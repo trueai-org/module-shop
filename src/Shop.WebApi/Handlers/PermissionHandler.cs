@@ -42,13 +42,15 @@ namespace Shop.WebApi.Handlers
                     if (string.IsNullOrWhiteSpace(token))
                         token = httpContext.Request.Query["access_token"];
 
+                    // TODO 暂时放开控制，允许一个账号多处登录
+
                     // 访问期间令牌自动续签（一次性令牌除外）
-                    if (string.IsNullOrWhiteSpace(identityId) ||
-                        string.IsNullOrWhiteSpace(token) ||
-                        !_tokenService.ValidateToken(identityId, token.TrimStart(JwtBearerDefaults.AuthenticationScheme).Trim()))
-                    {
-                        httpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                    }
+                    //if (string.IsNullOrWhiteSpace(identityId) ||
+                    //    string.IsNullOrWhiteSpace(token) ||
+                    //    !_tokenService.ValidateToken(identityId, token.TrimStart(JwtBearerDefaults.AuthenticationScheme).Trim()))
+                    //{
+                    //    httpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                    //}
                 }
             }
             await Task.CompletedTask;
