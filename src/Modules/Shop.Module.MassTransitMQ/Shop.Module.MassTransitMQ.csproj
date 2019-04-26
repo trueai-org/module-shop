@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="5.3.2" />
+    <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="5.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shop.Infrastructure\Shop.Infrastructure.csproj" />
+    <ProjectReference Include="..\Shop.Module.Core.Abstractions\Shop.Module.Core.Abstractions.csproj" />
+    <ProjectReference Include="..\Shop.Module.MQ.Abstractions\Shop.Module.MQ.Abstractions.csproj" />
+    <ProjectReference Include="..\Shop.Module.Orders.Abstractions\Shop.Module.Orders.Abstractions.csproj" />
+    <ProjectReference Include="..\Shop.Module.Reviews.Abstractions\Shop.Module.Reviews.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\StockHistoryApiController.cs" />
+    <Compile Remove="Services\IBrandService.cs" />
+    <Compile Remove="Services\ICategoryService.cs" />
+    <Compile Remove="Services\IProductPricingService.cs" />
+    <Compile Remove="Services\IProductService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shop.Infrastructure\Shop.Infrastructure.csproj" />
+    <ProjectReference Include="..\Shop.Module.Catalog.Abstractions\Shop.Module.Catalog.Abstractions.csproj" />
+    <ProjectReference Include="..\Shop.Module.Core.Abstractions\Shop.Module.Core.Abstractions.csproj" />
+    <ProjectReference Include="..\Shop.Module.Inventory.Abstractions\Shop.Module.Inventory.Abstractions.csproj" />
+    <ProjectReference Include="..\Shop.Module.MQ.Abstractions\Shop.Module.MQ.Abstractions.csproj" />
+    <ProjectReference Include="..\Shop.Module.Orders.Abstractions\Shop.Module.Orders.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

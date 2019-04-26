@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shop.Infrastructure\Shop.Infrastructure.csproj" />
+    <ProjectReference Include="..\Shop.Module.Core.Abstractions\Shop.Module.Core.Abstractions.csproj" />
+    <ProjectReference Include="..\Shop.Module.Inventory.Abstractions\Shop.Module.Inventory.Abstractions.csproj" />
+    <ProjectReference Include="..\Shop.Module.Orders.Abstractions\Shop.Module.Orders.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>
