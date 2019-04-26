@@ -3,7 +3,7 @@
 echo Linux Docker build Docker
 
 project_name="Shop.WebApi"
-port=5001
+port=6101
 image_name="shop_dev"
 image_version="1.0.0"
 
