@@ -19,6 +19,11 @@ unzip $project_name.zip
 
 cd publish
 
+# 覆盖环境配置文件
+ls
+
+/bin/cp -rf /home/config/shop/appsettings.Production.json appsettings.json
+
 # stop container
 docker stop $image_name
 
