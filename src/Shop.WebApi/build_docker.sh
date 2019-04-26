@@ -3,9 +3,9 @@
 echo Linux Docker build Docker
 
 project_name="Shop.WebApi"
-port=5020
-image_name="shop"
-image_version="1.0.1"
+port=5001
+image_name="shop_dev"
+image_version="1.0.0"
 
 # image version
 echo $image_version;
@@ -20,9 +20,7 @@ unzip $project_name.zip
 cd publish
 
 # 覆盖环境配置文件
-ls
-
-/bin/cp -rf /home/config/shop/appsettings.Production.json appsettings.json
+/bin/cp -rf /home/config/shop/appsettings.Development.json appsettings.json
 
 # stop container
 docker stop $image_name
