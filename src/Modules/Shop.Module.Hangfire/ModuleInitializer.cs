@@ -39,7 +39,7 @@ namespace Shop.Module.Hangfire
                         PrepareSchemaIfNecessary = true,
                         DashboardJobListLimit = 50000,
                         TransactionTimeout = TimeSpan.FromMinutes(1),
-                        //TablesPrefix = string.Empty // "Hangfire" // TablesPrefix - prefix for the tables in database. Default is none
+                        TablesPrefix = "Hangfire" // TablesPrefix - prefix for the tables in database. Default is none
                     })));
                     break;
                 case ProviderType.SqlServer:
