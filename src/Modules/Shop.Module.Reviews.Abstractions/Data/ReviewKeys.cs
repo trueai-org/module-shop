@@ -4,7 +4,7 @@ namespace Shop.Module.Reviews.Abstractions.Data
 {
     public class ReviewKeys : ShopKeys
     {
-        public const string Module = System + ":review";
+        public static string Module = System + ":review";
 
         /// <summary>
         /// 启用评论自动审核功能

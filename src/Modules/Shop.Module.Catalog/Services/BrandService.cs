@@ -15,7 +15,7 @@ namespace Shop.Module.Catalog.Services
 {
     public class BrandService : IBrandService
     {
-        const string _key = CatalogKeys.BrandAll;
+        private readonly string _key = CatalogKeys.BrandAll;
 
         private readonly IRepository<Brand> _brandRepository;
         private readonly IStaticCacheManager _cache;

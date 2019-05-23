@@ -18,6 +18,7 @@ using Shop.Module.Core.Extensions;
 using Shop.WebApi.Filters;
 using Shop.WebApi.Handlers;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -30,7 +31,7 @@ namespace Shop.WebApi.Extensions
     {
         public static void AddCustomizedConfigureServices(this IServiceCollection services, IConfiguration configuration, IHostingEnvironment env)
         {
-            // todo
+            // TODO
             // 本项目仅api，静态资源将不在存储，待优化配置
 
             if (string.IsNullOrWhiteSpace(env.WebRootPath))
@@ -41,6 +42,7 @@ namespace Shop.WebApi.Extensions
             GlobalConfiguration.WebRootPath = env.WebRootPath;
             GlobalConfiguration.ContentRootPath = env.ContentRootPath;
             GlobalConfiguration.Configuration = configuration;
+            GlobalConfiguration.Version = Convert.ToString(configuration["ShopVersion"]).Replace("-", "_").Replace(".", "_").Replace(" ", "_");
 
             services.AddModules(env.ContentRootPath);
             services.AddCustomizedDataStore(configuration);

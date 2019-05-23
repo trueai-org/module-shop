@@ -4,12 +4,12 @@ namespace Shop.Module.Orders.Abstractions.Data
 {
     public class OrderKeys : ShopKeys
     {
-        public const string Module = System + ":order";
+        public static string Module = System + ":order";
 
         /// <summary>
         /// 客户创建订单锁
         /// </summary>
-        public const string CustomerCreateOrderLock = Module + ":create:lock:";
+        public static string CustomerCreateOrderLock = Module + ":create:lock:";
 
         /// <summary>
         /// 订单下单后超时自动取消订单时间,默认2h(微信生成的预支付会话标识，用于后续接口调用中使用，该值有效期为2小时)

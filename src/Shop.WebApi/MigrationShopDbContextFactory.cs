@@ -28,6 +28,7 @@ namespace Shop.WebApi
             IServiceCollection services = new ServiceCollection();
             GlobalConfiguration.ContentRootPath = contentRootPath;
             GlobalConfiguration.Configuration = _configuration;
+            GlobalConfiguration.Version = Convert.ToString(_configuration["ShopVersion"]).Replace("-", "_").Replace(".", "_").Replace(" ", "_");
 
             services.AddModules(contentRootPath);
             services.AddCustomizedDataStore(_configuration);

@@ -17,7 +17,7 @@ namespace Shop.Module.Catalog.Services
 {
     public class CategoryService : ICategoryService
     {
-        const string AllCacheKey = CatalogKeys.CategoryAll;
+        private readonly string AllCacheKey = CatalogKeys.CategoryAll;
 
         private readonly IRepository<Category> _categoryRepository;
         private readonly IStaticCacheManager _cache;
