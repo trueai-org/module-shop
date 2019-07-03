@@ -42,7 +42,6 @@ namespace Shop.WebApi.Extensions
             GlobalConfiguration.WebRootPath = env.WebRootPath;
             GlobalConfiguration.ContentRootPath = env.ContentRootPath;
             GlobalConfiguration.Configuration = configuration;
-            GlobalConfiguration.Version = Convert.ToString(configuration["ShopVersion"]).Replace("-", "_").Replace(".", "_").Replace(" ", "_");
 
             services.AddModules(env.ContentRootPath);
             services.AddCustomizedDataStore(configuration);

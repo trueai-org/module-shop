@@ -5,7 +5,7 @@ namespace Shop.Module.Core.Abstractions.Data
     public class ShopKeys
     {
         // redis key prefix must start with [system]
-        public static readonly string System = "shop" + ":" + GlobalConfiguration.Version;
+        public static readonly string System = "shop";
 
         public static string RegisterPhonePrefix = System + ":register:phone:";
 

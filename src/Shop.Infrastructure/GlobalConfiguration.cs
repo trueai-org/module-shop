@@ -19,13 +19,6 @@ namespace Shop.Infrastructure
 
         public static string DefaultCulture => "en-US";
 
-        /// <summary>
-        /// 系统版本("-."替换为"_")
-        /// dev-1.0.0-beta1 -> dev_1_0_0_beta1
-        /// 1.0.0 -> 1_0_0
-        /// </summary>
-        public static string Version { get; set; } = "1_0_0";
-
         public static string WebRootPath { get; set; }
 
         public static string ContentRootPath { get; set; }
