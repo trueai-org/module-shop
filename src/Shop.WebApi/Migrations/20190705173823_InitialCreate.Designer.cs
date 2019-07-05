@@ -9,7 +9,7 @@ using Shop.Module.Core.Data;
 namespace Shop.WebApi.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    [Migration("20190523135241_InitialCreate")]
+    [Migration("20190705173823_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -853,7 +853,7 @@ namespace Shop.WebApi.Migrations
                             FormatType = 0,
                             IsVisibleInCommonSettingPage = true,
                             Module = "Core",
-                            Value = "https://localhost:44372/"
+                            Value = "https://demo.shopapi.circle.ac.cn/"
                         },
                         new
                         {
@@ -861,7 +861,7 @@ namespace Shop.WebApi.Migrations
                             FormatType = 0,
                             IsVisibleInCommonSettingPage = true,
                             Module = "Core",
-                            Value = "http://localhost:8000/"
+                            Value = "https://demo.shop.circle.ac.cn/"
                         },
                         new
                         {
@@ -870,7 +870,7 @@ namespace Shop.WebApi.Migrations
                             IsVisibleInCommonSettingPage = true,
                             Module = "Core",
                             Type = "Shop.Infrastructure.ShopConfig, Shop.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-                            Value = "{\"ShopName\":\"天网商城\",\"CacheTimeInMinutes\":60,\"RedisCachingEnabled\":true,\"RedisCachingConnection\":\"circle.ac.cn:16379,ssl=False,password=gBbvank9XfZ3A%SK,allowadmin=true\"}"
+                            Value = "{\"ShopName\":\"天网商城\",\"CacheTimeInMinutes\":60,\"RedisCachingEnabled\":true,\"RedisCachingConnection\":\"demo-shop-redis:6379,ssl=False,password=qGmNTfPtbQYMX6Qz,allowadmin=true\"}"
                         },
                         new
                         {
@@ -879,7 +879,7 @@ namespace Shop.WebApi.Migrations
                             IsVisibleInCommonSettingPage = true,
                             Module = "EmailSenderSmtp",
                             Type = "Shop.Module.EmailSenderSmtp.EmailSenderSmtpOptions, Shop.Module.EmailSenderSmtp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-                            Value = "{\"SmtpUserName\":\"system@trueai.org\",\"SmtpPassword\":\"eQga*GDkF^PAV2Ep\",\"SmtpHost\":\"smtp.mxhichina.com\",\"SmtpPort\":587}"
+                            Value = "{\"SmtpUserName\":\"system@trueai.org\",\"SmtpPassword\":\"******\",\"SmtpHost\":\"smtp.mxhichina.com\",\"SmtpPort\":587}"
                         },
                         new
                         {
@@ -888,7 +888,7 @@ namespace Shop.WebApi.Migrations
                             IsVisibleInCommonSettingPage = true,
                             Module = "SmsSenderAliyun",
                             Type = "Shop.Module.SmsSenderAliyun.Models.SmsSenderAliyunOptions, Shop.Module.SmsSenderAliyun, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-                            Value = "{\"RegionId\":\"default\",\"AccessKeyId\":\"LTAI8v8Crrypk7mr\",\"AccessKeySecret\":\"BVZY9tPKjNsuAg2njEgZa1KI9dCj9m\",\"IsTest\":true}"
+                            Value = "{\"RegionId\":\"default\",\"AccessKeyId\":\"LTAI8v8Crr******\",\"AccessKeySecret\":\"BVZY9tPKjNsuAg2njEgZa1KI******\",\"IsTest\":true}"
                         },
                         new
                         {
@@ -935,7 +935,7 @@ namespace Shop.WebApi.Migrations
                             IsVisibleInCommonSettingPage = true,
                             Module = "Hangfire",
                             Type = "Shop.Module.Hangfire.Models.HangfireOptions, Shop.Module.Hangfire, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-                            Value = "{\"Provider\":0,\"MySqlHangfireConnection\":\"server=cdb-29stmsyr.gz.tencentcdb.com;PORT=10012;database=shop_hangfire;uid=root;pwd=czYj9hnFaVUfZgm7;Connection Timeout=60;Allow Zero Datetime=True;Allow User Variables=True;pooling=true;min pool size=5;max pool size=512;SslMode=None;\",\"SqlServerHangfireConnection\":\"Data Source=circle.ac.cn;Initial Catalog=ShopTest;User ID=sa;Password=fQs2Uba_y3kWS,uC\",\"RedisHangfireConnection\":\"circle.ac.cn:16379,password=gBbvank9XfZ3A%SK,allowadmin=true\",\"Username\":\"admin\",\"Password\":\"123456\"}"
+                            Value = "{\"Provider\":0,\"MySqlHangfireConnection\":\"server=172.16.250.6;PORT=3306;database=demo_shop_hangfire;uid=root;pwd=czYj9hnFaVUfZgm7;Connection Timeout=60;Allow Zero Datetime=True;Allow User Variables=True;pooling=true;min pool size=5;max pool size=512;SslMode=None;\",\"SqlServerHangfireConnection\":\"Data Source=127.0.0.1;Initial Catalog=ShopHangfire;User ID=sa;Password=******\",\"RedisHangfireConnection\":\"127.0.0.1:16379,password=******,allowadmin=true\",\"Username\":\"admin\",\"Password\":\"123456\"}"
                         },
                         new
                         {
@@ -944,7 +944,7 @@ namespace Shop.WebApi.Migrations
                             IsVisibleInCommonSettingPage = true,
                             Module = "MiniProgram",
                             Type = "Shop.Module.Core.MiniProgram.Models.MiniProgramOptions, Shop.Module.Core.MiniProgram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-                            Value = "{\"AppId\":\"wxc90c1e6038d9960b\",\"AppSecret\":\"736192139a4ca393de4a18ce22eadb5a\",\"MchId\":\"1526185231\",\"Key\":\"jtA9J79YNUXnTRpVntHqTGSF2h8XmFhy\"}"
+                            Value = "{\"AppId\":\"wxc90c1e6038******\",\"AppSecret\":\"736192139a4ca393de4a18ce22******\",\"MchId\":\"1526******\",\"Key\":\"jtA9J79YNUXnTRpVntHqTGSF2h******\"}"
                         },
                         new
                         {
