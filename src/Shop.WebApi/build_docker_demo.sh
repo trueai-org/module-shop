@@ -32,7 +32,7 @@ docker rmi $image_name:$image_version
 docker build -t $image_name:$image_version .
 
 # run
-docker run -p $port:80 --restart=always --name $image_name --volume /home/shop_dev/wwwroot/user-content:/app/wwwroot/user-content/ --link demo-shop-redis -d $image_name:$image_version
+docker run -p $port:80 --restart=always --name $image_name --volume /home/shop/$image_name/user-content:/app/wwwroot/user-content/ --link demo-shop-redis -d $image_name:$image_version
 docker logs $image_name
 
 cd /home/docker/images

@@ -18,7 +18,7 @@ ModuleShop完全免费并且开源
 
 项目地址：[https://github.com/trueai-org/module-shop-admin](https://github.com/trueai-org/module-shop-admin)
 
-在线预览：[https://shopapi.circle.ac.cn/swagger](https://shopapi.circle.ac.cn/swagger)
+在线预览：[https://demo.shopapi.circle.ac.cn/swagger](https://demo.shopapi.circle.ac.cn/swagger)
 
 ### 项目结构
 
@@ -28,7 +28,7 @@ ModuleShop完全免费并且开源
 
 项目地址：[https://github.com/trueai-org/module-shop](https://github.com/trueai-org/module-shop)
 
-在线预览：[https://shop.circle.ac.cn](https://shop.circle.ac.cn) *admin/123456*
+在线预览：[https://demo.shop.circle.ac.cn](https://demo.shop.circle.ac.cn) *admin/123456*
 
 前端框架：[Ant Design Pro](https://pro.ant.design)
 
