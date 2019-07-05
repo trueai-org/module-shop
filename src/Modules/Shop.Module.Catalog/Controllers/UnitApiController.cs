@@ -18,7 +18,7 @@ namespace Shop.Module.Catalog.Controllers
     [Route("/api/units")]
     public class UnitApiController : ControllerBase
     {
-        private const string _key = CatalogKeys.UnitAll;
+        private readonly string _key = CatalogKeys.UnitAll;
         private readonly IRepository<Unit> _unitRepository;
         private readonly IRepository<Product> _productRepository;
         private readonly IStaticCacheManager _cache;

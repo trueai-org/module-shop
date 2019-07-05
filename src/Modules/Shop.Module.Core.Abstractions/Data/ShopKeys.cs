@@ -1,15 +1,17 @@
-﻿namespace Shop.Module.Core.Abstractions.Data
+﻿using Shop.Infrastructure;
+
+namespace Shop.Module.Core.Abstractions.Data
 {
     public class ShopKeys
     {
         // redis key prefix must start with [system]
-        public const string System = "shop";
+        public static readonly string System = "shop";
 
-        public const string RegisterPhonePrefix = System + ":register:phone:";
+        public static string RegisterPhonePrefix = System + ":register:phone:";
 
-        public const string UserJwtTokenPrefix = System + ":user:jwt:token:";
+        public static string UserJwtTokenPrefix = System + ":user:jwt:token:";
 
-        public const string Provinces = System + ":country:";
+        public static string Provinces = System + ":country:";
 
         /// <summary>
         /// 接口地址

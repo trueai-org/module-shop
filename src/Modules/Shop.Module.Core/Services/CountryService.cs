@@ -16,7 +16,7 @@ namespace Shop.Module.Core.Services
 {
     public class CountryService : ICountryService
     {
-        private const string _provincesKey = ShopKeys.Provinces;
+        private readonly string _provincesKey = ShopKeys.Provinces;
         private readonly IStaticCacheManager _cache;
         private readonly IRepository<Country> _countryRepository;
         private readonly IRepository<StateOrProvince> _provinceRepository;

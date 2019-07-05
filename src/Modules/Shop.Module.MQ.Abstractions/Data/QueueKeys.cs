@@ -7,21 +7,21 @@ namespace Shop.Module.MQ.Abstractions.Data
         /// <summary>
         /// 产品浏览记录消息
         /// </summary>
-        public const string ProductView = System + "_product_view";
+        public static string ProductView = System + "_product_view";
 
         /// <summary>
         /// 评论自动审核消息
         /// </summary>
-        public const string ReviewAutoApproved = System + "_review_auto_approved";
+        public static string ReviewAutoApproved = System + "_review_auto_approved";
 
         /// <summary>
         /// 回复自动审核消息
         /// </summary>
-        public const string ReplyAutoApproved = System + "_reply_auto_approved";
+        public static string ReplyAutoApproved = System + "_reply_auto_approved";
 
         /// <summary>
         /// 收到付款消息
         /// </summary>
-        public const string PaymentReceived = System + "_payment_received";
+        public static string PaymentReceived = System + "_payment_received";
     }
 }
