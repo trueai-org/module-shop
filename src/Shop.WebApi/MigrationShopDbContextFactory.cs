@@ -21,7 +21,6 @@ namespace Shop.WebApi
                             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                             .AddJsonFile($"appsettings.{environmentName}.json", true);
 
-
             builder.AddUserSecrets(typeof(MigrationShopDbContextFactory).Assembly, optional: true);
             builder.AddEnvironmentVariables();
             var _configuration = builder.Build();
