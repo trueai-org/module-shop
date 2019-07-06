@@ -21,7 +21,7 @@ cd publish
 
 # 覆盖环境配置文件
 # /bin/cp -rf /home/config/shop/appsettings.Development.json appsettings.json
-/bin/cp -rf /home/config/shop/appsettings.Production.json appsettings.json
+/bin/cp -rf /home/config/shop/appsettings.Production.json appsettings.Production.json
 
 # stop container
 docker stop $image_name
