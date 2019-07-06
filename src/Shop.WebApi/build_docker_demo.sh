@@ -4,7 +4,7 @@ echo Linux Docker build Docker
 
 project_name="Shop.WebApi"
 port=9101
-image_name="demo_shop"
+image_name="demo-shop"
 image_version="1.0.0"
 
 # image version
@@ -33,6 +33,7 @@ docker build -t $image_name:$image_version .
 
 # run
 docker run -p $port:80 --restart=always --name $image_name --volume /home/shop/$image_name/user-content:/app/wwwroot/user-content/ --link demo-shop-redis -d $image_name:$image_version
+
 docker logs $image_name
 
 cd /home/docker/images
