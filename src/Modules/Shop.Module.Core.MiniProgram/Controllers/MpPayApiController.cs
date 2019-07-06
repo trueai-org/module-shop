@@ -2,6 +2,7 @@
 using Essensoft.AspNetCore.Payment.WeChatPay.Notify;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Shop.Module.MQ.Abstractions.Data;
 using Shop.Module.MQ.Abstractions.Services;
 using Shop.Module.Orders.Abstractions.Events;
@@ -18,13 +19,16 @@ namespace Shop.Module.Core.MiniProgram.Controllers
     {
         private readonly IWeChatPayNotifyClient _client;
         private readonly IMQService _mqService;
+        private readonly ILogger _logger;
 
         public MpPayApiController(
             IWeChatPayNotifyClient client,
-            IMQService mqService)
+            IMQService mqService,
+            ILogger<MpPayApiController> logger)
         {
             _client = client;
             _mqService = mqService;
+            _logger = logger;
         }
 
         [AllowAnonymous]
@@ -54,6 +58,10 @@ namespace Shop.Module.Core.MiniProgram.Controllers
             catch
             {
                 return NoContent();
+            }
+            finally
+            {
+                _logger.LogInformation("参数：{@no}", no);
             }
         }
     }
