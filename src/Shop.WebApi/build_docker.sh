@@ -36,7 +36,7 @@ docker rmi $image_name:$image_version
 docker build -t $image_name:$image_version .
 
 # run
-docker run -p $port:80 --restart=always --name $image_name --volume /home/$image_name/wwwroot/:/app/wwwroot/user-content/ --volume /home/$image_name/logs/:/app/logs/ -d $image_name:$image_version
+docker run -p $port:80 --restart=always --name $image_name --volume /home/$image_name/wwwroot/:/app/wwwroot/ --volume /home/$image_name/logs/:/app/logs/ -d $image_name:$image_version
 docker logs $image_name
 
 cd /home/docker/images
