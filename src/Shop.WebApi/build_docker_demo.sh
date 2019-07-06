@@ -39,5 +39,5 @@ docker logs $image_name
 cd /home/docker/images
 
 rm -f $project_name.zip
-rm -f build_docker.sh
+rm -f build_docker_demo.sh
 rm -rf publish
