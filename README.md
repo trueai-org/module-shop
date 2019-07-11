@@ -134,3 +134,7 @@ ModuleShop完全免费并且开源
 ## 交流
 
 喜欢别忘了 Star，有问题可通过微信、公众号、QQ 群联系我，谢谢您的关注。
+
+[ModuleShop交流群](https://jq.qq.com/?_wv=1027&k=5AUnOw5 "ModuleShop交流群（863275860）")（863275860）
+
+![ModuleShop交流群二维码](https://gogs.circle.ac.cn/gogs/data/raw/master/images/863275860_8_8.png)
