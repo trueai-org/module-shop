@@ -9,7 +9,7 @@ using Shop.Module.Core.Data;
 namespace Shop.WebApi.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    [Migration("20190705173823_InitialCreate")]
+    [Migration("20190712122603_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -935,7 +935,7 @@ namespace Shop.WebApi.Migrations
                             IsVisibleInCommonSettingPage = true,
                             Module = "Hangfire",
                             Type = "Shop.Module.Hangfire.Models.HangfireOptions, Shop.Module.Hangfire, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-                            Value = "{\"Provider\":0,\"MySqlHangfireConnection\":\"server=172.16.250.6;PORT=3306;database=demo_shop_hangfire;uid=root;pwd=czYj9hnFaVUfZgm7;Connection Timeout=60;Allow Zero Datetime=True;Allow User Variables=True;pooling=true;min pool size=5;max pool size=512;SslMode=None;\",\"SqlServerHangfireConnection\":\"Data Source=127.0.0.1;Initial Catalog=ShopHangfire;User ID=sa;Password=******\",\"RedisHangfireConnection\":\"127.0.0.1:16379,password=******,allowadmin=true\",\"Username\":\"admin\",\"Password\":\"123456\"}"
+                            Value = "{\"Provider\":3,\"MySqlHangfireConnection\":\"server=172.16.250.6;PORT=3306;database=demo_shop_hangfire;uid=root;pwd=czYj9hnFaVUfZgm7;Connection Timeout=60;Allow Zero Datetime=True;Allow User Variables=True;pooling=true;min pool size=5;max pool size=512;SslMode=None;\",\"SqlServerHangfireConnection\":\"Data Source=127.0.0.1;Initial Catalog=ShopHangfire;User ID=sa;Password=******\",\"RedisHangfireConnection\":\"127.0.0.1:16379,password=******,allowadmin=true\",\"Username\":\"admin\",\"Password\":\"123456\"}"
                         },
                         new
                         {

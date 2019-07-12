@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Shop.Module.Schedule.Abstractions.Services;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Shop.WebApi.Controllers
 {
@@ -7,11 +11,28 @@ namespace Shop.WebApi.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly IJobService _jobService;
+        private readonly ILogger _logger;
+
+        public ValuesController(IJobService jobService, ILogger<ValuesController> logger)
+        {
+            _jobService = jobService;
+            _logger = logger;
+        }
+
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<ActionResult<IEnumerable<string>>> Get()
         {
+            _logger.LogInformation("now:" + DateTime.Now.ToLongTimeString());
+            await _jobService.Schedule(() => Log(), TimeSpan.FromSeconds(5));
             return new string[] { "value1", "value2" };
+        }
+
+        public async Task Log()
+        {
+            _logger.LogInformation("after:" + DateTime.Now.ToLongTimeString());
+            await Task.CompletedTask;
         }
 
         // GET api/values/5

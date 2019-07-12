@@ -1,5 +1,6 @@
 ﻿using Hangfire;
 using Hangfire.Dashboard.BasicAuthorization;
+using Hangfire.MemoryStorage;
 using Hangfire.MySql;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -51,7 +52,17 @@ namespace Shop.Module.Hangfire
                         config.UseRedisStorage(ConnectionMultiplexer.Connect(hangfireConfig.RedisHangfireConnection));
                     });
                     break;
+                case ProviderType.Memory:
+                    services.AddHangfire(config =>
+                    {
+                        config.UseMemoryStorage();
+                    });
+                    break;
                 default:
+                    services.AddHangfire(config =>
+                    {
+                        config.UseMemoryStorage();
+                    });
                     break;
             }
 
