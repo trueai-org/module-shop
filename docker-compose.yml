@@ -9,7 +9,14 @@ services:
     ports:
       - "6001:80"
     restart: always
-    #volumes:
-    #  - /home/demo-shop/shop-api/user-content:/app/wwwroot/user-content
-    #  - /home/demo-shop/shop-api/logs:/app/logs
-    #  - /etc/localtime:/etc/localtime:ro
+    networks:
+      - shop-net
+    volumes:
+      - /home/shop/shop-api/user-content:/app/wwwroot/user-content
+      - /home/shop/shop-api/logs:/app/logs
+      - /etc/localtime:/etc/localtime:ro
+      - /home/shop/env/appsettings.Production.json:/app/appsettings.Production.json:ro
+
+networks:
+  shop-net:
+    external: true
