@@ -37,6 +37,11 @@ namespace Shop.Module.StorageLocal
 
         public async Task<string> GetMediaUrl(string fileName)
         {
+            if (fileName == GlobalConfiguration.NoImage)
+            {
+                return await Task.FromResult($"{host.Trim('/')}/{fileName}");
+            }
+
             return await Task.FromResult($"{host.Trim('/')}/{MediaRootFoler}/{fileName}");
         }
 
