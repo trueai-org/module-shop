@@ -24,5 +24,7 @@ namespace Shop.Infrastructure
         public static string ContentRootPath { get; set; }
 
         public static IConfiguration Configuration { get; set; }
+
+        public const string NoImage = "no-image.png";
     }
 }

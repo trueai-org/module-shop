@@ -1,4 +1,5 @@
-﻿using Shop.Infrastructure.Data;
+﻿using Shop.Infrastructure;
+using Shop.Infrastructure.Data;
 using Shop.Module.Core.Abstractions.Entities;
 using Shop.Module.Core.Abstractions.Services;
 using Shop.Module.Core.Models;
@@ -23,7 +24,7 @@ namespace Shop.Module.Core.Services
         {
             if (media == null)
             {
-                return await GetMediaUrl("no-image.png");
+                return await GetMediaUrl(GlobalConfiguration.NoImage);
             }
 
             return await GetMediaUrl(media.FileName);
