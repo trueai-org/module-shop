@@ -3,12 +3,4 @@ version: '3.4'
 services:
   shop.api:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-    #  - ASPNETCORE_URLS=https://+:443;http://+:80
-    #  - ASPNETCORE_HTTPS_PORT=44372
-    #ports:
-    #  - "52606:80"
-    #  - "44372:443"
-    #volumes:
-    #  - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-    #  - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ASPNETCORE_ENVIRONMENT=Production
