@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  shop.api:
+    build:
+      context: .
+      dockerfile: src/Shop.WebApi/Dockerfile
+    container_name: shop-api
+    ports:
+      - "6001:80"
+    restart: always
+    #volumes:
+    #  - /home/demo-shop/shop-api/user-content:/app/wwwroot/user-content
+    #  - /home/demo-shop/shop-api/logs:/app/logs
+    #  - /etc/localtime:/etc/localtime:ro
