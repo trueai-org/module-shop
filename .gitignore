@@ -261,4 +261,5 @@ __pycache__/
 *.pyc
 /src/Shop.WebApi/logs
 /src/Shop.WebApi/wwwroot
+/src/Shop.WebApi/appsettings.Production.json
 /src/Shop.WebApi/appsettings.Development.json
