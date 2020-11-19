@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Shop.Infrastructure.Modules
 {
@@ -8,6 +8,6 @@ namespace Shop.Infrastructure.Modules
     {
         void ConfigureServices(IServiceCollection serviceCollection);
 
-        void Configure(IApplicationBuilder app, IHostingEnvironment env);
+        void Configure(IApplicationBuilder app, IWebHostEnvironment env);
     }
 }

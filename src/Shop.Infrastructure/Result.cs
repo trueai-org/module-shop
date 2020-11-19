@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Shop.Infrastructure
@@ -19,18 +18,6 @@ namespace Shop.Infrastructure
         public static Result Fail(string error)
         {
             return new Result(false, error);
-        }
-
-        public static Result Fail(ModelStateDictionary modelStates)
-        {
-            IEnumerable<string> errors = null;
-            if (modelStates != null && !modelStates.IsValid)
-            {
-                errors = from modelState in modelStates.Values
-                         from error in modelState?.Errors
-                         select error.ErrorMessage;
-            }
-            return new Result(false, errors != null ? string.Join("\r\n", errors) : null);
         }
 
         public static Result Fail<TValue>(TValue value, string error)

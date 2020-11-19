@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Infrastructure.Modules;
 using Shop.Module.Orders.Abstractions.Events;
@@ -23,7 +24,7 @@ namespace Shop.Module.Orders
             services.AddTransient<INotificationHandler<PaymentReceived>, PaymentReceivedHandler>();
         }
 
-        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
         }

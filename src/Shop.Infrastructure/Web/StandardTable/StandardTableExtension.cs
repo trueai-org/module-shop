@@ -120,5 +120,4 @@ namespace Shop.Infrastructure.Web.StandardTable
             };
         }
     }
-
 }

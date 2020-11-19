@@ -3,8 +3,6 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Shop.Module.Catalog.Abstractions.Events;
 using Shop.Module.Core.Abstractions.Events;
-using Shop.Module.Core.Abstractions.Models;
-using Shop.Module.MQ.Abstractions.Models;
 using System;
 using System.Threading.Tasks;
 

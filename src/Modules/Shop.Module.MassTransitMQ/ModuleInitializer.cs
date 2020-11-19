@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shop.Infrastructure.Modules;
 using Shop.Module.MassTransitMQ.Services;
 using Shop.Module.MQ.Abstractions.Data;
@@ -13,28 +14,6 @@ namespace Shop.Module.MassTransitMQ
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            //cfg.ReceiveEndpoint(QueueKeys.ProductView, e =>
-            //{
-            //    e.Consumer<ProductViewMQConsumer>();
-            //});
-            //cfg.ReceiveEndpoint(queue, e =>
-            //{
-            //    e.Handler<T>(async context =>
-            //    {
-            //        await Task.Run(() =>
-            //        {
-            //            callback(context.Message);
-            //        });
-            //    });
-            //});
-            //cfg.ReceiveEndpoint(QueueKeys.ProductView, endpoint =>
-            // {
-            //     endpoint.Handler<ProductViewedMessage>(async context =>
-            //     {
-            //         await Console.Out.WriteLineAsync($"Received: {context.Message}");
-            //     });
-            // });
-
             services.AddMassTransit(x =>
             {
                 x.AddConsumer<ProductViewMQConsumer>();
@@ -42,37 +21,44 @@ namespace Shop.Module.MassTransitMQ
                 x.AddConsumer<ReviewAutoApprovedMQConsumer>();
                 x.AddConsumer<PaymentReceivedMQConsumer>();
 
-                x.AddBus(p => Bus.Factory.CreateUsingInMemory(cfg =>
+                x.UsingInMemory((context, cfg) =>
                 {
                     cfg.ReceiveEndpoint(QueueKeys.ProductView, e =>
                     {
-                        e.ConfigureConsumer<ProductViewMQConsumer>(p);
+                        e.ConfigureConsumer<ProductViewMQConsumer>(context);
                     });
 
                     cfg.ReceiveEndpoint(QueueKeys.ReplyAutoApproved, e =>
                     {
-                        e.ConfigureConsumer<ReplyAutoApprovedMQConsumer>(p);
+                        e.ConfigureConsumer<ReplyAutoApprovedMQConsumer>(context);
                     });
 
                     cfg.ReceiveEndpoint(QueueKeys.ReviewAutoApproved, e =>
                     {
-                        e.ConfigureConsumer<ReviewAutoApprovedMQConsumer>(p);
+                        e.ConfigureConsumer<ReviewAutoApprovedMQConsumer>(context);
                     });
 
                     cfg.ReceiveEndpoint(QueueKeys.PaymentReceived, e =>
                     {
-                        e.ConfigureConsumer<PaymentReceivedMQConsumer>(p);
+                        e.ConfigureConsumer<PaymentReceivedMQConsumer>(context);
                     });
 
-                    cfg.ConfigureEndpoints(p);
-                }));
+                    cfg.ConfigureEndpoints(context);
+                });
+
+                //x.UsingRabbitMq((context, cfg) =>
+                //{
+                //});
             });
 
-            services.AddSingleton<IMQService, MQService>();
-            services.AddSingleton<Microsoft.Extensions.Hosting.IHostedService, MQHostedService>();
+            services.TryAddSingleton<IMQService, MemoryMQService>();
+
+            //services.TryAddSingleton<IMQService, RabbitMQService>();
+
+            services.AddMassTransitHostedService();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
         }

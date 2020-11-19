@@ -18,7 +18,7 @@ namespace Shop.Module.ShoppingCart
             services.AddTransient<INotificationHandler<UserSignedIn>, UserSignedInHandler>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
         }

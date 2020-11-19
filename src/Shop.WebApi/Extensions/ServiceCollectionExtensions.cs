@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
@@ -17,7 +18,6 @@ using Shop.Module.Core.Data;
 using Shop.Module.Core.Extensions;
 using Shop.WebApi.Filters;
 using Shop.WebApi.Handlers;
-using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.IO;
 using System.Linq;
@@ -29,7 +29,7 @@ namespace Shop.WebApi.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static void AddCustomizedConfigureServices(this IServiceCollection services, IConfiguration configuration, IHostingEnvironment env)
+        public static void AddCustomizedConfigureServices(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
         {
             // TODO
             // 本项目仅api，静态资源将不在存储，待优化配置
@@ -70,7 +70,7 @@ namespace Shop.WebApi.Extensions
                 options.Filters.Add<CustomActionFilterAttribute>();
                 options.Filters.Add<CustomExceptionFilterAttribute>();
             })
-            .AddJsonOptions(options =>
+            .AddNewtonsoftJson(options =>
             {
                 // 忽略循环引用
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -81,7 +81,7 @@ namespace Shop.WebApi.Extensions
                 // 设置输入/输出时间格式
                 options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local; // json to datetime 2019-02-26T22:34:13.000Z -> 2019-02-27 06:34:13
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             // 验证错误会自动触发HTTP 400响应。禁止ModelState无效时自动返回错误，仅在api项目中配置。
             services.Configure<ApiBehaviorOptions>(options =>
@@ -117,13 +117,16 @@ namespace Shop.WebApi.Extensions
                 //options.SignIn.RequireConfirmedPhoneNumber = true;
             });
 
-            services.AddScoped<ServiceFactory>(p => p.GetService);
-            services.AddScoped<IMediator, SequentialMediator>();
+            // mediatR
+            services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+
+            //services.AddScoped<ServiceFactory>(p => p.GetService);
+            //services.AddScoped<IMediator, SequentialMediator>();
 
             // swagger
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Shop API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Shop Api", Version = "1.0.0" });
             });
         }
 

@@ -1,50 +1,50 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Shop.Infrastructure.Data;
 using Shop.Module.Core.Abstractions.Entities;
+using Shop.Module.Core.Abstractions.Models;
 using Shop.Module.Core.Abstractions.Services;
-using Shop.Module.Core.Abstractions.ViewModels;
-using Shop.Module.Core.Extensions;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Shop.Module.Core.Services
 {
     public class AccountService : IAccountService
     {
-        private readonly ILogger _logger;
-        private readonly ITokenService _tokenService;
-        private readonly ShopSignInManager<User> _shopSignInManager;
+        private readonly IRepository<SmsSend> _smsSendRepository;
 
-        public AccountService(
-            ILoggerFactory loggerFactory,
-            ITokenService tokenService,
-            ShopSignInManager<User> shopSignInManager)
+        public AccountService(IRepository<SmsSend> smsSendRepository)
         {
-            _logger = loggerFactory.CreateLogger<AccountService>();
-            _tokenService = tokenService;
-            _shopSignInManager = shopSignInManager;
+            _smsSendRepository = smsSendRepository;
         }
 
-        public async Task<LoginResult> LoginWithSignInCheck(User user)
+        /// <summary>
+        /// 验证并获取最后一条验证码
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <param name="captcha"></param>
+        /// <returns></returns>
+        public async Task<SmsSend> ValidateGetLastSms(string phone, string captcha)
         {
-            var signInResult = await _shopSignInManager.SignInCheck(user);
-            if (signInResult.IsLockedOut)
+            // 5分钟内的验证码
+            var startOn = DateTime.Now.AddMinutes(-5);
+            var endOn = DateTime.Now;
+
+            var sms = await _smsSendRepository.Query(c => c.PhoneNumber == phone && c.IsSucceed && c.TemplateType == SmsTemplateType.Captcha && c.CreatedOn <= endOn && c.CreatedOn >= startOn)
+                .OrderByDescending(c => c.CreatedOn)
+                .FirstOrDefaultAsync();
+
+            if (sms == null || sms.IsUsed)
             {
-                throw new Exception("用户已锁定，请稍后重试");
+                throw new Exception("验证码不存在或已失效，请重新获取验证码");
             }
-            else if (signInResult == null || signInResult.Succeeded)
+
+            if (sms.Value != captcha)
             {
-                var token = await _tokenService.GenerateAccessToken(user);
-                var loginResult = new LoginResult()
-                {
-                    Token = token,
-                    Avatar = user.AvatarUrl,
-                    Email = user.Email,
-                    Name = user.FullName,
-                    Phone = user.PhoneNumber
-                };
-                return loginResult;
+                throw new Exception("验证码错误");
             }
-            throw new Exception("用户登录失败，请稍后重试");
+
+            return sms;
         }
     }
 }

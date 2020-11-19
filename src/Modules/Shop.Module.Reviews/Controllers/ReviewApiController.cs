@@ -8,7 +8,6 @@ using Shop.Module.Core.Abstractions.Extensions;
 using Shop.Module.Core.Abstractions.Models;
 using Shop.Module.Core.Abstractions.Services;
 using Shop.Module.MQ.Abstractions.Data;
-using Shop.Module.MQ.Abstractions.Models;
 using Shop.Module.MQ.Abstractions.Services;
 using Shop.Module.Orders.Abstractions.Entities;
 using Shop.Module.Orders.Abstractions.Models;
@@ -16,6 +15,7 @@ using Shop.Module.Reviews.Abstractions.Data;
 using Shop.Module.Reviews.Abstractions.Entities;
 using Shop.Module.Reviews.Abstractions.Events;
 using Shop.Module.Reviews.Abstractions.Models;
+using Shop.Module.Reviews.Abstractions.Services;
 using Shop.Module.Reviews.Abstractions.ViewModels;
 using System;
 using System.Linq;
@@ -34,6 +34,7 @@ namespace Shop.Module.Reviews.Controllers
         private readonly IRepository<Order> _orderRepository;
         private readonly IMQService _mqService;
         private readonly IAppSettingService _appSettingService;
+        private readonly IRepository<Reply> _replyRepository;
 
         public ReviewApiController(
             IRepository<Review> reviewRepository,
@@ -41,7 +42,8 @@ namespace Shop.Module.Reviews.Controllers
             IWorkContext workContext,
             IRepository<Order> orderRepository,
             IMQService mqService,
-            IAppSettingService appSettingService)
+            IAppSettingService appSettingService,
+            IRepository<Reply> replyRepository)
         {
             _reviewRepository = reviewRepository;
             _supportRepository = supportRepository;
@@ -49,10 +51,11 @@ namespace Shop.Module.Reviews.Controllers
             _orderRepository = orderRepository;
             _mqService = mqService;
             _appSettingService = appSettingService;
+            _replyRepository = replyRepository;
         }
 
         [HttpPost]
-        public async Task<Result> AddReview([FromBody]ReviewAddParam param)
+        public async Task<Result> AddReview([FromBody] ReviewAddParam param)
         {
             var user = await _workContext.GetCurrentOrThrowAsync();
             var anyType = entityTypeIds.Any(c => c == param.EntityTypeId);
@@ -124,7 +127,7 @@ namespace Shop.Module.Reviews.Controllers
             var isAuto = await _appSettingService.Get<bool>(ReviewKeys.IsReviewAutoApproved);
             if (isAuto)
             {
-                await _mqService.DirectSend(QueueKeys.ReviewAutoApproved, new ReviewAutoApprovedEvent()
+                await _mqService.Send(QueueKeys.ReviewAutoApproved, new ReviewAutoApprovedEvent()
                 {
                     ReviewId = review.Id
                 });
@@ -134,7 +137,7 @@ namespace Shop.Module.Reviews.Controllers
 
         [HttpPost("info")]
         [AllowAnonymous]
-        public async Task<Result> Info([FromBody]ReviewInfoParam param)
+        public async Task<Result> Info([FromBody] ReviewInfoParam param)
         {
             var any = entityTypeIds.Any(c => c == param.EntityTypeId);
             if (!any)
@@ -164,7 +167,7 @@ namespace Shop.Module.Reviews.Controllers
 
         [HttpPost("list")]
         [AllowAnonymous]
-        public async Task<Result> List([FromBody]ReviewListQueryParam param)
+        public async Task<Result> List([FromBody] ReviewListQueryParam param)
         {
             var any = entityTypeIds.Any(c => c == param.EntityTypeId);
             if (!any)
@@ -190,8 +193,25 @@ namespace Shop.Module.Reviews.Controllers
                     Avatar = c.User.AvatarUrl,
                     ReplieCount = c.Replies.Where(x => x.Status == ReplyStatus.Approved).Count(),
                     MediaUrls = c.Medias.OrderBy(x => x.DisplayOrder).Select(x => x.Media.Url),
-                    Replies = c.Replies.Where(x => x.Status == ReplyStatus.Approved && x.ParentId == null)
-                    .OrderByDescending(x => x.SupportCount).ThenByDescending(x => x.Id)
+                    //Replies = c.Replies.Where(x => x.Status == ReplyStatus.Approved && x.ParentId == null)
+                    //.OrderByDescending(x => x.SupportCount).ThenByDescending(x => x.Id)
+                    //.Take(2).Select(x => new ReplyListResult()
+                    //{
+                    //    Id = x.Id,
+                    //    Comment = x.Comment,
+                    //    ReplierName = x.ReplierName,
+                    //    CreatedOn = x.CreatedOn,
+                    //    SupportCount = x.SupportCount
+                    //})
+                }).Take(param.Take).ToListAsync();
+
+            // bug todo 待优化
+            result.ForEach(c =>
+            {
+                if (c.ReplieCount > 0)
+                {
+                    c.Replies = _replyRepository.Query(x => x.ReviewId == c.Id && x.Status == ReplyStatus.Approved && x.ParentId == null)
+                     .OrderByDescending(x => x.SupportCount).ThenByDescending(x => x.Id)
                     .Take(2).Select(x => new ReplyListResult()
                     {
                         Id = x.Id,
@@ -199,14 +219,16 @@ namespace Shop.Module.Reviews.Controllers
                         ReplierName = x.ReplierName,
                         CreatedOn = x.CreatedOn,
                         SupportCount = x.SupportCount
-                    })
-                }).Take(param.Take).ToListAsync();
+                    }).ToList();
+                }
+            });
+
             return Result.Ok(result);
         }
 
         [HttpPost("grid")]
         [AllowAnonymous]
-        public async Task<Result<StandardTableResult<ReviewListResult>>> Grid([FromBody]StandardTableParam<ReviewQueryParam> param)
+        public async Task<Result<StandardTableResult<ReviewListResult>>> Grid([FromBody] StandardTableParam<ReviewQueryParam> param)
         {
             var search = param?.Search;
             if (search == null)
@@ -254,17 +276,39 @@ namespace Shop.Module.Reviews.Controllers
                     Avatar = c.User.AvatarUrl,
                     ReplieCount = c.Replies.Where(x => x.Status == ReplyStatus.Approved).Count(),
                     MediaUrls = c.Medias.OrderBy(x => x.DisplayOrder).Select(x => x.Media.Url),
-                    Replies = c.Replies.Where(x => x.Status == ReplyStatus.Approved && x.ParentId == null)
-                    .OrderByDescending(x => x.SupportCount).ThenByDescending(x => x.Id)
-                    .Take(2).Select(x => new ReplyListResult()
-                    {
-                        Id = x.Id,
-                        Comment = x.Comment,
-                        ReplierName = x.ReplierName,
-                        CreatedOn = x.CreatedOn,
-                        SupportCount = x.SupportCount
-                    })
+                    //Replies = c.Replies.Where(x => x.Status == ReplyStatus.Approved && x.ParentId == null)
+                    //.OrderByDescending(x => x.SupportCount).ThenByDescending(x => x.Id)
+                    //.Take(2).Select(x => new ReplyListResult()
+                    //{
+                    //    Id = x.Id,
+                    //    Comment = x.Comment,
+                    //    ReplierName = x.ReplierName,
+                    //    CreatedOn = x.CreatedOn,
+                    //    SupportCount = x.SupportCount
+                    //})
                 });
+
+            if (result?.List?.Count() > 0)
+            {
+                // bug todo 待优化
+                result.List.ToList().ForEach(c =>
+                {
+                    if (c.ReplieCount > 0)
+                    {
+                        c.Replies = _replyRepository.Query(x => x.ReviewId == c.Id && x.Status == ReplyStatus.Approved && x.ParentId == null)
+                         .OrderByDescending(x => x.SupportCount).ThenByDescending(x => x.Id)
+                        .Take(2).Select(x => new ReplyListResult()
+                        {
+                            Id = x.Id,
+                            Comment = x.Comment,
+                            ReplierName = x.ReplierName,
+                            CreatedOn = x.CreatedOn,
+                            SupportCount = x.SupportCount
+                        }).ToList();
+                    }
+                });
+            }
+
             return Result.Ok(result);
         }
 

@@ -1,7 +1,7 @@
 ﻿using Hangfire;
 using Hangfire.Dashboard.BasicAuthorization;
 using Hangfire.MemoryStorage;
-using Hangfire.MySql;
+using Hangfire.Redis;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -13,8 +13,6 @@ using Shop.Module.Hangfire.Models;
 using Shop.Module.Hangfire.Services;
 using Shop.Module.Schedule.Abstractions.Services;
 using StackExchange.Redis;
-using System;
-using System.Transactions;
 
 namespace Shop.Module.Hangfire
 {
@@ -26,45 +24,59 @@ namespace Shop.Module.Hangfire
             var json = configuration.GetRequiredService<IConfiguration>().GetValue<string>(nameof(HangfireOptions));
             var hangfireConfig = JsonConvert.DeserializeObject<HangfireOptions>(json) ?? new HangfireOptions();
 
-            switch (hangfireConfig.Provider)
+            //services.AddHangfire(config =>
+            //{
+            //    config.UseRedisStorage(ConnectionMultiplexer.Connect(hangfireConfig.RedisHangfireConnection), new RedisStorageOptions()
+            //    {
+            //        Db = 1,
+            //        Prefix = "shop:"
+            //    });
+            //});
+
+            services.AddHangfire(config =>
             {
-                case ProviderType.MySql:
-                    services.AddHangfire(config =>
-                    config.UseStorage(new MySqlStorage(hangfireConfig.MySqlHangfireConnection,
-                    new MySqlStorageOptions
-                    {
-                        TransactionIsolationLevel = IsolationLevel.ReadCommitted,
-                        QueuePollInterval = TimeSpan.FromSeconds(15),
-                        JobExpirationCheckInterval = TimeSpan.FromHours(1),
-                        CountersAggregateInterval = TimeSpan.FromMinutes(5),
-                        PrepareSchemaIfNecessary = true,
-                        DashboardJobListLimit = 50000,
-                        TransactionTimeout = TimeSpan.FromMinutes(1),
-                        TablesPrefix = "Hangfire" // TablesPrefix - prefix for the tables in database. Default is none
-                    })));
-                    break;
-                case ProviderType.SqlServer:
-                    services.AddHangfire(config => config.UseSqlServerStorage(hangfireConfig.SqlServerHangfireConnection));
-                    break;
-                case ProviderType.Redis:
-                    services.AddHangfire(config =>
-                    {
-                        config.UseRedisStorage(ConnectionMultiplexer.Connect(hangfireConfig.RedisHangfireConnection));
-                    });
-                    break;
-                case ProviderType.Memory:
-                    services.AddHangfire(config =>
-                    {
-                        config.UseMemoryStorage();
-                    });
-                    break;
-                default:
-                    services.AddHangfire(config =>
-                    {
-                        config.UseMemoryStorage();
-                    });
-                    break;
-            }
+                config.UseMemoryStorage();
+            });
+
+            //switch (hangfireConfig.Provider)
+            //{
+            //    case ProviderType.MySql:
+            //        services.AddHangfire(config =>
+            //        config.UseStorage(new MySqlStorage(hangfireConfig.MySqlHangfireConnection,
+            //        new MySqlStorageOptions
+            //        {
+            //            TransactionIsolationLevel = IsolationLevel.ReadCommitted,
+            //            QueuePollInterval = TimeSpan.FromSeconds(15),
+            //            JobExpirationCheckInterval = TimeSpan.FromHours(1),
+            //            CountersAggregateInterval = TimeSpan.FromMinutes(5),
+            //            PrepareSchemaIfNecessary = true,
+            //            DashboardJobListLimit = 50000,
+            //            TransactionTimeout = TimeSpan.FromMinutes(1),
+            //            TablesPrefix = "Hangfire" // TablesPrefix - prefix for the tables in database. Default is none
+            //        })));
+            //        break;
+            //    case ProviderType.SqlServer:
+            //        services.AddHangfire(config => config.UseSqlServerStorage(hangfireConfig.SqlServerHangfireConnection));
+            //        break;
+            //    case ProviderType.Redis:
+            //        services.AddHangfire(config =>
+            //        {
+            //            config.UseRedisStorage(ConnectionMultiplexer.Connect(hangfireConfig.RedisHangfireConnection));
+            //        });
+            //        break;
+            //    case ProviderType.Memory:
+            //        services.AddHangfire(config =>
+            //        {
+            //            config.UseMemoryStorage();
+            //        });
+            //        break;
+            //    default:
+            //        services.AddHangfire(config =>
+            //        {
+            //            config.UseMemoryStorage();
+            //        });
+            //        break;
+            //}
 
             //services.Configure<HangfireAuthOptions>(configuration.GetSection("Hangfire"));
             //services.Configure<HangfireOptions>(options =>
@@ -80,7 +92,7 @@ namespace Shop.Module.Hangfire
             services.AddHostedService<TestEmailJob>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             //var option = app.ApplicationServices.GetRequiredService<IOptionsMonitor<HangfireOptions>>();
             var json = app.ApplicationServices.GetRequiredService<IConfiguration>().GetValue<string>(nameof(HangfireOptions));

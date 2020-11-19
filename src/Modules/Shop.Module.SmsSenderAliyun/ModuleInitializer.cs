@@ -9,7 +9,7 @@ namespace Shop.Module.SmsSenderAliyun
 {
     public class ModuleInitializer : IModuleInitializer
     {
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
         }

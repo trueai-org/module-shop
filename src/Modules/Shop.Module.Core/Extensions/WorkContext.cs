@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
+using Shop.Module.Core.Abstractions.Cache;
 using Shop.Module.Core.Abstractions.Data;
 using Shop.Module.Core.Abstractions.Entities;
 using Shop.Module.Core.Abstractions.Extensions;
 using Shop.Module.Core.Abstractions.Models;
+using Shop.Module.Core.Models.Cache;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,18 +20,24 @@ namespace Shop.Module.Core.Extensions
         private const string UserGuidCookiesName = ShopKeys.UserGuidCookiesName;
 
         private User _currentUser;
-        private HttpContext _httpContext;
-        private UserManager<User> _userManager;
-        private IRepository<User> _userRepository;
+        private readonly HttpContext _httpContext;
+        private readonly UserManager<User> _userManager;
+        private readonly IRepository<User> _userRepository;
+        private readonly AuthenticationConfig _config;
+        private readonly IStaticCacheManager _cacheManager;
 
         public WorkContext(
             IHttpContextAccessor contextAccessor,
             UserManager<User> userManager,
-            IRepository<User> userRepository)
+            IRepository<User> userRepository,
+            AuthenticationConfig config,
+            IStaticCacheManager cacheManager)
         {
             _userManager = userManager;
             _httpContext = contextAccessor.HttpContext;
             _userRepository = userRepository;
+            _config = config;
+            _cacheManager = cacheManager;
         }
 
         public async Task<User> GetCurrentUserAsync()
@@ -112,6 +120,69 @@ namespace Shop.Module.Core.Extensions
                 HttpOnly = true,
                 IsEssential = true
             });
+        }
+
+        /// <summary>
+        /// 验证令牌并自动续签
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="token"></param>
+        /// <param name="statusCode"></param>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public bool ValidateToken(int userId, string token, out int statusCode, string path = "")
+        {
+            statusCode = StatusCodes.Status200OK;
+
+            if (userId <= 0 || string.IsNullOrWhiteSpace(token))
+                return false;
+
+            var _options = _config?.Jwt;
+            if (_options == null)
+                throw new ArgumentNullException(nameof(AuthenticationConfig));
+
+            var key = ShopKeys.UserJwtTokenPrefix + userId;
+            var currentUser = _cacheManager.Get<UserTokenCache>(key);
+            if (currentUser != null && currentUser.Token.Equals(token, StringComparison.OrdinalIgnoreCase))
+            {
+                var utcNow = DateTime.UtcNow;
+                var issuer = _options.Issuer;
+                var jwtKey = _options.Key;
+                var minutes = _options.AccessTokenDurationInMinutes;
+
+                if (currentUser.TokenExpiresOnUtc != null && currentUser.TokenExpiresOnUtc < utcNow)
+                {
+                    // 过期
+                    _cacheManager.Remove(key);
+                    return false;
+                }
+                else if (minutes > 0 && currentUser.TokenExpiresOnUtc == null)
+                {
+                    // 当调整配置时，访问时更新配置（无过期时间->有过期时间）
+                    currentUser.TokenUpdatedOnUtc = utcNow;
+                    currentUser.TokenExpiresOnUtc = utcNow.AddMinutes(minutes);
+
+                    _cacheManager.Set(key, currentUser, minutes);
+                }
+                else if (currentUser.TokenExpiresOnUtc != null && (utcNow - currentUser.TokenUpdatedOnUtc).TotalMinutes >= 1)
+                {
+                    // 每分钟自动续签
+                    // 注意：默认jwt令牌不开启过期策略的
+                    currentUser.TokenUpdatedOnUtc = utcNow;
+                    currentUser.TokenExpiresOnUtc = utcNow.AddMinutes(minutes);
+
+                    _cacheManager.Set(key, currentUser, minutes);
+                }
+
+                return true;
+            }
+            else
+            {
+                // 令牌不存在或令牌不一致，返回 401
+                statusCode = StatusCodes.Status401Unauthorized;
+            }
+
+            return false;
         }
     }
 }

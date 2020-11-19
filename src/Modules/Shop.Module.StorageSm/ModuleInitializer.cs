@@ -15,7 +15,7 @@ namespace Shop.Module.StorageSm
             serviceCollection.AddScoped<IStorageService, SmStorageService>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
         }

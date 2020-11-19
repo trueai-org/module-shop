@@ -109,7 +109,7 @@ namespace Shop.Module.Core.Controllers
                       LastLoginOn = user.LastLoginOn,
                       PhoneNumber = user.PhoneNumber,
                       UpdatedOn = user.UpdatedOn,
-                      RoleIds = user.Roles.Select(c => c.RoleId).Distinct().OrderBy(c => c).ToList()
+                      RoleIds = user.Roles.Select(c => c.RoleId) // .Distinct().OrderBy(c => c).ToList()
                   });
             return Result.Ok(result);
         }
@@ -138,7 +138,7 @@ namespace Shop.Module.Core.Controllers
                 LastLoginOn = user.LastLoginOn,
                 PhoneNumber = user.PhoneNumber,
                 UpdatedOn = user.UpdatedOn,
-                RoleIds = user.Roles.Select(c => c.RoleId).Distinct().OrderBy(c => c).ToList()
+                RoleIds = user.Roles.Select(c => c.RoleId) // .Distinct().OrderBy(c => c).ToList()
             };
             return Result.Ok(model);
         }

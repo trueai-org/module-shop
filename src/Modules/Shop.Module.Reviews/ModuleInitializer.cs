@@ -23,7 +23,7 @@ namespace Shop.Module.Reviews
             services.AddTransient<INotificationHandler<ReviewAutoApprovedEvent>, ReviewAutoApprovedHandler>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
         }

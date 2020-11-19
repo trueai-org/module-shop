@@ -94,12 +94,21 @@ namespace Shop.Module.Catalog.Services
                     Id = category.Id,
                     IsPublished = category.IsPublished,
                     IncludeInMenu = category.IncludeInMenu,
-                    Name = IncludeParentName(all.FirstOrDefault(c => c.Id == category.Id)),
+                    //Name = IncludeParentName(all.FirstOrDefault(c => c.Id == category.Id)),
                     DisplayOrder = category.DisplayOrder,
                     ParentId = category.ParentId,
                     CreatedOn = category.CreatedOn,
                     UpdatedOn = category.UpdatedOn
                 });
+
+            // TODO .NET CORE 3.1
+            if (gridData?.List?.Count() > 0)
+            {
+                gridData.List.ToList().ForEach(c =>
+                {
+                    c.Name = IncludeParentName(all.FirstOrDefault(x => x.Id == c.Id));
+                });
+            }
 
             return Result.Ok(gridData);
         }
