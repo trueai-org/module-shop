@@ -20,8 +20,4 @@
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="新文件夹1\" />
-    <Folder Include="新文件夹\" />
-  </ItemGroup>
 </Project>
