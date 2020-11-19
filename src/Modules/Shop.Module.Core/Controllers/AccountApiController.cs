@@ -7,14 +7,12 @@ using Microsoft.Extensions.Logging;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
 using Shop.Infrastructure.Helpers;
-using Shop.Module.Core.Abstractions.Cache;
 using Shop.Module.Core.Abstractions.Data;
 using Shop.Module.Core.Abstractions.Entities;
 using Shop.Module.Core.Abstractions.Extensions;
 using Shop.Module.Core.Abstractions.Models;
 using Shop.Module.Core.Abstractions.Services;
 using Shop.Module.Core.Abstractions.ViewModels;
-using Shop.Module.Core.Extensions;
 using Shop.Module.Schedule.Abstractions.Services;
 using System;
 using System.Collections.Generic;
@@ -38,11 +36,10 @@ namespace Shop.Module.Core.Controllers
         private readonly IRepository<User> _userRepository;
         private readonly ITokenService _tokenService;
         private readonly IWorkContext _workContext;
-        private readonly IStaticCacheManager _cacheManager;
         private readonly string _webHost;
-        private readonly ShopSignInManager<User> _shopSignInManager;
         private readonly IJobService _jobService;
         private readonly IRepository<Media> _mediaRepository;
+        private readonly IAccountService _accountService;
 
         public AccountApiController(
             IRepository<SmsSend> smsSendRepository,
@@ -55,10 +52,9 @@ namespace Shop.Module.Core.Controllers
             IRepository<User> userRepository,
             ITokenService tokenService,
             IWorkContext workContext,
-            IStaticCacheManager cacheManager,
-            ShopSignInManager<User> shopSignInManager,
             IJobService jobService,
-            IRepository<Media> mediaRepository)
+            IRepository<Media> mediaRepository,
+            IAccountService accountService)
         {
             _smsSendRepository = smsSendRepository;
             _userManager = userManager;
@@ -70,10 +66,9 @@ namespace Shop.Module.Core.Controllers
             _tokenService = tokenService;
             _workContext = workContext;
             _webHost = configuration.GetValue<string>(ShopKeys.WebHost);
-            _cacheManager = cacheManager;
-            _shopSignInManager = shopSignInManager;
             _jobService = jobService;
             _mediaRepository = mediaRepository;
+            _accountService = accountService;
         }
 
         [HttpGet()]
@@ -164,13 +159,16 @@ namespace Shop.Module.Core.Controllers
                 return Result.Fail("此手机号已被注册");
 
             //5分钟内的验证码
-            var sms = _smsSendRepository
-                .Query(c => c.PhoneNumber == model.Phone && c.IsSucceed && !c.IsUsed && c.TemplateType == SmsTemplateType.Captcha
-                && c.CreatedOn >= DateTime.Now.AddMinutes(-5)).OrderByDescending(c => c.CreatedOn).FirstOrDefault();
-            if (sms == null)
-                return Result.Fail("验证码不存在或已失效，请重新获取验证码");
-            if (sms.Value != model.Captcha)
-                return Result.Fail("验证码错误");
+            //var sms = _smsSendRepository
+            //    .Query(c => c.PhoneNumber == model.Phone && c.IsSucceed && !c.IsUsed && c.TemplateType == SmsTemplateType.Captcha
+            //    && c.CreatedOn >= DateTime.Now.AddMinutes(-5)).OrderByDescending(c => c.CreatedOn).FirstOrDefault();
+            //if (sms == null)
+            //    return Result.Fail("验证码不存在或已失效，请重新获取验证码");
+            //if (sms.Value != model.Captcha)
+            //    return Result.Fail("验证码错误");
+
+            //5分钟内的验证码
+            var sms = await _accountService.ValidateGetLastSms(model?.Phone, model?.Captcha);
 
             var user = new User
             {
@@ -251,14 +249,7 @@ namespace Shop.Module.Core.Controllers
             var phone = model.Phone;
 
             //5分钟内的验证码
-            var sms = _smsSendRepository
-                .Query(c => c.PhoneNumber == phone && c.IsSucceed && !c.IsUsed && c.TemplateType == SmsTemplateType.Captcha
-                && c.CreatedOn >= DateTime.Now.AddMinutes(-5)).OrderByDescending(c => c.CreatedOn).FirstOrDefault();
-            if (sms == null)
-                return Result.Fail("验证码不存在或已失效，请重新获取验证码");
-
-            if (sms.Value != model.Code)
-                return Result.Fail("验证码错误");
+            var sms = await _accountService.ValidateGetLastSms(phone, model?.Code);
 
             //设置验证码被使用
             sms.IsUsed = true;
@@ -277,36 +268,78 @@ namespace Shop.Module.Core.Controllers
                 await _userManager.UpdateAsync(user);
             }
 
+            var isLockedOut = await _userManager.IsLockedOutAsync(user);
+            if (isLockedOut)
+            {
+                throw new Exception("用户已锁定，请稍后重试");
+            }
+
+            if (!await _signInManager.CanSignInAsync(user))
+            {
+                throw new Exception("用户不允许登录，请稍后重试");
+            }
+
+            // 如果手机没有验证，则自动验证
+            if (!user.PhoneNumberConfirmed)
+            {
+                user.PhoneNumberConfirmed = true;
+                await _userManager.UpdateAsync(user);
+            }
+
+            // 如果用手机登录且双因子=true时，则设置双因子=false
+            if (user.TwoFactorEnabled)
+            {
+                await _userManager.SetTwoFactorEnabledAsync(user, false);
+            }
+
+            // 重置错误次数计数器
+            var failedCount = await _userManager.GetAccessFailedCountAsync(user);
+            if (failedCount > 0)
+            {
+                await _userManager.ResetAccessFailedCountAsync(user);
+            }
+
+            var token = await _tokenService.GenerateAccessToken(user);
+            var loginResult = new LoginResult()
+            {
+                Token = token,
+                Avatar = user.AvatarUrl,
+                Email = user.Email,
+                Name = user.FullName,
+                Phone = user.PhoneNumber
+            };
+            return Result.Ok(loginResult);
+
             //var userFactors = await _userManager.GetValidTwoFactorProvidersAsync(user);
             //if (!userFactors.Any(c => c == nameof(model.Phone)))
             //    return Result.Fail("手机未验证，不允许用手机登录");
             //var isLockedOut = _userManager.IsLockedOutAsync(user);
 
-            var signInResult = await _shopSignInManager.SignInCheck(user);
-            if (signInResult == null || signInResult.Succeeded)
-            {
-                //如果返回null，说明被允许登录
-                //如果用手机登录且双因子=true时，则设置双因子=false
-                if (user.TwoFactorEnabled)
-                {
-                    await _userManager.SetTwoFactorEnabledAsync(user, false);
-                }
-                var token = await _tokenService.GenerateAccessToken(user);
-                var loginResult = new LoginResult()
-                {
-                    Token = token,
-                    Avatar = user.AvatarUrl,
-                    Email = user.Email,
-                    Name = user.FullName,
-                    Phone = user.PhoneNumber
-                };
-                return Result.Ok(loginResult);
-            }
-            else if (signInResult.IsLockedOut)
-            {
-                return Result.Fail("用户已锁定，请稍后重试");
-            }
-            return Result.Fail("用户登录失败，请稍后重试");
+            //var signInResult = await _shopSignInManager.SignInCheck(user);
+            //if (signInResult == null || signInResult.Succeeded)
+            //{
+            //    //如果返回null，说明被允许登录
+            //    //如果用手机登录且双因子=true时，则设置双因子=false
+            //    if (user.TwoFactorEnabled)
+            //    {
+            //        await _userManager.SetTwoFactorEnabledAsync(user, false);
+            //    }
+            //    var token = await _tokenService.GenerateAccessToken(user);
+            //    var loginResult = new LoginResult()
+            //    {
+            //        Token = token,
+            //        Avatar = user.AvatarUrl,
+            //        Email = user.Email,
+            //        Name = user.FullName,
+            //        Phone = user.PhoneNumber
+            //    };
+            //    return Result.Ok(loginResult);
+            //}
+            //else if (signInResult.IsLockedOut)
+            //{
+            //    return Result.Fail("用户已锁定，请稍后重试");
+            //}
+            //return Result.Fail("用户登录失败，请稍后重试");
         }
 
         /// <summary>
@@ -548,7 +581,7 @@ namespace Shop.Module.Core.Controllers
         /// <returns></returns>
         [HttpPut("confirm-email")]
         [AllowAnonymous]
-        public async Task<Result> ConfirmEmail([FromBody]ConfirmEmailParam param)
+        public async Task<Result> ConfirmEmail([FromBody] ConfirmEmailParam param)
         {
             var user = await _userManager.FindByIdAsync(param.UserId.ToString());
             if (user == null)
@@ -642,7 +675,7 @@ namespace Shop.Module.Core.Controllers
         /// <returns></returns>
         [HttpPost("forgot-password-email")]
         [AllowAnonymous]
-        public async Task<Result> ForgotPasswordSendEmail([FromBody]ResetPasswordPostParam param)
+        public async Task<Result> ForgotPasswordSendEmail([FromBody] ResetPasswordPostParam param)
         {
             var user = await _userManager.FindByNameAsync(param.UserName);
             if (user == null)
@@ -669,7 +702,7 @@ namespace Shop.Module.Core.Controllers
         /// <returns></returns>
         [HttpPut("reset-password-email")]
         [AllowAnonymous]
-        public async Task<Result> ResetPasswordByEmail([FromBody]ResetPasswordPutParam param)
+        public async Task<Result> ResetPasswordByEmail([FromBody] ResetPasswordPutParam param)
         {
             var user = await _userManager.FindByNameAsync(param.UserName);
             if (user == null)
@@ -699,7 +732,7 @@ namespace Shop.Module.Core.Controllers
         /// <returns></returns>
         [HttpPost("forgot-password-phone")]
         [AllowAnonymous]
-        public async Task<Result> ForgotPasswordSendPhone([FromBody]ResetPasswordPostParam param)
+        public async Task<Result> ForgotPasswordSendPhone([FromBody] ResetPasswordPostParam param)
         {
             var user = await _userManager.FindByNameAsync(param.UserName);
             if (user == null)
@@ -723,7 +756,7 @@ namespace Shop.Module.Core.Controllers
         /// <returns></returns>
         [HttpPut("reset-password-phone")]
         [AllowAnonymous]
-        public async Task<Result> ResetPasswordByPhone([FromBody]ResetPasswordPutParam param)
+        public async Task<Result> ResetPasswordByPhone([FromBody] ResetPasswordPutParam param)
         {
             var user = await _userManager.FindByNameAsync(param.UserName);
             if (user == null)
@@ -920,7 +953,7 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok();
         }
 
-        async Task SendEmailConfirmation(string email, int userId, string code)
+        private async Task SendEmailConfirmation(string email, int userId, string code)
         {
             if (string.IsNullOrEmpty(email))
                 return;

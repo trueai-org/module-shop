@@ -1,52 +1,22 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Areas\**" />
-    <Compile Remove="Events\**" />
-    <EmbeddedResource Remove="Areas\**" />
-    <EmbeddedResource Remove="Events\**" />
-    <None Remove="Areas\**" />
-    <None Remove="Events\**" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.8.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+		<PackageReference Include="RedLock.net" Version="2.2.0" />
+		<PackageReference Include="StackExchange.Redis" Version="2.2.4" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="Cache\ICacheManager.cs" />
-    <Compile Remove="Cache\ILocker.cs" />
-    <Compile Remove="Cache\IRedisConnectionWrapper.cs" />
-    <Compile Remove="Cache\IStaticCacheManager.cs" />
-    <Compile Remove="Extensions\IWorkContext.cs" />
-    <Compile Remove="Services\IAccountService.cs" />
-    <Compile Remove="Services\IAppSettingService.cs" />
-    <Compile Remove="Services\ICountryService.cs" />
-    <Compile Remove="Services\IEmailSender.cs" />
-    <Compile Remove="Services\IEntityService.cs" />
-    <Compile Remove="Services\IMediaService.cs" />
-    <Compile Remove="Services\ISmsSender.cs" />
-    <Compile Remove="Services\IStorageService.cs" />
-    <Compile Remove="Services\ITokenService.cs" />
-    <Compile Remove="Services\IUserAddressService.cs" />
-    <Compile Remove="Services\IWidgetInstanceService.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.0" />
-    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.3.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-    <PackageReference Include="RedLock.net" Version="2.2.0" />
-    <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.3.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Shop.Infrastructure\Shop.Infrastructure.csproj" />
-    <ProjectReference Include="..\Shop.Module.Core.Abstractions\Shop.Module.Core.Abstractions.csproj" />
-    <ProjectReference Include="..\Shop.Module.Schedule.Abstractions\Shop.Module.Schedule.Abstractions.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Shop.Infrastructure\Shop.Infrastructure.csproj" />
+		<ProjectReference Include="..\Shop.Module.Core.Abstractions\Shop.Module.Core.Abstractions.csproj" />
+		<ProjectReference Include="..\Shop.Module.Schedule.Abstractions\Shop.Module.Schedule.Abstractions.csproj" />
+	</ItemGroup>
 
 </Project>

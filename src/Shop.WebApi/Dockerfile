@@ -1,9 +1,11 @@
-FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM microsoft/dotnet:2.2-sdk AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["src/Shop.WebApi/Shop.WebApi.csproj", "src/Shop.WebApi/"]
 COPY ["src/Modules/Shop.Module.Reviews/Shop.Module.Reviews.csproj", "src/Modules/Shop.Module.Reviews/"]
@@ -25,14 +27,12 @@ COPY ["src/Modules/Shop.Module.Hangfire/Shop.Module.Hangfire.csproj", "src/Modul
 COPY ["src/Modules/Shop.Module.Shipments.Abstractions/Shop.Module.Shipments.Abstractions.csproj", "src/Modules/Shop.Module.Shipments.Abstractions/"]
 COPY ["src/Modules/Shop.Module.StorageGitHub/Shop.Module.StorageGitHub.csproj", "src/Modules/Shop.Module.StorageGitHub/"]
 COPY ["src/Modules/Shop.Module.EmailSenderSmtp/Shop.Module.EmailSenderSmtp.csproj", "src/Modules/Shop.Module.EmailSenderSmtp/"]
-COPY ["src/Modules/Shop.Module.RabbitMQ/Shop.Module.RabbitMQ.csproj", "src/Modules/Shop.Module.RabbitMQ/"]
 COPY ["src/Modules/Shop.Module.ShoppingCart.Abstractions/Shop.Module.ShoppingCart.Abstractions.csproj", "src/Modules/Shop.Module.ShoppingCart.Abstractions/"]
 COPY ["src/Modules/Shop.Module.Feedback/Shop.Module.Feedbacks.csproj", "src/Modules/Shop.Module.Feedback/"]
 COPY ["src/Modules/Shop.Module.Feedbacks.Abstractions/Shop.Module.Feedbacks.Abstractions.csproj", "src/Modules/Shop.Module.Feedbacks.Abstractions/"]
 COPY ["src/Modules/Shop.Module.SmsSenderAliyun/Shop.Module.SmsSenderAliyun.csproj", "src/Modules/Shop.Module.SmsSenderAliyun/"]
 COPY ["src/Modules/Shop.Module.Shipping/Shop.Module.Shipping.csproj", "src/Modules/Shop.Module.Shipping/"]
 COPY ["src/Modules/Shop.Module.Payments.Payments/Shop.Module.Payments.Payments.csproj", "src/Modules/Shop.Module.Payments.Payments/"]
-COPY ["src/Modules/Shop.Module.MQ/Shop.Module.MQ.csproj", "src/Modules/Shop.Module.MQ/"]
 COPY ["src/Modules/Shop.Module.MassTransitMQ/Shop.Module.MassTransitMQ.csproj", "src/Modules/Shop.Module.MassTransitMQ/"]
 COPY ["src/Modules/Shop.Module.ShoppingCart/Shop.Module.ShoppingCart.csproj", "src/Modules/Shop.Module.ShoppingCart/"]
 COPY ["src/Modules/Shop.Module.StorageSm/Shop.Module.StorageSm.csproj", "src/Modules/Shop.Module.StorageSm/"]
@@ -44,12 +44,12 @@ COPY ["src/Modules/Shop.Module.Shipments/Shop.Module.Shipments.csproj", "src/Mod
 RUN dotnet restore "src/Shop.WebApi/Shop.WebApi.csproj"
 COPY . .
 WORKDIR "/src/src/Shop.WebApi"
-RUN dotnet build "Shop.WebApi.csproj" -c Release -o /app
+RUN dotnet build "Shop.WebApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Shop.WebApi.csproj" -c Release -o /app
+RUN dotnet publish "Shop.WebApi.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app .
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Shop.WebApi.dll"]

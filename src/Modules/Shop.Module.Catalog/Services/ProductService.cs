@@ -11,7 +11,6 @@ using Shop.Module.Core.Abstractions.Extensions;
 using Shop.Module.Core.Abstractions.Models;
 using Shop.Module.Inventory.Abstractions.Entities;
 using Shop.Module.MQ.Abstractions.Data;
-using Shop.Module.MQ.Abstractions.Models;
 using Shop.Module.MQ.Abstractions.Services;
 using Shop.Module.Orders.Abstractions.Entities;
 using System;
@@ -152,7 +151,7 @@ namespace Shop.Module.Catalog.Services
 
             if (user != null)
             {
-                await _mqService.DirectSend(QueueKeys.ProductView, new ProductViewed()
+                await _mqService.Send(QueueKeys.ProductView, new ProductViewed()
                 {
                     UserId = user.Id,
                     EntityId = result.Id,

@@ -8,6 +8,8 @@ using Shop.Module.Core.MiniProgram.Models;
 using Shop.Module.Payments.Abstractions.Models;
 using Shop.Module.Payments.Abstractions.Services;
 using System;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Shop.Module.Core.MiniProgram.Services
@@ -30,6 +32,10 @@ namespace Shop.Module.Core.MiniProgram.Services
 
         public async Task<PaymentOrderBaseResponse> GeneratePaymentOrder(PaymentOrderRequest request)
         {
+            var ip = Dns.GetHostEntry(Dns.GetHostName())
+                .AddressList.FirstOrDefault(address => address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)?.ToString()
+                ?? "127.0.0.1";
+
             var apiHost = await _appSettingService.Get(ShopKeys.ApiHost);
             var wxRequest = new WeChatPayUnifiedOrderRequest
             {
@@ -38,20 +44,32 @@ namespace Shop.Module.Core.MiniProgram.Services
                 TotalFee = Convert.ToInt32(request.TotalAmount * 100),
                 OpenId = request.OpenId,
                 TradeType = "JSAPI",
-                SpbillCreateIp = "127.0.0.1",
+                //SpbillCreateIp = "127.0.0.1",
+                SpBillCreateIp = ip,
                 NotifyUrl = $"{apiHost.Trim('/')}/api/mp/pay/notify/{request.OrderNo}",
             };
-            var response = await _client.ExecuteAsync(wxRequest);
+
+            var config = await _appSettingService.Get<MiniProgramOptions>();
+            var opt = new WeChatPayOptions()
+            {
+                AppId = config.AppId,
+                MchId = config.MchId,
+                Secret = config.AppSecret,
+                Key = config.Key
+            };
+            var response = await _client.ExecuteAsync(wxRequest, opt);
+
             if (response?.ReturnCode == "SUCCESS" && response?.ResultCode == "SUCCESS")
             {
-                var req = new WeChatPayLiteAppCallPaymentRequest
+                var req = new WeChatPayAppSdkRequest
                 {
-                    Package = "prepay_id=" + response.PrepayId
+                    PrepayId = response.PrepayId,
                 };
 
                 // https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=7_7&index=5
                 // 将参数(parameter)给 小程序前端 让他调起支付API
-                var parameter = await _client.ExecuteAsync(req);
+                var parameter = await _client.ExecuteAsync(req, opt);
+
                 var json = JsonConvert.SerializeObject(parameter);
                 return JsonConvert.DeserializeObject<PaymentOrderResponse>(json);
             }

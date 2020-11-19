@@ -7,26 +7,19 @@ namespace Shop.WebApi.Extensions
 {
     public static class ApplicationBuilderExtensions
     {
-        public static void UseCustomizedConfigure(this IApplicationBuilder app, IHostingEnvironment env)
+        public static void UseCustomizedConfigure(this IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //跨域
-            app.UseCors(option =>
-            {
-                option.AllowAnyHeader();
-                option.AllowAnyMethod();
-                option.AllowAnyOrigin();
-                option.AllowCredentials();
-            });
+            ////跨域
+            //app.UseCors(option =>
+            //{
+            //    option.AllowAnyHeader();
+            //    option.AllowAnyMethod();
+            //    option.AllowAnyOrigin();
+            //    option.AllowCredentials();
+            //});
 
-            //JWT
-            app.UseAuthentication();
-
-            //Swagger
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Shop API V1");
-            });
+            ////JWT
+            //app.UseAuthentication();
 
             //module
             var moduleInitializers = app.ApplicationServices.GetServices<IModuleInitializer>();

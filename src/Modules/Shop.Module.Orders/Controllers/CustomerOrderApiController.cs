@@ -155,7 +155,7 @@ namespace Shop.Module.Orders.Controllers
         }
 
         [HttpPost("grid")]
-        public async Task<Result<StandardTableResult<CustomerOrderQueryResult>>> List([FromBody]StandardTableParam<CustomerOrderQueryParam> param)
+        public async Task<Result<StandardTableResult<CustomerOrderQueryResult>>> List([FromBody] StandardTableParam<CustomerOrderQueryParam> param)
         {
             var user = await _workContext.GetCurrentUserAsync();
             var query = _orderRepository.Query()
@@ -210,17 +210,28 @@ namespace Shop.Module.Orders.Controllers
                         ProductPrice = x.ProductPrice,
                         Quantity = x.Quantity,
                         ShippedQuantity = x.ShippedQuantity
-                    }).Take(2), // 列表中最多显示2个商品
+                    }),// EF CORE 子查询列表 top bug, 不允许此操作.Take(2), // 列表中最多显示2个商品
                     ItemsTotal = c.OrderItems.Sum(x => x.Quantity),
                     ItemsCount = c.OrderItems.Count,
                     PaymentEndOn = c.PaymentEndOn,
                     DeliveredEndOn = c.DeliveredEndOn
                 });
+
+            if (result.List?.Count() > 0)
+            {
+                result.List.ToList().ForEach(c =>
+                {
+                    if (c.Items?.Count() > 2)
+                    {
+                        c.Items = c.Items.Take(2).ToList();
+                    }
+                });
+            }
             return Result.Ok(result);
         }
 
         [HttpPut("{id:int:min(1)}/cancel")]
-        public async Task<Result> Cancel(int id, [FromBody]OrderCancelParam reason)
+        public async Task<Result> Cancel(int id, [FromBody] OrderCancelParam reason)
         {
             var user = await _workContext.GetCurrentOrThrowAsync();
             var order = await _orderRepository.Query()

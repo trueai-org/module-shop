@@ -29,7 +29,7 @@ namespace Shop.Module.Core.MiniProgram
             });
             services.AddScoped<IPaymentService, PaymentService>();
         }
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
         }

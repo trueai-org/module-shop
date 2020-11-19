@@ -16,7 +16,7 @@ namespace Shop.Module.SampleData
             services.AddTransient<IStateOrProvinceService, StateOrProvinceService>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
         }

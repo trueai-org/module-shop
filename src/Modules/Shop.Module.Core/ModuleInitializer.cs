@@ -50,8 +50,9 @@ namespace Shop.Module.Core
             //serviceCollection.AddSingleton<SettingDefinitionProvider>();
             //serviceCollection.AddScoped<ISettingService, SettingService>();
 
-            services.AddScoped<ShopSignInManager<User>>();
-            services.AddScoped<SignInManager<User>, ShopSignInManager<User>>();
+            services.AddScoped<SignInManager<User>>();
+            //services.AddScoped<ShopSignInManager<User>>();
+            //services.AddScoped<SignInManager<User>, ShopSignInManager<User>>();
 
             // used redis
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -82,7 +83,7 @@ namespace Shop.Module.Core
             }
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
         }

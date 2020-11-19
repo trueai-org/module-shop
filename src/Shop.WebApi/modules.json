@@ -107,18 +107,9 @@
 
   /* mq */
   {
-    "id": "Shop.Module.MQ",
-    "version": "1.0.0"
-  },
-  {
     "id": "Shop.Module.MQ.Abstractions",
     "version": "1.0.0"
   },
-  // only one
-  //{
-  //  "id": "Shop.Module.RabbitMQ",
-  //  "version": "1.0.0"
-  //},
   {
     "id": "Shop.Module.MassTransitMQ",
     "version": "1.0.0"

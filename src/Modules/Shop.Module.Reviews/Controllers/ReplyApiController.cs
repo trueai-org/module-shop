@@ -78,7 +78,7 @@ namespace Shop.Module.Reviews.Controllers
             var isAuto = await _appSettingService.Get<bool>(ReviewKeys.IsReplyAutoApproved);
             if (isAuto)
             {
-                await _mqService.DirectSend(QueueKeys.ReplyAutoApproved, new ReplyAutoApprovedEvent()
+                await _mqService.Send(QueueKeys.ReplyAutoApproved, new ReplyAutoApprovedEvent()
                 {
                     ReplyId = reply.Id
                 });

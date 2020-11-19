@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Essensoft.AspNetCore.Payment.WeChatPay" Version="2.3.2" />
+    <PackageReference Include="Essensoft.AspNetCore.Payment.WeChatPay" Version="3.1.8" />
   </ItemGroup>
 
   <ItemGroup>

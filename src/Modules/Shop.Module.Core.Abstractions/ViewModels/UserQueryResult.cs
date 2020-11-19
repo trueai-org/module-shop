@@ -44,6 +44,6 @@ namespace Shop.Module.Core.Abstractions.ViewModels
 
         public DateTime UpdatedOn { get; set; }
 
-        public IList<int> RoleIds { get; set; } = new List<int>();
+        public IEnumerable<int> RoleIds { get; set; } = new List<int>();
     }
 }

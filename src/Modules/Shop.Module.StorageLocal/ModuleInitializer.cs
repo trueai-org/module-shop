@@ -15,7 +15,7 @@ namespace Shop.Module.StorageLocal
             serviceCollection.AddScoped<IStorageService, LocalStorageService>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
         }

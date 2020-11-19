@@ -6,6 +6,12 @@ namespace Shop.Module.Core.Abstractions.Services
 {
     public interface IAccountService
     {
-        Task<LoginResult> LoginWithSignInCheck(User user);
+        /// <summary>
+        /// 验证并获取最后一条验证码
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <param name="captcha"></param>
+        /// <returns></returns>
+        Task<SmsSend> ValidateGetLastSms(string phone, string captcha);
     }
 }
