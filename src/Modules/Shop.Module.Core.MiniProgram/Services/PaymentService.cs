@@ -58,12 +58,11 @@ namespace Shop.Module.Core.MiniProgram.Services
                 Key = config.Key
             };
             var response = await _client.ExecuteAsync(wxRequest, opt);
-
-            if (response?.ReturnCode == "SUCCESS" && response?.ResultCode == "SUCCESS")
+            if (response?.ReturnCode == WeChatPayCode.Success && response?.ResultCode == WeChatPayCode.Success)
             {
-                var req = new WeChatPayAppSdkRequest
+                var req = new WeChatPayLiteAppSdkRequest
                 {
-                    PrepayId = response.PrepayId,
+                    Package = $"prepay_id={response.PrepayId}"
                 };
 
                 // https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=7_7&index=5
