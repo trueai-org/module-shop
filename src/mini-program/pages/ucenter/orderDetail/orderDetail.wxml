@@ -1,0 +1,172 @@
+<view class="cu-bar {{order.orderStatus==60?'bg-gradual-green':'bg-gradual-orange'}} shadow-warp radius">
+    <view class='action'>
+        <text class="icon-info text-white"></text>
+        <text class="text text-white">{{order.orderStatusString}}</text>
+    </view>
+    <view wx:if="{{showTimer}}" class='action'>
+        <!-- 支付 -->
+        <text class="text-white text-sm">{{timeStrDesc}}{{timerStr}}</text>
+    </view>
+</view>
+<view class="cu-bar bg-white solid-bottom margin-top-sm">
+    <view class='action'>
+        <text class="icon-title text-blue"></text>
+        <text class="text">商品信息</text>
+    </view>
+    <view class='action'>
+        <text class="text">共{{order.itemsTotal}}件商品</text>
+    </view>
+</view>
+<view class="cu-card article no-card">
+    <view class="cu-item no-padding">
+        <view class="cu-list">
+            <view wx:for="{{order.items}}" wx:key="{{gitem.id}}" wx:for-item="gitem">
+                <navigator url="/pages/goods/goods?id={{gitem.productId}}">
+                    <view class="cu-item padding-lr-sm">
+                        <view class="content" style="padding:12rpx 0;">
+                            <image src="{{gitem.productMediaUrl}}" mode="aspectFill" class="shadow"></image>
+                            <view class="desc">
+                                <view class="text-content">
+                                    <text class="text-sm">{{gitem.productName}}</text>
+                                </view>
+                                <view>
+                                    <view class="cu-tag sm bg-white">× {{gitem.quantity}}</view>
+                                    <!-- <view class="cu-tag sm line-black round">
+                                    <text class="icon-comment text-black">评价晒单</text>
+                                </view> -->
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+                <view wx:if="{{order.orderStatus==60&&!gitem.isReviewed}}" class="cu-item padding-lr-sm padding-tb-sm text-right solid-bottom">
+                    <button bindtap="redirectToReview" data-id="{{gitem.productId}}" class="cu-btn sm round line-olive shadow margin-left-xs">
+                        <!-- <text class="icon-comment text-red"></text> -->
+                        评价晒单
+                    </button>
+                    <!-- <button class="cu-btn sm round line shadow margin-left-xs">追加评价</button> -->
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="bg-white padding-sm margin-top-sm">
+    <view class="flex margin-tb-xs justify-between">
+        <view class="">
+            <text class="text">订单编号：</text>
+            <text class="text">{{order.no}}</text>
+        </view>
+        <view class="text-sm">
+            <text class="icon-copy text-gray">复制</text>
+        </view>
+    </view>
+    <view class="text-sm margin-tb-xs">
+        <text class="text">下单时间：</text>
+        <text class="text">{{order.createdOn}}</text>
+    </view>
+    <view wx:if="{{order.paymentOn}}" class="text-sm margin-tb-xs">
+        <text class="text">支付时间：</text>
+        <text class="text">{{order.paymentOn}}</text>
+    </view>
+</view>
+<view class="flex bg-white padding-sm margin-top-sm">
+    <view class="">
+        <text class="icon-locationfill text-yellow"></text>
+    </view>
+    <view class="margin-left-xs">
+        <view class="">
+            <text class="">{{order.address.contactName}}</text>
+            <text class="margin-left">{{order.address.phone}}</text>
+        </view>
+        <view class="margin-top-xs">
+            <text class="text-sm text-cut">{{order.address.fullAddressLine1}}</text>
+        </view>
+    </view>
+</view>
+<view class="bg-white padding-lr-sm padding-top-sm margin-top-sm">
+    <view class="flex margin-tb-xs">
+        <view class="flex-sub">商品总额</view>
+        <view class="flex-sub text-right">￥{{order.subTotal}}</view>
+    </view>
+    <view class="flex margin-tb-xs">
+        <view class="flex-sub">运费</view>
+        <view class="flex-sub text-right">+ ￥{{order.shippingFeeAmount}}</view>
+    </view>
+    <view class="flex margin-tb-xs">
+        <view class="flex-sub">折扣</view>
+        <view class="flex-sub text-right">- ￥{{order.discountAmount}}</view>
+    </view>
+    <view class="cu-bar solid-top">
+        <view class="action"></view>
+        <view class='action' style="margin-right:0;">
+            <text class="text-sm">{{order.orderStatus==20||order.orderStatus==25?'需付款':'实付款'}}:</text>
+            <text class="text-xl text-bold text-red">￥{{order.orderTotal}}</text>
+        </view>
+    </view>
+</view>
+<view wx:if="{{order.orderStatus}}">
+    <view class="cu-tabbar-height"></view>
+    <view class="cu-bar bg-white solid-top" style="position:fixed;bottom:0;width:100%;">
+        <view class="action"></view>
+        <view class='action'>
+            <!-- <button wx:if="{{order.orderStatus==60&&!order.isReviewed}}" class="cu-btn sm round line shadow margin-left-xs">评价晒单</button> -->
+            <view wx:if="{{order.orderStatus==20 || order.orderStatus==25}}">
+                <button bindtap="showCancelModal" class="cu-btn sm round line shadow margin-left-xs">取消订单</button>
+                <button catchtap="payOrder" class="cu-btn sm round bg-red shadow margin-left-xs">去支付</button>
+            </view>
+            <view wx:elif="{{order.orderStatus==30||order.orderStatus==40||order.orderStatus==50}}">
+                <button wx:if="{{order.deliveredEndOnForSecond>0}}" bindtap="delayShippedOrder" class="cu-btn sm round line-blue shadow margin-left-xs">延长收货</button>
+                <button bindtap="showShippedModal" class="cu-btn sm round line-green shadow margin-left-xs">确认收货</button>
+            </view>
+            <view wx:elif="{{order.orderStatus==60 || order.orderStatus==70}}">
+                <button bindtap="showDeleteModal" class="cu-btn sm round line shadow margin-left-xs">删除订单</button>
+                <button bindtap="againOrder" class="cu-btn sm round line-red shadow margin-left-xs">再次购买</button>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="cu-modal {{visibleDelete?'show':''}}">
+    <view class="cu-dialog">
+        <!-- <view class="cu-bar bg-white justify-end">
+            <view class="content">确认删除订单吗？</view>
+            <view class="action" bindtap="hideModal">
+                <text class="icon-close text-red"></text>
+            </view>
+        </view> -->
+        <view class="padding-xl">确认删除订单吗？</view>
+        <view class="cu-bar bg-white">
+            <view class="action margin-0 flex-sub" bindtap="hideModal">取消</view>
+            <view class="action margin-0 flex-sub text-red solid-left" bindtap="deleteOrder">确定</view>
+        </view>
+    </view>
+</view>
+<view class="cu-modal {{visibleCancel?'show':''}}">
+    <view class="cu-dialog">
+        <!-- <view class="cu-bar bg-white justify-end">
+            <view class="content">确认删除订单吗？</view>
+            <view class="action" bindtap="hideModal">
+                <text class="icon-close text-red"></text>
+            </view>
+        </view> -->
+        <view class="padding-xl">确认取消订单吗？</view>
+        <view class="cu-bar bg-white">
+            <view class="action margin-0 flex-sub" bindtap="hideCancelModal">取消</view>
+            <view class="action margin-0 flex-sub text-red solid-left" bindtap="cancelOrder">确定</view>
+        </view>
+    </view>
+</view>
+<view class="cu-modal {{visibleShipped?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content text-bold">确认收货</view>
+            <view class="action" bindtap="hideModal">
+                <text class="icon-close text-red"></text>
+            </view>
+        </view>
+        <view class="padding-xl text-red text-left text-bold">请收到货后，再确认收货！否则您可能钱货两空！</view>
+        <view class="cu-bar bg-white">
+            <view class="action margin-0 flex-sub" bindtap="hideShippedModal">取消</view>
+            <view class="action margin-0 flex-sub text-red solid-left" bindtap="shippedOrder">确定</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shop.Infrastructure\Shop.Infrastructure.csproj" />
+    <ProjectReference Include="..\Shop.Module.Catalog.Abstractions\Shop.Module.Catalog.Abstractions.csproj" />
+    <ProjectReference Include="..\Shop.Module.Core.Abstractions\Shop.Module.Core.Abstractions.csproj" />
+    <ProjectReference Include="..\Shop.Module.Orders.Abstractions\Shop.Module.Orders.Abstractions.csproj" />
+    <ProjectReference Include="..\Shop.Module.Payments.Abstractions\Shop.Module.Payments.Abstractions.csproj" />
+    <ProjectReference Include="..\Shop.Module.Reviews.Abstractions\Shop.Module.Reviews.Abstractions.csproj" />
+    <ProjectReference Include="..\Shop.Module.Schedule.Abstractions\Shop.Module.Schedule.Abstractions.csproj" />
+    <ProjectReference Include="..\Shop.Module.Shipments.Abstractions\Shop.Module.Shipments.Abstractions.csproj" />
+    <ProjectReference Include="..\Shop.Module.ShoppingCart.Abstractions\Shop.Module.ShoppingCart.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

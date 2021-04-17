@@ -1,0 +1,20 @@
+<form>
+  <view class="cu-form-group margin-top">
+    <view class="title">反馈类型</view>
+    <picker bindchange="PickerChange" value="{{index}}" range="{{array}}">
+      <view class="picker">{{index?array[index]:'请选择反馈类型'}}</view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <textarea data-placeholder="对我们网站、商品、服务，你还有什么建议吗？你还希望在商城上买到什么？请告诉我们..." maxlength="400" placeholder-class="placeholder" class="{{textareaAValue?'value':''}}" bindinput="textareaAInput"></textarea>
+  </view>
+  <view class="cu-form-group">
+    <!-- <view class="title">联系方式</view> -->
+    <input bindinput="onContact" placeholder="方便我们与您联系"></input>
+  </view>
+  <view class="bg-white solid-top">
+    <view class="flex flex-direction padding">
+      <button bindtap="save" class="cu-btn bg-red lg">提交</button>
+    </view>
+  </view>
+</form>

@@ -1,0 +1,32 @@
+<view class="container">
+    <navigator url="/pages/search/search">
+        <view class="cu-bar bg-white search no-padding">
+            <view class="search-form radius">
+                <text class="icon-search"></text>
+                <input type="text" placeholder="搜索商品" confirm-type="search"></input>
+            </view>
+        </view>
+    </navigator>
+    <view class="catalog">
+        <scroll-view class="nav" scroll-y="true">
+            <view class="item padding-lr-sm text-cut {{ current.id == item.id ? 'text-red text' : 'text-sm'}}" wx:for="{{categories}}" data-id="{{item.id}}" data-index="{{index}}" bindtap="switchCate" wx:key>{{item.name}}</view>
+        </scroll-view>
+        <scroll-view class="cate" scroll-y="true">
+            <navigator url="url" class="banner" url="/pages/category/category?parentId={{current.id}}">
+                <image class="image" src="{{current.thumbnailUrl}}" mode="aspectFill"></image>
+                <view wx:if="{{current.description}}" class="txt">{{current.description}}</view>
+            </navigator>
+            <view class="hd">
+                <text class="line"></text>
+                <text class="txt">{{current.name}}分类</text>
+                <text class="line"></text>
+            </view>
+            <view class="bd">
+                <navigator url="/pages/category/category?id={{item.id}}&parentId={{item.parentId}}" class="item {{(index+1) % 3 == 0 ? 'last' : ''}}" wx:for="{{current.subCategories}}" wx:key>
+                    <image class="icon" src="{{item.thumbnailUrl}}"></image>
+                    <text class="txt">{{item.name}}</text>
+                </navigator>
+            </view>
+        </scroll-view>
+    </view>
+</view>

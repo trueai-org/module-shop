@@ -1,0 +1,13 @@
+<view class='margin-xl bg-white padding-xl radius shadow-lg'>
+  <view class='text-center margin-bottom text-lg text-bold text-red'>关于商城</view>
+  <view class='text-content'>
+    <view>一个基于.NET Core构建的简单、跨平台、模块化的电子商务系统。</view>
+    <view class='margin-top-sm text-bold text-cyan'>跨平台</view>
+    <view class='margin-top-sm'>Docker、Windows、Linux、Mac。</view>
+    <view class='margin-top-sm'>Microsoft SQL Server、PostgreSQL、MySQL、SQLite。</view>
+    <view class='margin-top-sm text-bold text-blue'>模块化</view>
+    <view class='margin-top-sm'>该应用程序分为许多自包含模块。</view>
+    <view class='margin-top-sm text-bold text-green'>自由开源</view>
+    <view class='margin-top-sm'>Module Shop是GitHub上免费且完全开源的。</view>
+  </view>
+</view>

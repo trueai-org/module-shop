@@ -1,0 +1,42 @@
+<form>
+    <view class="cu-form-group margin-top">
+        <view class="title">评价等级</view>
+        <view class="" style="font-size:36rpx;">
+            <text bindtap="checkFavor" data-id="{{item}}" class="icon-favorfill text-red padding-left-xs" wx:for="{{favors}}"></text>
+            <text bindtap="checkFavor" data-id="{{item+favors}}" class="icon-favor text-gray padding-left-xs" wx:for="{{maxFavors-favors}}"></text>
+        </view>
+    </view>
+    <view class="cu-form-group margin-top">
+        <view class="title">分享您的使用体验吧</view>
+    </view>
+    <view class="cu-form-group">
+        <textarea data-placeholder="感觉怎么样？跟大家分享一下吧~" maxlength="400" placeholder-class="placeholder" class="{{textareaAValue?'value':''}}" bindinput="textareaAInput"></textarea>
+    </view>
+    <view class="cu-bar bg-white margin-top">
+        <view class="action">图片上传</view>
+        <view class="action">{{imgList.length}}/{{maxImg}}</view>
+    </view>
+    <view class="cu-form-group">
+        <view class="grid col-4 grid-square flex-sub">
+            <view class="padding-xs bg-img" style="background-image:url({{imgList[index]}})" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage" data-url="{{imgList[index]}}">
+                <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+                    <text class="icon-close"></text>
+                </view>
+            </view>
+            <view class="padding-xs solids" bindtap="ChooseImage" wx:if="{{imgList.length<maxImg}}">
+                <text class="icon-cameraadd"></text>
+            </view>
+        </view>
+    </view>
+    <view class="cu-form-group">
+        <view class="title">是否匿名</view>
+        <checkbox-group bindchange="checkboxChange">
+            <checkbox class="round red" checked="{{isAnonymous?'checked':''}}"></checkbox>
+        </checkbox-group>
+    </view>
+    <view class="bg-white solid-top">
+        <view class="flex flex-direction padding">
+            <button bindtap="save" class="cu-btn bg-red lg">提交</button>
+        </view>
+    </view>
+</form>

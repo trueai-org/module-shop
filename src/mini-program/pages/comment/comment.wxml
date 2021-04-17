@@ -1,0 +1,75 @@
+<scroll-view scroll-x class="bg-white nav fixed" style="top:0px">
+  <view class="flex text-center">
+    <view class="cu-item flex-sub {{ showType == 0 ? 'text-red cur' : ''}}" bindtap="switchTab" data-id="{{0}}">全部({{reviewsInfo.reviewsCount}})</view>
+    <view class="cu-item flex-sub {{ showType == 0 ? '' : 'text-red cur'}}" bindtap="switchTab" data-id="{{1}}">
+      最新
+      <!-- <text wx:if="{{predicate=='id'}}" class="icon-triangledownfill lg text-gray"></text> -->
+    </view>
+  </view>
+</scroll-view>
+<view class="cu-bar bg-white solid-bottom" style="top:90rpx;">
+  <view class='action'>
+    <!-- <button bindtap="switchAll" class="cu-btn round sm {{ratingLevel==null&&isMedia==null?'bg-red':'line text-red'}}">
+          全部 {{reviewsInfo.reviewsCount}}
+        </button> -->
+    <button bindtap="switchLevel" data-id="5" class="cu-btn round sm margin-right-xs {{ratingLevel==5?'bg-orange':'line text-orange'}}">好评 {{reviewsInfo.rating5Count}}</button>
+    <button bindtap="switchLevel" data-id="3" class="cu-btn round sm margin-right-xs {{ratingLevel==3?'bg-orange':'line text-orange'}}">中评 {{reviewsInfo.rating2Count+reviewsInfo.rating3Count+reviewsInfo.rating4Count}}</button>
+    <button bindtap="switchLevel" data-id="1" class="cu-btn round sm margin-right-xs {{ratingLevel==1?'bg-orange':'line text-orange'}}">差评 {{reviewsInfo.rating1Count}}</button>
+    <button bindtap="switchMedia" class="cu-btn round sm {{isMedia===true?'bg-cyan':'line text-cyan'}}">有图 {{reviewsInfo.mediasCount}}</button>
+  </view>
+  <view class='action'>
+    <text class="text-sm">好评度</text>
+    <text class="text-red text">{{reviewsInfo.positiveRatingPercent}}%</text>
+  </view>
+</view>
+<view class="bg-white" style="margin-top:90rpx;">
+  <view class="cu-item padding solid-bottom" wx:for="{{pageData}}" wx:key="{{item.id}}">
+    <view class="cu-list menu-avatar" style="margin-left:-30rpx;">
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url({{item.avatar?item.avatar:defaultAvatar}});"></view>
+        <view class="content">
+          <view class="text">{{item.reviewerName}}</view>
+          <view class="text-gray text-sm">
+            <text wx:for="{{item.rating}}" wx:key class="icon-favorfill text-red"></text>
+            <text wx:for="{{(5 - item.rating)}}" wx:key class="icon-favor text-red"></text>
+          </view>
+        </view>
+        <view>
+          <view class="text-gray text-sm flex justify-between">{{item.createdOnForDate}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="text-content margin-bottom-sm">{{item.comment}}</view>
+    <view wx:if="{{item.mediaUrls.length > 0}}" class="grid flex-sub col-3 grid-square">
+      <view bindtap="ViewImage" data-index="{{index}}" data-id="{{item.id}}" wx:for="{{item.mediaUrls}}" wx:for-item="uitem" class="bg-img only-img" style="background-image:url({{uitem}});"></view>
+    </view>
+    <view class="flex justify-between text-left">
+      <view class="text-gray text-df">白色 × 2</view>
+      <view class="text-gray text-sm">
+        <text bindtap="supportReview" data-id="{{item.id}}" class="icon-appreciate margin-lr-xs">{{item.supportCount}}</text>
+        <text bindtap="redirectReview" data-id="{{item.id}}" class="icon-message margin-lr-xs">{{item.replieCount}}</text>
+      </view>
+    </view>
+    <view wx:if="{{item.replies.length>0}}">
+      <view wx:for="{{item.replies}}" wx:key wx:for-item="iitem" class="bg-gray padding-sm radius margin-top-sm text-sm">
+        <view class="flex">
+          <view class="text-sm">{{iitem.replierName}}：</view>
+          <view class="flex-sub text-sm">{{iitem.comment}}</view>
+        </view>
+        <view class="margin-top-sm flex justify-between">
+          <view class="text-gray text-sm">{{iitem.createdOnForDate}}</view>
+          <view class="text-sm">
+            <!-- fill text-red -->
+            <text bindtap="supportReply" data-id="{{iitem.id}}" class="icon-appreciate text-gray">{{iitem.supportCount}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{item.replieCount>item.replies.length}}" class="text-right text-sm padding-top-sm">
+      <button bindtap="redirectReview" data-id="{{item.id}}" class="cu-btn round sm text-gray">
+        更多
+        <text class="icon-right lg text-gray"></text>
+      </button>
+    </view>
+  </view>
+</view>

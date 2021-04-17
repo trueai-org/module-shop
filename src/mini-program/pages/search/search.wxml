@@ -1,0 +1,94 @@
+<scroll-view class="container" style="height: 100%;">
+  <view class="cu-bar bg-white search no-padding fixed" style="top:0rpx;">
+    <view class="search-form radius">
+      <text class="icon-search"></text>
+      <input type="text" name="input" class="keywrod" focus="true" value="{{keyword}}" placeholder="搜索商品" confirm-type="search" bindinput="inputChange" bindfocus="inputFocus" bindconfirm="onKeywordConfirm" confirm-type="search" placeholder="{{defaultKeyword.name}}"></input>
+      <text wx:if="{{keyword}}" bindtap="clearKeyword" class="icon-close text-gray"></text>
+    </view>
+    <view class="action">
+      <text bindtap="closeSearch">取消</text>
+    </view>
+  </view>
+  <view class="no-search" wx:if="{{ !searchStatus}}">
+    <view class="serach-keywords search-history" wx:if="{{!keyword  && historyKeyword.length}}">
+      <view class="h">
+        <text class="title">历史记录</text>
+        <image class="icon" bindtap="clearHistory" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/del1-93f0a4add4.png"></image>
+      </view>
+      <view class="b">
+        <view class="item" bindtap="onKeywordTap" data-keyword="{{item.name}}" wx:for="{{historyKeyword}}" hover-class="navigator-hover">{{item.name}}</view>
+      </view>
+    </view>
+    <view class="serach-keywords search-hot" wx:if="{{!keyword}}">
+      <view class="h">
+        <text class="title">热门搜索</text>
+      </view>
+      <view class="b">
+        <view class="item {{item.is_hot === 1 ? 'active' : ''}}" hover-class="navigator-hover" bindtap="onKeywordTap" data-keyword="{{item.name}}" wx:for="{{hotKeyword}}">{{item.name}}</view>
+      </view>
+    </view>
+    <view class="shelper-list" wx:if="{{keyword}}">
+      <view class="item" hover-class="navigator-hover" wx:for="{{helpKeyword}}" bindtap="onKeywordTap" data-keyword="{{item}}">{{item}}</view>
+    </view>
+  </view>
+  <view wx:if="{{searchStatus}}">
+    <scroll-view scroll-x class="bg-white nav" style="margin-top:100rpx;">
+      <view class="flex text-center">
+        <view class="cu-item flex-sub {{currentSortType == 'default'?'text-red cur':''}}" bindtap="openSortFilter2" id="defaultSort">
+          综合
+          <!-- <text class="icon-triangledownfill {{currentSortType=='default'?'text-red':'text-gray'}}"></text> -->
+        </view>
+        <view class="cu-item flex-sub {{currentSortType == 'price'?'text-red cur':''}}" bindtap="openSortFilter2" id="priceSort">
+          价格
+          <text wx:if="{{currentSortType == 'price'&&reverse}}" class="icon-triangledownfill text-red"></text>
+          <text wx:elif="{{currentSortType == 'price'&&!reverse}}" class="icon-triangleupfill text-red"></text>
+          <!-- <text wx:else class="icon-triangleupfill text-gray"></text> -->
+        </view>
+        <view class="cu-item flex-sub {{currentSortType == 'category'?'text-red cur':''}}" bindtap="openSortFilter2" id="categoryFilter">
+          筛选
+          <text class="icon-filter"></text>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="grid col-2 padding-xs">
+      <view class="cu-card case" bindtap="navToGoods" data-id="{{iitem.id}}" wx:for="{{pageData}}" wx:for-item="iitem">
+        <view class="cu-item shadow" style="margin:6rpx;">
+          <view class="image">
+            <image class="bg-white" src="{{iitem.thumbnailUrl}}" mode="aspectFill" style="max-height:375rpx;"></image>
+          </view>
+          <view class="cu-list">
+            <view class="cu-item">
+              <view class="content padding-lr-sm">
+                <view class="text-cut text text text-left">{{iitem.name}}</view>
+                <view class="text-cut text-gray text-sm text-left">{{iitem.shortDescription}}</view>
+                <view class="flex">
+                  <view class="text-red text-bold">￥{{iitem.price}}</view>
+                  <view wx:if="{{iitem.oldPrice&&iitem.oldPrice>0}}" class="padding-left-xs text-gray" style="text-decoration:line-through;">￥{{iitem.oldPrice}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="search-result-empty" wx:if="{{!pageData.length && searchStatus}}">
+    <image class="icon" src="http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/noSearchResult-7572a94f32.png"></image>
+    <text class="text">您寻找的商品还未上架</text>
+  </view>
+</scroll-view>
+<view class="cu-modal {{categoryFilter?'show':''}}" bindtap="hideModal">
+  <view class="cu-dialog">
+    <view class="cu-list text-left ">
+      <view class="cu-bar solid-bottom">
+        <view class="action">
+          <!-- <text class="icon-titles text-gray"></text> -->
+          <text>选择分类</text>
+        </view>
+      </view>
+      <view class="padding-sm">
+        <button wx:for="{{categories}}" wx:key data-id="{{item.id}}" data-category-index="{{index}}" bindtap="selectCategory2" class="margin-xs cu-btn sm {{categoryId==item.id?'text-red line':'line text'}}">{{item.name}}</button>
+      </view>
+    </view>
+  </view>
+</view>

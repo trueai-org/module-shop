@@ -1,0 +1,36 @@
+<scroll-view scroll-x class="bg-white nav fixed" scroll-with-animation scroll-left="{{scrollLeft}}" style="top:0px">
+    <view class="cu-item {{current.id == item.id?'text-red cur':''}}" wx:for="{{categories}}" wx:key bindtap="switchCate2" data-id="{{item.id}}">{{item.name}}</view>
+</scroll-view>
+<scroll-view scroll-y="true" style="padding-top:90rpx;">
+    <view class="text-center">
+        <view>
+            <view class="padding-top-sm">
+                <text>{{current.name}}</text>
+            </view>
+            <view wx:if="{{current.description}}" class="text-left padding-lr-sm">
+                <text class="text-sm text-gray">{{current.description}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="grid col-2 padding-xs">
+        <view class="cu-card case" bindtap="navToGoods" data-id="{{iitem.id}}" wx:for="{{pageData}}" wx:for-item="iitem">
+            <view class="cu-item shadow" style="margin:6rpx;">
+                <view class="image">
+                    <image class="bg-white" src="{{iitem.thumbnailUrl}}" mode="aspectFill" style="max-height:375rpx;"></image>
+                </view>
+                <view class="cu-list">
+                    <view class="cu-item">
+                        <view class="content padding-lr-sm">
+                            <view class="text-cut text text text-left">{{iitem.name}}</view>
+                            <view class="text-cut text-gray text-sm text-left">{{iitem.shortDescription}}</view>
+                            <view class="flex">
+                                <view class="text-red text-bold">￥{{iitem.price}}</view>
+                                <view wx:if="{{iitem.oldPrice&&iitem.oldPrice>0}}" class="padding-left-xs text-gray" style="text-decoration:line-through;">￥{{iitem.oldPrice}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</scroll-view>

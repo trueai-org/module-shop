@@ -1,0 +1,20 @@
+<import src="./template/widget.wxml" />
+<view class="container">
+  <navigator url="/pages/search/search">
+    <view class="cu-bar bg-white search no-padding">
+      <view class="search-form radius">
+        <text class="icon-search"></text>
+        <input type="text" placeholder="搜索商品" confirm-type="search"></input>
+      </view>
+    </view>
+  </navigator>
+  <view>
+    <template is="widget" data="{{widgets:widgets,widgetZoneId:1,carouselWidgets:carouselWidgets,categorys:categorys,htmls:htmls,simplProducts:simplProducts,products:products}}" />
+  </view>
+  <view class="content">
+    <template is="widget" data="{{widgets:widgets,widgetZoneId:2,carouselWidgets:carouselWidgets,categorys:categorys,htmls:htmls,simplProducts:simplProducts,products:products}}" />
+  </view>
+  <view class="content-after">
+    <template is="widget" data="{{widgets:widgets,widgetZoneId:3,carouselWidgets:carouselWidgets,categorys:categorys,htmls:htmls,simplProducts:simplProducts,products:products}}" />
+  </view>
+</view>

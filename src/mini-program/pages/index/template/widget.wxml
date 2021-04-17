@@ -1,0 +1,123 @@
+<import src="../../../lib/wxParse/wxParse.wxml" />
+<template name="widget">
+    <view wx:for="{{widgets}}" wx:key>
+        <view wx:if="{{item.widgetZoneId==widgetZoneId}}">
+            <view wx:if="{{item.widgetId==1}}">
+                <view wx:for="{{ categorys }}" wx:for-index="idx" wx:for-item="item1" wx:key>
+                    <view wx:if="{{item1.widgetZoneId==widgetZoneId && item1.id == item.id}}">
+                        <view class="cu-list grid col-{{item1.categorys.length}} no-border">
+                            <view class="cu-item" wx:for="{{item1.categorys}}" wx:for-item="item2" wx:key>
+                                <navigator class="item" url="/pages/category/category?id={{item2.id}}&parentId={{item2.parentId}}">
+                                    <view class="image">
+                                        <image src="{{item2.thumbnailUrl}}" mode="aspectFit" style="max-height:75rpx;"></image>
+                                    </view>
+                                    <!-- <view class="icon-circle"></view> -->
+                                    <text>{{item2.name}}</text>
+                                </navigator>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view wx:elif="{{item.widgetId==2}}">
+                <view wx:for="{{ products }}" wx:key wx:for-index="idx" wx:for-item="item1">
+                    <view wx:if="{{item1.widgetZoneId==widgetZoneId && item1.id == item.id}}">
+                        <navigator url="../newGoods/newGoods">
+                            <view class="solid-bottom">
+                                <view class="padding-lr-xs bg-white margin-top-sm">
+                                    <view class="padding-tb">
+                                        <text class="icon-titles text-cyan"></text>
+                                        <text>{{item1.widgetName}}</text>
+                                    </view>
+                                </view>
+                            </view>
+                        </navigator>
+                        <view class="cu-list grid col-2">
+                            <view class="cu-item" bindtap="navToGoods" data-id="{{item2.id}}" wx:for="{{item1.products}}" wx:for-item="item2" wx:key style="padding-top:0rpx;">
+                                <view class="image">
+                                    <image class="bg-gray" src="{{item2.thumbnailUrl}}" mode="aspectFill" style="max-height:375rpx;"></image>
+                                </view>
+                                <view class="cu-list">
+                                    <view class="cu-item">
+                                        <view class="content padding-lr-sm">
+                                            <view class="text-cut text text text-left">{{item2.name}}</view>
+                                            <view class="text-cut text-gray text-sm text-left">{{item2.shortDescription}}</view>
+                                            <view class="flex">
+                                                <view class="text-red text-bold">￥{{item2.price}}</view>
+                                                <view wx:if="{{item2.oldPrice&&item2.oldPrice>0}}" class="padding-left-xs text-gray" style="text-decoration:line-through;">￥{{item2.oldPrice}}</view>
+                                            </view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view wx:elif="{{item.widgetId==3}}">
+                <view wx:for="{{ simplProducts }}" wx:for-index="idx" wx:for-item="item1" wx:key>
+                    <view wx:if="{{item1.widgetZoneId==widgetZoneId && item1.id == item.id}}">
+                        <navigator url="../hotGoods/hotGoods">
+                            <view class="solid-bottom">
+                                <view class="padding-lr-xs bg-white margin-top-sm">
+                                    <view class="padding-tb">
+                                        <text class="icon-titles text-cyan"></text>
+                                        <text>{{item1.widgetName}}</text>
+                                    </view>
+                                </view>
+                            </view>
+                        </navigator>
+                        <view class="cu-card article no-card">
+                            <view class="padding-sm cu-item shadow no-padding" wx:for="{{item1.products}}" wx:for-index="index" wx:for-item="item2" wx:key="{{item2.id}}">
+                                <view bindtap="navToGoods" data-id="{{item2.id}}" class="content " style="padding:12rpx;">
+                                    <image class="bg-gray" src="{{item2.thumbnailUrl}}" mode="aspectFit"></image>
+                                    <view class="desc">
+                                        <view class="text-content">
+                                            <view>
+                                                <text wx:if="{{item2.isFeatured}}" class="cu-tag bg-red sm round">精品</text>
+                                                {{item2.name}}
+                                            </view>
+                                            <!-- <view>
+                                                    <text class="text-cut text-gray text-sm">{{item2.shortDescription}}</text>
+                                                </view> -->
+                                        </view>
+                                        <view>
+                                            <view class="flex">
+                                                <view class="text-red text-sm">￥</view>
+                                                <view class="text-red text-bold">{{item2.price}}</view>
+                                                <view wx:if="{{item2.oldPrice&&item2.oldPrice>0}}" class="padding-left-xs text-gray text-sm" style="text-decoration:line-through;">￥{{item2.oldPrice}}</view>
+                                            </view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view wx:elif="{{item.widgetId==4}}">
+                <view wx:for="{{ htmls }}" wx:for-index="idx" wx:for-item="item1" wx:key>
+                    <view wx:if="{{item1.widgetZoneId==widgetZoneId && item1.id == item.id}}">
+                        <view class="bg-white padding-sm margin-top-sm text">
+                            <template is="wxParse" data="{{wxParseData:item1.htmlData}}" />
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view wx:elif="{{item.widgetId==5}}">
+                <view wx:for="{{ carouselWidgets }}" wx:for-index="idx" wx:for-item="itemCw" wx:key>
+                    <view wx:if="{{itemCw.widgetZoneId==widgetZoneId && itemCw.id == item.id}}">
+                        <swiper class="banner" indicator-active-color="rgba(0, 0, 0, .6)" indicator-color="rgba(0, 0, 0, .3)" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
+                            <swiper-item wx:for="{{ itemCw.items }}" wx:for-item="itemCwItem" wx:key>
+                                <navigator url="{{ itemCwItem.targetUrl }}">
+                                    <image src="{{ itemCwItem.imageUrl }}" background-size="cover" mode="aspectFill"></image>
+                                </navigator>
+                            </swiper-item>
+                        </swiper>
+                    </view>
+                </view>
+            </view>
+            <view wx:elif="{{item.widgetId==7}}">{{item.id}}</view>
+        </view>
+    </view>
+</template>

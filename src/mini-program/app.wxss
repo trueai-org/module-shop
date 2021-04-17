@@ -1,0 +1,34 @@
+@import "static/colorui/main.wxss";
+@import "static/colorui/icon.wxss";
+
+/**app.wxss**/
+.container {
+  box-sizing: border-box;
+  background-color: #f4f4f4;
+  font-family: PingFangSC-Light,helvetica,'Heiti SC';
+} 
+
+view,image,text,navigator{
+  box-sizing: border-box;
+  padding:0;
+  margin:0;
+
+}
+
+view,text{
+  font-family: PingFangSC-Light,helvetica,'Heiti SC';
+  font-size: 29rpx;
+  /* color: #333; */
+}
+
+/* module shop extend */
+.no-padding {
+  padding: 0px !important;
+}
+.no-margin {
+  margin: 0px !important;
+}
+.no-border {
+  border: 0px !important;
+  border-radius: 0px !important;
+}

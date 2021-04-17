@@ -1,0 +1,122 @@
+<scroll-view scroll-y>
+  <view class="cu-list menu-avatar bg-white shadow-warp">
+    <view class="cu-item">
+      <view bindtap="onUserInfoClick" class="cu-avatar round lg" style="background-image:url({{userInfo.avatar}});">
+        <!-- <view class="cu-tag badge">99+</view> -->
+      </view>
+      <view class="content">
+        <view class="text-grey">
+          <text class="text-cut" bindtap='onUserInfoClick'>{{ userInfo.name || '点击登录' }}</text>
+          <!-- <view class="cu-tag round bg-mauve sm">钻石</view>
+          <view class="cu-tag round bg-pink sm">钻石</view>
+          <view class="cu-tag round bg-green sm">钻石</view>
+          <view class="cu-tag round bg-orange sm">钻石</view> -->
+        </view>
+        <!-- <view class="text-gray text-sm flex">
+          <text class="text-cut">塔里克是保护者星灵，用超乎寻常的力量守护着符文之地的生命、仁爱以及万物之美。塔里克由于渎职而被放逐，离开了祖国德玛西亚，前去攀登巨神峰寻找救赎，但他找到的却是来自星界的更高层的召唤。现在的塔里克与古代巨神族的神力相融合，以瓦洛兰之盾的身份，永不疲倦地警惕着阴险狡诈的虚空腐化之力。</text>
+        </view> -->
+      </view>
+      <view wx:if="{{userInfo && userInfo.name}}" class="action text-xxl">
+        <!-- <view class="text-grey text-xs">22:20</view> -->
+        <view class="icon-qr_code text-right text-grey"></view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-list menu shadow-lg" style="margin-top:20rpx;">
+    <view class="cu-item arrow">
+      <navigator class="content" url="/pages/ucenter/order/order" hover-class="none">
+        <text class="icon-formfill text-red"></text>
+        <text class="text-grey">我的订单</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <navigator class="content" url="../address/address" hover-class="none">
+        <text class="icon-locationfill text-yellow"></text>
+        <text class="text-grey">地址管理</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <navigator class="content" url="/pages/ucenter/coupon/coupon" hover-class="none">
+        <text class="icon-ticket text-olive"></text>
+        <text class="text-grey">优惠券</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <navigator class="content" url="/pages/ucenter/collect/collect" hover-class="none">
+        <text class="icon-favorfill text-orange"></text>
+        <text class="text-grey">我的收藏</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <navigator class="content" url="/pages/ucenter/footprint/footprint" hover-class="none">
+        <text class="icon-all text-grey"></text>
+        <text class="text-grey">我的浏览</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <navigator class="content" url="/pages/ucenter/index/index" hover-class="none">
+        <text class="icon-safe text-cyan"></text>
+        <text class="text-grey">账号安全</text>
+      </navigator>
+    </view>
+  </view>
+  <view class="cu-list menu shadow-lg" style="margin-top:20rpx;">
+    <view class="cu-item arrow">
+      <navigator class="content" url="/pages/chat/chat" hover-class="none">
+        <text class="icon-dianhua text-red"></text>
+        <text class="text-grey">联系客服</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <navigator class="content" url="/pages/help/help" hover-class="none">
+        <text class="icon-questionfill text-yellow"></text>
+        <text class="text-grey">帮助中心</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <navigator class="content" url="/pages/ucenter/feedback/feedback" hover-class="none">
+        <text class="icon-writefill text-olive"></text>
+        <text class="text-grey">意见反馈</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <navigator class="content" url="/pages/about/about" hover-class="none">
+        <text class="icon-infofill text-cyan"></text>
+        <text class="text-grey">关于软件</text>
+      </navigator>
+    </view>
+  </view>
+  <view wx:if="{{userInfo && userInfo.name}}" class="cu-list menu shadow-lg" style="margin:20rpx 0;">
+    <view bindtap="exitLogin" class="cu-item arrow">
+      <button class="cu-btn content">
+        <text class="icon-exit text-grey"></text>
+        <text class="text-grey">退出登录</text>
+      </button>
+    </view>
+  </view>
+</scroll-view>
+<view class="cu-modal {{showLoginDialog?'show':''}}" bindtap="onCloseLoginDialog">
+  <view class="cu-dialog" catchtap='onDialogBody' style="width:520rpx;">
+    <view class="cu-list padding">
+      <view class="cu-avatar xl round">
+        <image src="/static/images/logo.png" mode="aspectFit"></image>
+      </view>
+      <view class="padding-top-sm">
+        <text class="text-bold text-black">{{shopName}}</text>
+      </view>
+    </view>
+    <button style="width:100%;height:100rpx;border-radius:0;" class="cu-btn bg-blue" open-type="getUserInfo" bindgetuserinfo="onWechatLogin">授权登录</button>
+    <!-- <view class="cu-list">
+      <view class="cu-bar solid-bottom">
+        <view class="action">
+          <text class="icon-titles text-blue"></text>
+          <text>请选择登录方式</text>
+        </view>
+      </view>
+      <view class="padding flex flex-direction">
+        <button class="cu-btn bg-green lg" open-type="getUserInfo" bindgetuserinfo="onWechatLogin">授权登录</button>
+        <button class="cu-btn bg-blue margin-top lg" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onWechatLogin">手机号登录</button>
+      </view>
+    </view> -->
+  </view>
+</view>

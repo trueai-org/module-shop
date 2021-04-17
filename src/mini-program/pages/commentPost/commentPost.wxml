@@ -1,0 +1,80 @@
+<view class="cu-card dynamic no-card">
+    <view class="cu-item shadow">
+        <view class="cu-list menu-avatar">
+            <view class="cu-item">
+                <view bindtap="replyReset" class="cu-avatar round lg" style="background-image:url({{item.avatar?item.avatar:defaultAvatar}});"></view>
+                <view class="content">
+                    <view bindtap="replyReset" class="text">{{item.reviewerName}}</view>
+                    <view class="text-gray text-sm">
+                        <text wx:for="{{item.rating}}" wx:key class="icon-favorfill text-red"></text>
+                        <text wx:for="{{(5 - item.rating)}}" wx:key class="icon-favor text-red"></text>
+                    </view>
+                </view>
+                <view>
+                    <view class="text-gray text-sm flex justify-between">{{item.createdOn}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="content padding">{{item.comment}}</view>
+        <view wx:if="{{item.mediaUrls.length > 0}}" class="grid flex-sub padding-lr grid-square col-1">
+            <view wx:for="{{item.mediaUrls}}" class="bg-img only-img" style="background-image:url({{item}});"></view>
+        </view>
+        <view class="flex justify-between text-left">
+            <view class="text-gray text-sm text-left padding">白色 × 2</view>
+            <view class="text-gray text-sm text-right padding">
+                <text bindtap="supportReview" class="icon-appreciate margin-lr-xs">{{item.supportCount}}</text>
+            </view>
+        </view>
+        <view class="cu-list menu-avatar comment solids-top">
+            <view class="cu-bar bg-white solid-bottom">
+                <view class='action'>
+                    <text class='icon-titles text-orange'></text>
+                    {{item.replieCount}}条回复
+                </view>
+            </view>
+            <view wx:for="{{pageData}}" wx:key class="cu-item">
+                <view bindtap="replyReplier" data-id="{{item.id}}" data-name="{{item.replierName}}" class="cu-avatar round" style="background-image:url({{item.avatar?item.avatar:defaultAvatar}});"></view>
+                <view class="content">
+                    <view bindtap="replyReplier" data-id="{{item.id}}" data-name="{{item.replierName}}" class="text">{{item.replierName}}</view>
+                    <view class="flex justify-between">
+                        <view class="text-gray text-sm">{{item.createdOn}}</view>
+                        <view class="text-gray text-sm">
+                            <text bindtap="supportReply" data-id="{{item.id}}" class="icon-appreciate text-gray margin-lr-xs">{{item.supportCount}}</text>
+                        </view>
+                    </view>
+                    <view class="text text-content">{{item.comment}}</view>
+                    <view wx:for="{{item.replies}}" wx:key wx:for-item="iitem" class="bg-gray padding-sm radius margin-top-sm text-sm">
+                        <view class="flex text-sm">
+                            <view>
+                                <text bindtap="replyReplier" data-id="{{iitem.id}}" data-name="{{iitem.replierName}}" class="text-sm text">{{iitem.replierName}}{{' '}}</text>
+                                <text class="text-sm text-red">回复</text>
+                                <text class="text-sm text-grey">{{' '}}{{iitem.toUserName}}{{':'}}</text>
+                            </view>
+                        </view>
+                        <view class="flex text-sm">
+                            <view class="flex-sub text-sm">{{iitem.comment}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="cu-bar foot input" style="bottom:{{InputBottom}}px">
+    <view class="action">
+        <!-- <checkbox class="switch-sex sm" checked></checkbox> -->
+        <!-- <text bindtap="supportReview" class="icon-appreciate text-grey"></text> -->
+    </view>
+    <input value="{{content}}" bindinput="bindInpuntValue" placeholder="{{placeholder}}" class="solid-bottom" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="400" cursor-spacing="10"></input>
+    <view class="action">
+        <!-- <text class="text-grey margin-right-sm">{{400 - content.length}}</text> -->
+        <radio bindtap="switchAnonymous" class="blue radio" checked="{{isAnonymous}}"></radio>
+        匿名
+    </view>
+    <button bindtap="onPost" class="cu-btn bg-red shadow">发送</button>
+</view>
+<view class="cu-tabbar-height"></view>
+<view class='load-progress {{loadProgress?"show":"hide"}}' style="top:{{0}}px;">
+    <!-- <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view> -->
+    <view class='load-progress-spinner text-green'></view>
+</view>
