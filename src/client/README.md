@@ -14,19 +14,19 @@ Docker, Windows, Linux, Mac. Microsoft SQL Server, PostgreSQL, MySQL, SQLite
 
 ModuleShop完全免费并且开源
 
-## 后台API
+## 后台服务 / API
 
-项目地址：[https://github.com/trueai-org/module-shop-admin](https://github.com/trueai-org/module-shop-admin)
+项目地址：/src/server
 
 在线预览：[https://demo.shopapi.circle.ac.cn/swagger](https://demo.shopapi.circle.ac.cn/swagger)
 
 ### 项目结构
 
-![商品](https://gogs.circle.ac.cn/gogs/data/raw/master/images/devenv_2019-07-06_20-48-19.png)
+![商品](/docs/screenshots/devenv_2019-07-06_20-48-19.png)
 
 ## 后台前端
 
-项目地址：[https://github.com/trueai-org/module-shop](https://github.com/trueai-org/module-shop)
+项目地址：/src/client
 
 在线预览：[https://demo.shop.circle.ac.cn](https://demo.shop.circle.ac.cn) *admin/123456*
 
@@ -36,10 +36,10 @@ ModuleShop完全免费并且开源
 
 ### 项目截图
 
-![商品](https://gogs.circle.ac.cn/gogs/data/raw/master/images/chrome_2019-07-06_20-59-32.png)
-![商品](https://gogs.circle.ac.cn/gogs/data/raw/master/images/chrome_2019-07-06_20-59-21.png)
-![订单](https://gogs.circle.ac.cn/gogs/data/raw/master/images/chrome_2019-07-06_20-59-55.png)
-![首页显示配置](https://gogs.circle.ac.cn/gogs/data/raw/master/images/chrome_2019-07-06_21-00-04.png)
+![商品](/docs/screenshots/chrome_2019-07-06_20-59-32.png)
+![商品](/docs/screenshots/chrome_2019-07-06_20-59-21.png)
+![订单](/docs/screenshots/chrome_2019-07-06_20-59-55.png)
+![首页显示配置](/docs/screenshots/chrome_2019-07-06_21-00-04.png)
 
 ### 功能列表
 
@@ -53,29 +53,29 @@ ModuleShop完全免费并且开源
 
 ## 微信小程序
 
-项目地址：[https://github.com/trueai-org/module-shop-mini-program](https://github.com/trueai-org/module-shop-mini-program)
+项目地址：/src/mini-program
 
 在线预览（天网商城）：
 
-![小程序码](https://gogs.circle.ac.cn/gogs/data/raw/master/images/shop_mp_8.jpg)
+![小程序码](/docs/screenshots/shop_mp_8.jpg)
 
 ### 项目截图
 
-![首页](https://gogs.circle.ac.cn/gogs/data/raw/master/images/wechatdevtools_2019-07-06_21-05-55.png)
+![首页](/docs/screenshots/wechatdevtools_2019-07-06_21-05-55.png)
 
-![分类](https://gogs.circle.ac.cn/gogs/data/raw/master/images/wechatdevtools_2019-07-06_21-06-27.png)
+![分类](/docs/screenshots/wechatdevtools_2019-07-06_21-06-27.png)
 
-![购物车](https://gogs.circle.ac.cn/gogs/data/raw/master/images/wechatdevtools_2019-07-06_21-07-05.png)
+![购物车](/docs/screenshots/wechatdevtools_2019-07-06_21-07-05.png)
 
-![商品详情](https://gogs.circle.ac.cn/gogs/data/raw/master/images/wechatdevtools_2019-07-07_01-42-31.png)
+![商品详情](/docs/screenshots/wechatdevtools_2019-07-07_01-42-31.png)
 
-![订单列表](https://gogs.circle.ac.cn/gogs/data/raw/master/images/wechatdevtools_2019-07-07_01-32-17.png)
+![订单列表](/docs/screenshots/wechatdevtools_2019-07-07_01-32-17.png)
 
-![订单详情](https://gogs.circle.ac.cn/gogs/data/raw/master/images/wechatdevtools_2019-07-06_21-07-35.png)
+![订单详情](/docs/screenshots/wechatdevtools_2019-07-06_21-07-35.png)
 
-![评价](https://gogs.circle.ac.cn/gogs/data/raw/master/images/wechatdevtools_2019-07-07_01-41-17.png)
+![评价](/docs/screenshots/wechatdevtools_2019-07-07_01-41-17.png)
 
-![我的](https://gogs.circle.ac.cn/gogs/data/raw/master/images/wechatdevtools_2019-07-07_01-35-29.png)
+![我的](/docs/screenshots/wechatdevtools_2019-07-07_01-35-29.png)
 
 
 ### 功能列表
@@ -135,6 +135,6 @@ ModuleShop完全免费并且开源
 
 喜欢别忘了 Star，有问题可通过微信、公众号、QQ 群联系我，谢谢您的关注。
 
-[ModuleShop交流群](https://jq.qq.com/?_wv=1027&k=5AUnOw5 "ModuleShop交流群（863275860）")（863275860）
+[ModuleShop交流群](https://jq.qq.com/?_wv=1027&k=5AUnOw5 "ModuleShop交流群（863275860）")（QQ群：863275860）
 
-![ModuleShop交流群二维码](https://gogs.circle.ac.cn/gogs/data/raw/master/images/863275860_8_8.png)
+![ModuleShop交流群二维码](/docs/screenshots/863275860_8_8.png)
