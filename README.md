@@ -24,7 +24,7 @@ ModuleShop完全免费并且开源
 
 ![商品](/docs/screenshots/devenv_2019-07-06_20-48-19.png)
 
-## 后台前端
+## 后台管理
 
 项目地址：/src/client
 
