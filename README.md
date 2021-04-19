@@ -1,4 +1,4 @@
-# ModuleShop
+# Module Shop
 
 一个基于 .NET Core构建的简单、跨平台、模块化的商城系统
 
