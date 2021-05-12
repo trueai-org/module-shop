@@ -1,6 +1,4 @@
-﻿using Shop.Infrastructure;
-
-namespace Shop.Module.Core.Abstractions.Data
+﻿namespace Shop.Module.Core.Data
 {
     public class ShopKeys
     {
@@ -12,16 +10,6 @@ namespace Shop.Module.Core.Abstractions.Data
         public static string UserJwtTokenPrefix = System + ":user:jwt:token:";
 
         public static string Provinces = System + ":country:";
-
-        /// <summary>
-        /// 接口地址
-        /// </summary>
-        public const string ApiHost = "ApiHost";
-
-        /// <summary>
-        /// 站点地址
-        /// </summary>
-        public const string WebHost = "WebHost";
 
         /// <summary>
         /// 访客用户默认密码

@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
 using Shop.Infrastructure.Helpers;
-using Shop.Module.Core.Abstractions.Data;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Models;
-using Shop.Module.Core.Abstractions.Services;
+using Shop.Module.Core.Data;
+using Shop.Module.Core.Entities;
+using Shop.Module.Core.Models;
+using Shop.Module.Core.Services;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -20,9 +21,9 @@ namespace Shop.Module.StorageLocal
 
         public LocalStorageService(
              IRepository<Media> mediaRepository,
-             IAppSettingService appSettingService)
+             IOptionsMonitor<ShopConfig> options)
         {
-            host = appSettingService.Get(ShopKeys.ApiHost).Result;
+            host = options.CurrentValue.ApiHost;
             _mediaRepository = mediaRepository;
         }
 

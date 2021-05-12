@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Shop.Module.MQ.Abstractions.Services
+namespace Shop.Module.MQ
 {
     public interface IMQService
     {

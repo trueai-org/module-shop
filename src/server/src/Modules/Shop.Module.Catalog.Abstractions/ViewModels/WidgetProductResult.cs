@@ -1,6 +1,6 @@
-﻿using Shop.Module.Core.Abstractions.ViewModels;
+﻿using Shop.Module.Core.ViewModels;
 
-namespace Shop.Module.Catalog.Abstractions.ViewModels
+namespace Shop.Module.Catalog.ViewModels
 {
     public class WidgetProductResult : WidgetResultBase
     {

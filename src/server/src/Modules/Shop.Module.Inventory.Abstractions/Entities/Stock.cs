@@ -1,9 +1,9 @@
 ﻿using Shop.Infrastructure.Models;
-using Shop.Module.Catalog.Abstractions.Entities;
+using Shop.Module.Catalog.Entities;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Inventory.Abstractions.Entities
+namespace Shop.Module.Inventory.Entities
 {
     public class Stock : EntityBase
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Shop.Module.Reviews.Abstractions.Models
+namespace Shop.Module.Reviews.Models
 {
     public enum RatingLevel
     {

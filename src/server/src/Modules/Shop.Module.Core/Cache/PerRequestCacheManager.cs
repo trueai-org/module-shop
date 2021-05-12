@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Shop.Infrastructure;
-using Shop.Module.Core.Abstractions.Cache;
+using Shop.Module.Core.Cache;
 using System;
 using System.Collections.Generic;
 using System.Linq;

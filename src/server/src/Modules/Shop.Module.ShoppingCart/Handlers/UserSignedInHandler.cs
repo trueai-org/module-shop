@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using Shop.Module.Core.Abstractions.Events;
-using Shop.Module.Core.Abstractions.Extensions;
-using Shop.Module.ShoppingCart.Abstractions.Services;
+using Shop.Module.Core.Events;
+using Shop.Module.Core.Extensions;
+using Shop.Module.ShoppingCart.Services;
 using System.Threading;
 using System.Threading.Tasks;
 

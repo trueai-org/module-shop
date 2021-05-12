@@ -1,4 +1,4 @@
-﻿using Shop.Module.Core.Abstractions.Models;
+﻿using Shop.Module.Core.Models;
 using System;
 
 namespace Shop.Module.Core.Models.Cache

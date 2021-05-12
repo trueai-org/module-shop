@@ -1,7 +1,9 @@
-﻿namespace Shop.Module.MassTransitMQ
+﻿namespace Shop.Module.MQ
 {
-    public class MassTransitOptions
+    public class RabbitMQOptions
     {
+        public bool Enabled { get; set; }
+
         public string Host { get; set; }
 
         public ushort Port { get; set; }

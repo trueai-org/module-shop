@@ -14,19 +14,23 @@ namespace Shop.WebApi.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
+                .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("ClaimType");
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("ClaimValue");
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("RoleId");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -38,13 +42,17 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("ClaimType");
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("ClaimValue");
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -55,13 +63,17 @@ namespace Shop.WebApi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Value");
+                    b.Property<string>("Value")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
@@ -71,25 +83,33 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.Brand", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsPublished");
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.Property<string>("Slug")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -99,39 +119,54 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("DisplayOrder");
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IncludeInMenu");
+                    b.Property<bool>("IncludeInMenu")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsPublished");
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int?>("MediaId");
+                    b.Property<int?>("MediaId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("MetaDescription");
+                    b.Property<string>("MetaDescription")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("MetaKeywords");
+                    b.Property<string>("MetaKeywords")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("MetaTitle");
+                    b.Property<string>("MetaTitle")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<int?>("ParentId");
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Slug")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -145,128 +180,186 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("AdditionalShippingCharge");
+                    b.Property<decimal>("AdditionalShippingCharge")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<string>("AdminRemark");
+                    b.Property<string>("AdminRemark")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Barcode");
+                    b.Property<string>("Barcode")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int?>("BrandId");
+                    b.Property<int?>("BrandId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("CreatedById");
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("DeliveryTime");
+                    b.Property<int?>("DeliveryTime")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("DisplayOrder");
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("DisplayStockAvailability");
+                    b.Property<bool>("DisplayStockAvailability")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("DisplayStockQuantity");
+                    b.Property<bool>("DisplayStockQuantity")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int?>("FreightTemplateId");
+                    b.Property<int?>("FreightTemplateId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Gtin")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<bool>("HasOptions");
+                    b.Property<bool>("HasOptions")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<decimal>("Height");
+                    b.Property<decimal>("Height")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<bool>("IsAllowToOrder");
+                    b.Property<bool>("IsAllowToOrder")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsCallForPricing");
+                    b.Property<bool>("IsCallForPricing")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsFeatured");
+                    b.Property<bool>("IsFeatured")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsFreeShipping");
+                    b.Property<bool>("IsFreeShipping")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsPublished");
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsShipEnabled");
+                    b.Property<bool>("IsShipEnabled")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsVisibleIndividually");
+                    b.Property<bool>("IsVisibleIndividually")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<decimal>("Length");
+                    b.Property<decimal>("Length")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<string>("MetaDescription");
+                    b.Property<string>("MetaDescription")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("MetaKeywords");
+                    b.Property<string>("MetaKeywords")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("MetaTitle");
+                    b.Property<string>("MetaTitle")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.Property<string>("NormalizedName")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<bool>("NotReturnable");
+                    b.Property<bool>("NotReturnable")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<decimal?>("OldPrice");
+                    b.Property<decimal?>("OldPrice")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<int>("OrderMaximumQuantity");
+                    b.Property<int>("OrderMaximumQuantity")
+                        .HasColumnType("int");
 
-                    b.Property<int>("OrderMinimumQuantity");
+                    b.Property<int>("OrderMinimumQuantity")
+                        .HasColumnType("int");
 
-                    b.Property<int?>("ParentGroupedProductId");
+                    b.Property<int?>("ParentGroupedProductId")
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("Price");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<int>("PublishType");
+                    b.Property<int>("PublishType")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime?>("PublishedOn");
+                    b.Property<DateTime?>("PublishedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<double?>("RatingAverage");
+                    b.Property<double?>("RatingAverage")
+                        .HasColumnType("double");
 
-                    b.Property<int>("ReviewsCount");
+                    b.Property<int>("ReviewsCount")
+                        .HasColumnType("int");
 
-                    b.Property<string>("ShortDescription");
+                    b.Property<string>("ShortDescription")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Sku")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.Property<string>("Slug")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<decimal?>("SpecialPrice");
+                    b.Property<decimal?>("SpecialPrice")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<DateTime?>("SpecialPriceEnd");
+                    b.Property<DateTime?>("SpecialPriceEnd")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("SpecialPriceStart");
+                    b.Property<DateTime?>("SpecialPriceStart")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Specification");
+                    b.Property<string>("Specification")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("StockReduceStrategy");
+                    b.Property<int>("StockReduceStrategy")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("StockTrackingIsEnabled");
+                    b.Property<bool>("StockTrackingIsEnabled")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int?>("ThumbnailImageId");
+                    b.Property<int?>("ThumbnailImageId")
+                        .HasColumnType("int");
 
-                    b.Property<int?>("UnitId");
+                    b.Property<int?>("UnitId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime?>("UnpublishedOn");
+                    b.Property<DateTime?>("UnpublishedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("UnpublishedReason");
+                    b.Property<string>("UnpublishedReason")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("UpdatedById");
+                    b.Property<int>("UpdatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("ValidThru");
+                    b.Property<int?>("ValidThru")
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("Weight");
+                    b.Property<decimal>("Weight")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<decimal>("Width");
+                    b.Property<decimal>("Width")
+                        .HasColumnType("decimal(65,30)");
 
                     b.HasKey("Id");
 
@@ -300,19 +393,25 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductAttribute", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("GroupId");
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -324,22 +423,30 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductAttributeData", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<int>("AttributeId");
+                    b.Property<int>("AttributeId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsPublished");
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Value")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.HasKey("Id");
@@ -352,17 +459,22 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductAttributeGroup", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -372,17 +484,22 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductAttributeTemplate", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -392,17 +509,23 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductAttributeTemplateRelation", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<int>("AttributeId");
+                    b.Property<int>("AttributeId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("TemplateId");
+                    b.Property<int>("TemplateId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -416,21 +539,29 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductAttributeValue", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<int>("AttributeId");
+                    b.Property<int>("AttributeId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("ProductId");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Value");
+                    b.Property<string>("Value")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -444,21 +575,29 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductCategory", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<int>("CategoryId");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("DisplayOrder");
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsFeaturedProduct");
+                    b.Property<bool>("IsFeaturedProduct")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("ProductId");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -472,19 +611,26 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductLink", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("LinkType");
+                    b.Property<int>("LinkType")
+                        .HasColumnType("int");
 
-                    b.Property<int>("LinkedProductId");
+                    b.Property<int>("LinkedProductId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("ProductId");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -498,19 +644,26 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductMedia", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("DisplayOrder");
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("MediaId");
+                    b.Property<int>("MediaId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("ProductId");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -524,19 +677,25 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductOption", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("DisplayType");
+                    b.Property<int>("DisplayType")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -566,21 +725,29 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductOptionCombination", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("DisplayOrder");
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("OptionId");
+                    b.Property<int>("OptionId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("ProductId");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Value")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.HasKey("Id");
@@ -595,25 +762,34 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductOptionData", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Display")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsPublished");
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("OptionId");
+                    b.Property<int>("OptionId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Value")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.HasKey("Id");
@@ -626,28 +802,39 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductOptionValue", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Display")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<int>("DisplayOrder");
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsDefault");
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int?>("MediaId");
+                    b.Property<int?>("MediaId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("OptionId");
+                    b.Property<int>("OptionId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("ProductId");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Value")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.HasKey("Id");
@@ -664,29 +851,41 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductPriceHistory", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<int>("CreatedById");
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<decimal?>("OldPrice");
+                    b.Property<decimal?>("OldPrice")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<decimal?>("Price");
+                    b.Property<decimal?>("Price")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<int?>("ProductId");
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
 
-                    b.Property<decimal?>("SpecialPrice");
+                    b.Property<decimal?>("SpecialPrice")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<DateTime?>("SpecialPriceEnd");
+                    b.Property<DateTime?>("SpecialPriceEnd")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("SpecialPriceStart");
+                    b.Property<DateTime?>("SpecialPriceStart")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("UpdatedById");
+                    b.Property<int>("UpdatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -702,19 +901,26 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductRecentlyViewed", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("CustomerId");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<DateTime>("LatestViewedOn");
+                    b.Property<DateTime>("LatestViewedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("ProductId");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("ViewedCount");
+                    b.Property<int>("ViewedCount")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -728,22 +934,30 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductWishlist", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("CustomerId");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("ProductId");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("Quantity");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -757,15 +971,20 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.Unit", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -775,33 +994,47 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.Address", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("AddressLine1");
+                    b.Property<string>("AddressLine1")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("AddressLine2");
+                    b.Property<string>("AddressLine2")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("City");
+                    b.Property<string>("City")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Company");
+                    b.Property<string>("Company")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("ContactName");
+                    b.Property<string>("ContactName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("CountryId");
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("Phone");
+                    b.Property<string>("Phone")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("StateOrProvinceId");
+                    b.Property<int>("StateOrProvinceId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("ZipCode");
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -815,22 +1048,28 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.AppSetting", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
-                    b.Property<int>("FormatType");
+                    b.Property<int>("FormatType")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsVisibleInCommonSettingPage");
+                    b.Property<bool>("IsVisibleInCommonSettingPage")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Module")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.Property<string>("Note")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.Property<string>("Type")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<string>("Value");
+                    b.Property<string>("Value")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -844,49 +1083,6 @@ namespace Shop.WebApi.Migrations
                             IsVisibleInCommonSettingPage = false,
                             Module = "Core",
                             Value = "1.0"
-                        },
-                        new
-                        {
-                            Id = "ApiHost",
-                            FormatType = 0,
-                            IsVisibleInCommonSettingPage = true,
-                            Module = "Core",
-                            Value = "https://demo.shopapi.circle.ac.cn/"
-                        },
-                        new
-                        {
-                            Id = "WebHost",
-                            FormatType = 0,
-                            IsVisibleInCommonSettingPage = true,
-                            Module = "Core",
-                            Value = "https://demo.shop.circle.ac.cn/"
-                        },
-                        new
-                        {
-                            Id = "ShopConfig",
-                            FormatType = 1,
-                            IsVisibleInCommonSettingPage = true,
-                            Module = "Core",
-                            Type = "Shop.Infrastructure.ShopConfig, Shop.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-                            Value = "{\"ShopName\":\"天网商城\",\"CacheTimeInMinutes\":60,\"RedisCachingEnabled\":true,\"RedisCachingConnection\":\"demo-shop-redis:6379,ssl=False,password=qGmNTfPtbQYMX6Qz,allowadmin=true\"}"
-                        },
-                        new
-                        {
-                            Id = "EmailSenderSmtpOptions",
-                            FormatType = 1,
-                            IsVisibleInCommonSettingPage = true,
-                            Module = "EmailSenderSmtp",
-                            Type = "Shop.Module.EmailSenderSmtp.EmailSenderSmtpOptions, Shop.Module.EmailSenderSmtp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-                            Value = "{\"SmtpUserName\":\"system@trueai.org\",\"SmtpPassword\":\"******\",\"SmtpHost\":\"smtp.mxhichina.com\",\"SmtpPort\":587}"
-                        },
-                        new
-                        {
-                            Id = "SmsSenderAliyunOptions",
-                            FormatType = 1,
-                            IsVisibleInCommonSettingPage = true,
-                            Module = "SmsSenderAliyun",
-                            Type = "Shop.Module.SmsSenderAliyun.Models.SmsSenderAliyunOptions, Shop.Module.SmsSenderAliyun, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-                            Value = "{\"RegionId\":\"default\",\"AccessKeyId\":\"LTAI8v8Crr******\",\"AccessKeySecret\":\"BVZY9tPKjNsuAg2njEgZa1KI******\",\"IsTest\":true}"
                         },
                         new
                         {
@@ -928,24 +1124,6 @@ namespace Shop.WebApi.Migrations
                         },
                         new
                         {
-                            Id = "HangfireOptions",
-                            FormatType = 1,
-                            IsVisibleInCommonSettingPage = true,
-                            Module = "Hangfire",
-                            Type = "Shop.Module.Hangfire.Models.HangfireOptions, Shop.Module.Hangfire, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-                            Value = "{\"Provider\":3,\"MySqlHangfireConnection\":\"server=172.16.250.6;PORT=3306;database=demo_shop_hangfire;uid=root;pwd=czYj9hnFaVUfZgm7;Connection Timeout=60;Allow Zero Datetime=True;Allow User Variables=True;pooling=true;min pool size=5;max pool size=512;SslMode=None;\",\"SqlServerHangfireConnection\":\"Data Source=127.0.0.1;Initial Catalog=ShopHangfire;User ID=sa;Password=******\",\"RedisHangfireConnection\":\"127.0.0.1:16379,password=******,allowadmin=true\",\"Username\":\"admin\",\"Password\":\"123456\"}"
-                        },
-                        new
-                        {
-                            Id = "MiniProgramOptions",
-                            FormatType = 1,
-                            IsVisibleInCommonSettingPage = true,
-                            Module = "MiniProgram",
-                            Type = "Shop.Module.Core.MiniProgram.Models.MiniProgramOptions, Shop.Module.Core.MiniProgram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-                            Value = "{\"AppId\":\"wxc90c1e6038******\",\"AppSecret\":\"736192139a4ca393de4a18ce22******\",\"MchId\":\"1526******\",\"Key\":\"jtA9J79YNUXnTRpVntHqTGSF2h******\"}"
-                        },
-                        new
-                        {
                             Id = "IsReviewAutoApproved",
                             FormatType = 0,
                             IsVisibleInCommonSettingPage = true,
@@ -967,38 +1145,52 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.Country", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("DisplayOrder");
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsBillingEnabled");
+                    b.Property<bool>("IsBillingEnabled")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsCityEnabled");
+                    b.Property<bool>("IsCityEnabled")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsDistrictEnabled");
+                    b.Property<bool>("IsDistrictEnabled")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsPublished");
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsShippingEnabled");
+                    b.Property<bool>("IsShippingEnabled")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<int>("NumericIsoCode");
+                    b.Property<int>("NumericIsoCode")
+                        .HasColumnType("int");
 
                     b.Property<string>("ThreeLetterIsoCode")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("TwoLetterIsoCode")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -1044,38 +1236,53 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.EmailSend", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("Bcc");
+                    b.Property<string>("Bcc")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Body");
+                    b.Property<string>("Body")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Cc");
+                    b.Property<string>("Cc")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("From")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsHtml");
+                    b.Property<bool>("IsHtml")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsSucceed");
+                    b.Property<bool>("IsSucceed")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("Message");
+                    b.Property<string>("Message")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("OutId")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.Property<string>("ReceiptId")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<string>("Subject");
+                    b.Property<string>("Subject")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("To");
+                    b.Property<string>("To")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -1085,25 +1292,33 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.Entity", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("EntityId");
+                    b.Property<int>("EntityId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("EntityTypeId");
+                    b.Property<int>("EntityTypeId")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.Property<string>("Slug")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -1115,16 +1330,20 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.EntityType", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsMenuable");
+                    b.Property<bool>("IsMenuable")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Module")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.HasKey("Id");
@@ -1172,35 +1391,47 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.Media", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<string>("Caption")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("FileName")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<int>("FileSize");
+                    b.Property<int>("FileSize")
+                        .HasColumnType("int");
 
                     b.Property<string>("Hash")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.Property<string>("Host")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.Property<string>("Md5")
+                        .HasColumnType("varchar(32) CHARACTER SET utf8mb4")
                         .HasMaxLength(32);
 
-                    b.Property<int>("MediaType");
+                    b.Property<int>("MediaType")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Path");
+                    b.Property<string>("Path")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Url");
+                    b.Property<string>("Url")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -1210,15 +1441,19 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.Role", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                        .IsConcurrencyToken()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Name")
+                        .HasColumnType("varchar(256) CHARACTER SET utf8mb4")
                         .HasMaxLength(256);
 
                     b.Property<string>("NormalizedName")
+                        .HasColumnType("varchar(256) CHARACTER SET utf8mb4")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
@@ -1256,43 +1491,59 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.SmsSend", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsSucceed");
+                    b.Property<bool>("IsSucceed")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsTest");
+                    b.Property<bool>("IsTest")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsUsed");
+                    b.Property<bool>("IsUsed")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("Message");
+                    b.Property<string>("Message")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("OutId")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.Property<string>("ReceiptId")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.Property<string>("SignName")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.Property<string>("TemplateCode")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<string>("TemplateParam");
+                    b.Property<string>("TemplateParam")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int?>("TemplateType");
+                    b.Property<int?>("TemplateType")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Value")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.HasKey("Id");
@@ -1309,30 +1560,41 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.StateOrProvince", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<string>("Code")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<int>("CountryId");
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("DisplayOrder");
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsPublished");
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("Level");
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<int?>("ParentId");
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -1346,78 +1608,110 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.User", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<int>("AccessFailedCount");
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
 
                     b.Property<string>("AdminRemark")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<int?>("AvatarId");
+                    b.Property<int?>("AvatarId")
+                        .HasColumnType("int");
 
                     b.Property<string>("AvatarUrl")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                        .IsConcurrencyToken()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Culture");
+                    b.Property<string>("Culture")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int?>("DefaultBillingAddressId");
+                    b.Property<int?>("DefaultBillingAddressId")
+                        .HasColumnType("int");
 
-                    b.Property<int?>("DefaultShippingAddressId");
+                    b.Property<int?>("DefaultShippingAddressId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
+                        .HasColumnType("varchar(256) CHARACTER SET utf8mb4")
                         .HasMaxLength(256);
 
-                    b.Property<bool>("EmailConfirmed");
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("ExtensionData");
+                    b.Property<string>("ExtensionData")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("FullName")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<bool>("IsActive");
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<DateTime?>("LastActivityOn");
+                    b.Property<DateTime?>("LastActivityOn")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("LastIpAddress")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<DateTime?>("LastLoginOn");
+                    b.Property<DateTime?>("LastLoginOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("LockoutEnabled");
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd");
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("NormalizedEmail")
+                        .HasColumnType("varchar(256) CHARACTER SET utf8mb4")
                         .HasMaxLength(256);
 
                     b.Property<string>("NormalizedUserName")
+                        .HasColumnType("varchar(256) CHARACTER SET utf8mb4")
                         .HasMaxLength(256);
 
-                    b.Property<string>("PasswordHash");
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("PhoneNumber");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
-                    b.Property<bool>("PhoneNumberConfirmed");
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("RefreshTokenHash");
+                    b.Property<string>("RefreshTokenHash")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("SecurityStamp");
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<bool>("TwoFactorEnabled");
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<Guid>("UserGuid");
+                    b.Property<Guid>("UserGuid")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("UserName")
+                        .HasColumnType("varchar(256) CHARACTER SET utf8mb4")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
@@ -1498,17 +1792,23 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.UserAddress", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<int>("AddressId");
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("AddressType");
+                    b.Property<int>("AddressType")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<DateTime?>("LastUsedOn");
+                    b.Property<DateTime?>("LastUsedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -1521,24 +1821,33 @@ namespace Shop.WebApi.Migrations
 
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.UserLogin", b =>
                 {
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
-                    b.Property<string>("ProviderKey");
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("ProviderDisplayName");
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("UnionId")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -1549,9 +1858,11 @@ namespace Shop.WebApi.Migrations
 
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.UserRole", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("RoleId");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -1575,21 +1886,28 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.Widget", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("CreateUrl");
+                    b.Property<string>("CreateUrl")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("EditUrl");
+                    b.Property<string>("EditUrl")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<bool>("IsPublished");
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<string>("ViewComponentName");
+                    b.Property<string>("ViewComponentName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -1661,29 +1979,41 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.WidgetInstance", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Data");
+                    b.Property<string>("Data")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("DisplayOrder");
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
 
-                    b.Property<string>("HtmlData");
+                    b.Property<string>("HtmlData")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime?>("PublishEnd");
+                    b.Property<DateTime?>("PublishEnd")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("PublishStart");
+                    b.Property<DateTime?>("PublishStart")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("WidgetId");
+                    b.Property<int>("WidgetId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("WidgetZoneId");
+                    b.Property<int>("WidgetZoneId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -1697,14 +2027,18 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.WidgetZone", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.HasKey("Id");
@@ -1735,25 +2069,34 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Feedbacks.Abstractions.Entities.Feedback", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("Contact");
+                    b.Property<string>("Contact")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Content")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Title")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<int>("Type");
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("UserId");
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -1765,28 +2108,39 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Inventory.Abstractions.Entities.Stock", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("DisplayOrder");
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsEnabled");
+                    b.Property<bool>("IsEnabled")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("LockedStockQuantity");
+                    b.Property<int>("LockedStockQuantity")
+                        .HasColumnType("int");
 
                     b.Property<string>("Note")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<int>("ProductId");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("StockQuantity");
+                    b.Property<int>("StockQuantity")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("WarehouseId");
+                    b.Property<int>("WarehouseId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -1800,27 +2154,38 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Inventory.Abstractions.Entities.StockHistory", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<int>("AdjustedQuantity");
+                    b.Property<int>("AdjustedQuantity")
+                        .HasColumnType("int");
 
-                    b.Property<int>("CreatedById");
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("Note");
+                    b.Property<string>("Note")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("ProductId");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("StockQuantity");
+                    b.Property<int>("StockQuantity")
+                        .HasColumnType("int");
 
-                    b.Property<int>("UpdatedById");
+                    b.Property<int>("UpdatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("WarehouseId");
+                    b.Property<int>("WarehouseId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -1838,21 +2203,28 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Inventory.Abstractions.Entities.Warehouse", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<int>("AddressId");
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("AdminRemark");
+                    b.Property<string>("AdminRemark")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -1864,83 +2236,120 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Orders.Abstractions.Entities.Order", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<string>("AdminNote")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<int?>("BillingAddressId");
+                    b.Property<int?>("BillingAddressId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime?>("CancelOn");
+                    b.Property<DateTime?>("CancelOn")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("CancelReason")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<string>("CouponCode");
+                    b.Property<string>("CouponCode")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("CouponRuleName");
+                    b.Property<string>("CouponRuleName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("CreatedById");
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("CustomerId");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime?>("DeliveredEndOn");
+                    b.Property<DateTime?>("DeliveredEndOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("DeliveredOn");
+                    b.Property<DateTime?>("DeliveredOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<decimal>("DiscountAmount");
+                    b.Property<decimal>("DiscountAmount")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<long>("No");
+                    b.Property<long>("No")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("OnHoldReason")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
                     b.Property<string>("OrderNote")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<int>("OrderStatus");
+                    b.Property<int>("OrderStatus")
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("OrderTotal");
+                    b.Property<decimal>("OrderTotal")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<DateTime?>("PaymentEndOn");
+                    b.Property<DateTime?>("PaymentEndOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<decimal>("PaymentFeeAmount");
+                    b.Property<decimal>("PaymentFeeAmount")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<int?>("PaymentMethod");
+                    b.Property<int?>("PaymentMethod")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime?>("PaymentOn");
+                    b.Property<DateTime?>("PaymentOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("PaymentType");
+                    b.Property<int>("PaymentType")
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("RefundAmount");
+                    b.Property<decimal>("RefundAmount")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<DateTime?>("RefundOn");
+                    b.Property<DateTime?>("RefundOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("RefundReason");
+                    b.Property<string>("RefundReason")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int?>("RefundStatus");
+                    b.Property<int?>("RefundStatus")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime?>("ShippedOn");
+                    b.Property<DateTime?>("ShippedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("ShippingAddressId");
+                    b.Property<int?>("ShippingAddressId")
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("ShippingFeeAmount");
+                    b.Property<decimal>("ShippingFeeAmount")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<int>("ShippingMethod");
+                    b.Property<int>("ShippingMethod")
+                        .HasColumnType("int");
 
-                    b.Property<int?>("ShippingStatus");
+                    b.Property<int?>("ShippingStatus")
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("SubTotal");
+                    b.Property<decimal>("SubTotal")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<decimal>("SubTotalWithDiscount");
+                    b.Property<decimal>("SubTotalWithDiscount")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<int>("UpdatedById");
+                    b.Property<int>("UpdatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -1963,27 +2372,38 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Orders.Abstractions.Entities.OrderHistory", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<int>("CreatedById");
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("NewStatus");
+                    b.Property<int>("NewStatus")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Note");
+                    b.Property<string>("Note")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int?>("OldStatus");
+                    b.Property<int?>("OldStatus")
+                        .HasColumnType("int");
 
-                    b.Property<int>("OrderId");
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("OrderSnapshot");
+                    b.Property<string>("OrderSnapshot")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("UpdatedById");
+                    b.Property<int>("UpdatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -1999,39 +2419,56 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Orders.Abstractions.Entities.OrderItem", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<int>("CreatedById");
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<decimal>("DiscountAmount");
+                    b.Property<decimal>("DiscountAmount")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<decimal>("ItemAmount");
+                    b.Property<decimal>("ItemAmount")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<decimal>("ItemWeight");
+                    b.Property<decimal>("ItemWeight")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<string>("Note");
+                    b.Property<string>("Note")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("OrderId");
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("ProductId");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("ProductMediaUrl");
+                    b.Property<string>("ProductMediaUrl")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("ProductName");
+                    b.Property<string>("ProductName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<decimal>("ProductPrice");
+                    b.Property<decimal>("ProductPrice")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<int>("Quantity");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
-                    b.Property<int>("ShippedQuantity");
+                    b.Property<int>("ShippedQuantity")
+                        .HasColumnType("int");
 
-                    b.Property<int>("UpdatedById");
+                    b.Property<int>("UpdatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -2049,37 +2486,53 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Orders.Abstractions.Events.OrderAddress", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("AddressLine1");
+                    b.Property<string>("AddressLine1")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("AddressLine2");
+                    b.Property<string>("AddressLine2")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("AddressType");
+                    b.Property<int>("AddressType")
+                        .HasColumnType("int");
 
-                    b.Property<string>("City");
+                    b.Property<string>("City")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Company");
+                    b.Property<string>("Company")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("ContactName");
+                    b.Property<string>("ContactName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("CountryId");
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("OrderId");
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Phone");
+                    b.Property<string>("Phone")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("StateOrProvinceId");
+                    b.Property<int>("StateOrProvinceId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("ZipCode");
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -2095,42 +2548,59 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Reviews.Abstractions.Entities.Review", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<string>("Comment")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("EntityId");
+                    b.Property<int>("EntityId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("EntityTypeId");
+                    b.Property<int>("EntityTypeId")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsAnonymous");
+                    b.Property<bool>("IsAnonymous")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsSystem");
+                    b.Property<bool>("IsSystem")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("Rating");
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
 
                     b.Property<string>("ReviewerName")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<int?>("SourceId");
+                    b.Property<int?>("SourceId")
+                        .HasColumnType("int");
 
-                    b.Property<int?>("SourceType");
+                    b.Property<int?>("SourceType")
+                        .HasColumnType("int");
 
-                    b.Property<int>("Status");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
-                    b.Property<int>("SupportCount");
+                    b.Property<int>("SupportCount")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -2142,19 +2612,26 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Reviews.Abstractions.Entities.ReviewMedia", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("DisplayOrder");
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("MediaId");
+                    b.Property<int>("MediaId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("ReviewId");
+                    b.Property<int>("ReviewId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -2168,21 +2645,29 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Reviews.Abstractions.Entities.Support", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("EntityId");
+                    b.Property<int>("EntityId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("EntityTypeId");
+                    b.Property<int>("EntityTypeId")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int?>("ReviewId");
+                    b.Property<int?>("ReviewId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -2196,36 +2681,50 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Reviews.Abstractions.Services.Reply", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<string>("Comment")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("IsAnonymous");
+                    b.Property<bool>("IsAnonymous")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int?>("ParentId");
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ReplierName")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<int>("ReviewId");
+                    b.Property<int>("ReviewId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("Status");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
-                    b.Property<int>("SupportCount");
+                    b.Property<int>("SupportCount")
+                        .HasColumnType("int");
 
-                    b.Property<int?>("ToUserId");
+                    b.Property<int?>("ToUserId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ToUserName")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -2243,30 +2742,42 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Shipments.Abstractions.Entities.Shipment", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("AdminComment");
+                    b.Property<string>("AdminComment")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("CreatedById");
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("DeliveredOn");
+                    b.Property<DateTime?>("DeliveredOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("OrderId");
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime?>("ShippedOn");
+                    b.Property<DateTime?>("ShippedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<decimal>("TotalWeight");
+                    b.Property<decimal>("TotalWeight")
+                        .HasColumnType("decimal(65,30)");
 
                     b.Property<string>("TrackingNumber")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<int>("UpdatedById");
+                    b.Property<int>("UpdatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -2286,25 +2797,35 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Shipments.Abstractions.Entities.ShipmentItem", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<int>("CreatedById");
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("OrderItemId");
+                    b.Property<int>("OrderItemId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("ProductId");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("Quantity");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
-                    b.Property<int>("ShipmentId");
+                    b.Property<int>("ShipmentId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("UpdatedById");
+                    b.Property<int>("UpdatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -2324,18 +2845,24 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Shipping.Abstractions.Entities.FreightTemplate", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
+                        .HasColumnType("varchar(450) CHARACTER SET utf8mb4")
                         .HasMaxLength(450);
 
-                    b.Property<string>("Note");
+                    b.Property<string>("Note")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -2345,27 +2872,38 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.Shipping.Abstractions.Entities.PriceAndDestination", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<int>("CountryId");
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("FreightTemplateId");
+                    b.Property<int>("FreightTemplateId")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsEnabled");
+                    b.Property<bool>("IsEnabled")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<decimal>("MinOrderSubtotal");
+                    b.Property<decimal>("MinOrderSubtotal")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<string>("Note");
+                    b.Property<string>("Note")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<decimal>("ShippingPrice");
+                    b.Property<decimal>("ShippingPrice")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<int?>("StateOrProvinceId");
+                    b.Property<int?>("StateOrProvinceId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -2381,35 +2919,50 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.ShoppingCart.Abstractions.Entities.Cart", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("CouponCode");
+                    b.Property<string>("CouponCode")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("CouponRuleName");
+                    b.Property<string>("CouponRuleName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("CreatedById");
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<int>("CustomerId");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsActive");
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsProductPriceIncludeTax");
+                    b.Property<bool>("IsProductPriceIncludeTax")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("OrderNote");
+                    b.Property<string>("OrderNote")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<decimal?>("ShippingAmount");
+                    b.Property<decimal?>("ShippingAmount")
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<string>("ShippingData");
+                    b.Property<string>("ShippingData")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("ShippingMethod");
+                    b.Property<string>("ShippingMethod")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("UpdatedById");
+                    b.Property<int>("UpdatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -2425,25 +2978,35 @@ namespace Shop.WebApi.Migrations
             modelBuilder.Entity("Shop.Module.ShoppingCart.Abstractions.Entities.CartItem", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<int>("CartId");
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("CreatedById");
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("IsChecked");
+                    b.Property<bool>("IsChecked")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("ProductId");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("Quantity");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
-                    b.Property<int>("UpdatedById");
+                    b.Property<int>("UpdatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn");
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -2460,26 +3023,29 @@ namespace Shop.WebApi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.Role")
+                    b.HasOne("Shop.Module.Core.Abstractions.Entities.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User")
+                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User")
+                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.Category", b =>
@@ -2505,7 +3071,8 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Shipping.Abstractions.Entities.FreightTemplate", "FreightTemplate")
                         .WithMany()
@@ -2530,7 +3097,8 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductAttribute", b =>
@@ -2538,7 +3106,8 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.ProductAttributeGroup", "Group")
                         .WithMany("Attributes")
                         .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductAttributeData", b =>
@@ -2546,7 +3115,8 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.ProductAttribute", "Attribute")
                         .WithMany()
                         .HasForeignKey("AttributeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductAttributeTemplateRelation", b =>
@@ -2554,13 +3124,15 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.ProductAttribute", "Attribute")
                         .WithMany("ProductTemplates")
                         .HasForeignKey("AttributeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.ProductAttributeTemplate", "Template")
                         .WithMany("ProductAttributes")
                         .HasForeignKey("TemplateId")
                         .HasConstraintName("FK_Catalog_ProductAttributeTemplateRelation_Catalog_ProductAtt~1")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductAttributeValue", b =>
@@ -2568,12 +3140,14 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.ProductAttribute", "Attribute")
                         .WithMany()
                         .HasForeignKey("AttributeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
                         .WithMany("AttributeValues")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductCategory", b =>
@@ -2581,12 +3155,14 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
                         .WithMany("Categories")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductLink", b =>
@@ -2594,12 +3170,14 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "LinkedProduct")
                         .WithMany()
                         .HasForeignKey("LinkedProductId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductMedia", b =>
@@ -2607,12 +3185,14 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.Media", "Media")
                         .WithMany()
                         .HasForeignKey("MediaId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
                         .WithMany("Medias")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductOptionCombination", b =>
@@ -2620,12 +3200,14 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.ProductOption", "Option")
                         .WithMany()
                         .HasForeignKey("OptionId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
                         .WithMany("OptionCombinations")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductOptionData", b =>
@@ -2633,7 +3215,8 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.ProductOption", "Option")
                         .WithMany()
                         .HasForeignKey("OptionId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductOptionValue", b =>
@@ -2646,12 +3229,14 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.ProductOption", "Option")
                         .WithMany()
                         .HasForeignKey("OptionId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
                         .WithMany("OptionValues")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductPriceHistory", b =>
@@ -2659,7 +3244,8 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
                         .WithMany("PriceHistories")
@@ -2669,7 +3255,8 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductRecentlyViewed", b =>
@@ -2677,12 +3264,14 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductWishlist", b =>
@@ -2690,12 +3279,14 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.Address", b =>
@@ -2703,12 +3294,14 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.StateOrProvince", "StateOrProvince")
                         .WithMany()
                         .HasForeignKey("StateOrProvinceId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.Entity", b =>
@@ -2716,7 +3309,8 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.EntityType", "EntityType")
                         .WithMany()
                         .HasForeignKey("EntityTypeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.StateOrProvince", b =>
@@ -2724,7 +3318,8 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.Country", "Country")
                         .WithMany("StatesOrProvinces")
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.StateOrProvince", "Parent")
                         .WithMany()
@@ -2755,20 +3350,23 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.Address", "Address")
                         .WithMany("UserAddresses")
                         .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "User")
                         .WithMany("UserAddresses")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.UserLogin", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User")
+                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.UserRole", b =>
@@ -2776,12 +3374,14 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "User")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.WidgetInstance", b =>
@@ -2789,12 +3389,14 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.Widget", "Widget")
                         .WithMany()
                         .HasForeignKey("WidgetId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.WidgetZone", "WidgetZone")
                         .WithMany()
                         .HasForeignKey("WidgetZoneId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Feedbacks.Abstractions.Entities.Feedback", b =>
@@ -2810,12 +3412,14 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Inventory.Abstractions.Entities.Warehouse", "Warehouse")
                         .WithMany()
                         .HasForeignKey("WarehouseId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Inventory.Abstractions.Entities.StockHistory", b =>
@@ -2823,22 +3427,26 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Inventory.Abstractions.Entities.Warehouse", "Warehouse")
                         .WithMany()
                         .HasForeignKey("WarehouseId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Inventory.Abstractions.Entities.Warehouse", b =>
@@ -2846,7 +3454,8 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Orders.Abstractions.Entities.Order", b =>
@@ -2858,12 +3467,14 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Orders.Abstractions.Events.OrderAddress", "ShippingAddress")
                         .WithMany()
@@ -2872,7 +3483,8 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Orders.Abstractions.Entities.OrderHistory", b =>
@@ -2880,17 +3492,20 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Orders.Abstractions.Entities.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Orders.Abstractions.Entities.OrderItem", b =>
@@ -2898,22 +3513,26 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Orders.Abstractions.Entities.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Orders.Abstractions.Events.OrderAddress", b =>
@@ -2921,17 +3540,20 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Orders.Abstractions.Entities.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.StateOrProvince", "StateOrProvince")
                         .WithMany()
                         .HasForeignKey("StateOrProvinceId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Reviews.Abstractions.Entities.Review", b =>
@@ -2939,7 +3561,8 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Reviews.Abstractions.Entities.ReviewMedia", b =>
@@ -2947,17 +3570,19 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.Media", "Media")
                         .WithMany()
                         .HasForeignKey("MediaId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Reviews.Abstractions.Entities.Review", "Review")
                         .WithMany("Medias")
                         .HasForeignKey("ReviewId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Reviews.Abstractions.Entities.Support", b =>
                 {
-                    b.HasOne("Shop.Module.Reviews.Abstractions.Entities.Review")
+                    b.HasOne("Shop.Module.Reviews.Abstractions.Entities.Review", null)
                         .WithMany("Supports")
                         .HasForeignKey("ReviewId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -2965,7 +3590,8 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Reviews.Abstractions.Services.Reply", b =>
@@ -2978,7 +3604,8 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Reviews.Abstractions.Entities.Review", "Review")
                         .WithMany("Replies")
                         .HasForeignKey("ReviewId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "ToUser")
                         .WithMany()
@@ -2988,7 +3615,8 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Shipments.Abstractions.Entities.Shipment", b =>
@@ -2996,17 +3624,20 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Orders.Abstractions.Entities.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Shipments.Abstractions.Entities.ShipmentItem", b =>
@@ -3014,27 +3645,32 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Orders.Abstractions.Entities.OrderItem", "OrderItem")
                         .WithMany()
                         .HasForeignKey("OrderItemId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Shipments.Abstractions.Entities.Shipment", "Shipment")
                         .WithMany("Items")
                         .HasForeignKey("ShipmentId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.Shipping.Abstractions.Entities.PriceAndDestination", b =>
@@ -3042,12 +3678,14 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Shipping.Abstractions.Entities.FreightTemplate", "FreightTemplate")
                         .WithMany("PriceAndDestinations")
                         .HasForeignKey("FreightTemplateId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.StateOrProvince", "StateOrProvince")
                         .WithMany()
@@ -3060,17 +3698,20 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shop.Module.ShoppingCart.Abstractions.Entities.CartItem", b =>
@@ -3078,22 +3719,26 @@ namespace Shop.WebApi.Migrations
                     b.HasOne("Shop.Module.ShoppingCart.Abstractions.Entities.Cart", "Cart")
                         .WithMany("Items")
                         .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

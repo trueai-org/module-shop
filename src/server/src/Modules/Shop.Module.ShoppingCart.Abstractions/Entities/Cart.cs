@@ -1,9 +1,9 @@
 ﻿using Shop.Infrastructure.Models;
-using Shop.Module.Core.Abstractions.Entities;
+using Shop.Module.Core.Entities;
 using System;
 using System.Collections.Generic;
 
-namespace Shop.Module.ShoppingCart.Abstractions.Entities
+namespace Shop.Module.ShoppingCart.Entities
 {
     public class Cart : EntityBase
     {

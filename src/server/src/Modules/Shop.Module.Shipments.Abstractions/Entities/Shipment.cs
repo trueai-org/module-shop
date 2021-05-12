@@ -1,11 +1,11 @@
 ﻿using Shop.Infrastructure.Models;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Orders.Abstractions.Entities;
+using Shop.Module.Core.Entities;
+using Shop.Module.Orders.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Shipments.Abstractions.Entities
+namespace Shop.Module.Shipments.Entities
 {
     public class Shipment : EntityBase
     {

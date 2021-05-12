@@ -8,17 +8,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
 using Shop.Infrastructure.Modules;
-using Shop.Module.Core.Abstractions.Entities;
+using Shop.Module.Core.Entities;
 using Shop.Module.Core.Data;
 using Shop.Module.Core.Extensions;
 using Shop.WebApi.Filters;
 using Shop.WebApi.Handlers;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -31,9 +31,6 @@ namespace Shop.WebApi.Extensions
     {
         public static void AddCustomizedConfigureServices(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
         {
-            // TODO
-            // 本项目仅api，静态资源将不在存储，待优化配置
-
             if (string.IsNullOrWhiteSpace(env.WebRootPath))
             {
                 env.WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
@@ -43,12 +40,22 @@ namespace Shop.WebApi.Extensions
             GlobalConfiguration.ContentRootPath = env.ContentRootPath;
             GlobalConfiguration.Configuration = configuration;
 
-            services.AddModules(env.ContentRootPath);
+            services.AddModules(configuration);
             services.AddCustomizedDataStore(configuration);
             services.AddCustomizedIdentity(configuration);
 
             // 在core中注入配置
             //services.AddCustomizedShopConfig(configuration);
+            //public static void AddCustomizedShopConfig(this IServiceCollection services, IConfiguration configuration)
+            //{
+            //    var config = new ShopConfig();
+            //    configuration.GetSection("Shop").Bind(config);
+            //    services.AddSingleton(config);
+
+            //    var authConfig = new AuthenticationConfig();
+            //    configuration.GetSection("Authentication").Bind(authConfig);
+            //    services.AddSingleton(authConfig);
+            //}
 
             services.AddHttpClient();
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
@@ -62,7 +69,7 @@ namespace Shop.WebApi.Extensions
             var moduleInitializers = sp.GetServices<IModuleInitializer>();
             foreach (var moduleInitializer in moduleInitializers)
             {
-                moduleInitializer.ConfigureServices(services);
+                moduleInitializer.ConfigureServices(services, configuration);
             }
 
             services.AddMvc(options =>
@@ -119,20 +126,14 @@ namespace Shop.WebApi.Extensions
 
             // mediatR
             services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
-
-            //services.AddScoped<ServiceFactory>(p => p.GetService);
-            //services.AddScoped<IMediator, SequentialMediator>();
-
-            // swagger
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Shop Api", Version = "1.0.0" });
-            });
         }
 
-        public static void AddModules(this IServiceCollection services, string contentRootPath)
+        public static void AddModules(this IServiceCollection services, IConfiguration configuration)
         {
-            foreach (var module in new ModuleConfigurationManager().GetModules())
+            var modules = new List<ModuleInfo>();
+            configuration.GetSection("Modules").Bind(modules);
+
+            foreach (var module in modules)
             {
                 module.Assembly = Assembly.Load(new AssemblyName(module.Id));
                 GlobalConfiguration.Modules.Add(module);
@@ -144,18 +145,6 @@ namespace Shop.WebApi.Extensions
                 }
             }
         }
-
-        //public static void AddCustomizedShopConfig(this IServiceCollection services, IConfiguration configuration)
-        //{
-        //    var config = new ShopConfig();
-        //    configuration.GetSection("Shop").Bind(config);
-        //    services.AddSingleton(config);
-
-        //    var authConfig = new AuthenticationConfig();
-        //    configuration.GetSection("Authentication").Bind(authConfig);
-        //    services.AddSingleton(authConfig);
-        //}
-
         public static void AddCustomizedDataStore(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContextPool<ShopDbContext>(options => options.UseCustomizedDataStore(configuration));

@@ -1,5 +1,5 @@
-﻿using Shop.Module.Core.Abstractions.Cache;
-using Shop.Module.Core.Abstractions.Services;
+﻿using Shop.Module.Core.Cache;
+using Shop.Module.Core.Services;
 using Shop.Module.SampleData.Data;
 using Shop.Module.SampleData.ViewModels;
 using System;

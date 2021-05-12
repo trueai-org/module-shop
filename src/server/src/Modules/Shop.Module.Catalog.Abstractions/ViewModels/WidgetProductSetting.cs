@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Shop.Module.Catalog.Abstractions.ViewModels
+namespace Shop.Module.Catalog.ViewModels
 {
     public class WidgetProductSetting
     {

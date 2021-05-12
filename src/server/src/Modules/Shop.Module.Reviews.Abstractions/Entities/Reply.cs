@@ -1,13 +1,13 @@
 ﻿using Shop.Infrastructure.Models;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Reviews.Abstractions.Entities;
-using Shop.Module.Reviews.Abstractions.Models;
+using Shop.Module.Core.Entities;
+using Shop.Module.Reviews.Entities;
+using Shop.Module.Reviews.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Shop.Module.Reviews.Abstractions.Services
+namespace Shop.Module.Reviews.Services
 {
     public class Reply : EntityBase
     {

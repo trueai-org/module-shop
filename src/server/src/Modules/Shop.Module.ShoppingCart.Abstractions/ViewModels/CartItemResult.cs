@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Shop.Module.ShoppingCart.Abstractions.ViewModels
+namespace Shop.Module.ShoppingCart.ViewModels
 {
     public class CartItemResult
     {

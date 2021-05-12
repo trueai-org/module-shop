@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Shipping.Abstractions.Entities
+namespace Shop.Module.Shipping.Entities
 {
     public class FreightTemplate : EntityBase
     {

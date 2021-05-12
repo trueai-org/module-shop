@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Shop.Infrastructure.Data;
-using Shop.Module.Catalog.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Events;
-using Shop.Module.Core.Abstractions.Extensions;
-using Shop.Module.Core.Abstractions.Models;
+using Shop.Module.Catalog.Entities;
+using Shop.Module.Core.Events;
+using Shop.Module.Core.Extensions;
+using Shop.Module.Core.Models;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Shop.Module.Orders.Abstractions.Models
+namespace Shop.Module.Orders.Models
 {
     /// <summary>
     /// 订单状态

@@ -1,32 +1,30 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
-using Shop.Module.Catalog.Abstractions.Entities;
-using Shop.Module.Catalog.Abstractions.Models;
-using Shop.Module.Core.Abstractions.Cache;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Extensions;
-using Shop.Module.Core.Abstractions.Models;
-using Shop.Module.Core.Abstractions.Services;
-using Shop.Module.Core.Abstractions.ViewModels;
-using Shop.Module.Inventory.Abstractions.Entities;
-using Shop.Module.Orders.Abstractions.Data;
-using Shop.Module.Orders.Abstractions.Entities;
-using Shop.Module.Orders.Abstractions.Events;
-using Shop.Module.Orders.Abstractions.Models;
-using Shop.Module.Orders.Abstractions.Services;
-using Shop.Module.Orders.Abstractions.ViewModels;
+using Shop.Module.Catalog.Entities;
+using Shop.Module.Catalog.Models;
+using Shop.Module.Core.Cache;
+using Shop.Module.Core.Entities;
+using Shop.Module.Core.Extensions;
+using Shop.Module.Core.Models;
+using Shop.Module.Core.Services;
+using Shop.Module.Core.ViewModels;
+using Shop.Module.Inventory.Entities;
+using Shop.Module.Orders.Data;
+using Shop.Module.Orders.Entities;
 using Shop.Module.Orders.Events;
-using Shop.Module.Payments.Abstractions.Models;
-using Shop.Module.Payments.Abstractions.Services;
-using Shop.Module.Schedule.Abstractions.Services;
-using Shop.Module.Shipments.Abstractions.Entities;
-using Shop.Module.ShoppingCart.Abstractions.Entities;
+using Shop.Module.Orders.Models;
+using Shop.Module.Orders.ViewModels;
+using Shop.Module.Payments.Models;
+using Shop.Module.Payments.Services;
+using Shop.Module.Schedule;
+using Shop.Module.Shipments.Entities;
+using Shop.Module.ShoppingCart.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Shop.Module.Orders.Services
@@ -53,6 +51,7 @@ namespace Shop.Module.Orders.Services
         private readonly ILocker _locker;
         private readonly IPaymentService _paymentService;
         private readonly IRepository<UserLogin> _userLoginRepository;
+        private readonly ShopConfig _shopConfig;
 
         public OrderService(
             IRepository<Order> orderRepository,
@@ -74,7 +73,8 @@ namespace Shop.Module.Orders.Services
             IAppSettingService appSettingService,
             ILocker locker,
             IPaymentService paymentService,
-            IRepository<UserLogin> userLoginRepository)
+            IRepository<UserLogin> userLoginRepository,
+            IOptionsSnapshot<ShopConfig> shopConfig)
         {
             _orderRepository = orderRepository;
             _orderItemRepository = orderItemRepository;
@@ -96,6 +96,7 @@ namespace Shop.Module.Orders.Services
             _locker = locker;
             _paymentService = paymentService;
             _userLoginRepository = userLoginRepository;
+            _shopConfig = shopConfig.Value;
         }
 
         public async Task<OrderCreateResult> OrderCreateByCart(int cartId, OrderCreateBaseParam param, string adminNote = null)
@@ -378,7 +379,7 @@ namespace Shop.Module.Orders.Services
                 throw new Exception("买家信息信息异常");
             }
 
-            var shopConfig = await _appSettingService.Get<ShopConfig>();
+            var shopConfig = _shopConfig;
             if (string.IsNullOrWhiteSpace(shopConfig?.ShopName))
             {
                 throw new ArgumentNullException(nameof(ShopConfig.ShopName));

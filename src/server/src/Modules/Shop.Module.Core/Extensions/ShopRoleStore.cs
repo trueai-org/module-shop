@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Shop.Module.Core.Abstractions.Entities;
+using Shop.Module.Core.Entities;
 using Shop.Module.Core.Data;
 
 namespace Shop.Module.Core.Extensions

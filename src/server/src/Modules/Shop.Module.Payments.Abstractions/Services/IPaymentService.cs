@@ -1,7 +1,7 @@
-﻿using Shop.Module.Payments.Abstractions.Models;
+﻿using Shop.Module.Payments.Models;
 using System.Threading.Tasks;
 
-namespace Shop.Module.Payments.Abstractions.Services
+namespace Shop.Module.Payments.Services
 {
     public interface IPaymentService
     {

@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using Shop.Infrastructure;
-using Shop.Module.Core.Abstractions.Data;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Models;
+using Shop.Module.Core.Entities;
+using Shop.Module.Core.Models;
 using System;
 
 namespace Shop.Module.Core.Data
@@ -12,29 +10,8 @@ namespace Shop.Module.Core.Data
     {
         public static void SeedData(ModelBuilder builder)
         {
-            var cfg = GlobalConfiguration.Configuration;
-
-            var config = new ShopConfig()
-            {
-                ShopName = cfg[$"{nameof(ShopConfig)}:{nameof(ShopConfig.ShopName)}"],
-                CacheTimeInMinutes = int.Parse(cfg[$"{nameof(ShopConfig)}:{nameof(ShopConfig.CacheTimeInMinutes)}"]),
-                RedisCachingEnabled = bool.Parse(cfg[$"{nameof(ShopConfig)}:{nameof(ShopConfig.RedisCachingEnabled)}"]),
-                RedisCachingConnection = cfg[$"{nameof(ShopConfig)}:{nameof(ShopConfig.RedisCachingConnection)}"],
-            };
-            var json = JsonConvert.SerializeObject(config);
-
             builder.Entity<AppSetting>().HasData(
-                new AppSetting("Global.AssetVersion") { Module = "Core", IsVisibleInCommonSettingPage = false, Value = "1.0" },
-                new AppSetting(ShopKeys.ApiHost) { Module = "Core", IsVisibleInCommonSettingPage = true, Value = cfg[$"{nameof(ShopConfig)}:{nameof(ShopKeys.ApiHost)}"] },
-                new AppSetting(ShopKeys.WebHost) { Module = "Core", IsVisibleInCommonSettingPage = true, Value = cfg[$"{nameof(ShopConfig)}:{nameof(ShopKeys.WebHost)}"] },
-                new AppSetting(nameof(ShopConfig))
-                {
-                    Module = "Core",
-                    IsVisibleInCommonSettingPage = true,
-                    Value = json,
-                    FormatType = AppSettingFormatType.Json,
-                    Type = typeof(ShopConfig).AssemblyQualifiedName
-                }
+                new AppSetting("Global.AssetVersion") { Module = "Core", IsVisibleInCommonSettingPage = false, Value = "1.0" }
             );
 
             //builder.Entity<EntityType>().HasData(

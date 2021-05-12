@@ -1,6 +1,6 @@
-﻿using Shop.Module.Core.Abstractions.Events;
+﻿using Shop.Module.Core.Events;
 
-namespace Shop.Module.Catalog.Abstractions.Events
+namespace Shop.Module.Catalog.Events
 {
     public class ProductViewed : EntityViewed
     {

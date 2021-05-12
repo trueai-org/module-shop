@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shop.Infrastructure.Data;
 using Shop.Infrastructure.Helpers;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Models;
-using Shop.Module.Reviews.Abstractions.Data;
-using Shop.Module.Reviews.Abstractions.Entities;
-using Shop.Module.Reviews.Abstractions.Services;
+using Shop.Module.Core.Entities;
+using Shop.Module.Core.Models;
+using Shop.Module.Reviews.Data;
+using Shop.Module.Reviews.Entities;
+using Shop.Module.Reviews.Services;
 
 namespace Shop.Module.Reviews.Data
 {

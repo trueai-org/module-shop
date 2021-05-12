@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Shop.Module.Orders.Abstractions.ViewModels
+namespace Shop.Module.Orders.ViewModels
 {
     public class OrderAddressResult
     {

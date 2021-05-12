@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Shop.Module.Core.Abstractions.Cache
+namespace Shop.Module.Core.Cache
 {
     public interface ILocker
     {

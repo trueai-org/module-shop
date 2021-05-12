@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
-using Shop.Module.Orders.Abstractions.Entities;
+using Shop.Module.Orders.Entities;
 using System.Linq;
 using System.Threading.Tasks;
 

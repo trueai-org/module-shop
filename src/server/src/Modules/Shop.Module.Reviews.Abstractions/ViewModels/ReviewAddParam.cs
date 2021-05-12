@@ -1,9 +1,9 @@
-﻿using Shop.Module.Core.Abstractions.Models;
-using Shop.Module.Reviews.Abstractions.Models;
+﻿using Shop.Module.Core.Models;
+using Shop.Module.Reviews.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Reviews.Abstractions.ViewModels
+namespace Shop.Module.Reviews.ViewModels
 {
     public class ReviewAddParam
     {

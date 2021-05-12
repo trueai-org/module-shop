@@ -1,6 +1,6 @@
-﻿using Shop.Module.Core.Abstractions.Models;
+﻿using Shop.Module.Core.Models;
 
-namespace Shop.Module.Orders.Abstractions.ViewModels
+namespace Shop.Module.Orders.ViewModels
 {
     public class OrderCreateAddressParam
     {

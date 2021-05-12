@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Shop.Module.Core.Abstractions.Entities;
+using Shop.Module.Core.Entities;
 
 namespace Shop.Module.Core.Extensions
 {

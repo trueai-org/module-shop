@@ -1,8 +1,8 @@
-﻿using Shop.Module.Core.Abstractions.ViewModels;
+﻿using Shop.Module.Core.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Shop.Module.Core.Abstractions.Services
+namespace Shop.Module.Core.Services
 {
     public interface IUserAddressService
     {

@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Models;
-using Shop.Module.Core.Abstractions.ViewModels;
+using Shop.Module.Core.Entities;
+using Shop.Module.Core.Models;
+using Shop.Module.Core.ViewModels;
 using System;
 using System.Threading.Tasks;
 

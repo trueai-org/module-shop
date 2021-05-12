@@ -1,4 +1,4 @@
-﻿namespace Shop.Module.Catalog.Abstractions.ViewModels
+﻿namespace Shop.Module.Catalog.ViewModels
 {
     public enum WidgetProductOrderBy
     {

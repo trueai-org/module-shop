@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
 using Shop.Infrastructure.Web.StandardTable;
-using Shop.Module.Catalog.Abstractions.Entities;
-using Shop.Module.Catalog.Abstractions.Services;
-using Shop.Module.Catalog.Abstractions.ViewModels;
+using Shop.Module.Catalog.Entities;
+using Shop.Module.Catalog.Services;
+using Shop.Module.Catalog.ViewModels;
 using System;
 using System.Threading.Tasks;
 

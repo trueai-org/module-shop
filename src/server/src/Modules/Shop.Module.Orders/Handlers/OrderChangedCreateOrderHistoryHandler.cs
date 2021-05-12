@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Newtonsoft.Json;
 using Shop.Infrastructure.Data;
-using Shop.Module.Orders.Abstractions.Entities;
+using Shop.Module.Orders.Entities;
 using System.Threading;
 using System.Threading.Tasks;
 

@@ -1,4 +1,4 @@
-﻿namespace Shop.Module.Catalog.Abstractions.Models
+﻿namespace Shop.Module.Catalog.Models
 {
     /// <summary>
     /// 发布/上架类型

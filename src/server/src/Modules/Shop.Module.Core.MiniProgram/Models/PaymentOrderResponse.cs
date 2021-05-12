@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Shop.Module.Payments.Abstractions.Models;
+using Shop.Module.Payments.Models;
 
 namespace Shop.Module.Core.MiniProgram.Models
 {
@@ -7,12 +7,16 @@ namespace Shop.Module.Core.MiniProgram.Models
     {
         [JsonProperty("timeStamp")]
         public string TimeStamp { get; set; }
+
         [JsonProperty("nonceStr")]
         public string NonceStr { get; set; }
+
         [JsonProperty("package")]
         public string Package { get; set; }
+
         [JsonProperty("signType")]
         public string SignType { get; set; }
+
         [JsonProperty("paySign")]
         public string PaySign { get; set; }
     }

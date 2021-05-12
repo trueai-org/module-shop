@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shop.Infrastructure.Data;
-using Shop.Module.ShoppingCart.Abstractions.Entities;
+using Shop.Module.ShoppingCart.Entities;
 
 namespace Shop.Module.ShoppingCart.Data
 {

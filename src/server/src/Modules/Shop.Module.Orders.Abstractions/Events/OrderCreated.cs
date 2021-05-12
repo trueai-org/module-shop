@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using Shop.Module.Orders.Abstractions.Entities;
+using Shop.Module.Orders.Entities;
 
-namespace Shop.Module.Orders.Abstractions.Events
+namespace Shop.Module.Orders.Events
 {
     public class OrderCreated : INotification
     {

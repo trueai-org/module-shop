@@ -1,4 +1,4 @@
-﻿namespace Shop.Module.ShoppingCart.Abstractions.ViewModels
+﻿namespace Shop.Module.ShoppingCart.ViewModels
 {
     public class AddToCartParam
     {

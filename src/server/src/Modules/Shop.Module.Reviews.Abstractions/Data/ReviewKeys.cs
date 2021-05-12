@@ -1,6 +1,6 @@
-﻿using Shop.Module.Core.Abstractions.Data;
+﻿using Shop.Module.Core.Data;
 
-namespace Shop.Module.Reviews.Abstractions.Data
+namespace Shop.Module.Reviews.Data
 {
     public class ReviewKeys : ShopKeys
     {

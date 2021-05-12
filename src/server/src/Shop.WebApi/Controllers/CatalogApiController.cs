@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop.Infrastructure;
-using Shop.Module.Catalog.Abstractions.Services;
+using Shop.Module.Catalog.Services;
 using System.Threading.Tasks;
 
 namespace Shop.WebApi.Controllers

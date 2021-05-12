@@ -1,14 +1,20 @@
 ﻿namespace Shop.Module.Hangfire.Models
 {
+    /// <summary>
+    /// Hangfire 作业配置
+    /// </summary>
     public class HangfireOptions
     {
-        public ProviderType Provider { get; set; } = ProviderType.MySql;
+        /// <summary>
+        /// 是否启用 Redis，如果未启用，则默认为内存模式
+        /// </summary>
+        public bool RedisEnabled { get; set; }
 
-        public string MySqlHangfireConnection { get; set; }
-
-        public string SqlServerHangfireConnection { get; set; }
-
-        public string RedisHangfireConnection { get; set; }
+        /// <summary>
+        /// Redis 连接字符串
+        /// <see cref=""/>
+        /// </summary>
+        public string RedisConnection { get; set; }
 
         /// <summary>
         /// 用户名

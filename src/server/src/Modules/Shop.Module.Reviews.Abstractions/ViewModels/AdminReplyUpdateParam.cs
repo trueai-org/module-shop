@@ -1,6 +1,6 @@
-﻿using Shop.Module.Reviews.Abstractions.Models;
+﻿using Shop.Module.Reviews.Models;
 
-namespace Shop.Module.Reviews.Abstractions.ViewModels
+namespace Shop.Module.Reviews.ViewModels
 {
     public class AdminReplyUpdateParam
     {

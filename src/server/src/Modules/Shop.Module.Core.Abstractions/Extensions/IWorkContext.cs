@@ -1,7 +1,7 @@
-﻿using Shop.Module.Core.Abstractions.Entities;
+﻿using Shop.Module.Core.Entities;
 using System.Threading.Tasks;
 
-namespace Shop.Module.Core.Abstractions.Extensions
+namespace Shop.Module.Core.Extensions
 {
     public interface IWorkContext
     {

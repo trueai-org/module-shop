@@ -2,12 +2,11 @@
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
 using Shop.Infrastructure.Web.StandardTable;
-using Shop.Module.Catalog.Abstractions.Data;
-using Shop.Module.Catalog.Abstractions.Entities;
-using Shop.Module.Catalog.Abstractions.Services;
-using Shop.Module.Catalog.Abstractions.ViewModels;
-using Shop.Module.Core.Abstractions.Cache;
-using Shop.Module.Core.Abstractions.Services;
+using Shop.Module.Catalog.Data;
+using Shop.Module.Catalog.Entities;
+using Shop.Module.Catalog.ViewModels;
+using Shop.Module.Core.Cache;
+using Shop.Module.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using Shop.Module.Core.Abstractions.Extensions;
+using Shop.Module.Core.Extensions;
 using System.Security.Claims;
 using System.Threading.Tasks;
 

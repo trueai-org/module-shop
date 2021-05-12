@@ -1,7 +1,7 @@
 ﻿using Shop.Infrastructure.Models;
 using System;
 
-namespace Shop.Module.Core.Abstractions.Entities
+namespace Shop.Module.Core.Entities
 {
     public class WidgetInstance : EntityBase
     {

@@ -1,4 +1,4 @@
-﻿namespace Shop.Module.Core.Abstractions.ViewModels
+﻿namespace Shop.Module.Core.ViewModels
 {
     public class WidgetCarouselItem
     {

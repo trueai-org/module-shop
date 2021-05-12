@@ -1,11 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using Shop.Infrastructure;
 using Shop.Module.Core.Data;
 using Shop.WebApi.Extensions;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace Shop.WebApi
 {
@@ -13,27 +15,28 @@ namespace Shop.WebApi
     {
         public ShopDbContext CreateDbContext(string[] args)
         {
-            var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
             var contentRootPath = Directory.GetCurrentDirectory();
 
             var builder = new ConfigurationBuilder()
-                            .SetBasePath(contentRootPath)
-                            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                            .AddJsonFile($"appsettings.{environmentName}.json", true);
+                .SetBasePath(contentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("appsettings.Modules.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{environmentName}.json", true);
 
             builder.AddUserSecrets(typeof(MigrationShopDbContextFactory).Assembly, optional: true);
             builder.AddEnvironmentVariables();
-            var _configuration = builder.Build();
+
+            var configuration = builder.Build();
+
+            GlobalConfiguration.ContentRootPath = contentRootPath;
+            GlobalConfiguration.Configuration = configuration;
 
             IServiceCollection services = new ServiceCollection();
-            GlobalConfiguration.ContentRootPath = contentRootPath;
-            GlobalConfiguration.Configuration = _configuration;
+            services.AddModules(configuration);
+            services.AddCustomizedDataStore(configuration);
 
-            services.AddModules(contentRootPath);
-            services.AddCustomizedDataStore(_configuration);
-            var _serviceProvider = services.BuildServiceProvider();
-
-            return _serviceProvider.GetRequiredService<ShopDbContext>();
+            return services.BuildServiceProvider().GetRequiredService<ShopDbContext>();
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Shop.Module.Schedule.Abstractions.Services
+namespace Shop.Module.Schedule
 {
     public interface IJobService
     {
@@ -12,7 +12,7 @@ namespace Shop.Module.Schedule.Abstractions.Services
         /// </summary>
         /// <param name="methodCall"></param>
         /// <returns></returns>
-        Task Enqueue(Expression<Func<Task>> methodCall);
+        Task<string> Enqueue(Expression<Func<Task>> methodCall);
 
         /// <summary>
         /// Delayed jobs
@@ -21,7 +21,7 @@ namespace Shop.Module.Schedule.Abstractions.Services
         /// <param name="methodCall"></param>
         /// <param name="timeSpan"></param>
         /// <returns></returns>
-        Task Schedule(Expression<Func<Task>> methodCall, TimeSpan timeSpan);
+        Task<string> Schedule(Expression<Func<Task>> methodCall, TimeSpan timeSpan);
 
         /// <summary>
         /// Recurring jobs

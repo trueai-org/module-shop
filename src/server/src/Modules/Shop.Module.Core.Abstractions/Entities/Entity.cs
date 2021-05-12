@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Core.Abstractions.Entities
+namespace Shop.Module.Core.Entities
 {
     public class Entity : EntityBase
     {

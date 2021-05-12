@@ -3,29 +3,35 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Shop.WebApi.Extensions;
 
 namespace Shop.WebApi
 {
     public class Startup
     {
-        private readonly IWebHostEnvironment _hostingEnvironment;
-        private readonly IConfiguration _configuration;
-
-        public Startup(IConfiguration configuration, IWebHostEnvironment hostingEnvironment)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
-            _configuration = configuration;
-            _hostingEnvironment = hostingEnvironment;
+            Configuration = configuration;
+            Environment = env;
         }
 
         public IConfiguration Configuration { get; }
+
+        public IWebHostEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
 
-            services.AddCustomizedConfigureServices(_configuration, _hostingEnvironment);
+            services.AddCustomizedConfigureServices(Configuration, Environment);
+
+            // swagger
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Shop Api", Version = "1.0.0" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,12 +40,6 @@ namespace Shop.WebApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Shop Api");
-                });
             }
             else
             {
@@ -47,23 +47,18 @@ namespace Shop.WebApi
                 app.UseHsts();
             }
 
+            // swagger
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Shop Api");
+            });
+
             app.UseCustomizedConfigure(env);
 
             //app.UseHttpsRedirection();
 
-            //app.UseRouting();
-
             app.UseRouting();
-
-            // https://docs.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-3.1
-            // 指定AllowAnyOrigin和AllowCredentials是不安全的配置，可能会导致跨站点请求伪造。当使用两种方法配置应用程序时，CORS服务将返回无效的CORS响应。
-            app.UseCors(option =>
-            {
-                option.AllowAnyHeader();
-                option.AllowAnyMethod();
-                option.AllowAnyOrigin();
-                //option.AllowCredentials();
-            });
 
             app.UseAuthentication();
             app.UseAuthorization();

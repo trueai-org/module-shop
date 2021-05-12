@@ -1,4 +1,4 @@
-﻿namespace Shop.Module.Catalog.Abstractions.Entities
+﻿namespace Shop.Module.Catalog.Entities
 {
     public class CalculatedProductPrice
     {

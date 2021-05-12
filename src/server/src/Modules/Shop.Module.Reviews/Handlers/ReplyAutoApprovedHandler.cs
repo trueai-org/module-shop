@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Shop.Infrastructure.Data;
-using Shop.Module.Reviews.Abstractions.Events;
-using Shop.Module.Reviews.Abstractions.Models;
-using Shop.Module.Reviews.Abstractions.Services;
+using Shop.Module.Reviews.Events;
+using Shop.Module.Reviews.Models;
+using Shop.Module.Reviews.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

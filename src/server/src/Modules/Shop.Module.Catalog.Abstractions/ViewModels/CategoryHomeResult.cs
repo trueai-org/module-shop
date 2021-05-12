@@ -1,7 +1,7 @@
-﻿using Shop.Module.Catalog.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Entities;
+﻿using Shop.Module.Catalog.Entities;
+using Shop.Module.Core.Entities;
 
-namespace Shop.Module.Catalog.Abstractions.ViewModels
+namespace Shop.Module.Catalog.ViewModels
 {
     public class CategoryHomeResult
     {

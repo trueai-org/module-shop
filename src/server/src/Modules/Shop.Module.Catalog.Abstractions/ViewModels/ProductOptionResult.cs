@@ -1,6 +1,6 @@
-﻿using Shop.Module.Catalog.Abstractions.Models;
+﻿using Shop.Module.Catalog.Models;
 
-namespace Shop.Module.Catalog.Abstractions.ViewModels
+namespace Shop.Module.Catalog.ViewModels
 {
     public class ProductOptionResult
     {

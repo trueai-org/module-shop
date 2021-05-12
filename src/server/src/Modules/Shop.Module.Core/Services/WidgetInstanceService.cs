@@ -1,6 +1,6 @@
 ﻿using Shop.Infrastructure.Data;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Services;
+using Shop.Module.Core.Entities;
+using Shop.Module.Core.Services;
 using System;
 using System.Linq;
 

@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
-using Shop.Module.Core.Abstractions.Extensions;
-using Shop.Module.ShoppingCart.Abstractions.Entities;
-using Shop.Module.ShoppingCart.Abstractions.Services;
-using Shop.Module.ShoppingCart.Abstractions.ViewModels;
+using Shop.Module.Core.Extensions;
+using Shop.Module.ShoppingCart.Entities;
+using Shop.Module.ShoppingCart.Services;
+using Shop.Module.ShoppingCart.ViewModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

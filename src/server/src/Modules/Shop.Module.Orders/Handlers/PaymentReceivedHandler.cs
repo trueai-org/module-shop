@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using Shop.Module.Orders.Abstractions.Events;
-using Shop.Module.Orders.Abstractions.Services;
-using Shop.Module.Orders.Abstractions.ViewModels;
+using Shop.Module.Orders.Events;
+using Shop.Module.Orders.Services;
+using Shop.Module.Orders.ViewModels;
 using System.Threading;
 using System.Threading.Tasks;
 

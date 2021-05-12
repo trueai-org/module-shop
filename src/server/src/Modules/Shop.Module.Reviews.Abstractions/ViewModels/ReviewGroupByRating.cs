@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Shop.Module.Reviews.Abstractions.ViewModels
+namespace Shop.Module.Reviews.ViewModels
 {
     public class ReviewGroupByRating
     {

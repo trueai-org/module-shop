@@ -1,10 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Infrastructure.Modules;
-using Shop.Module.Orders.Abstractions.Events;
-using Shop.Module.Orders.Abstractions.Services;
 using Shop.Module.Orders.Events;
 using Shop.Module.Orders.Services;
 
@@ -12,7 +11,7 @@ namespace Shop.Module.Orders
 {
     public class ModuleInitializer : IModuleInitializer
     {
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<IOrderService, OrderService>();
 

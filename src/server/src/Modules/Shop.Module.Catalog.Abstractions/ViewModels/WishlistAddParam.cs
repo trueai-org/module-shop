@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Catalog.Abstractions.ViewModels
+namespace Shop.Module.Catalog.ViewModels
 {
     public class WishlistAddParam
     {

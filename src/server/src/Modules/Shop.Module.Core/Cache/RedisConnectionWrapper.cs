@@ -1,7 +1,7 @@
 ﻿using RedLockNet.SERedis;
 using RedLockNet.SERedis.Configuration;
 using Shop.Infrastructure;
-using Shop.Module.Core.Abstractions.Cache;
+using Shop.Module.Core.Cache;
 using StackExchange.Redis;
 using System;
 using System.Linq;

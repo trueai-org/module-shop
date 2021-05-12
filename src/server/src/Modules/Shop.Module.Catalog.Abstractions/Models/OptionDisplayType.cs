@@ -1,4 +1,4 @@
-﻿namespace Shop.Module.Catalog.Abstractions.Models
+﻿namespace Shop.Module.Catalog.Models
 {
     /// <summary>
     /// 选项显示类型

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Infrastructure;
-using Shop.Module.Core.Abstractions.Cache;
+using Shop.Module.Core.Cache;
 using System.Threading.Tasks;
 
 namespace Shop.Module.Core.Controllers

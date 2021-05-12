@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Payments.Abstractions.Models
+namespace Shop.Module.Payments.Models
 {
     /// <summary>
     /// 订单支付请求参数

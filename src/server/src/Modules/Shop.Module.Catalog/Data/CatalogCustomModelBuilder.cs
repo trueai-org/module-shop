@@ -2,10 +2,10 @@
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
 using Shop.Infrastructure.Helpers;
-using Shop.Module.Catalog.Abstractions.Entities;
-using Shop.Module.Catalog.Abstractions.Models;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Models;
+using Shop.Module.Catalog.Entities;
+using Shop.Module.Catalog.Models;
+using Shop.Module.Core.Entities;
+using Shop.Module.Core.Models;
 
 namespace Shop.Module.Catalog.Data
 {

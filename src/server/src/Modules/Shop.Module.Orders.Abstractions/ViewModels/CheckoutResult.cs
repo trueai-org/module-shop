@@ -1,8 +1,8 @@
-﻿using Shop.Module.Core.Abstractions.ViewModels;
+﻿using Shop.Module.Core.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Shop.Module.Orders.Abstractions.ViewModels
+namespace Shop.Module.Orders.ViewModels
 {
     public class CheckoutResult
     {

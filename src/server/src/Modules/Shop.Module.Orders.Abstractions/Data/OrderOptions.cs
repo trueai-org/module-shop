@@ -1,4 +1,4 @@
-﻿namespace Shop.Module.Orders.Abstractions.Data
+﻿namespace Shop.Module.Orders.Data
 {
     public class OrderOptions
     {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Shop.Module.Core.Abstractions.Entities
+namespace Shop.Module.Core.Entities
 {
     public class User : IdentityUser<int>, IEntityWithTypedId<int>, IExtendableObject
     {

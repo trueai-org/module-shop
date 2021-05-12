@@ -1,8 +1,8 @@
-﻿using Shop.Module.Orders.Abstractions.Models;
+﻿using Shop.Module.Orders.Models;
 using System;
 using System.Collections.Generic;
 
-namespace Shop.Module.Shipments.Abstractions.ViewModels
+namespace Shop.Module.Shipments.ViewModels
 {
     public class ShipmentQueryResult
     {

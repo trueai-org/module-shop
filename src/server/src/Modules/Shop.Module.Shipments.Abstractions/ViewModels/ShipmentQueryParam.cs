@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Shop.Module.Shipments.Abstractions.ViewModels
+namespace Shop.Module.Shipments.ViewModels
 {
     public class ShipmentQueryParam
     {

@@ -1,7 +1,7 @@
-﻿using Shop.Module.Core.Abstractions.Models;
+﻿using Shop.Module.Core.Models;
 using System.Collections.Generic;
 
-namespace Shop.Module.Orders.Abstractions.ViewModels
+namespace Shop.Module.Orders.ViewModels
 {
     public class OrderGetAddressResult
     {

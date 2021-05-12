@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Shop.Infrastructure.Data;
-using Shop.Module.Core.Abstractions.Entities;
+using Shop.Module.Core.Entities;
 
 namespace Shop.Module.Core.Data
 {

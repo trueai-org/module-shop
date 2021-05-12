@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Infrastructure.Modules;
 using Shop.Module.SampleData.Data;
@@ -9,7 +10,7 @@ namespace Shop.Module.SampleData
 {
     public class ModuleInitializer : IModuleInitializer
     {
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<ISqlRepository, SqlRepository>();
             services.AddTransient<ISampleDataService, SampleDataService>();

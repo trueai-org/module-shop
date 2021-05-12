@@ -1,7 +1,7 @@
 ﻿using MassTransit;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Shop.Module.Reviews.Abstractions.Events;
+using Shop.Module.Reviews.Events;
 using System;
 using System.Threading.Tasks;
 

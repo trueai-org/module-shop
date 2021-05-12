@@ -11,19 +11,23 @@
 
 	<ItemGroup>
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.10" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.10" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.15" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.15" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.15">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
-		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.4" />
 		<PackageReference Include="Serilog" Version="2.10.0" />
 		<PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
 		<PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
 		<PackageReference Include="Serilog.Sinks.Elasticsearch" Version="8.4.1" />
 		<PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.6.3" />
-		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.6.3" />
-		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.6.3" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.1.4" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.1.4" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.1.4" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -48,7 +52,6 @@
 		<ProjectReference Include="..\Modules\Shop.Module.Reviews\Shop.Module.Reviews.csproj" />
 		<ProjectReference Include="..\Modules\Shop.Module.SampleData\Shop.Module.SampleData.csproj" />
 		<ProjectReference Include="..\Modules\Shop.Module.Schedule.Abstractions\Shop.Module.Schedule.Abstractions.csproj" />
-		<ProjectReference Include="..\Modules\Shop.Module.Schedule\Shop.Module.Schedule.csproj" />
 		<ProjectReference Include="..\Modules\Shop.Module.Shipments.Abstractions\Shop.Module.Shipments.Abstractions.csproj" />
 		<ProjectReference Include="..\Modules\Shop.Module.Shipments\Shop.Module.Shipments.csproj" />
 		<ProjectReference Include="..\Modules\Shop.Module.Shipping.Abstractions\Shop.Module.Shipping.Abstractions.csproj" />
@@ -58,12 +61,11 @@
 		<ProjectReference Include="..\Modules\Shop.Module.SmsSenderAliyun\Shop.Module.SmsSenderAliyun.csproj" />
 		<ProjectReference Include="..\Modules\Shop.Module.StorageGitHub\Shop.Module.StorageGitHub.csproj" />
 		<ProjectReference Include="..\Modules\Shop.Module.StorageLocal\Shop.Module.StorageLocal.csproj" />
-		<ProjectReference Include="..\Modules\Shop.Module.StorageSm\Shop.Module.StorageSm.csproj" />
 		<ProjectReference Include="..\Shop.Infrastructure\Shop.Infrastructure.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="logs\" />
 	</ItemGroup>
-
+	
 </Project>

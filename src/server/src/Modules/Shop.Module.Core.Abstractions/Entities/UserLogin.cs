@@ -3,7 +3,7 @@ using Shop.Infrastructure.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Core.Abstractions.Entities
+namespace Shop.Module.Core.Entities
 {
     public class UserLogin : IdentityUserLogin<int>, IEntityWithTypedId<int>
     {

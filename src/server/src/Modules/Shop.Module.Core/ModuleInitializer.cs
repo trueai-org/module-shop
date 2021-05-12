@@ -4,14 +4,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Modules;
-using Shop.Module.Core.Abstractions.Cache;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Extensions;
-using Shop.Module.Core.Abstractions.Services;
 using Shop.Module.Core.Cache;
+using Shop.Module.Core.Entities;
 using Shop.Module.Core.Extensions;
 using Shop.Module.Core.Services;
 
@@ -19,14 +15,13 @@ namespace Shop.Module.Core
 {
     public class ModuleInitializer : IModuleInitializer
     {
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
-            var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
-            var json = configuration.GetValue<string>(nameof(ShopConfig));
             var config = new ShopConfig();
-            if (!string.IsNullOrWhiteSpace(json))
-                config = JsonConvert.DeserializeObject<ShopConfig>(json) ?? new ShopConfig();
-            //configuration.GetSection("Shop").Bind(config);
+            var configSection = configuration.GetSection(nameof(ShopConfig));
+            configSection.Bind(config);
+            services.Configure<ShopConfig>(configSection);
+
             services.AddSingleton(config);
 
             var authConfig = new AuthenticationConfig();
@@ -54,7 +49,7 @@ namespace Shop.Module.Core
             //services.AddScoped<ShopSignInManager<User>>();
             //services.AddScoped<SignInManager<User>, ShopSignInManager<User>>();
 
-            // used redis
+  
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //services.AddHttpContextAccessor();
 
@@ -68,9 +63,8 @@ namespace Shop.Module.Core
 
             services.AddScoped<ICacheManager, PerRequestCacheManager>();
 
-            //register dependencies
-            var shopConfig = services.BuildServiceProvider().GetService<ShopConfig>();
-            if (shopConfig.RedisCachingEnabled)
+            // cache
+            if (config.RedisCachingEnabled)
             {
                 services.AddSingleton<IRedisConnectionWrapper, RedisConnectionWrapper>()
                     .AddSingleton<ILocker, RedisConnectionWrapper>();

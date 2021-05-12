@@ -1,6 +1,6 @@
-﻿using Shop.Module.Core.Abstractions.Data;
+﻿using Shop.Module.Core.Data;
 
-namespace Shop.Module.MQ.Abstractions.Data
+namespace Shop.Module.MQ
 {
     public class QueueKeys : ShopKeys
     {

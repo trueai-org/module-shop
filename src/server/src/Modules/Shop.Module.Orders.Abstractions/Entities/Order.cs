@@ -1,14 +1,14 @@
 ﻿using Newtonsoft.Json;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Models;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Orders.Abstractions.Events;
-using Shop.Module.Orders.Abstractions.Models;
+using Shop.Module.Core.Entities;
+using Shop.Module.Orders.Events;
+using Shop.Module.Orders.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Orders.Abstractions.Entities
+namespace Shop.Module.Orders.Entities
 {
     public class Order : EntityBase
     {

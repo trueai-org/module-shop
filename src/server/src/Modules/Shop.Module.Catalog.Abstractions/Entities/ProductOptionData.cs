@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Catalog.Abstractions.Entities
+namespace Shop.Module.Catalog.Entities
 {
     /// <summary>
     /// 产品选项数据（例：X、M、L、XXL、XXXL、RED、yellow、#FFFFFF、#000）

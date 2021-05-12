@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Reviews.Abstractions.ViewModels
+namespace Shop.Module.Reviews.ViewModels
 {
     public class ReplyAddParam
     {

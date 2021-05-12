@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Shop.Infrastructure.Models;
 
-namespace Shop.Module.Core.Abstractions.Entities
+namespace Shop.Module.Core.Entities
 {
     public class Country : EntityBase
     {

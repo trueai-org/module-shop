@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using Shop.Module.Orders.Abstractions.Models;
+using Shop.Module.Orders.Models;
 using System;
 
-namespace Shop.Module.Orders.Abstractions.Events
+namespace Shop.Module.Orders.Events
 {
     /// <summary>
     /// 收到付款/付款成功

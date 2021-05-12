@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using Shop.Module.Orders.Abstractions.Entities;
-using Shop.Module.Orders.Abstractions.Models;
+using Shop.Module.Orders.Entities;
+using Shop.Module.Orders.Models;
 
 namespace Shop.Module.Orders.Events
 {

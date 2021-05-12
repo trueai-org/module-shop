@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Shop.Module.Catalog.Abstractions.Entities
+namespace Shop.Module.Catalog.Entities
 {
     /// <summary>
     /// 产品属性数据（季节：春季、夏季、秋季、冬季）

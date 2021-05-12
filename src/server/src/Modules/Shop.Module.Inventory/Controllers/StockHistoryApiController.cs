@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
 using Shop.Infrastructure.Web.StandardTable;
-using Shop.Module.Inventory.Abstractions.Entities;
-using Shop.Module.Inventory.Abstractions.ViewModels;
+using Shop.Module.Inventory.Entities;
+using Shop.Module.Inventory.ViewModels;
 using System.Linq;
 using System.Threading.Tasks;
 

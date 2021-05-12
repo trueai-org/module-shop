@@ -26,6 +26,7 @@ namespace Shop.WebApi
         {
             var env = hostingContext.HostingEnvironment;
             configBuilder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("appsettings.Modules.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
             var configuration = configBuilder.Build();

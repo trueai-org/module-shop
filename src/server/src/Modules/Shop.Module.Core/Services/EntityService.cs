@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Shop.Infrastructure.Data;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Events;
-using Shop.Module.Core.Abstractions.Models;
-using Shop.Module.Core.Abstractions.Services;
+using Shop.Module.Core.Entities;
+using Shop.Module.Core.Events;
+using Shop.Module.Core.Models;
+using Shop.Module.Core.Services;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

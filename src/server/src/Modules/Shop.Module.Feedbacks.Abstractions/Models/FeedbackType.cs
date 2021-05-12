@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Shop.Module.Feedbacks.Abstractions.Models
+namespace Shop.Module.Feedbacks.Models
 {
     public enum FeedbackType
     {

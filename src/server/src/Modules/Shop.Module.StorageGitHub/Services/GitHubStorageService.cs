@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RestSharp;
 using Shop.Infrastructure.Data;
 using Shop.Infrastructure.Helpers;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Models;
-using Shop.Module.Core.Abstractions.Services;
+using Shop.Module.Core.Entities;
+using Shop.Module.Core.Models;
+using Shop.Module.Core.Services;
 using Shop.Module.StorageGitHub.Models;
 using System;
 using System.IO;
@@ -22,18 +23,15 @@ namespace Shop.Module.StorageGitHub
     {
         private const string ContentHost = "https://raw.githubusercontent.com";
 
-        //private readonly IOptionsMonitor<GitHubUploadOptions> _options;
+        private readonly IOptionsMonitor<StorageGitHubOptions> _options;
         private readonly IRepository<Media> _mediaRepository;
-        private readonly IAppSettingService _appSettingService;
 
         public GitHubStorageService(
-            //IOptionsMonitor<GitHubUploadOptions> options,
-            IRepository<Media> mediaRepository,
-            IAppSettingService appSettingService)
+            IOptionsMonitor<StorageGitHubOptions> options,
+            IRepository<Media> mediaRepository)
         {
-            //_options = options;
+            _options = options;
             _mediaRepository = mediaRepository;
-            _appSettingService = appSettingService;
         }
 
         public async Task DeleteMediaAsync(string fileName)
@@ -43,7 +41,8 @@ namespace Shop.Module.StorageGitHub
 
         public async Task<string> GetMediaUrl(string fileName)
         {
-            var options = await _appSettingService.Get<StorageGitHubOptions>();
+            var options = _options.CurrentValue;
+
             if (options == null || string.IsNullOrWhiteSpace(fileName))
                 return string.Empty;
             var res = options.RepositoryName.Trim().Trim('/');
@@ -126,7 +125,7 @@ namespace Shop.Module.StorageGitHub
 
         private async Task<string> GetHostForUrlFrefix()
         {
-            var options = await _appSettingService.Get<StorageGitHubOptions>();
+            var options = _options.CurrentValue;
             if (options == null)
                 return string.Empty;
             var res = options.RepositoryName.Trim().Trim('/');
@@ -143,7 +142,7 @@ namespace Shop.Module.StorageGitHub
             if (uploadFileName == null)
                 throw new ArgumentNullException(nameof(uploadFileName));
 
-            var setting = await _appSettingService.Get<StorageGitHubOptions>();
+            var setting = _options.CurrentValue;
             if (setting == null)
                 throw new ArgumentNullException(nameof(setting));
             if (setting.Host == null)

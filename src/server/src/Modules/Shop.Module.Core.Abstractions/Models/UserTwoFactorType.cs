@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Shop.Module.Core.Abstractions.Models
+namespace Shop.Module.Core.Models
 {
     /// <summary>
     /// 用户双因子验证类型

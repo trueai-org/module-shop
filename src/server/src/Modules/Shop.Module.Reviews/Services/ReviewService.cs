@@ -1,15 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shop.Infrastructure.Data;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Extensions;
-using Shop.Module.Core.Abstractions.Models;
-using Shop.Module.Core.Abstractions.Services;
-using Shop.Module.MQ.Abstractions.Services;
-using Shop.Module.Orders.Abstractions.Entities;
-using Shop.Module.Orders.Abstractions.Models;
-using Shop.Module.Reviews.Abstractions.Entities;
-using Shop.Module.Reviews.Abstractions.Models;
-using Shop.Module.Reviews.Services.Abstractions;
+using Shop.Module.Core.Entities;
+using Shop.Module.Core.Extensions;
+using Shop.Module.Core.Models;
+using Shop.Module.Core.Services;
+using Shop.Module.MQ;
+using Shop.Module.Orders.Entities;
+using Shop.Module.Orders.Models;
+using Shop.Module.Reviews.Entities;
+using Shop.Module.Reviews.Models;
 using System.Linq;
 using System.Threading.Tasks;
 

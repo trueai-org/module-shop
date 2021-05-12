@@ -1,4 +1,4 @@
-﻿namespace Shop.Module.Payments.Abstractions.Models
+﻿namespace Shop.Module.Payments.Models
 {
     public abstract class PaymentOrderBaseResponse
     {

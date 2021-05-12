@@ -1,8 +1,8 @@
-﻿using Shop.Module.Core.Abstractions.Models;
-using Shop.Module.Reviews.Abstractions.Models;
+﻿using Shop.Module.Core.Models;
+using Shop.Module.Reviews.Models;
 using System.Threading.Tasks;
 
-namespace Shop.Module.Reviews.Services.Abstractions
+namespace Shop.Module.Reviews.Services
 {
     public interface IReviewService
     {

@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Web.StandardTable;
-using Shop.Module.Catalog.Abstractions.Services;
-using Shop.Module.Catalog.Abstractions.ViewModels;
-using Shop.Module.Core.Abstractions.Cache;
-using Shop.Module.Core.Abstractions.Data;
+using Shop.Module.Catalog.Services;
+using Shop.Module.Catalog.ViewModels;
+using Shop.Module.Core.Cache;
+using Shop.Module.Core.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

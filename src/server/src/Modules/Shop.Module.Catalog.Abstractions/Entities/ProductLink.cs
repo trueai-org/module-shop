@@ -1,8 +1,8 @@
 ﻿using Shop.Infrastructure.Models;
-using Shop.Module.Catalog.Abstractions.Models;
+using Shop.Module.Catalog.Models;
 using System;
 
-namespace Shop.Module.Catalog.Abstractions.Entities
+namespace Shop.Module.Catalog.Entities
 {
     public class ProductLink : EntityBase
     {

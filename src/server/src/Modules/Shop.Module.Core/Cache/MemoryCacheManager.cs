@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Primitives;
 using Shop.Infrastructure;
-using Shop.Module.Core.Abstractions.Cache;
+using Shop.Module.Core.Cache;
 using System;
 using System.Collections.Concurrent;
 using System.Linq;

@@ -1,4 +1,4 @@
-﻿namespace Shop.Module.Core.Abstractions.Models
+﻿namespace Shop.Module.Core.Models
 {
     /// <summary>
     /// 州/省、市、区、街道 类型

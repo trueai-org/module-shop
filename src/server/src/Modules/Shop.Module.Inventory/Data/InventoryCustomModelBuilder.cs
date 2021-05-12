@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
-using Shop.Module.Inventory.Abstractions.Entities;
+using Shop.Module.Inventory.Entities;
 
 namespace Shop.Module.Inventory.Data
 {

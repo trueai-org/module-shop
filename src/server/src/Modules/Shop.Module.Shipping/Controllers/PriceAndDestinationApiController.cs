@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
 using Shop.Infrastructure.Web.StandardTable;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Extensions;
-using Shop.Module.Core.Abstractions.Models;
-using Shop.Module.Shipping.Abstractions.Entities;
-using Shop.Module.Shipping.Abstractions.ViewModels;
+using Shop.Module.Core.Entities;
+using Shop.Module.Core.Extensions;
+using Shop.Module.Core.Models;
+using Shop.Module.Shipping.Entities;
+using Shop.Module.Shipping.ViewModels;
 using System;
 using System.Threading.Tasks;
 

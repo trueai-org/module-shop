@@ -1,11 +1,11 @@
 ﻿using Shop.Infrastructure;
 using Shop.Infrastructure.Web.StandardTable;
-using Shop.Module.Catalog.Abstractions.Entities;
-using Shop.Module.Catalog.Abstractions.ViewModels;
+using Shop.Module.Catalog.Entities;
+using Shop.Module.Catalog.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Shop.Module.Catalog.Abstractions.Services
+namespace Shop.Module.Catalog.Services
 {
     public interface ICategoryService
     {

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Shop.Module.Reviews.Abstractions.Events
+namespace Shop.Module.Reviews.Events
 {
     public class ReviewAutoApprovedEvent : INotification
     {

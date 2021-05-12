@@ -1,4 +1,4 @@
-﻿namespace Shop.Module.Reviews.Abstractions.ViewModels
+﻿namespace Shop.Module.Reviews.ViewModels
 {
     public class ReplyQueryParam
     {

@@ -3,13 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Models;
-using Shop.Module.Core.Abstractions.Services;
-using Shop.Module.Core.Abstractions.ViewModels;
+using Shop.Module.Core.Entities;
+using Shop.Module.Core.Models;
+using Shop.Module.Core.Services;
+using Shop.Module.Core.ViewModels;
 using Shop.Module.Core.MiniProgram.Data;
 using Shop.Module.Core.MiniProgram.Models;
 using Shop.Module.Core.MiniProgram.ViewModels;
@@ -43,9 +44,10 @@ namespace Shop.Module.Core.MiniProgram.Controllers
             ILoggerFactory loggerFactory,
             IConfiguration configuration,
             IRepository<User> userRepository,
-            ITokenService tokenService)
+            ITokenService tokenService,
+            IOptionsMonitor<MiniProgramOptions> options)
         {
-            _option = appSettingService.Get<MiniProgramOptions>().Result;
+            _option = options.CurrentValue;
             _userLoginRepository = userLoginRepository;
             _userManager = userManager;
             _signInManager = signInManager;

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 
 
-namespace Shop.Module.Core.Abstractions.Services
+namespace Shop.Module.Core.Services
 {
     public interface IEmailSender
     {

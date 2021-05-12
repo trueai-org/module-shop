@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Catalog.Abstractions.Entities
+namespace Shop.Module.Catalog.Entities
 {
     /// <summary>
     /// 产品属性

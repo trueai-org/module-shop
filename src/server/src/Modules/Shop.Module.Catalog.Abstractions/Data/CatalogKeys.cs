@@ -1,6 +1,6 @@
-﻿using Shop.Module.Core.Abstractions.Data;
+﻿using Shop.Module.Core.Data;
 
-namespace Shop.Module.Catalog.Abstractions.Data
+namespace Shop.Module.Catalog.Data
 {
     public class CatalogKeys : ShopKeys
     {

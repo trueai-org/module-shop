@@ -1,4 +1,4 @@
-﻿namespace Shop.Module.Reviews.Abstractions.Models
+﻿namespace Shop.Module.Reviews.Models
 {
     /// <summary>
     /// 评论来源类型 Order = 0

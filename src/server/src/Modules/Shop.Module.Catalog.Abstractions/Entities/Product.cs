@@ -1,13 +1,13 @@
 ﻿using Shop.Infrastructure.Models;
-using Shop.Module.Catalog.Abstractions.Models;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Shipping.Abstractions.Entities;
+using Shop.Module.Catalog.Models;
+using Shop.Module.Core.Entities;
+using Shop.Module.Shipping.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Shop.Module.Catalog.Abstractions.Entities
+namespace Shop.Module.Catalog.Entities
 {
     public class Product : EntityBase
     {

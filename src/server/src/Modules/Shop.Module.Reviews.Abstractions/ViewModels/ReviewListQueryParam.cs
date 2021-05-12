@@ -1,7 +1,7 @@
-﻿using Shop.Module.Core.Abstractions.Models;
+﻿using Shop.Module.Core.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Reviews.Abstractions.ViewModels
+namespace Shop.Module.Reviews.ViewModels
 {
     public class ReviewListQueryParam
     {

@@ -1,5 +1,5 @@
 ﻿using MassTransit;
-using Shop.Module.MQ.Abstractions.Services;
+using Shop.Module.MQ;
 using System;
 using System.Threading.Tasks;
 

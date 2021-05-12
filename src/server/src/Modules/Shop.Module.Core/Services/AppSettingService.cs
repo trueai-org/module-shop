@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using Shop.Module.Core.Abstractions.Services;
+using Shop.Module.Core.Services;
 using System;
 using System.Threading.Tasks;
 

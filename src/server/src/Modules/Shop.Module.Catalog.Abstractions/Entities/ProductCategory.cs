@@ -1,7 +1,7 @@
 ﻿using Shop.Infrastructure.Models;
 using System;
 
-namespace Shop.Module.Catalog.Abstractions.Entities
+namespace Shop.Module.Catalog.Entities
 {
     public class ProductCategory : EntityBase
     {

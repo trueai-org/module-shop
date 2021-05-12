@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Shop.Infrastructure.Data;
-using Shop.Module.Core.Abstractions.Services;
-using Shop.Module.ShoppingCart.Abstractions.Entities;
-using Shop.Module.ShoppingCart.Abstractions.Services;
-using Shop.Module.ShoppingCart.Abstractions.ViewModels;
+using Shop.Module.Core.Services;
+using Shop.Module.ShoppingCart.Entities;
+using Shop.Module.ShoppingCart.Services;
+using Shop.Module.ShoppingCart.ViewModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Shipping.Abstractions.ViewModels
+namespace Shop.Module.Shipping.ViewModels
 {
     public class FreightTemplateCreateParam
     {

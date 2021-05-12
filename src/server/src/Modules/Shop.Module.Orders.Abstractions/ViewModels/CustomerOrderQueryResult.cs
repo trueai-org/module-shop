@@ -1,10 +1,10 @@
 ﻿using Shop.Infrastructure.Helpers;
-using Shop.Module.Orders.Abstractions.Models;
+using Shop.Module.Orders.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Shop.Module.Orders.Abstractions.ViewModels
+namespace Shop.Module.Orders.ViewModels
 {
     public class CustomerOrderQueryResult
     {

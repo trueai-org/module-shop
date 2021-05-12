@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Shop.Module.Hangfire.Jobs
 {
-    public class TestEmailJob : BackgroundService
+    public class HealthJob : BackgroundService
     {
-        private readonly ILogger<TestEmailJob> _logger;
-        public TestEmailJob(ILogger<TestEmailJob> logger)
+        private readonly ILogger _logger;
+        public HealthJob(ILogger<HealthJob> logger)
         {
             _logger = logger;
         }
@@ -18,18 +18,13 @@ namespace Shop.Module.Hangfire.Jobs
         {
             try
             {
-                RecurringJob.AddOrUpdate("email_send", () => EmailSend(), Cron.MinuteInterval(2)); //2分钟一次 //Cron.Daily(1, 10) //每天9:10
+                RecurringJob.AddOrUpdate("HealthJob", () => _logger.LogInformation($"Health Job is running. {DateTime.Now:yyyy:MM:dd HH:mm:ss.fff}"), Cron.Minutely());
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Server monitoring, email job error");
+                _logger.LogError(ex, "Server monitoring, Health Job Error");
             }
             return Task.CompletedTask;
-        }
-
-        public void EmailSend()
-        {
-            _logger.LogInformation("email send do worker.");
         }
     }
 }

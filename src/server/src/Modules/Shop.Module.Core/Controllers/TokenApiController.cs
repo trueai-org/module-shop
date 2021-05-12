@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Infrastructure;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Services;
-using Shop.Module.Core.Abstractions.ViewModels;
+using Shop.Module.Core.Entities;
+using Shop.Module.Core.Services;
+using Shop.Module.Core.ViewModels;
 using System.Threading.Tasks;
 
 namespace Shop.Module.Core.Controllers

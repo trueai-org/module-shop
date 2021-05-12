@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
 using Shop.Infrastructure.Models;
-using Shop.Module.Catalog.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Entities;
+using Shop.Module.Catalog.Entities;
+using Shop.Module.Core.Entities;
 using System;
 
-namespace Shop.Module.Orders.Abstractions.Entities
+namespace Shop.Module.Orders.Entities
 {
     public class OrderItem : EntityBase
     {

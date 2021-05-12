@@ -1,6 +1,6 @@
-﻿using Shop.Module.Core.Abstractions.Models;
+﻿using Shop.Module.Core.Models;
 
-namespace Shop.Module.Reviews.Abstractions.ViewModels
+namespace Shop.Module.Reviews.ViewModels
 {
     public class SupportParam
     {

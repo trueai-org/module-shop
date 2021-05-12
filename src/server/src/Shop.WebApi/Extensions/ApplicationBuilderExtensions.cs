@@ -9,26 +9,20 @@ namespace Shop.WebApi.Extensions
     {
         public static void UseCustomizedConfigure(this IApplicationBuilder app, IWebHostEnvironment env)
         {
-            ////跨域
-            //app.UseCors(option =>
-            //{
-            //    option.AllowAnyHeader();
-            //    option.AllowAnyMethod();
-            //    option.AllowAnyOrigin();
-            //    option.AllowCredentials();
-            //});
+            // 跨域
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyMethod().AllowAnyHeader().SetIsOriginAllowed(origin => true).AllowCredentials();
+            });
 
-            ////JWT
-            //app.UseAuthentication();
-
-            //module
+            // 模块
             var moduleInitializers = app.ApplicationServices.GetServices<IModuleInitializer>();
             foreach (var moduleInitializer in moduleInitializers)
             {
                 moduleInitializer.Configure(app, env);
             }
 
-            //静态资源
+            // 静态资源
             app.UseStaticFiles();
         }
     }

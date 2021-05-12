@@ -1,9 +1,9 @@
 ﻿using Shop.Infrastructure.Models;
-using Shop.Module.Catalog.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Entities;
+using Shop.Module.Catalog.Entities;
+using Shop.Module.Core.Entities;
 using System;
 
-namespace Shop.Module.Inventory.Abstractions.Entities
+namespace Shop.Module.Inventory.Entities
 {
     public class StockHistory : EntityBase
     {

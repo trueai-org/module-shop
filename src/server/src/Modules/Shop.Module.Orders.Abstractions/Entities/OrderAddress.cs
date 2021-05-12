@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 using Shop.Infrastructure.Models;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Models;
-using Shop.Module.Orders.Abstractions.Entities;
+using Shop.Module.Core.Entities;
+using Shop.Module.Core.Models;
+using Shop.Module.Orders.Entities;
 using System;
 
-namespace Shop.Module.Orders.Abstractions.Events
+namespace Shop.Module.Orders.Events
 {
     public class OrderAddress : EntityBase
     {

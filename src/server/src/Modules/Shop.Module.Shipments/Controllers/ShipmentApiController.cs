@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
 using Shop.Infrastructure.Web.StandardTable;
-using Shop.Module.Core.Abstractions.Extensions;
-using Shop.Module.Orders.Abstractions.Entities;
-using Shop.Module.Shipments.Abstractions.Entities;
-using Shop.Module.Shipments.Abstractions.ViewModels;
+using Shop.Module.Core.Extensions;
+using Shop.Module.Orders.Entities;
+using Shop.Module.Shipments.Entities;
+using Shop.Module.Shipments.ViewModels;
 using System.Linq;
 using System.Threading.Tasks;
 

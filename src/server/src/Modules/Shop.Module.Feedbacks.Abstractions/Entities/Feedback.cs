@@ -1,10 +1,10 @@
 ﻿using Shop.Infrastructure.Models;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Feedbacks.Abstractions.Models;
+using Shop.Module.Core.Entities;
+using Shop.Module.Feedbacks.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Feedbacks.Abstractions.Entities
+namespace Shop.Module.Feedbacks.Entities
 {
     public class Feedback : EntityBase
     {

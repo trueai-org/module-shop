@@ -3,29 +3,29 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using Shop.Infrastructure.Modules;
 using Shop.Module.Core.MiniProgram.Models;
 using Shop.Module.Core.MiniProgram.Services;
-using Shop.Module.Payments.Abstractions.Services;
+using Shop.Module.Payments.Services;
 
 namespace Shop.Module.Core.MiniProgram
 {
     public class ModuleInitializer : IModuleInitializer
     {
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
-            var configuration = services.BuildServiceProvider();
-            var json = configuration.GetRequiredService<IConfiguration>().GetValue<string>(nameof(MiniProgramOptions));
-            var config = JsonConvert.DeserializeObject<MiniProgramOptions>(json) ?? new MiniProgramOptions();
+            var opt = new MiniProgramOptions();
+            var sec = configuration.GetSection(nameof(MiniProgramOptions));
+            sec.Bind(opt);
+            services.Configure<MiniProgramOptions>(sec);
 
             services.AddWeChatPay();
             services.Configure<WeChatPayOptions>(options =>
             {
-                options.AppId = config.AppId;
-                options.MchId = config.MchId;
-                options.Secret = config.AppSecret;
-                options.Key = config.Key;
+                options.AppId = opt.AppId;
+                options.MchId = opt.MchId;
+                options.AppSecret = opt.AppSecret;
+                options.Key = opt.Key;
             });
             services.AddScoped<IPaymentService, PaymentService>();
         }

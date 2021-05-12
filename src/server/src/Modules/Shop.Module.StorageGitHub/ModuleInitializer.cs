@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Infrastructure.Modules;
-using Shop.Module.Core.Abstractions.Services;
+using Shop.Module.Core.Services;
 
 namespace Shop.Module.StorageGitHub
 {
     public class ModuleInitializer : IModuleInitializer
     {
-        public void ConfigureServices(IServiceCollection serviceCollection)
+        public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
-            serviceCollection.AddScoped<IStorageService, GitHubStorageService>();
-            //serviceCollection.AddSingleton<IStorageService, GitHubStorageService>();
+            services.AddScoped<IStorageService, GitHubStorageService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

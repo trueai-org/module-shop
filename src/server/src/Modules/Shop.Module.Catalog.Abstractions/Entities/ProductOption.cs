@@ -1,9 +1,9 @@
 ﻿using Shop.Infrastructure.Models;
-using Shop.Module.Catalog.Abstractions.Models;
+using Shop.Module.Catalog.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Catalog.Abstractions.Entities
+namespace Shop.Module.Catalog.Entities
 {
     /// <summary>
     /// 产品选项（销售属性，尺码、颜色等）

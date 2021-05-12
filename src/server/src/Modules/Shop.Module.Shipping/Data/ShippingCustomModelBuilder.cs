@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shop.Infrastructure.Data;
-using Shop.Module.Shipping.Abstractions.Entities;
+using Shop.Module.Shipping.Entities;
 
 namespace Shop.Module.Shipping.Data
 {

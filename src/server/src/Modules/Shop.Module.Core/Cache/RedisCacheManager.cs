@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Shop.Infrastructure;
-using Shop.Module.Core.Abstractions.Cache;
-using Shop.Module.Core.Abstractions.Data;
 using Shop.Module.Core.Data;
 using StackExchange.Redis;
 using System;

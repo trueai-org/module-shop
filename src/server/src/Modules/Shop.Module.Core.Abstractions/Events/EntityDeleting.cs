@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Shop.Module.Core.Abstractions.Events
+namespace Shop.Module.Core.Events
 {
     public class EntityDeleting : INotification
     {

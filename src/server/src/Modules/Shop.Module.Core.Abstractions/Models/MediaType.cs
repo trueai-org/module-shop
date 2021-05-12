@@ -1,4 +1,4 @@
-﻿namespace Shop.Module.Core.Abstractions.Models
+﻿namespace Shop.Module.Core.Models
 {
     public enum MediaType
     {

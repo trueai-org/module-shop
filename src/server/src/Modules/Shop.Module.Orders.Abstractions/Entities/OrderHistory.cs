@@ -1,9 +1,9 @@
 ﻿using Shop.Infrastructure.Models;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Orders.Abstractions.Models;
+using Shop.Module.Core.Entities;
+using Shop.Module.Orders.Models;
 using System;
 
-namespace Shop.Module.Orders.Abstractions.Entities
+namespace Shop.Module.Orders.Entities
 {
     public class OrderHistory : EntityBase
     {

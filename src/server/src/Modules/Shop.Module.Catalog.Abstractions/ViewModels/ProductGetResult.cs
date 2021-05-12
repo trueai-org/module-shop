@@ -1,8 +1,8 @@
-﻿using Shop.Module.Catalog.Abstractions.Models;
+﻿using Shop.Module.Catalog.Models;
 using System;
 using System.Collections.Generic;
 
-namespace Shop.Module.Catalog.Abstractions.ViewModels
+namespace Shop.Module.Catalog.ViewModels
 {
     public class ProductGetResult
     {

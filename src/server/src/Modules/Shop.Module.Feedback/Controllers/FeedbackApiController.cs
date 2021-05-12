@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
-using Shop.Module.Core.Abstractions.Extensions;
-using Shop.Module.Feedbacks.Abstractions.Entities;
-using Shop.Module.Feedbacks.Abstractions.ViewModels;
+using Shop.Module.Core.Extensions;
+using Shop.Module.Feedbacks.Entities;
+using Shop.Module.Feedbacks.ViewModels;
 using System.Threading.Tasks;
 
 namespace Shop.Module.Feedbacks.Controllers

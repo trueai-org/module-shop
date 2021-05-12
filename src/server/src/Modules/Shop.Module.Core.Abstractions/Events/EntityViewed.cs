@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using Shop.Module.Core.Abstractions.Models;
+using Shop.Module.Core.Models;
 
-namespace Shop.Module.Core.Abstractions.Events
+namespace Shop.Module.Core.Events
 {
     public class EntityViewed : INotification
     {

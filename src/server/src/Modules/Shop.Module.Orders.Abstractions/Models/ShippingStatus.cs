@@ -1,4 +1,4 @@
-﻿namespace Shop.Module.Orders.Abstractions.Models
+﻿namespace Shop.Module.Orders.Models
 {
     /// <summary>
     /// 运输状态

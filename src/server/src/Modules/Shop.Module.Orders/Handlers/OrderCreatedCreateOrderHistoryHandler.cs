@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Newtonsoft.Json;
 using Shop.Infrastructure.Data;
-using Shop.Module.Orders.Abstractions.Entities;
-using Shop.Module.Orders.Abstractions.Events;
-using Shop.Module.Orders.Abstractions.Models;
+using Shop.Module.Orders.Entities;
+using Shop.Module.Orders.Events;
+using Shop.Module.Orders.Models;
 using System.Threading;
 using System.Threading.Tasks;
 

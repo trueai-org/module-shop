@@ -1,7 +1,7 @@
-﻿using Shop.Module.Reviews.Abstractions.Models;
+﻿using Shop.Module.Reviews.Models;
 using System;
 
-namespace Shop.Module.Reviews.Abstractions.ViewModels
+namespace Shop.Module.Reviews.ViewModels
 {
     public class AdminReplyListResult
     {

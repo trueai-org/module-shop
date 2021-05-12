@@ -1,7 +1,7 @@
-﻿using Shop.Module.Feedbacks.Abstractions.Models;
+﻿using Shop.Module.Feedbacks.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Feedbacks.Abstractions.ViewModels
+namespace Shop.Module.Feedbacks.ViewModels
 {
     public class FeedbackAddParam
     {

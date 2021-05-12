@@ -1,14 +1,14 @@
 ﻿using Essensoft.AspNetCore.Payment.WeChatPay;
-using Essensoft.AspNetCore.Payment.WeChatPay.Notify;
+using Essensoft.AspNetCore.Payment.WeChatPay.V2;
+using Essensoft.AspNetCore.Payment.WeChatPay.V2.Notify;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Shop.Module.Core.Abstractions.Services;
+using Microsoft.Extensions.Options;
 using Shop.Module.Core.MiniProgram.Models;
-using Shop.Module.MQ.Abstractions.Data;
-using Shop.Module.MQ.Abstractions.Services;
-using Shop.Module.Orders.Abstractions.Events;
-using Shop.Module.Orders.Abstractions.Models;
+using Shop.Module.MQ;
+using Shop.Module.Orders.Events;
+using Shop.Module.Orders.Models;
 using System;
 using System.Threading.Tasks;
 
@@ -22,18 +22,18 @@ namespace Shop.Module.Core.MiniProgram.Controllers
         private readonly IWeChatPayNotifyClient _client;
         private readonly IMQService _mqService;
         private readonly ILogger _logger;
-        private readonly IAppSettingService _appSettingService;
+        private readonly MiniProgramOptions _options;
 
         public MpPayApiController(
             IWeChatPayNotifyClient client,
             IMQService mqService,
             ILogger<MpPayApiController> logger,
-            IAppSettingService appSettingService)
+            IOptionsMonitor<MiniProgramOptions> options)
         {
             _client = client;
             _mqService = mqService;
             _logger = logger;
-            _appSettingService = appSettingService;
+            _options = options.CurrentValue;
         }
 
         [AllowAnonymous]
@@ -42,12 +42,12 @@ namespace Shop.Module.Core.MiniProgram.Controllers
         {
             try
             {
-                var config = await _appSettingService.Get<MiniProgramOptions>();
+                var config = _options;
                 var opt = new WeChatPayOptions()
                 {
                     AppId = config.AppId,
                     MchId = config.MchId,
-                    Secret = config.AppSecret,
+                    AppSecret = config.AppSecret,
                     Key = config.Key
                 };
 

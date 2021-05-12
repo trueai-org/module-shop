@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Orders.Abstractions.Data;
-using Shop.Module.Orders.Abstractions.Entities;
-using Shop.Module.Orders.Abstractions.Events;
+using Shop.Module.Core.Entities;
+using Shop.Module.Orders.Data;
+using Shop.Module.Orders.Entities;
+using Shop.Module.Orders.Events;
 
 namespace Shop.Module.Orders.Data
 {

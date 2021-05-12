@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Catalog.Abstractions.Entities
+namespace Shop.Module.Catalog.Entities
 {
     /// <summary>
     /// 产品属性组（鞋子属性、运动鞋属性、女装属性、男装属性、公共属性、关键属性、首饰属性、电子产品属性等）

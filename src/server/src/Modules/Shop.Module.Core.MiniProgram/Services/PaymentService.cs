@@ -1,12 +1,13 @@
 ﻿using Essensoft.AspNetCore.Payment.WeChatPay;
-using Essensoft.AspNetCore.Payment.WeChatPay.Request;
+using Essensoft.AspNetCore.Payment.WeChatPay.V2;
+using Essensoft.AspNetCore.Payment.WeChatPay.V2.Request;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using Shop.Module.Core.Abstractions.Data;
-using Shop.Module.Core.Abstractions.Services;
+using Shop.Infrastructure;
 using Shop.Module.Core.MiniProgram.Models;
-using Shop.Module.Payments.Abstractions.Models;
-using Shop.Module.Payments.Abstractions.Services;
+using Shop.Module.Payments.Models;
+using Shop.Module.Payments.Services;
 using System;
 using System.Linq;
 using System.Net;
@@ -16,18 +17,21 @@ namespace Shop.Module.Core.MiniProgram.Services
 {
     public class PaymentService : IPaymentService
     {
-        private readonly ILogger<PaymentService> _logger;
+        private readonly ILogger _logger;
         private readonly IWeChatPayClient _client;
-        private readonly IAppSettingService _appSettingService;
+        private readonly IOptionsMonitor<MiniProgramOptions> _options;
+        private readonly string _apiHost;
 
         public PaymentService(
             ILogger<PaymentService> logger,
             IWeChatPayClient client,
-            IAppSettingService appSettingService)
+            IOptionsMonitor<MiniProgramOptions> options,
+            IOptionsMonitor<ShopConfig> config)
         {
             _logger = logger;
             _client = client;
-            _appSettingService = appSettingService;
+            _options = options;
+            _apiHost = config.CurrentValue.ApiHost;
         }
 
         public async Task<PaymentOrderBaseResponse> GeneratePaymentOrder(PaymentOrderRequest request)
@@ -36,7 +40,7 @@ namespace Shop.Module.Core.MiniProgram.Services
                 .AddressList.FirstOrDefault(address => address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)?.ToString()
                 ?? "127.0.0.1";
 
-            var apiHost = await _appSettingService.Get(ShopKeys.ApiHost);
+            var apiHost = _apiHost;
             var wxRequest = new WeChatPayUnifiedOrderRequest
             {
                 Body = request.Subject,
@@ -49,18 +53,18 @@ namespace Shop.Module.Core.MiniProgram.Services
                 NotifyUrl = $"{apiHost.Trim('/')}/api/mp/pay/notify/{request.OrderNo}",
             };
 
-            var config = await _appSettingService.Get<MiniProgramOptions>();
+            var config = _options.CurrentValue;
             var opt = new WeChatPayOptions()
             {
                 AppId = config.AppId,
                 MchId = config.MchId,
-                Secret = config.AppSecret,
+                AppSecret = config.AppSecret,
                 Key = config.Key
             };
             var response = await _client.ExecuteAsync(wxRequest, opt);
             if (response?.ReturnCode == WeChatPayCode.Success && response?.ResultCode == WeChatPayCode.Success)
             {
-                var req = new WeChatPayLiteAppSdkRequest
+                var req = new WeChatPayAppSdkRequest
                 {
                     Package = $"prepay_id={response.PrepayId}"
                 };

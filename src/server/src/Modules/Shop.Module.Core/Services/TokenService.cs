@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Shop.Infrastructure;
-using Shop.Module.Core.Abstractions.Cache;
-using Shop.Module.Core.Abstractions.Data;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Models;
-using Shop.Module.Core.Abstractions.Services;
+using Shop.Module.Core.Cache;
+using Shop.Module.Core.Data;
+using Shop.Module.Core.Entities;
+using Shop.Module.Core.Models;
+using Shop.Module.Core.Services;
 using Shop.Module.Core.Models.Cache;
 using System;
 using System.Collections.Generic;

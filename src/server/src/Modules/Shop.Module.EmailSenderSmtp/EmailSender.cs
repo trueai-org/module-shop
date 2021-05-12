@@ -1,11 +1,11 @@
 ﻿using MailKit.Net.Smtp;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using MimeKit;
 using MimeKit.Text;
 using Shop.Infrastructure.Data;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Services;
+using Shop.Module.Core.Entities;
+using Shop.Module.Core.Services;
 using System;
 using System.Threading.Tasks;
 
@@ -13,17 +13,16 @@ namespace Shop.Module.EmailSenderSmtp
 {
     public class EmailSender : IEmailSender
     {
-        private readonly EmailSenderSmtpOptions _emailConfig = new EmailSenderSmtpOptions();
+        private readonly EmailSmtpOptions _options;
         private readonly IRepository<EmailSend> _emilSendRepository;
         private readonly ILogger<EmailSender> _logger;
 
         public EmailSender(
-            IConfiguration config,
             IRepository<EmailSend> emilSendRepository,
             ILogger<EmailSender> logger,
-            IAppSettingService appSettingService)
+            IOptionsMonitor<EmailSmtpOptions> options)
         {
-            _emailConfig = appSettingService.Get<EmailSenderSmtpOptions>().Result;
+            _options = options.CurrentValue;
             _emilSendRepository = emilSendRepository;
             _logger = logger;
         }
@@ -33,19 +32,19 @@ namespace Shop.Module.EmailSenderSmtp
             var send = new EmailSend();
             try
             {
-                if (string.IsNullOrWhiteSpace(_emailConfig.SmtpUserName))
-                    throw new ArgumentNullException(nameof(_emailConfig.SmtpUserName));
-                if (string.IsNullOrWhiteSpace(_emailConfig.SmtpPassword))
-                    throw new ArgumentNullException(nameof(_emailConfig.SmtpPassword));
+                if (string.IsNullOrWhiteSpace(_options.SmtpUserName))
+                    throw new ArgumentNullException(nameof(_options.SmtpUserName));
+                if (string.IsNullOrWhiteSpace(_options.SmtpPassword))
+                    throw new ArgumentNullException(nameof(_options.SmtpPassword));
 
-                send.From = _emailConfig.SmtpUserName;
+                send.From = _options.SmtpUserName;
                 send.To = email;
                 send.Subject = subject;
                 send.IsHtml = isHtml;
                 send.Body = body;
 
                 var message = new MimeMessage();
-                message.From.Add(new MailboxAddress(_emailConfig.SmtpUserName));
+                message.From.Add(new MailboxAddress(_options.SmtpUserName));
                 message.To.Add(new MailboxAddress(email));
                 message.Subject = subject;
 
@@ -59,14 +58,14 @@ namespace Shop.Module.EmailSenderSmtp
                 {
                     // Accept all SSL certificates (in case the server supports STARTTLS)
                     client.ServerCertificateValidationCallback = (s, c, h, e) => true;
-                    await client.ConnectAsync(_emailConfig.SmtpHost, _emailConfig.SmtpPort, false);
+                    await client.ConnectAsync(_options.SmtpHost, _options.SmtpPort, false);
 
                     // Note: since we don't have an OAuth2 token, disable
                     // the XOAUTH2 authentication mechanism.
                     client.AuthenticationMechanisms.Remove("XOAUTH2");
 
                     // Note: only needed if the SMTP server requires authentication
-                    await client.AuthenticateAsync(_emailConfig.SmtpUserName, _emailConfig.SmtpPassword);
+                    await client.AuthenticateAsync(_options.SmtpUserName, _options.SmtpPassword);
 
                     await client.SendAsync(message);
                     await client.DisconnectAsync(true);

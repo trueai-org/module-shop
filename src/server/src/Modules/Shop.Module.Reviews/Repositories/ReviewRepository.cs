@@ -1,8 +1,8 @@
-﻿using Shop.Module.Core.Abstractions.Entities;
+﻿using Shop.Module.Core.Entities;
 using Shop.Module.Core.Data;
-using Shop.Module.Reviews.Abstractions.Entities;
-using Shop.Module.Reviews.Abstractions.Repositories;
-using Shop.Module.Reviews.Abstractions.ViewModels;
+using Shop.Module.Reviews.Entities;
+using Shop.Module.Reviews.Repositories;
+using Shop.Module.Reviews.ViewModels;
 using System.Linq;
 
 namespace Shop.Module.Reviews.Data

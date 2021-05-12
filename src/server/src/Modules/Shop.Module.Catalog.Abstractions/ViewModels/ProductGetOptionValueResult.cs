@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Shop.Module.Catalog.Abstractions.ViewModels
+namespace Shop.Module.Catalog.ViewModels
 {
     public class ProductGetOptionValueResult
     {

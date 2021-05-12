@@ -1,4 +1,4 @@
-﻿namespace Shop.Module.Core.Abstractions.Models
+﻿namespace Shop.Module.Core.Models
 {
     /// <summary>
     /// 短信模板类型

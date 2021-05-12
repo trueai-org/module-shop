@@ -1,9 +1,9 @@
-﻿using Shop.Module.ShoppingCart.Abstractions.Entities;
-using Shop.Module.ShoppingCart.Abstractions.ViewModels;
+﻿using Shop.Module.ShoppingCart.Entities;
+using Shop.Module.ShoppingCart.ViewModels;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Shop.Module.ShoppingCart.Abstractions.Services
+namespace Shop.Module.ShoppingCart.Services
 {
     public interface ICartService
     {

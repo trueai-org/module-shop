@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Essensoft.AspNetCore.Payment.WeChatPay" Version="3.1.8" />
+    <PackageReference Include="Essensoft.AspNetCore.Payment.WeChatPay" Version="3.3.2" />
   </ItemGroup>
 
   <ItemGroup>

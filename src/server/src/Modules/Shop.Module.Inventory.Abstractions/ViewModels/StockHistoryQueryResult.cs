@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Shop.Module.Inventory.Abstractions.ViewModels
+namespace Shop.Module.Inventory.ViewModels
 {
     public class StockHistoryQueryResult
     {

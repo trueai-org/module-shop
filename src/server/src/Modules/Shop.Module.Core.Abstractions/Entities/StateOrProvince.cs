@@ -1,9 +1,9 @@
 ﻿using Shop.Infrastructure.Models;
-using Shop.Module.Core.Abstractions.Models;
+using Shop.Module.Core.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Core.Abstractions.Entities
+namespace Shop.Module.Core.Entities
 {
     /// <summary>
     /// 州/省、市、区、街道

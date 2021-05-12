@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Infrastructure;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Services;
+using Shop.Module.Core.Entities;
+using Shop.Module.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;

@@ -1,9 +1,9 @@
-﻿using Shop.Module.Orders.Abstractions.Entities;
-using Shop.Module.Orders.Abstractions.ViewModels;
-using Shop.Module.Payments.Abstractions.Models;
+﻿using Shop.Module.Orders.Entities;
+using Shop.Module.Orders.ViewModels;
+using Shop.Module.Payments.Models;
 using System.Threading.Tasks;
 
-namespace Shop.Module.Orders.Abstractions.Services
+namespace Shop.Module.Orders.Services
 {
     public interface IOrderService
     {

@@ -1,11 +1,12 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Shop.Infrastructure.Data;
-using Shop.Module.Core.Abstractions.Cache;
-using Shop.Module.Core.Abstractions.Data;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Models;
-using Shop.Module.Core.Abstractions.Services;
+using Shop.Module.Core.Cache;
+using Shop.Module.Core.Data;
+using Shop.Module.Core.Entities;
+using Shop.Module.Core.Models;
+using Shop.Module.Core.Services;
 using Shop.Module.SmsSenderAliyun.Models;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ namespace Shop.Module.SmsSenderAliyun.Services
     public class AliyunSmsSenderService : ISmsSender
     {
         const string SEPARATOR = "&";
+
         private readonly int timeoutInMilliSeconds = 100000;
         private readonly string version = "2017-05-25";
         private readonly string action = "SendSms";
@@ -37,28 +39,26 @@ namespace Shop.Module.SmsSenderAliyun.Services
         private readonly string accessKeyId;
         private readonly string accessKeySecret;
         private readonly bool isTest;
+
         private readonly ILogger _logger;
         private readonly IRepository<SmsSend> _smsSendRepository;
         private readonly IStaticCacheManager _cacheManager;
-        private readonly IAppSettingService _appSettingService;
 
         public AliyunSmsSenderService(
             ILoggerFactory loggerFactory,
-            //IOptionsMonitor<AliyunSmsOptions> options,
+            IOptionsMonitor<AliyunSmsOptions> options,
             IRepository<SmsSend> smsSendRepository,
-            IStaticCacheManager cacheManager,
-            IAppSettingService appSettingService)
+            IStaticCacheManager cacheManager)
         {
             _logger = loggerFactory.CreateLogger<AliyunSmsSenderService>();
             _smsSendRepository = smsSendRepository;
             _cacheManager = cacheManager;
-            _appSettingService = appSettingService;
 
-            var options = _appSettingService.Get<SmsSenderAliyunOptions>().Result;
-            regionId = options.RegionId;
-            accessKeyId = options.AccessKeyId;
-            accessKeySecret = options.AccessKeySecret;
-            isTest = options.IsTest; 
+
+            regionId = options.CurrentValue.RegionId;
+            accessKeyId = options.CurrentValue.AccessKeyId;
+            accessKeySecret = options.CurrentValue.AccessKeySecret;
+            isTest = options.CurrentValue.IsTest;
         }
 
         public async Task<bool> SendSmsAsync(SmsSend model)

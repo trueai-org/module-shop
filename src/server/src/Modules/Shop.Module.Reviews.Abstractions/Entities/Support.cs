@@ -1,8 +1,8 @@
 ﻿using Shop.Infrastructure.Models;
-using Shop.Module.Core.Abstractions.Entities;
+using Shop.Module.Core.Entities;
 using System;
 
-namespace Shop.Module.Reviews.Abstractions.Entities
+namespace Shop.Module.Reviews.Entities
 {
     public class Support : EntityBase
     {

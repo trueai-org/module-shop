@@ -4,16 +4,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
 using Shop.Infrastructure.Helpers;
-using Shop.Module.Core.Abstractions.Data;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Extensions;
-using Shop.Module.Core.Abstractions.Models;
-using Shop.Module.Core.Abstractions.Services;
-using Shop.Module.Core.Abstractions.ViewModels;
-using Shop.Module.Schedule.Abstractions.Services;
+using Shop.Module.Core.Data;
+using Shop.Module.Core.Entities;
+using Shop.Module.Core.Extensions;
+using Shop.Module.Core.Models;
+using Shop.Module.Core.Services;
+using Shop.Module.Core.ViewModels;
+using Shop.Module.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,19 +43,19 @@ namespace Shop.Module.Core.Controllers
         private readonly IAccountService _accountService;
 
         public AccountApiController(
-            IRepository<SmsSend> smsSendRepository,
             UserManager<User> userManager,
             SignInManager<User> signInManager,
+            IRepository<SmsSend> smsSendRepository,
             IEmailSender emailSender,
             ISmsSender smsSender,
             ILoggerFactory loggerFactory,
-            IConfiguration configuration,
             IRepository<User> userRepository,
             ITokenService tokenService,
             IWorkContext workContext,
             IJobService jobService,
             IRepository<Media> mediaRepository,
-            IAccountService accountService)
+            IAccountService accountService,
+            IOptionsMonitor<ShopConfig> config)
         {
             _smsSendRepository = smsSendRepository;
             _userManager = userManager;
@@ -65,7 +66,7 @@ namespace Shop.Module.Core.Controllers
             _userRepository = userRepository;
             _tokenService = tokenService;
             _workContext = workContext;
-            _webHost = configuration.GetValue<string>(ShopKeys.WebHost);
+            _webHost = config.CurrentValue.WebHost;
             _jobService = jobService;
             _mediaRepository = mediaRepository;
             _accountService = accountService;
