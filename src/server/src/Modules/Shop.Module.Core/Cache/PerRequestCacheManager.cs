@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
 using Shop.Infrastructure;
-using Shop.Module.Core.Cache;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +22,10 @@ namespace Shop.Module.Core.Cache
 
         #region Ctor
 
-        public PerRequestCacheManager(IHttpContextAccessor httpContextAccessor, ShopConfig config)
+        public PerRequestCacheManager(IHttpContextAccessor httpContextAccessor, IOptionsMonitor<ShopConfig> config)
         {
-            this._httpContextAccessor = httpContextAccessor;
-            this._config = config;
+            _httpContextAccessor = httpContextAccessor;
+            _config = config.CurrentValue;
         }
 
         #endregion

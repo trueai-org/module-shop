@@ -1,11 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Moq;
+﻿using Moq;
 using Shop.Infrastructure.Data;
-using Shop.Module.Core.Abstractions.Entities;
-using Shop.Module.Core.Abstractions.Extensions;
-using System.Collections.Generic;
+using Shop.Module.Core.Entities;
 using System.Linq;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Shop.Module.Core.Tests

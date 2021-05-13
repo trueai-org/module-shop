@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using Shop.Infrastructure;
 using Shop.Module.Core.Data;
 using StackExchange.Redis;
@@ -29,18 +30,18 @@ namespace Shop.Module.Core.Cache
         public RedisCacheManager(
             ICacheManager perRequestCacheManager,
             IRedisConnectionWrapper connectionWrapper,
-            ShopConfig config)
+            IOptionsMonitor<ShopConfig> config)
         {
-            if (string.IsNullOrEmpty(config.RedisCachingConnection))
+            if (string.IsNullOrWhiteSpace(config?.CurrentValue?.RedisCachingConnection))
                 throw new Exception("Redis connection string is empty");
 
-            this._perRequestCacheManager = perRequestCacheManager;
+            _perRequestCacheManager = perRequestCacheManager;
 
             // ConnectionMultiplexer.Connect should only be called once and shared between callers
-            this._connectionWrapper = connectionWrapper;
+            _connectionWrapper = connectionWrapper;
 
-            this._db = _connectionWrapper.GetDatabase();
-            this._config = config;
+            _db = _connectionWrapper.GetDatabase();
+            _config = config.CurrentValue;
         }
 
         #endregion

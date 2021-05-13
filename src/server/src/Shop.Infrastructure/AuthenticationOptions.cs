@@ -1,6 +1,6 @@
 ﻿namespace Shop.Infrastructure
 {
-    public class AuthenticationConfig
+    public class AuthenticationOptions
     {
         public AuthenticationJwtConfig Jwt { get; set; } = new AuthenticationJwtConfig();
     }
@@ -8,6 +8,7 @@
     public class AuthenticationJwtConfig
     {
         public string Key { get; set; }
+
         public string Issuer { get; set; }
 
         /// <summary>

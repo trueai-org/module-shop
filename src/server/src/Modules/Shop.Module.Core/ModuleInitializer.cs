@@ -21,13 +21,8 @@ namespace Shop.Module.Core
             var configSection = configuration.GetSection(nameof(ShopConfig));
             configSection.Bind(config);
             services.Configure<ShopConfig>(configSection);
-
-            services.AddSingleton(config);
-
-            var authConfig = new AuthenticationConfig();
-            configuration.GetSection("Authentication").Bind(authConfig);
-            services.AddSingleton(authConfig);
-
+            services.Configure<AuthenticationOptions>(configuration.GetSection(nameof(AuthenticationOptions)));
+  
             services.AddTransient<IEntityService, EntityService>();
             services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<IAccountService, AccountService>();

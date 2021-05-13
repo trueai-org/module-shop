@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore;
+﻿using Com.Ctrip.Framework.Apollo;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
 using Serilog;
+using Serilog.Debugging;
 using Shop.Module.Core.Extensions;
 using Shop.WebApi.Extensions;
+using System;
 
 namespace Shop.WebApi
 {
@@ -12,33 +14,42 @@ namespace Shop.WebApi
     {
         public static void Main(string[] args)
         {
-            BuildWebHost2(args).Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        // Changed to BuildWebHost2 to make EF don't pickup during design time
-        private static IWebHost BuildWebHost2(string[] args) => WebHost.CreateDefaultBuilder(args)
-            .UseStartup<Startup>()
-            .ConfigureAppConfiguration(SetupConfiguration)
-            .ConfigureLogging(SetupLogging)
-            .Build();
-
-        private static void SetupConfiguration(WebHostBuilderContext hostingContext, IConfigurationBuilder configBuilder)
-        {
-            var env = hostingContext.HostingEnvironment;
-            configBuilder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+        public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            }).ConfigureAppConfiguration((builderContext, config) =>
+            {
+                var env = builderContext.HostingEnvironment;
+                var configuration = config.AddJsonFile($"appsettings.json", true, reloadOnChange: true)
                 .AddJsonFile("appsettings.Modules.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
+                .Build();
 
-            var configuration = configBuilder.Build();
-            configBuilder.AddEntityFrameworkConfig(options => options.UseCustomizedDataStore(configuration));
+                config.AddEntityFrameworkConfig(opt => opt.UseCustomizedDataStore(configuration));
 
-            Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(configuration) //.GetSection("Serilog")
-                .CreateLogger();
-        }
-        private static void SetupLogging(WebHostBuilderContext hostingContext, ILoggingBuilder loggingBuilder)
-        {
-            loggingBuilder.AddSerilog();
-        }
+                config.AddApollo(configuration.GetSection("Apollo")).AddDefault();
+
+                if (env.IsDevelopment())
+                {
+                    Com.Ctrip.Framework.Apollo.Logging.LogManager.UseConsoleLogging(Com.Ctrip.Framework.Apollo.Logging.LogLevel.Trace);
+                }
+
+                Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
+            }).ConfigureLogging((loggingBuilder) =>
+            {
+                loggingBuilder.AddSerilog();
+            }).UseSerilog((builderContext, config) =>
+            {
+                var env = builderContext.HostingEnvironment;
+                if (env.IsDevelopment())
+                {
+                    config.MinimumLevel.Information().Enrich.FromLogContext().WriteTo.Console();
+                    SelfLog.Enable(Console.Error);
+                }
+            });
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
 using Shop.Module.Core.Cache;
@@ -23,20 +24,20 @@ namespace Shop.Module.Core.Extensions
         private readonly HttpContext _httpContext;
         private readonly UserManager<User> _userManager;
         private readonly IRepository<User> _userRepository;
-        private readonly AuthenticationConfig _config;
+        private readonly AuthenticationOptions _config;
         private readonly IStaticCacheManager _cacheManager;
 
         public WorkContext(
             IHttpContextAccessor contextAccessor,
             UserManager<User> userManager,
             IRepository<User> userRepository,
-            AuthenticationConfig config,
+            IOptionsMonitor<AuthenticationOptions> config,
             IStaticCacheManager cacheManager)
         {
             _userManager = userManager;
             _httpContext = contextAccessor.HttpContext;
             _userRepository = userRepository;
-            _config = config;
+            _config = config.CurrentValue;
             _cacheManager = cacheManager;
         }
 
@@ -139,7 +140,7 @@ namespace Shop.Module.Core.Extensions
 
             var _options = _config?.Jwt;
             if (_options == null)
-                throw new ArgumentNullException(nameof(AuthenticationConfig));
+                throw new ArgumentNullException(nameof(AuthenticationOptions));
 
             var key = ShopKeys.UserJwtTokenPrefix + userId;
             var currentUser = _cacheManager.Get<UserTokenCache>(key);

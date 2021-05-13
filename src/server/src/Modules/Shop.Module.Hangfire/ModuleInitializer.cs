@@ -1,6 +1,7 @@
 ﻿using Hangfire;
 using Hangfire.Dashboard.BasicAuthorization;
 using Hangfire.MemoryStorage;
+using Hangfire.Redis;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,9 +27,23 @@ namespace Shop.Module.Hangfire
 
             if (options.RedisEnabled)
             {
+                var redisOptions = ConfigurationOptions.Parse(options.RedisConnection);
+                RedisStorageOptions storageOptions = null;
+                if (redisOptions.DefaultDatabase.HasValue)
+                {
+                    storageOptions ??= new RedisStorageOptions();
+                    storageOptions.Db = redisOptions.DefaultDatabase.Value;
+                }
+
+                if (!string.IsNullOrWhiteSpace(redisOptions.ChannelPrefix))
+                {
+                    storageOptions ??= new RedisStorageOptions();
+                    storageOptions.Prefix = redisOptions.ChannelPrefix;
+                }
+
                 services.AddHangfire(config =>
                 {
-                    config.UseRedisStorage(ConnectionMultiplexer.Connect(options.RedisConnection));
+                    config.UseRedisStorage(ConnectionMultiplexer.Connect(redisOptions), storageOptions);
                 });
             }
             else
@@ -40,6 +55,7 @@ namespace Shop.Module.Hangfire
             }
 
             services.AddScoped<IJobService, JobService>();
+
             services.AddHostedService<HealthJob>();
         }
 

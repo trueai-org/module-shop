@@ -1,7 +1,7 @@
-﻿using RedLockNet.SERedis;
+﻿using Microsoft.Extensions.Options;
+using RedLockNet.SERedis;
 using RedLockNet.SERedis.Configuration;
 using Shop.Infrastructure;
-using Shop.Module.Core.Cache;
 using StackExchange.Redis;
 using System;
 using System.Linq;
@@ -26,11 +26,11 @@ namespace Shop.Module.Core.Cache
 
         #region Ctor
 
-        public RedisConnectionWrapper(ShopConfig config)
+        public RedisConnectionWrapper(IOptionsMonitor<ShopConfig> config)
         {
-            this._config = config;
-            this._connectionString = new Lazy<string>(GetConnectionString);
-            this._redisLockFactory = CreateRedisLockFactory();
+            _config = config.CurrentValue;
+            _connectionString = new Lazy<string>(GetConnectionString);
+            _redisLockFactory = CreateRedisLockFactory();
         }
 
         #endregion

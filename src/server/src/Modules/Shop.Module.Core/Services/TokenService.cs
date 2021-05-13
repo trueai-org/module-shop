@@ -14,21 +14,22 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 
 namespace Shop.Module.Core.Services
 {
     public class TokenService : ITokenService
     {
-        private readonly AuthenticationConfig _config;
+        private readonly AuthenticationOptions _config;
         private readonly IStaticCacheManager _cacheManager;
         private readonly UserManager<User> _userManager;
 
         public TokenService(
-            AuthenticationConfig config,
+            IOptionsMonitor<AuthenticationOptions> config,
             IStaticCacheManager cacheManager,
             UserManager<User> userManager)
         {
-            _config = config;
+            _config = config.CurrentValue;
             _cacheManager = cacheManager;
             _userManager = userManager;
         }

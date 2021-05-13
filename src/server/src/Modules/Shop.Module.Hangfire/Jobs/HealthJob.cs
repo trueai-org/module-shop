@@ -14,17 +14,24 @@ namespace Shop.Module.Hangfire.Jobs
         {
             _logger = logger;
         }
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             try
             {
-                RecurringJob.AddOrUpdate("HealthJob", () => _logger.LogInformation($"Health Job is running. {DateTime.Now:yyyy:MM:dd HH:mm:ss.fff}"), Cron.Minutely());
+                // 延迟执行
+                await Task.Delay(5000, stoppingToken);
+
+                _logger.LogInformation("Health Job Starting");
+
+                RecurringJob.AddOrUpdate("HealthJob", () => Console.WriteLine($"Health Job Running {DateTime.Now:yyyy:MM:dd HH:mm:ss.fff}"), Cron.Minutely());
+
+                _logger.LogInformation("Health Job Started");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Server monitoring, Health Job Error");
+                _logger.LogError(ex, "Health Job Error");
             }
-            return Task.CompletedTask;
+            await Task.CompletedTask;
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 using Shop.Infrastructure;
-using Shop.Module.Core.Cache;
 using System;
 using System.Collections.Concurrent;
 using System.Linq;
@@ -41,10 +41,10 @@ namespace Shop.Module.Core.Cache
             _allKeys = new ConcurrentDictionary<string, bool>();
         }
 
-        public MemoryCacheManager(IMemoryCache cache, ShopConfig config)
+        public MemoryCacheManager(IMemoryCache cache, IOptionsMonitor<ShopConfig> config)
         {
             _cache = cache;
-            _config = config;
+            _config = config.CurrentValue;
             _cancellationTokenSource = new CancellationTokenSource();
         }
 

@@ -56,7 +56,7 @@ namespace Shop.WebApi
 
             app.UseCustomizedConfigure(env);
 
-            //app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
 

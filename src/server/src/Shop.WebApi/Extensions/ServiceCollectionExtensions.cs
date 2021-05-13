@@ -12,8 +12,8 @@ using Newtonsoft.Json;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
 using Shop.Infrastructure.Modules;
-using Shop.Module.Core.Entities;
 using Shop.Module.Core.Data;
+using Shop.Module.Core.Entities;
 using Shop.Module.Core.Extensions;
 using Shop.WebApi.Filters;
 using Shop.WebApi.Handlers;
@@ -130,21 +130,21 @@ namespace Shop.WebApi.Extensions
 
         public static void AddModules(this IServiceCollection services, IConfiguration configuration)
         {
-            var modules = new List<ModuleInfo>();
-            configuration.GetSection("Modules").Bind(modules);
+            var modules = configuration.GetSection("Modules").Get<List<ModuleInfo>>();
 
             foreach (var module in modules)
             {
                 module.Assembly = Assembly.Load(new AssemblyName(module.Id));
                 GlobalConfiguration.Modules.Add(module);
 
-                var moduleInitializerType = module.Assembly.GetTypes().FirstOrDefault(t => typeof(IModuleInitializer).IsAssignableFrom(t));
-                if ((moduleInitializerType != null) && (moduleInitializerType != typeof(IModuleInitializer)))
+                var moduleType = module.Assembly.GetTypes().FirstOrDefault(t => typeof(IModuleInitializer).IsAssignableFrom(t));
+                if ((moduleType != null) && (moduleType != typeof(IModuleInitializer)))
                 {
-                    services.AddSingleton(typeof(IModuleInitializer), moduleInitializerType);
+                    services.AddSingleton(typeof(IModuleInitializer), moduleType);
                 }
             }
         }
+
         public static void AddCustomizedDataStore(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContextPool<ShopDbContext>(options => options.UseCustomizedDataStore(configuration));
@@ -189,8 +189,8 @@ namespace Shop.WebApi.Extensions
                     ValidateAudience = false, // 允许匿名
                     ValidateLifetime = false, // in this case, we don't care about the token's expiration date
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = configuration["Authentication:Jwt:Issuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Authentication:Jwt:Key"]))
+                    ValidIssuer = configuration[$"{nameof(AuthenticationOptions)}:Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration[$"{nameof(AuthenticationOptions)}:Jwt:Key"]))
                 };
 
                 // 某些场景下，我们可能会使用Url来传递Token
