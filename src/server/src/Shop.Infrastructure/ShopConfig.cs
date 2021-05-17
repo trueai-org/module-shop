@@ -1,4 +1,6 @@
-﻿namespace Shop.Infrastructure
+﻿using Shop.Infrastructure.Models;
+
+namespace Shop.Infrastructure
 {
     /// <summary>
     /// 商城基础配置
@@ -9,6 +11,11 @@
         /// 商城名称
         /// </summary>
         public string ShopName { get; set; }
+
+        /// <summary>
+        /// 商城环境 DEV FAT UAT PRO
+        /// </summary>
+        public ShopEnv ShopEnv { get; set; }
 
         /// <summary>
         /// Gets the default cache time in minutes

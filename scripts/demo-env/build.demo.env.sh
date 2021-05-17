@@ -2,7 +2,7 @@
 
 # demo shop env
 
-# create network: 
+# create network
 # docker network create demo-shop-net
 
 docker-compose -f docker-compose.demo.env.yml -p demo-shop-env down

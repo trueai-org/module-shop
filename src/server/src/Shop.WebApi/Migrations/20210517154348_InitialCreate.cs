@@ -1779,20 +1779,13 @@ namespace Shop.WebApi.Migrations
                 columns: new[] { "Id", "FormatType", "IsVisibleInCommonSettingPage", "Module", "Note", "Type", "Value" },
                 values: new object[,]
                 {
-                    { "IsReplyAutoApproved", 0, true, "Reviews", null, "System.Boolean", "true" },
-                    { "IsReviewAutoApproved", 0, true, "Reviews", null, "System.Boolean", "false" },
-                    { "MiniProgramOptions", 1, true, "MiniProgram", null, "Shop.Module.Core.MiniProgram.Models.MiniProgramOptions, Shop.Module.Core.MiniProgram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "{\"AppId\":\"wxc90c1e6038******\",\"AppSecret\":\"736192139a4ca393de4a18ce22******\",\"MchId\":\"1526******\",\"Key\":\"jtA9J79YNUXnTRpVntHqTGSF2h******\"}" },
-                    { "HangfireOptions", 1, true, "Hangfire", null, "Shop.Module.Hangfire.Models.HangfireOptions, Shop.Module.Hangfire, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "{\"Provider\":3,\"MySqlHangfireConnection\":\"server=172.16.250.6;PORT=3306;database=demo_shop_hangfire;uid=root;pwd=czYj9hnFaVUfZgm7;Connection Timeout=60;Allow Zero Datetime=True;Allow User Variables=True;pooling=true;min pool size=5;max pool size=512;SslMode=None;\",\"SqlServerHangfireConnection\":\"Data Source=127.0.0.1;Initial Catalog=ShopHangfire;User ID=sa;Password=******\",\"RedisHangfireConnection\":\"127.0.0.1:16379,password=******,allowadmin=true\",\"Username\":\"admin\",\"Password\":\"123456\"}" },
-                    { "OrderCompleteAutoReviewTimeForMinute", 0, true, "Orders", "订单完成后超时自动好评时间（买家未在指定的时间内评价,则系统自动好评，单位：分钟）", "System.Int32", "10080" },
-                    { "OrderAutoCompleteTimeForMinute", 0, true, "Orders", "订单支付后超时自动完成订单时间（买家未在指定的时间内确认收货,则系统自动确认收货完成订单，单位：分钟）", "System.Int32", "10080" },
-                    { "OrderAutoCanceledTimeForMinute", 0, true, "Orders", "订单下单后超时自动取消订单时间（单位：分钟）", "System.Int32", "120" },
-                    { "SmsSenderAliyunOptions", 1, true, "SmsSenderAliyun", null, "Shop.Module.SmsSenderAliyun.Models.SmsSenderAliyunOptions, Shop.Module.SmsSenderAliyun, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "{\"RegionId\":\"default\",\"AccessKeyId\":\"LTAI8v8Crr******\",\"AccessKeySecret\":\"BVZY9tPKjNsuAg2njEgZa1KI******\",\"IsTest\":true}" },
-                    { "EmailSenderSmtpOptions", 1, true, "EmailSenderSmtp", null, "Shop.Module.EmailSenderSmtp.EmailSenderSmtpOptions, Shop.Module.EmailSenderSmtp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "{\"SmtpUserName\":\"system@trueai.org\",\"SmtpPassword\":\"******\",\"SmtpHost\":\"smtp.mxhichina.com\",\"SmtpPort\":587}" },
-                    { "ShopConfig", 1, true, "Core", null, "Shop.Infrastructure.ShopConfig, Shop.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "{\"ShopName\":\"天网商城\",\"CacheTimeInMinutes\":60,\"RedisCachingEnabled\":true,\"RedisCachingConnection\":\"demo-shop-redis:6379,ssl=False,password=qGmNTfPtbQYMX6Qz,allowadmin=true\"}" },
-                    { "WebHost", 0, true, "Core", null, null, "https://demo.shop.circle.ac.cn/" },
-                    { "ApiHost", 0, true, "Core", null, null, "https://demo.shopapi.circle.ac.cn/" },
                     { "Global.AssetVersion", 0, false, "Core", null, null, "1.0" },
-                    { "Catalog.ProductPageSize", 0, true, "Catalog", null, null, "10" }
+                    { "Catalog.ProductPageSize", 0, true, "Catalog", null, null, "10" },
+                    { "OrderAutoCanceledTimeForMinute", 0, true, "Orders", "订单下单后超时自动取消订单时间（单位：分钟）", "System.Int32", "120" },
+                    { "OrderAutoCompleteTimeForMinute", 0, true, "Orders", "订单支付后超时自动完成订单时间（买家未在指定的时间内确认收货,则系统自动确认收货完成订单，单位：分钟）", "System.Int32", "10080" },
+                    { "OrderCompleteAutoReviewTimeForMinute", 0, true, "Orders", "订单完成后超时自动好评时间（买家未在指定的时间内评价,则系统自动好评，单位：分钟）", "System.Int32", "10080" },
+                    { "IsReviewAutoApproved", 0, true, "Reviews", "启用评论自动审核功能", "System.Boolean", "false" },
+                    { "IsReplyAutoApproved", 0, true, "Reviews", "启用回复自动审核功能", "System.Boolean", "true" }
                 });
 
             migrationBuilder.InsertData(
@@ -1810,10 +1803,10 @@ namespace Shop.WebApi.Migrations
                 values: new object[,]
                 {
                     { 11, false, "Reviews", "Reply" },
+                    { 3, false, "Catalog", "Product" },
                     { 10, false, "Reviews", "Review" },
                     { 1, true, "Catalog", "Category" },
-                    { 2, true, "Catalog", "Brand" },
-                    { 3, false, "Catalog", "Product" }
+                    { 2, true, "Catalog", "Brand" }
                 });
 
             migrationBuilder.InsertData(

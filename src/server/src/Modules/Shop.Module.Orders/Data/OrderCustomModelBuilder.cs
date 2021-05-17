@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
 using Shop.Module.Core.Entities;
-using Shop.Module.Orders.Data;
 using Shop.Module.Orders.Entities;
 using Shop.Module.Orders.Events;
 
@@ -37,14 +35,13 @@ namespace Shop.Module.Orders.Data
                 .HasForeignKey(x => x.BillingAddressId);
             });
 
-            var cfg = GlobalConfiguration.Configuration;
-
+            var opt = new OrderOptions();
             modelBuilder.Entity<AppSetting>().HasData(
                 new AppSetting(OrderKeys.OrderAutoCanceledTimeForMinute)
                 {
                     Module = module,
                     IsVisibleInCommonSettingPage = true,
-                    Value = cfg[$"{nameof(OrderOptions)}:{nameof(OrderOptions.OrderAutoCanceledTimeForMinute)}"],
+                    Value = opt.OrderAutoCanceledTimeForMinute.ToString(),
                     Type = typeof(int).FullName,
                     Note = "订单下单后超时自动取消订单时间（单位：分钟）"
                 },
@@ -52,7 +49,7 @@ namespace Shop.Module.Orders.Data
                 {
                     Module = module,
                     IsVisibleInCommonSettingPage = true,
-                    Value = cfg[$"{nameof(OrderOptions)}:{nameof(OrderOptions.OrderAutoCompleteTimeForMinute)}"],
+                    Value = opt.OrderAutoCompleteTimeForMinute.ToString(),
                     Type = typeof(int).FullName,
                     Note = "订单支付后超时自动完成订单时间（买家未在指定的时间内确认收货,则系统自动确认收货完成订单，单位：分钟）"
                 },
@@ -60,7 +57,7 @@ namespace Shop.Module.Orders.Data
                 {
                     Module = module,
                     IsVisibleInCommonSettingPage = true,
-                    Value = cfg[$"{nameof(OrderOptions)}:{nameof(OrderOptions.OrderCompleteAutoReviewTimeForMinute)}"],
+                    Value = opt.OrderCompleteAutoReviewTimeForMinute.ToString(),
                     Type = typeof(int).FullName,
                     Note = "订单完成后超时自动好评时间（买家未在指定的时间内评价,则系统自动好评，单位：分钟）"
                 });

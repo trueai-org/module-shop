@@ -14,7 +14,7 @@ namespace Shop.WebApi.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.10")
+                .HasAnnotation("ProductVersion", "3.1.15")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -80,7 +80,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Core_UserToken");
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.Brand", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.Brand", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -116,7 +116,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Catalog_Brand");
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.Category", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -177,7 +177,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Catalog_Category");
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.Product", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -390,7 +390,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Catalog_Product");
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductAttribute", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductAttribute", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -420,7 +420,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Catalog_ProductAttribute");
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductAttributeData", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductAttributeData", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -456,7 +456,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Catalog_ProductAttributeData");
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductAttributeGroup", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductAttributeGroup", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -481,7 +481,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Catalog_ProductAttributeGroup");
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductAttributeTemplate", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductAttributeTemplate", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -506,7 +506,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Catalog_ProductAttributeTemplate");
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductAttributeTemplateRelation", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductAttributeTemplateRelation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -536,7 +536,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Catalog_ProductAttributeTemplateRelation");
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductAttributeValue", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductAttributeValue", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -572,7 +572,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Catalog_ProductAttributeValue");
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductCategory", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -608,7 +608,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Catalog_ProductCategory");
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductLink", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductLink", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -641,7 +641,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Catalog_ProductLink");
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductMedia", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductMedia", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -674,7 +674,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Catalog_ProductMedia");
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductOption", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductOption", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -722,7 +722,7 @@ namespace Shop.WebApi.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductOptionCombination", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductOptionCombination", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -759,7 +759,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Catalog_ProductOptionCombination");
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductOptionData", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductOptionData", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -799,7 +799,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Catalog_ProductOptionData");
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductOptionValue", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductOptionValue", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -848,7 +848,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Catalog_ProductOptionValue");
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductPriceHistory", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductPriceHistory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -898,7 +898,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Catalog_ProductPriceHistory");
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductRecentlyViewed", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductRecentlyViewed", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -931,7 +931,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Catalog_ProductRecentlyViewed");
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductWishlist", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductWishlist", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -968,7 +968,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Catalog_ProductWishlist");
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.Unit", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.Unit", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -991,7 +991,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Catalog_Unit");
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.Address", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1045,7 +1045,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Core_Address");
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.AppSetting", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.AppSetting", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
@@ -1128,6 +1128,7 @@ namespace Shop.WebApi.Migrations
                             FormatType = 0,
                             IsVisibleInCommonSettingPage = true,
                             Module = "Reviews",
+                            Note = "启用评论自动审核功能",
                             Type = "System.Boolean",
                             Value = "false"
                         },
@@ -1137,12 +1138,13 @@ namespace Shop.WebApi.Migrations
                             FormatType = 0,
                             IsVisibleInCommonSettingPage = true,
                             Module = "Reviews",
+                            Note = "启用回复自动审核功能",
                             Type = "System.Boolean",
                             Value = "true"
                         });
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.Country", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.Country", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1233,7 +1235,7 @@ namespace Shop.WebApi.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.EmailSend", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.EmailSend", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1289,7 +1291,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Core_EmailSend");
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.Entity", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.Entity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1327,7 +1329,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Core_Entity");
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.EntityType", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.EntityType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1388,7 +1390,7 @@ namespace Shop.WebApi.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.Media", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.Media", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1438,7 +1440,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Core_Media");
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.Role", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1488,7 +1490,7 @@ namespace Shop.WebApi.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.SmsSend", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.SmsSend", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1557,7 +1559,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Core_SmsSend");
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.StateOrProvince", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.StateOrProvince", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1605,7 +1607,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Core_StateOrProvince");
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.User", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1789,7 +1791,7 @@ namespace Shop.WebApi.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.UserAddress", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.UserAddress", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1819,7 +1821,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Core_UserAddress");
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.UserLogin", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.UserLogin", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
@@ -1856,7 +1858,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Core_UserLogin");
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.UserRole", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.UserRole", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -1883,7 +1885,7 @@ namespace Shop.WebApi.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.Widget", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.Widget", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1976,7 +1978,7 @@ namespace Shop.WebApi.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.WidgetInstance", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.WidgetInstance", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2024,7 +2026,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Core_WidgetInstance");
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.WidgetZone", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.WidgetZone", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2066,7 +2068,7 @@ namespace Shop.WebApi.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Shop.Module.Feedbacks.Abstractions.Entities.Feedback", b =>
+            modelBuilder.Entity("Shop.Module.Feedbacks.Entities.Feedback", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2105,7 +2107,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Feedbacks_Feedback");
                 });
 
-            modelBuilder.Entity("Shop.Module.Inventory.Abstractions.Entities.Stock", b =>
+            modelBuilder.Entity("Shop.Module.Inventory.Entities.Stock", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2151,7 +2153,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Inventory_Stock");
                 });
 
-            modelBuilder.Entity("Shop.Module.Inventory.Abstractions.Entities.StockHistory", b =>
+            modelBuilder.Entity("Shop.Module.Inventory.Entities.StockHistory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2200,7 +2202,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Inventory_StockHistory");
                 });
 
-            modelBuilder.Entity("Shop.Module.Inventory.Abstractions.Entities.Warehouse", b =>
+            modelBuilder.Entity("Shop.Module.Inventory.Entities.Warehouse", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2233,7 +2235,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Inventory_Warehouse");
                 });
 
-            modelBuilder.Entity("Shop.Module.Orders.Abstractions.Entities.Order", b =>
+            modelBuilder.Entity("Shop.Module.Orders.Entities.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2369,7 +2371,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Orders_Order");
                 });
 
-            modelBuilder.Entity("Shop.Module.Orders.Abstractions.Entities.OrderHistory", b =>
+            modelBuilder.Entity("Shop.Module.Orders.Entities.OrderHistory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2416,7 +2418,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Orders_OrderHistory");
                 });
 
-            modelBuilder.Entity("Shop.Module.Orders.Abstractions.Entities.OrderItem", b =>
+            modelBuilder.Entity("Shop.Module.Orders.Entities.OrderItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2483,7 +2485,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Orders_OrderItem");
                 });
 
-            modelBuilder.Entity("Shop.Module.Orders.Abstractions.Events.OrderAddress", b =>
+            modelBuilder.Entity("Shop.Module.Orders.Events.OrderAddress", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2545,7 +2547,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Orders_OrderAddress");
                 });
 
-            modelBuilder.Entity("Shop.Module.Reviews.Abstractions.Entities.Review", b =>
+            modelBuilder.Entity("Shop.Module.Reviews.Entities.Review", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2609,7 +2611,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Reviews_Review");
                 });
 
-            modelBuilder.Entity("Shop.Module.Reviews.Abstractions.Entities.ReviewMedia", b =>
+            modelBuilder.Entity("Shop.Module.Reviews.Entities.ReviewMedia", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2642,7 +2644,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Reviews_ReviewMedia");
                 });
 
-            modelBuilder.Entity("Shop.Module.Reviews.Abstractions.Entities.Support", b =>
+            modelBuilder.Entity("Shop.Module.Reviews.Entities.Support", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2678,7 +2680,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Reviews_Support");
                 });
 
-            modelBuilder.Entity("Shop.Module.Reviews.Abstractions.Services.Reply", b =>
+            modelBuilder.Entity("Shop.Module.Reviews.Services.Reply", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2739,7 +2741,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Reviews_Reply");
                 });
 
-            modelBuilder.Entity("Shop.Module.Shipments.Abstractions.Entities.Shipment", b =>
+            modelBuilder.Entity("Shop.Module.Shipments.Entities.Shipment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2794,7 +2796,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Shipments_Shipment");
                 });
 
-            modelBuilder.Entity("Shop.Module.Shipments.Abstractions.Entities.ShipmentItem", b =>
+            modelBuilder.Entity("Shop.Module.Shipments.Entities.ShipmentItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2842,7 +2844,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Shipments_ShipmentItem");
                 });
 
-            modelBuilder.Entity("Shop.Module.Shipping.Abstractions.Entities.FreightTemplate", b =>
+            modelBuilder.Entity("Shop.Module.Shipping.Entities.FreightTemplate", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2869,7 +2871,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Shipping_FreightTemplate");
                 });
 
-            modelBuilder.Entity("Shop.Module.Shipping.Abstractions.Entities.PriceAndDestination", b =>
+            modelBuilder.Entity("Shop.Module.Shipping.Entities.PriceAndDestination", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2916,7 +2918,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("Shipping_PriceAndDestination");
                 });
 
-            modelBuilder.Entity("Shop.Module.ShoppingCart.Abstractions.Entities.Cart", b =>
+            modelBuilder.Entity("Shop.Module.ShoppingCart.Entities.Cart", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2975,7 +2977,7 @@ namespace Shop.WebApi.Migrations
                     b.ToTable("ShoppingCart_Cart");
                 });
 
-            modelBuilder.Entity("Shop.Module.ShoppingCart.Abstractions.Entities.CartItem", b =>
+            modelBuilder.Entity("Shop.Module.ShoppingCart.Entities.CartItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -3023,7 +3025,7 @@ namespace Shop.WebApi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.Role", null)
+                    b.HasOne("Shop.Module.Core.Entities.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3032,7 +3034,7 @@ namespace Shop.WebApi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", null)
+                    b.HasOne("Shop.Module.Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3041,93 +3043,93 @@ namespace Shop.WebApi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", null)
+                    b.HasOne("Shop.Module.Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.Category", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.Category", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.Media", "Media")
+                    b.HasOne("Shop.Module.Core.Entities.Media", "Media")
                         .WithMany()
                         .HasForeignKey("MediaId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Category", "Parent")
+                    b.HasOne("Shop.Module.Catalog.Entities.Category", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.Product", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.Product", b =>
                 {
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Brand", "Brand")
+                    b.HasOne("Shop.Module.Catalog.Entities.Brand", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "CreatedBy")
+                    b.HasOne("Shop.Module.Core.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Shipping.Abstractions.Entities.FreightTemplate", "FreightTemplate")
+                    b.HasOne("Shop.Module.Shipping.Entities.FreightTemplate", "FreightTemplate")
                         .WithMany()
                         .HasForeignKey("FreightTemplateId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "ParentProduct")
+                    b.HasOne("Shop.Module.Catalog.Entities.Product", "ParentProduct")
                         .WithMany("Childrens")
                         .HasForeignKey("ParentGroupedProductId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.Media", "ThumbnailImage")
+                    b.HasOne("Shop.Module.Core.Entities.Media", "ThumbnailImage")
                         .WithMany()
                         .HasForeignKey("ThumbnailImageId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Unit", "Unit")
+                    b.HasOne("Shop.Module.Catalog.Entities.Unit", "Unit")
                         .WithMany()
                         .HasForeignKey("UnitId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "UpdatedBy")
+                    b.HasOne("Shop.Module.Core.Entities.User", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductAttribute", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductAttribute", b =>
                 {
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.ProductAttributeGroup", "Group")
+                    b.HasOne("Shop.Module.Catalog.Entities.ProductAttributeGroup", "Group")
                         .WithMany("Attributes")
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductAttributeData", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductAttributeData", b =>
                 {
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.ProductAttribute", "Attribute")
+                    b.HasOne("Shop.Module.Catalog.Entities.ProductAttribute", "Attribute")
                         .WithMany()
                         .HasForeignKey("AttributeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductAttributeTemplateRelation", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductAttributeTemplateRelation", b =>
                 {
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.ProductAttribute", "Attribute")
+                    b.HasOne("Shop.Module.Catalog.Entities.ProductAttribute", "Attribute")
                         .WithMany("ProductTemplates")
                         .HasForeignKey("AttributeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.ProductAttributeTemplate", "Template")
+                    b.HasOne("Shop.Module.Catalog.Entities.ProductAttributeTemplate", "Template")
                         .WithMany("ProductAttributes")
                         .HasForeignKey("TemplateId")
                         .HasConstraintName("FK_Catalog_ProductAttributeTemplateRelation_Catalog_ProductAtt~1")
@@ -3135,606 +3137,606 @@ namespace Shop.WebApi.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductAttributeValue", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductAttributeValue", b =>
                 {
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.ProductAttribute", "Attribute")
+                    b.HasOne("Shop.Module.Catalog.Entities.ProductAttribute", "Attribute")
                         .WithMany()
                         .HasForeignKey("AttributeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
+                    b.HasOne("Shop.Module.Catalog.Entities.Product", "Product")
                         .WithMany("AttributeValues")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductCategory", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductCategory", b =>
                 {
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Category", "Category")
+                    b.HasOne("Shop.Module.Catalog.Entities.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
+                    b.HasOne("Shop.Module.Catalog.Entities.Product", "Product")
                         .WithMany("Categories")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductLink", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductLink", b =>
                 {
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "LinkedProduct")
+                    b.HasOne("Shop.Module.Catalog.Entities.Product", "LinkedProduct")
                         .WithMany()
                         .HasForeignKey("LinkedProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
+                    b.HasOne("Shop.Module.Catalog.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductMedia", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductMedia", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.Media", "Media")
+                    b.HasOne("Shop.Module.Core.Entities.Media", "Media")
                         .WithMany()
                         .HasForeignKey("MediaId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
+                    b.HasOne("Shop.Module.Catalog.Entities.Product", "Product")
                         .WithMany("Medias")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductOptionCombination", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductOptionCombination", b =>
                 {
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.ProductOption", "Option")
+                    b.HasOne("Shop.Module.Catalog.Entities.ProductOption", "Option")
                         .WithMany()
                         .HasForeignKey("OptionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
+                    b.HasOne("Shop.Module.Catalog.Entities.Product", "Product")
                         .WithMany("OptionCombinations")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductOptionData", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductOptionData", b =>
                 {
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.ProductOption", "Option")
+                    b.HasOne("Shop.Module.Catalog.Entities.ProductOption", "Option")
                         .WithMany()
                         .HasForeignKey("OptionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductOptionValue", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductOptionValue", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.Media", "Media")
+                    b.HasOne("Shop.Module.Core.Entities.Media", "Media")
                         .WithMany()
                         .HasForeignKey("MediaId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.ProductOption", "Option")
+                    b.HasOne("Shop.Module.Catalog.Entities.ProductOption", "Option")
                         .WithMany()
                         .HasForeignKey("OptionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
+                    b.HasOne("Shop.Module.Catalog.Entities.Product", "Product")
                         .WithMany("OptionValues")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductPriceHistory", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductPriceHistory", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "CreatedBy")
+                    b.HasOne("Shop.Module.Core.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
+                    b.HasOne("Shop.Module.Catalog.Entities.Product", "Product")
                         .WithMany("PriceHistories")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "UpdatedBy")
+                    b.HasOne("Shop.Module.Core.Entities.User", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductRecentlyViewed", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductRecentlyViewed", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "Customer")
+                    b.HasOne("Shop.Module.Core.Entities.User", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
+                    b.HasOne("Shop.Module.Catalog.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Catalog.Abstractions.Entities.ProductWishlist", b =>
+            modelBuilder.Entity("Shop.Module.Catalog.Entities.ProductWishlist", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "Customer")
+                    b.HasOne("Shop.Module.Core.Entities.User", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
+                    b.HasOne("Shop.Module.Catalog.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.Address", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.Address", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.Country", "Country")
+                    b.HasOne("Shop.Module.Core.Entities.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.StateOrProvince", "StateOrProvince")
+                    b.HasOne("Shop.Module.Core.Entities.StateOrProvince", "StateOrProvince")
                         .WithMany()
                         .HasForeignKey("StateOrProvinceId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.Entity", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.Entity", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.EntityType", "EntityType")
+                    b.HasOne("Shop.Module.Core.Entities.EntityType", "EntityType")
                         .WithMany()
                         .HasForeignKey("EntityTypeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.StateOrProvince", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.StateOrProvince", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.Country", "Country")
+                    b.HasOne("Shop.Module.Core.Entities.Country", "Country")
                         .WithMany("StatesOrProvinces")
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.StateOrProvince", "Parent")
+                    b.HasOne("Shop.Module.Core.Entities.StateOrProvince", "Parent")
                         .WithMany()
                         .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.User", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.User", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.Media", "Avatar")
+                    b.HasOne("Shop.Module.Core.Entities.Media", "Avatar")
                         .WithMany()
                         .HasForeignKey("AvatarId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.UserAddress", "DefaultBillingAddress")
+                    b.HasOne("Shop.Module.Core.Entities.UserAddress", "DefaultBillingAddress")
                         .WithMany()
                         .HasForeignKey("DefaultBillingAddressId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.UserAddress", "DefaultShippingAddress")
+                    b.HasOne("Shop.Module.Core.Entities.UserAddress", "DefaultShippingAddress")
                         .WithMany()
                         .HasForeignKey("DefaultShippingAddressId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.UserAddress", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.UserAddress", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.Address", "Address")
+                    b.HasOne("Shop.Module.Core.Entities.Address", "Address")
                         .WithMany("UserAddresses")
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "User")
+                    b.HasOne("Shop.Module.Core.Entities.User", "User")
                         .WithMany("UserAddresses")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.UserLogin", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.UserLogin", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", null)
+                    b.HasOne("Shop.Module.Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.UserRole", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.UserRole", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.Role", "Role")
+                    b.HasOne("Shop.Module.Core.Entities.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "User")
+                    b.HasOne("Shop.Module.Core.Entities.User", "User")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Core.Abstractions.Entities.WidgetInstance", b =>
+            modelBuilder.Entity("Shop.Module.Core.Entities.WidgetInstance", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.Widget", "Widget")
+                    b.HasOne("Shop.Module.Core.Entities.Widget", "Widget")
                         .WithMany()
                         .HasForeignKey("WidgetId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.WidgetZone", "WidgetZone")
+                    b.HasOne("Shop.Module.Core.Entities.WidgetZone", "WidgetZone")
                         .WithMany()
                         .HasForeignKey("WidgetZoneId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Feedbacks.Abstractions.Entities.Feedback", b =>
+            modelBuilder.Entity("Shop.Module.Feedbacks.Entities.Feedback", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "User")
+                    b.HasOne("Shop.Module.Core.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("Shop.Module.Inventory.Abstractions.Entities.Stock", b =>
+            modelBuilder.Entity("Shop.Module.Inventory.Entities.Stock", b =>
                 {
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
+                    b.HasOne("Shop.Module.Catalog.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Inventory.Abstractions.Entities.Warehouse", "Warehouse")
+                    b.HasOne("Shop.Module.Inventory.Entities.Warehouse", "Warehouse")
                         .WithMany()
                         .HasForeignKey("WarehouseId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Inventory.Abstractions.Entities.StockHistory", b =>
+            modelBuilder.Entity("Shop.Module.Inventory.Entities.StockHistory", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "CreatedBy")
+                    b.HasOne("Shop.Module.Core.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
+                    b.HasOne("Shop.Module.Catalog.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "UpdatedBy")
+                    b.HasOne("Shop.Module.Core.Entities.User", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Inventory.Abstractions.Entities.Warehouse", "Warehouse")
+                    b.HasOne("Shop.Module.Inventory.Entities.Warehouse", "Warehouse")
                         .WithMany()
                         .HasForeignKey("WarehouseId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Inventory.Abstractions.Entities.Warehouse", b =>
+            modelBuilder.Entity("Shop.Module.Inventory.Entities.Warehouse", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.Address", "Address")
+                    b.HasOne("Shop.Module.Core.Entities.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Orders.Abstractions.Entities.Order", b =>
+            modelBuilder.Entity("Shop.Module.Orders.Entities.Order", b =>
                 {
-                    b.HasOne("Shop.Module.Orders.Abstractions.Events.OrderAddress", "BillingAddress")
+                    b.HasOne("Shop.Module.Orders.Events.OrderAddress", "BillingAddress")
                         .WithMany()
                         .HasForeignKey("BillingAddressId");
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "CreatedBy")
+                    b.HasOne("Shop.Module.Core.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "Customer")
+                    b.HasOne("Shop.Module.Core.Entities.User", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Orders.Abstractions.Events.OrderAddress", "ShippingAddress")
+                    b.HasOne("Shop.Module.Orders.Events.OrderAddress", "ShippingAddress")
                         .WithMany()
                         .HasForeignKey("ShippingAddressId");
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "UpdatedBy")
+                    b.HasOne("Shop.Module.Core.Entities.User", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Orders.Abstractions.Entities.OrderHistory", b =>
+            modelBuilder.Entity("Shop.Module.Orders.Entities.OrderHistory", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "CreatedBy")
+                    b.HasOne("Shop.Module.Core.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Orders.Abstractions.Entities.Order", "Order")
+                    b.HasOne("Shop.Module.Orders.Entities.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "UpdatedBy")
+                    b.HasOne("Shop.Module.Core.Entities.User", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Orders.Abstractions.Entities.OrderItem", b =>
+            modelBuilder.Entity("Shop.Module.Orders.Entities.OrderItem", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "CreatedBy")
+                    b.HasOne("Shop.Module.Core.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Orders.Abstractions.Entities.Order", "Order")
+                    b.HasOne("Shop.Module.Orders.Entities.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
+                    b.HasOne("Shop.Module.Catalog.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "UpdatedBy")
+                    b.HasOne("Shop.Module.Core.Entities.User", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Orders.Abstractions.Events.OrderAddress", b =>
+            modelBuilder.Entity("Shop.Module.Orders.Events.OrderAddress", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.Country", "Country")
+                    b.HasOne("Shop.Module.Core.Entities.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Orders.Abstractions.Entities.Order", "Order")
+                    b.HasOne("Shop.Module.Orders.Entities.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.StateOrProvince", "StateOrProvince")
+                    b.HasOne("Shop.Module.Core.Entities.StateOrProvince", "StateOrProvince")
                         .WithMany()
                         .HasForeignKey("StateOrProvinceId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Reviews.Abstractions.Entities.Review", b =>
+            modelBuilder.Entity("Shop.Module.Reviews.Entities.Review", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "User")
+                    b.HasOne("Shop.Module.Core.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Reviews.Abstractions.Entities.ReviewMedia", b =>
+            modelBuilder.Entity("Shop.Module.Reviews.Entities.ReviewMedia", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.Media", "Media")
+                    b.HasOne("Shop.Module.Core.Entities.Media", "Media")
                         .WithMany()
                         .HasForeignKey("MediaId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Reviews.Abstractions.Entities.Review", "Review")
+                    b.HasOne("Shop.Module.Reviews.Entities.Review", "Review")
                         .WithMany("Medias")
                         .HasForeignKey("ReviewId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Reviews.Abstractions.Entities.Support", b =>
+            modelBuilder.Entity("Shop.Module.Reviews.Entities.Support", b =>
                 {
-                    b.HasOne("Shop.Module.Reviews.Abstractions.Entities.Review", null)
+                    b.HasOne("Shop.Module.Reviews.Entities.Review", null)
                         .WithMany("Supports")
                         .HasForeignKey("ReviewId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "User")
+                    b.HasOne("Shop.Module.Core.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Reviews.Abstractions.Services.Reply", b =>
+            modelBuilder.Entity("Shop.Module.Reviews.Services.Reply", b =>
                 {
-                    b.HasOne("Shop.Module.Reviews.Abstractions.Services.Reply", "Parent")
+                    b.HasOne("Shop.Module.Reviews.Services.Reply", "Parent")
                         .WithMany("Childrens")
                         .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Shop.Module.Reviews.Abstractions.Entities.Review", "Review")
+                    b.HasOne("Shop.Module.Reviews.Entities.Review", "Review")
                         .WithMany("Replies")
                         .HasForeignKey("ReviewId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "ToUser")
+                    b.HasOne("Shop.Module.Core.Entities.User", "ToUser")
                         .WithMany()
                         .HasForeignKey("ToUserId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "User")
+                    b.HasOne("Shop.Module.Core.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Shipments.Abstractions.Entities.Shipment", b =>
+            modelBuilder.Entity("Shop.Module.Shipments.Entities.Shipment", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "CreatedBy")
+                    b.HasOne("Shop.Module.Core.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Orders.Abstractions.Entities.Order", "Order")
+                    b.HasOne("Shop.Module.Orders.Entities.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "UpdatedBy")
+                    b.HasOne("Shop.Module.Core.Entities.User", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Shipments.Abstractions.Entities.ShipmentItem", b =>
+            modelBuilder.Entity("Shop.Module.Shipments.Entities.ShipmentItem", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "CreatedBy")
+                    b.HasOne("Shop.Module.Core.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Orders.Abstractions.Entities.OrderItem", "OrderItem")
+                    b.HasOne("Shop.Module.Orders.Entities.OrderItem", "OrderItem")
                         .WithMany()
                         .HasForeignKey("OrderItemId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
+                    b.HasOne("Shop.Module.Catalog.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Shipments.Abstractions.Entities.Shipment", "Shipment")
+                    b.HasOne("Shop.Module.Shipments.Entities.Shipment", "Shipment")
                         .WithMany("Items")
                         .HasForeignKey("ShipmentId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "UpdatedBy")
+                    b.HasOne("Shop.Module.Core.Entities.User", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.Shipping.Abstractions.Entities.PriceAndDestination", b =>
+            modelBuilder.Entity("Shop.Module.Shipping.Entities.PriceAndDestination", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.Country", "Country")
+                    b.HasOne("Shop.Module.Core.Entities.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Shipping.Abstractions.Entities.FreightTemplate", "FreightTemplate")
+                    b.HasOne("Shop.Module.Shipping.Entities.FreightTemplate", "FreightTemplate")
                         .WithMany("PriceAndDestinations")
                         .HasForeignKey("FreightTemplateId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.StateOrProvince", "StateOrProvince")
+                    b.HasOne("Shop.Module.Core.Entities.StateOrProvince", "StateOrProvince")
                         .WithMany()
                         .HasForeignKey("StateOrProvinceId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("Shop.Module.ShoppingCart.Abstractions.Entities.Cart", b =>
+            modelBuilder.Entity("Shop.Module.ShoppingCart.Entities.Cart", b =>
                 {
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "CreatedBy")
+                    b.HasOne("Shop.Module.Core.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "Customer")
+                    b.HasOne("Shop.Module.Core.Entities.User", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "UpdatedBy")
+                    b.HasOne("Shop.Module.Core.Entities.User", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Module.ShoppingCart.Abstractions.Entities.CartItem", b =>
+            modelBuilder.Entity("Shop.Module.ShoppingCart.Entities.CartItem", b =>
                 {
-                    b.HasOne("Shop.Module.ShoppingCart.Abstractions.Entities.Cart", "Cart")
+                    b.HasOne("Shop.Module.ShoppingCart.Entities.Cart", "Cart")
                         .WithMany("Items")
                         .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "CreatedBy")
+                    b.HasOne("Shop.Module.Core.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Catalog.Abstractions.Entities.Product", "Product")
+                    b.HasOne("Shop.Module.Catalog.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Shop.Module.Core.Abstractions.Entities.User", "UpdatedBy")
+                    b.HasOne("Shop.Module.Core.Entities.User", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById")
                         .OnDelete(DeleteBehavior.Restrict)

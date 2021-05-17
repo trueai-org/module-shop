@@ -71,6 +71,4 @@
 	  <Folder Include="logs\" />
 	</ItemGroup>
 
-	<ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" appsettings_1production_1json__JsonSchema="https://beaujs.com/schema.json" /></VisualStudio></ProjectExtensions>
-	
 </Project>

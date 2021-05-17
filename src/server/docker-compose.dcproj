@@ -9,11 +9,7 @@
     <DockerServiceName>shop.webapi</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="build.demo.env.sh" />
     <None Include="build.sh" />
-    <None Include="build.demo.sh" />
-    <None Include="docker-compose.demo.env.yml" />
-    <None Include="docker-compose.demo.yml" />
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>
