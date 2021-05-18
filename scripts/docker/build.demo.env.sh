@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# demo shop env
-
 # create network
 # docker network create demo-shop-net
 
