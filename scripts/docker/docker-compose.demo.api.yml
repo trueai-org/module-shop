@@ -4,7 +4,7 @@ services:
   shop.api:
     build:
       context: .
-      dockerfile: ../../src/Shop.WebApi/Dockerfile
+      dockerfile: ../../src/server/src/Shop.WebApi/Dockerfile
     container_name: demo-shop-api
     ports:
       - "9101:80"
