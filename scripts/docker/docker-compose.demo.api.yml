@@ -3,7 +3,7 @@ version: '3.4'
 services:
   shop.api:
     build:
-      context: .
+      context: ../../src/server/.
       dockerfile: ../../src/server/src/Shop.WebApi/Dockerfile
     container_name: demo-shop-api
     ports:
