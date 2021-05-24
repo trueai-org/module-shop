@@ -17,10 +17,10 @@ namespace Shop.Module.Core
     {
         public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
-            var config = new ShopConfig();
-            var configSection = configuration.GetSection(nameof(ShopConfig));
+            var config = new ShopOptions();
+            var configSection = configuration.GetSection(nameof(ShopOptions));
             configSection.Bind(config);
-            services.Configure<ShopConfig>(configSection);
+            services.Configure<ShopOptions>(configSection);
             services.Configure<AuthenticationOptions>(configuration.GetSection(nameof(AuthenticationOptions)));
   
             services.AddTransient<IEntityService, EntityService>();

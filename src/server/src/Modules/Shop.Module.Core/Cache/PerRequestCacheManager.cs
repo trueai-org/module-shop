@@ -16,13 +16,13 @@ namespace Shop.Module.Core.Cache
         #region Fields
 
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly ShopConfig _config;
+        private readonly ShopOptions _config;
 
         #endregion
 
         #region Ctor
 
-        public PerRequestCacheManager(IHttpContextAccessor httpContextAccessor, IOptionsMonitor<ShopConfig> config)
+        public PerRequestCacheManager(IHttpContextAccessor httpContextAccessor, IOptionsMonitor<ShopOptions> config)
         {
             _httpContextAccessor = httpContextAccessor;
             _config = config.CurrentValue;

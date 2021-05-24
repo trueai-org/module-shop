@@ -23,15 +23,14 @@ namespace Shop.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-
             services.AddCustomizedConfigureServices(Configuration, Environment);
 
-            // swagger
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Shop Api", Version = "1.0.0" });
             });
+
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +46,6 @@ namespace Shop.WebApi
                 app.UseHsts();
             }
 
-            // swagger
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -56,7 +54,7 @@ namespace Shop.WebApi
 
             app.UseCustomizedConfigure(env);
 
-            // app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 

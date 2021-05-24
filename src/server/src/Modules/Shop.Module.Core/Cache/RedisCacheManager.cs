@@ -22,7 +22,7 @@ namespace Shop.Module.Core.Cache
 
         private readonly IDatabase _db;
 
-        private readonly ShopConfig _config;
+        private readonly ShopOptions _config;
         #endregion
 
         #region Ctor
@@ -30,7 +30,7 @@ namespace Shop.Module.Core.Cache
         public RedisCacheManager(
             ICacheManager perRequestCacheManager,
             IRedisConnectionWrapper connectionWrapper,
-            IOptionsMonitor<ShopConfig> config)
+            IOptionsMonitor<ShopOptions> config)
         {
             if (string.IsNullOrWhiteSpace(config?.CurrentValue?.RedisCachingConnection))
                 throw new Exception("Redis connection string is empty");

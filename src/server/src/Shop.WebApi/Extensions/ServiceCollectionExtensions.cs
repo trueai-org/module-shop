@@ -44,19 +44,6 @@ namespace Shop.WebApi.Extensions
             services.AddCustomizedDataStore(configuration);
             services.AddCustomizedIdentity(configuration);
 
-            // 在core中注入配置
-            //services.AddCustomizedShopConfig(configuration);
-            //public static void AddCustomizedShopConfig(this IServiceCollection services, IConfiguration configuration)
-            //{
-            //    var config = new ShopConfig();
-            //    configuration.GetSection("Shop").Bind(config);
-            //    services.AddSingleton(config);
-
-            //    var authConfig = new AuthenticationConfig();
-            //    configuration.GetSection("Authentication").Bind(authConfig);
-            //    services.AddSingleton(authConfig);
-            //}
-
             services.AddHttpClient();
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient(typeof(IRepositoryWithTypedId<,>), typeof(RepositoryWithTypedId<,>));
@@ -134,8 +121,9 @@ namespace Shop.WebApi.Extensions
 
             foreach (var module in modules)
             {
-                module.Assembly = Assembly.Load(new AssemblyName(module.Id));
                 GlobalConfiguration.Modules.Add(module);
+
+                module.Assembly = Assembly.Load(new AssemblyName(module.Id));
 
                 var moduleType = module.Assembly.GetTypes().FirstOrDefault(t => typeof(IModuleInitializer).IsAssignableFrom(t));
                 if ((moduleType != null) && (moduleType != typeof(IModuleInitializer)))
@@ -176,7 +164,7 @@ namespace Shop.WebApi.Extensions
 
             services.AddAuthentication(options =>
             {
-                // 302 ?
+                // 302
                 // or [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;

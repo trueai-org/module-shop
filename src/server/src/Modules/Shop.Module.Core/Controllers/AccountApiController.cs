@@ -55,7 +55,7 @@ namespace Shop.Module.Core.Controllers
             IJobService jobService,
             IRepository<Media> mediaRepository,
             IAccountService accountService,
-            IOptionsMonitor<ShopConfig> config)
+            IOptionsMonitor<ShopOptions> config)
         {
             _smsSendRepository = smsSendRepository;
             _userManager = userManager;

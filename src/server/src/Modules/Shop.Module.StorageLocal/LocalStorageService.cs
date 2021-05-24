@@ -21,7 +21,7 @@ namespace Shop.Module.StorageLocal
 
         public LocalStorageService(
              IRepository<Media> mediaRepository,
-             IOptionsMonitor<ShopConfig> options)
+             IOptionsMonitor<ShopOptions> options)
         {
             host = options.CurrentValue.ApiHost;
             _mediaRepository = mediaRepository;

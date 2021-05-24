@@ -1,4 +1,7 @@
-﻿using Shop.Module.Core.Cache;
+﻿using Microsoft.Extensions.Options;
+using Shop.Infrastructure;
+using Shop.Infrastructure.Models;
+using Shop.Module.Core.Cache;
 using Shop.Module.Core.Services;
 using Shop.Module.SampleData.Data;
 using Shop.Module.SampleData.ViewModels;
@@ -14,25 +17,30 @@ namespace Shop.Module.SampleData.Services
         private readonly ISqlRepository _sqlRepository;
         private readonly IMediaService _mediaService;
         private readonly IStaticCacheManager _cache;
+        private readonly IOptionsSnapshot<ShopOptions> _options;
 
         public SampleDataService(
             ISqlRepository sqlRepository,
             IMediaService mediaService,
-            IStaticCacheManager cache)
+            IStaticCacheManager cache,
+            IOptionsSnapshot<ShopOptions> options)
         {
             _sqlRepository = sqlRepository;
             _mediaService = mediaService;
             _cache = cache;
+            _options = options;
         }
 
         public async Task ResetToSampleData(SampleDataOption model)
         {
+            if (_options.Value.ShopEnv == ShopEnv.PRO)
+            {
+                throw new Exception("正式环境不允许此操作！");
+            }
+
             var usePostgres = _sqlRepository.GetDbConnectionType() == "Npgsql.NpgsqlConnection";
             var useSQLite = _sqlRepository.GetDbConnectionType() == "Microsoft.Data.Sqlite.SqliteConnection";
             var useMySql = _sqlRepository.GetDbConnectionType().Contains("MySql");
-
-            //var sampleContentFolder = Path.Combine(GlobalConfiguration.ContentRootPath, "Modules", "Shop.Module.SampleData", "SampleContent", model.Industry);
-            //Directory.GetCurrentDirectory()
 
             var sampleContentFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SampleContent", model.Industry);
             var filePath = usePostgres ? Path.Combine(sampleContentFolder, "ResetToSampleData_Postgres.sql") :

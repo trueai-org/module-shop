@@ -34,6 +34,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Modules\Shop.Module.ApiProfilerAuth\Shop.Module.ApiProfilerAuth.csproj" />
+		<ProjectReference Include="..\Modules\Shop.Module.ApiProfiler\Shop.Module.ApiProfiler.csproj" />
+		<ProjectReference Include="..\Modules\Shop.Module.BasicAuth\Shop.Module.BasicAuth.csproj" />
 		<ProjectReference Include="..\Modules\Shop.Module.Catalog.Abstractions\Shop.Module.Catalog.Abstractions.csproj" />
 		<ProjectReference Include="..\Modules\Shop.Module.Catalog\Shop.Module.Catalog.csproj" />
 		<ProjectReference Include="..\Modules\Shop.Module.Core.Abstractions\Shop.Module.Core.Abstractions.csproj" />
@@ -51,6 +54,7 @@
 		<ProjectReference Include="..\Modules\Shop.Module.Orders\Shop.Module.Orders.csproj" />
 		<ProjectReference Include="..\Modules\Shop.Module.Payments.Abstractions\Shop.Module.Payments.Abstractions.csproj" />
 		<ProjectReference Include="..\Modules\Shop.Module.Payments.Payments\Shop.Module.Payments.Payments.csproj" />
+		<ProjectReference Include="..\Modules\Shop.Module.RateLimit\Shop.Module.RateLimit.csproj" />
 		<ProjectReference Include="..\Modules\Shop.Module.Reviews.Abstractions\Shop.Module.Reviews.Abstractions.csproj" />
 		<ProjectReference Include="..\Modules\Shop.Module.Reviews\Shop.Module.Reviews.csproj" />
 		<ProjectReference Include="..\Modules\Shop.Module.SampleData\Shop.Module.SampleData.csproj" />

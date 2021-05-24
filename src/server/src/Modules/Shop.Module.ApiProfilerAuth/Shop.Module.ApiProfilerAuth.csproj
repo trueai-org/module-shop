@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shop.Infrastructure\Shop.Infrastructure.csproj" />
+    <ProjectReference Include="..\Shop.Module.ApiProfiler\Shop.Module.ApiProfiler.csproj" />
+    <ProjectReference Include="..\Shop.Module.BasicAuth\Shop.Module.BasicAuth.csproj" />
+  </ItemGroup>
+
+</Project>

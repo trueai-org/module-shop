@@ -19,7 +19,7 @@ namespace Shop.Module.Core.Cache
         #region Fields
 
         private readonly IMemoryCache _cache;
-        private readonly ShopConfig _config;
+        private readonly ShopOptions _config;
 
         /// <summary>
         /// All keys of cache
@@ -41,7 +41,7 @@ namespace Shop.Module.Core.Cache
             _allKeys = new ConcurrentDictionary<string, bool>();
         }
 
-        public MemoryCacheManager(IMemoryCache cache, IOptionsMonitor<ShopConfig> config)
+        public MemoryCacheManager(IMemoryCache cache, IOptionsMonitor<ShopOptions> config)
         {
             _cache = cache;
             _config = config.CurrentValue;

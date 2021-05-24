@@ -16,7 +16,7 @@ namespace Shop.Module.Core.Cache
     {
         #region Fields
 
-        private readonly ShopConfig _config;
+        private readonly ShopOptions _config;
         private readonly object _lock = new object();
         private volatile ConnectionMultiplexer _connection;
         private readonly Lazy<string> _connectionString;
@@ -26,7 +26,7 @@ namespace Shop.Module.Core.Cache
 
         #region Ctor
 
-        public RedisConnectionWrapper(IOptionsMonitor<ShopConfig> config)
+        public RedisConnectionWrapper(IOptionsMonitor<ShopOptions> config)
         {
             _config = config.CurrentValue;
             _connectionString = new Lazy<string>(GetConnectionString);

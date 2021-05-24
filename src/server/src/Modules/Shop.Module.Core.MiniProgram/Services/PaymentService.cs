@@ -26,7 +26,7 @@ namespace Shop.Module.Core.MiniProgram.Services
             ILogger<PaymentService> logger,
             IWeChatPayClient client,
             IOptionsMonitor<MiniProgramOptions> options,
-            IOptionsMonitor<ShopConfig> config)
+            IOptionsMonitor<ShopOptions> config)
         {
             _logger = logger;
             _client = client;

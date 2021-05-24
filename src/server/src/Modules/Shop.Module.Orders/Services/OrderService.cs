@@ -51,7 +51,7 @@ namespace Shop.Module.Orders.Services
         private readonly ILocker _locker;
         private readonly IPaymentService _paymentService;
         private readonly IRepository<UserLogin> _userLoginRepository;
-        private readonly ShopConfig _shopConfig;
+        private readonly ShopOptions _shopConfig;
 
         public OrderService(
             IRepository<Order> orderRepository,
@@ -74,7 +74,7 @@ namespace Shop.Module.Orders.Services
             ILocker locker,
             IPaymentService paymentService,
             IRepository<UserLogin> userLoginRepository,
-            IOptionsSnapshot<ShopConfig> shopConfig)
+            IOptionsSnapshot<ShopOptions> shopConfig)
         {
             _orderRepository = orderRepository;
             _orderItemRepository = orderItemRepository;
@@ -382,7 +382,7 @@ namespace Shop.Module.Orders.Services
             var shopConfig = _shopConfig;
             if (string.IsNullOrWhiteSpace(shopConfig?.ShopName))
             {
-                throw new ArgumentNullException(nameof(ShopConfig.ShopName));
+                throw new ArgumentNullException(nameof(ShopOptions.ShopName));
             }
 
             // 生成第三方预支付订单信息

@@ -20,8 +20,9 @@ namespace Shop.WebApi
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(contentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile("appsettings.Modules.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile("appsettings.Modules.json", true, true)
+                .AddJsonFile($"appsettings.RateLimiting.json", true)
                 .AddJsonFile($"appsettings.{environmentName}.json", true);
 
             builder.AddUserSecrets(typeof(MigrationShopDbContextFactory).Assembly, optional: true);
