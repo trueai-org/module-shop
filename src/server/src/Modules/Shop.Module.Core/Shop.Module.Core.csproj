@@ -7,7 +7,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
 		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.11.0" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
 		<PackageReference Include="RedLock.net" Version="2.2.0" />
 		<PackageReference Include="StackExchange.Redis" Version="2.2.4" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.11.0" />
