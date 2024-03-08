@@ -69,8 +69,9 @@ export default {
   },
   proxy: {
     '/api': {
-      target: 'http://localhost:5000/',
+      // target: 'http://localhost:5000/',
       // target: 'http://circle.ac.cn:5020/',
+      target: 'https://demo.shopapi.circle.ac.cn/',
       changeOrigin: true,
       // pathRewrite: { '^/api': '' },
     },
