@@ -2,6 +2,8 @@
 
 一个基于 .NET Core构建的简单、跨平台、模块化的商城系统
 
+已升级 .NET 8.0 支持。
+
 **跨平台**
 
 > Docker, Windows, Linux, Mac. Microsoft SQL Server, PostgreSQL, MySQL, SQLite
