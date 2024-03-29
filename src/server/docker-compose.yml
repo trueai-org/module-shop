@@ -7,7 +7,7 @@ services:
       dockerfile: src/Shop.WebApi/Dockerfile
     container_name: shop-api
     ports:
-      - "6001:80"
+      - "6001:8080"
     restart: always
     networks:
       - shop-net
