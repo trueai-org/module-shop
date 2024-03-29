@@ -17,8 +17,6 @@ namespace Shop.Module.Core.Tests
             //Assert.Equal(true);
         }
 
-
-
         private Mock<IRepository<StateOrProvince>> MakeRepository()
         {
             var pageRepository = new Mock<IRepository<StateOrProvince>>();
@@ -33,7 +31,6 @@ namespace Shop.Module.Core.Tests
             var country = new Country() { Name = "France" };
             var stateOrProvince = new StateOrProvince { Name = "IDF", Country = country };
 
-
             var address = new Address
             {
                 CountryId = 1,
@@ -46,7 +43,6 @@ namespace Shop.Module.Core.Tests
 
             return userAddress;
         }
-
 
         //private DefaultShippingAddressViewComponent MakeMockedDefaultAddressViewComponent(UserAddress address, User user)
         //{
