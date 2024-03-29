@@ -1,20 +1,42 @@
-﻿using Com.Ctrip.Framework.Apollo.Logging;
+﻿using AspNetCoreRateLimit;
+using Com.Ctrip.Framework.Apollo.Logging;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Debugging;
 using Shop.Module.Core.Extensions;
 using Shop.WebApi.Extensions;
 using System;
+using System.Threading.Tasks;
 
 namespace Shop.WebApi
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var webHost = CreateHostBuilder(args).Build();
+
+            // AspNetCoreRateLimit
+            // https://github.com/stefanprodan/AspNetCoreRateLimit/wiki/Version-3.0.0-Breaking-Changes
+            using (var scope = webHost.Services.CreateScope())
+            {
+                // get the ClientPolicyStore instance
+                var clientPolicyStore = scope.ServiceProvider.GetRequiredService<IClientPolicyStore>();
+
+                // seed Client data from appsettings
+                await clientPolicyStore.SeedAsync();
+
+                // get the IpPolicyStore instance
+                var ipPolicyStore = scope.ServiceProvider.GetRequiredService<IIpPolicyStore>();
+
+                // seed IP data from appsettings
+                await ipPolicyStore.SeedAsync();
+            }
+
+            await webHost.RunAsync();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
@@ -50,7 +72,7 @@ namespace Shop.WebApi
                 config.AddEntityFrameworkConfig(opt => opt.UseCustomizedDataStore(configuration));
 
                 var loggerConfig = new LoggerConfiguration();
-    
+
                 if (env.IsDevelopment())
                 {
                     LogManager.UseConsoleLogging(LogLevel.Trace);

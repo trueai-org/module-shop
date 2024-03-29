@@ -181,7 +181,10 @@ namespace Shop.Module.StorageGitHub
             };
 
             var client = new RestClient(uri);
-            var request = new RestRequest(Method.PUT);
+            var request = new RestRequest()
+            {
+                 Method = Method.Put
+            };
             request.AddHeader("Authorization", "token " + token);
             request.AddJsonBody(body);
             var response = client.Execute(request);

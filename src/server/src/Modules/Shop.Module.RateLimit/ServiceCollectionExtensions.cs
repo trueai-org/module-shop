@@ -43,6 +43,10 @@ namespace Shop.Module.RateLimit
 
             // configuration (resolvers, counter key builders)
             services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+
+            // https://github.com/stefanprodan/AspNetCoreRateLimit/issues/216
+            services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
+            // services.AddSingleton<IProcessingStrategy, RedisProcessingStrategy>();
         }
     }
 }

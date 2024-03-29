@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using MassTransit;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -112,7 +113,9 @@ namespace Shop.WebApi.Extensions
             });
 
             // mediatR
-            services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+            //services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Startup).Assembly));
         }
 
         public static void AddModules(this IServiceCollection services, IConfiguration configuration)
@@ -143,8 +146,16 @@ namespace Shop.WebApi.Extensions
             // SQL Server
             //options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Shop.WebApi"));
 
+            //// MySql
+            //options.UseMySql(configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Shop.WebApi"));
+
             // MySql
-            options.UseMySql(configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Shop.WebApi"));
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+            // 需要根据实际使用的 MySQL 版本进行调整
+            var serverVersion = new MySqlServerVersion(new Version(5, 7, 34));
+
+            options.UseMySql(connectionString, serverVersion, b => b.MigrationsAssembly("Shop.WebApi"));
         }
 
         public static void AddCustomizedIdentity(this IServiceCollection services, IConfiguration configuration)
