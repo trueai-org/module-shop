@@ -22,7 +22,7 @@
 
 > 包含对业务的中文说明和注释。
 
-> 支持 Swagger 免输入 token 直接调用接口（自动记忆 token），请使用 MockApi 模拟用户登录，在线调试和调用 API。
+> 支持 Swagger 免输入 token 在线调用接口（自动记忆），请使用 MockApi 模拟用户登录，在线调试 API。
 
 在线文档：[https://demo.shopapi.circle.ac.cn/swagger](https://demo.shopapi.circle.ac.cn/swagger)
 
