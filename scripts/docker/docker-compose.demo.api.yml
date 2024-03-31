@@ -7,7 +7,7 @@ services:
       dockerfile: src/Shop.WebApi/Dockerfile
     container_name: demo-shop-api
     ports:
-      - "9101:80"
+      - "9101:8080"
     restart: always
     networks:
       - demo-shop-net
