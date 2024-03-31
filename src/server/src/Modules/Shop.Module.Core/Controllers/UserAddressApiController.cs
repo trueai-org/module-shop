@@ -8,12 +8,12 @@ using Shop.Module.Core.Extensions;
 using Shop.Module.Core.Models;
 using Shop.Module.Core.Services;
 using Shop.Module.Core.ViewModels;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Core.Controllers
 {
+    /// <summary>
+    /// 用户收货地址相关 API
+    /// </summary>
     [ApiController]
     [Authorize]
     [Route("api/user-addresses")]
@@ -45,6 +45,10 @@ namespace Shop.Module.Core.Controllers
             _userAddressService = userAddressService;
         }
 
+        /// <summary>
+        /// 获取当前用户所有的收货地址
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<Result> List()
         {
@@ -52,6 +56,11 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 获取收货地址详情
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id:int:min(1)}")]
         public async Task<Result> Get(int id)
         {
@@ -60,8 +69,14 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 添加用户收货地址
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         [HttpPost]
-        public async Task<Result> Post([FromBody]UserAddressCreateParam param)
+        public async Task<Result> Post([FromBody] UserAddressCreateParam param)
         {
             var user = await _workContext.GetCurrentUserAsync();
             var countryId = (int)CountryWithId.China;
@@ -109,8 +124,15 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 更新用户收货地址
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         [HttpPut("{id:int:min(1)}")]
-        public async Task<Result> Put(int id, [FromBody]UserAddressCreateParam param)
+        public async Task<Result> Put(int id, [FromBody] UserAddressCreateParam param)
         {
             var user = await _workContext.GetCurrentUserAsync();
             var userAddress = await _userAddressRepository.Query().Include(c => c.Address).FirstOrDefaultAsync(c => c.Id == id && c.UserId == user.Id);
@@ -164,6 +186,12 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 删除用户收货地址
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         [HttpDelete("{id:int:min(1)}")]
         public async Task<Result> Delete(int id)
         {

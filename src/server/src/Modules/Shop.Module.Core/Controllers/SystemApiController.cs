@@ -5,12 +5,13 @@ using Microsoft.Net.Http.Headers;
 using Shop.Infrastructure;
 using Shop.Module.Core.Services;
 using Shop.Module.Core.ViewModels;
-using System;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Core.Controllers
 {
+    /// <summary>
+    /// 管理后台系统服务相关 API
+    /// </summary>
     [ApiController]
     [Route("api/system")]
     [Authorize()]
@@ -27,6 +28,10 @@ namespace Shop.Module.Core.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
+        /// <summary>
+        /// 获取系统运行信息
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("info")]
         public async Task<Result> Get()
         {
@@ -73,7 +78,7 @@ namespace Shop.Module.Core.Controllers
             //            .FirstOrDefault() is DebuggableAttribute attribute && attribute.IsJITOptimizerDisabled;
 
             //        //https://stackoverflow.com/questions/2050396/getting-the-date-of-a-net-assembly
-            //        //we use a simple method because the more Jeff Atwood's solution doesn't work anymore 
+            //        //we use a simple method because the more Jeff Atwood's solution doesn't work anymore
             //        //more info at https://blog.codinghorror.com/determining-build-date-the-hard-way/
             //        loadedAssemblyModel.BuildDate = assembly.IsDynamic ? null : (DateTime?)TimeZoneInfo.ConvertTimeFromUtc(System.IO.File.GetLastWriteTimeUtc(assembly.Location), TimeZoneInfo.Local);
 

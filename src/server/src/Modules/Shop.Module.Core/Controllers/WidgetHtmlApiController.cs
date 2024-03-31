@@ -6,11 +6,12 @@ using Shop.Infrastructure.Data;
 using Shop.Module.Core.Entities;
 using Shop.Module.Core.Models;
 using Shop.Module.Core.ViewModels;
-using System;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Core.Controllers
 {
+    /// <summary>
+    /// 小部件 Html API 控制器，提供 HTML 部件相关的接口操作。
+    /// </summary>
     [Authorize(Roles = "admin")]
     [Route("api/widget-html")]
     public class WidgetHtmlApiController : ControllerBase
@@ -22,6 +23,11 @@ namespace Shop.Module.Core.Controllers
             _widgetInstanceRepository = widgetInstanceRepository;
         }
 
+        /// <summary>
+        /// 根据部件实例ID获取 HTML 部件信息。
+        /// </summary>
+        /// <param name="id">部件实例ID。</param>
+        /// <returns>HTML 部件信息。</returns>
         [HttpGet("{id}")]
         public async Task<Result> Get(int id)
         {
@@ -43,8 +49,13 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok(model);
         }
 
+        /// <summary>
+        /// 创建新的 HTML 部件。
+        /// </summary>
+        /// <param name="model">HTML 部件参数。</param>
+        /// <returns>操作结果。</returns>
         [HttpPost]
-        public async Task<Result> Post([FromBody]WidgetHtmlParam model)
+        public async Task<Result> Post([FromBody] WidgetHtmlParam model)
         {
             var widgetInstance = new WidgetInstance
             {
@@ -61,8 +72,14 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 更新 HTML 部件信息。
+        /// </summary>
+        /// <param name="id">部件实例ID。</param>
+        /// <param name="model">HTML 部件参数。</param>
+        /// <returns>操作结果。</returns>
         [HttpPut("{id}")]
-        public async Task<Result> Put(int id, [FromBody]WidgetHtmlParam model)
+        public async Task<Result> Put(int id, [FromBody] WidgetHtmlParam model)
         {
             var widgetInstance = await _widgetInstanceRepository.Query().FirstOrDefaultAsync(x => x.Id == id);
             if (widgetInstance == null)

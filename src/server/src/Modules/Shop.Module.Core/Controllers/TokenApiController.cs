@@ -5,10 +5,12 @@ using Shop.Infrastructure;
 using Shop.Module.Core.Entities;
 using Shop.Module.Core.Services;
 using Shop.Module.Core.ViewModels;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Core.Controllers
 {
+    /// <summary>
+    /// 管理后台令牌服务相关 API
+    /// </summary>
     [ApiController]
     [Route("api/token")]
     public class TokenApiController : ControllerBase
@@ -25,6 +27,11 @@ namespace Shop.Module.Core.Controllers
             _tokenService = tokenService;
         }
 
+        /// <summary>
+        /// 刷新令牌
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("refresh")]
         public async Task<Result> RefeshToken(RefreshTokenParam model)

@@ -8,13 +8,12 @@ using Shop.Module.Core.Entities;
 using Shop.Module.Core.Models;
 using Shop.Module.Core.Services;
 using Shop.Module.Core.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Core.Controllers
 {
+    /// <summary>
+    /// 管理后台控制器用于处理国家和省份相关操作的 API 请求。
+    /// </summary>
     [ApiController]
     [Route("api/countries")]
     [Authorize(Roles = "admin")]
@@ -24,6 +23,7 @@ namespace Shop.Module.Core.Controllers
         private readonly IRepository<StateOrProvince> _provinceRepository;
         private readonly IRepository<Address> _addressRepository;
         private readonly ICountryService _countryService;
+
         public CountryApiController(
             IRepository<Country> countryRepository,
             IRepository<StateOrProvince> provinceRepository,
@@ -36,8 +36,13 @@ namespace Shop.Module.Core.Controllers
             _countryService = countryService;
         }
 
+        /// <summary>
+        /// 获取所有国家的分页结果。
+        /// </summary>
+        /// <param name="param">分页参数。</param>
+        /// <returns>表示操作结果的 <see cref="Result{T}"/> 对象，其中的值为 <see cref="StandardTableResult{CountryResult}"/> 对象。</returns>
         [HttpPost("grid")]
-        public async Task<Result<StandardTableResult<CountryResult>>> List([FromBody]StandardTableParam param)
+        public async Task<Result<StandardTableResult<CountryResult>>> List([FromBody] StandardTableParam param)
         {
             var query = _countryRepository.Query();
             var result = await query.Include(x => x.StatesOrProvinces)
@@ -118,7 +123,7 @@ namespace Shop.Module.Core.Controllers
         }
 
         [HttpPost]
-        public async Task<Result> Post([FromBody]CountryCreateParam model)
+        public async Task<Result> Post([FromBody] CountryCreateParam model)
         {
             var any = _countryRepository.Query().Any(c => c.NumericIsoCode == model.NumericIsoCode
             || c.TwoLetterIsoCode == model.TwoLetterIsoCode
@@ -146,7 +151,7 @@ namespace Shop.Module.Core.Controllers
         }
 
         [HttpPut("{id:int:min(1)}")]
-        public async Task<Result> Put(int id, [FromBody]CountryCreateParam model)
+        public async Task<Result> Put(int id, [FromBody] CountryCreateParam model)
         {
             var country = await _countryRepository.FirstOrDefaultAsync(id);
             if (country == null)
@@ -197,7 +202,7 @@ namespace Shop.Module.Core.Controllers
         }
 
         [HttpPost("provinces/grid/{countryId:int:min(1)}")]
-        public async Task<Result<StandardTableResult<ProvinceQueryResult>>> ListProvince(int countryId, [FromBody]StandardTableParam<ProvinceQueryParam> param)
+        public async Task<Result<StandardTableResult<ProvinceQueryResult>>> ListProvince(int countryId, [FromBody] StandardTableParam<ProvinceQueryParam> param)
         {
             var query = _provinceRepository.Query().Where(c => c.CountryId == countryId);
             var search = param.Search;
@@ -262,7 +267,7 @@ namespace Shop.Module.Core.Controllers
         }
 
         [HttpPost("provinces/{countryId:int:min(1)}")]
-        public async Task<Result> AddProvince(int countryId, [FromBody]ProvinceCreateParam model)
+        public async Task<Result> AddProvince(int countryId, [FromBody] ProvinceCreateParam model)
         {
             var anyCountry = _countryRepository.Query().Any(c => c.Id == countryId);
             if (!anyCountry)
@@ -288,7 +293,7 @@ namespace Shop.Module.Core.Controllers
         }
 
         [HttpPut("provinces/{id:int:min(1)}")]
-        public async Task<Result> EditProvince(int id, [FromBody]ProvinceCreateParam model)
+        public async Task<Result> EditProvince(int id, [FromBody] ProvinceCreateParam model)
         {
             var province = await _provinceRepository.FirstOrDefaultAsync(id);
             if (province == null)
@@ -349,7 +354,6 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok();
         }
 
-
         private async Task<StateOrProvinceLevel> GetLevelByParent(int? parentId)
         {
             var level = StateOrProvinceLevel.Default;
@@ -369,12 +373,15 @@ namespace Shop.Module.Core.Controllers
                     case StateOrProvinceLevel.Default:
                         level = StateOrProvinceLevel.City;
                         break;
+
                     case StateOrProvinceLevel.City:
                         level = StateOrProvinceLevel.District;
                         break;
+
                     case StateOrProvinceLevel.District:
                         level = StateOrProvinceLevel.Street;
                         break;
+
                     case StateOrProvinceLevel.Street:
                         throw new Exception($"无法设置最小层级[{parent.Level.ToString()}]作为父级");
                     default:

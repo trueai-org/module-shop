@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace Shop.Module.Core.Controllers
 {
+    /// <summary>
+    /// 上传服务相关 API
+    /// </summary>
     [ApiController]
     [Route("api/upload")]
     [Authorize()] //Roles = "admin"
@@ -28,6 +31,11 @@ namespace Shop.Module.Core.Controllers
             _storageService = storageService;
         }
 
+        /// <summary>
+        /// 单文件上传
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         [HttpPost()]
         public async Task<Result> Upload(IFormFile file)
         {
@@ -50,6 +58,11 @@ namespace Shop.Module.Core.Controllers
             });
         }
 
+        /// <summary>
+        /// 多文件上传
+        /// </summary>
+        /// <param name="formCollection"></param>
+        /// <returns></returns>
         [HttpPost("multiple")]
         public async Task<Result> MultiUpload(IFormCollection formCollection)
         {

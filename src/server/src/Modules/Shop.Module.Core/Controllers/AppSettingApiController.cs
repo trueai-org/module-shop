@@ -9,12 +9,12 @@ using Shop.Module.Core.Entities;
 using Shop.Module.Core.Extensions;
 using Shop.Module.Core.Models;
 using Shop.Module.Core.Services;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Core.Controllers
 {
+    /// <summary>
+    /// 管理后台控制器用于处理应用程序设置相关操作的 API 请求。
+    /// </summary>
     [ApiController]
     [Route("api/appsettings")]
     [Authorize(Roles = "admin")]
@@ -37,6 +37,10 @@ namespace Shop.Module.Core.Controllers
             _workContext = workContext;
         }
 
+        /// <summary>
+        /// 获取应用程序设置列表。
+        /// </summary>
+        /// <returns>表示操作结果的 <see cref="Result"/> 对象。</returns>
         [HttpGet]
         public async Task<Result> Get()
         {
@@ -44,6 +48,11 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok(settings.OrderBy(c => c.Module).ThenBy(c => c.FormatType).ThenBy(c => c.Id));
         }
 
+        /// <summary>
+        /// 更新应用程序设置。
+        /// </summary>
+        /// <param name="model">要更新的应用程序设置。</param>
+        /// <returns>表示操作结果的 <see cref="Result"/> 对象。</returns>
         [HttpPut]
         public async Task<Result> Put([FromBody]AppSetting model)
         {

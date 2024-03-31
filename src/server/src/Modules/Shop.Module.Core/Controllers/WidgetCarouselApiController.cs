@@ -8,14 +8,12 @@ using Shop.Module.Core.Entities;
 using Shop.Module.Core.Models;
 using Shop.Module.Core.Services;
 using Shop.Module.Core.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Core.Controllers
 {
-
+    /// <summary>
+    /// 小部件轮播 API 控制器，提供轮播部件相关的接口操作。
+    /// </summary>
     [Authorize(Roles = "admin")]
     [Route("api/widget-carousels")]
     public class WidgetCarouselApiController : ControllerBase
@@ -34,6 +32,11 @@ namespace Shop.Module.Core.Controllers
             _mediaRepository = mediaRepository;
         }
 
+        /// <summary>
+        /// 根据部件实例ID获取轮播部件信息。
+        /// </summary>
+        /// <param name="id">部件实例ID。</param>
+        /// <returns>轮播部件信息。</returns>
         [HttpGet("{id}")]
         public async Task<Result> Get(long id)
         {
@@ -64,8 +67,13 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok(model);
         }
 
+        /// <summary>
+        /// 创建新的轮播部件。
+        /// </summary>
+        /// <param name="model">轮播部件参数。</param>
+        /// <returns>操作结果。</returns>
         [HttpPost]
-        public async Task<Result> Post([FromBody]WidgetCarouselParam model)
+        public async Task<Result> Post([FromBody] WidgetCarouselParam model)
         {
             var widgetInstance = new WidgetInstance
             {
@@ -82,8 +90,14 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 更新轮播部件信息。
+        /// </summary>
+        /// <param name="id">部件实例ID。</param>
+        /// <param name="model">轮播部件参数。</param>
+        /// <returns>操作结果。</returns>
         [HttpPut("{id}")]
-        public async Task<Result> Put(int id, [FromBody]WidgetCarouselParam model)
+        public async Task<Result> Put(int id, [FromBody] WidgetCarouselParam model)
         {
             var widgetInstance = await _widgetInstanceRepository.Query().FirstOrDefaultAsync(x => x.Id == id);
             if (widgetInstance == null)

@@ -15,6 +15,9 @@ using System.Threading.Tasks;
 
 namespace Shop.Module.Core.Controllers
 {
+    /// <summary>
+    /// 管理后台用户 API 控制器，包含用户相关操作的接口。
+    /// </summary>
     [ApiController]
     [Route("api/users")]
     [Authorize(Roles = "admin")]
@@ -37,6 +40,12 @@ namespace Shop.Module.Core.Controllers
             _tokenService = tokenService;
         }
 
+        /// <summary>
+        /// 快速搜索用户。
+        /// </summary>
+        /// <param name="nameOrPhone">用户名或电话号码。</param>
+        /// <param name="take">返回结果数量。</param>
+        /// <returns>符合条件的用户列表。</returns>
         [HttpGet("quick-search")]
         public async Task<Result> QuickSearch(string nameOrPhone, int take = 20)
         {
@@ -61,6 +70,12 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok(users);
         }
 
+
+        /// <summary>
+        /// 获取用户列表。
+        /// </summary>
+        /// <param name="param">标准表格参数。</param>
+        /// <returns>用户列表的标准表格结果。</returns>
         [HttpPost("grid")]
         public async Task<Result<StandardTableResult<UserQueryResult>>> List([FromBody]StandardTableParam<UserQueryParam> param)
         {
@@ -114,6 +129,11 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 根据用户ID获取用户信息。
+        /// </summary>
+        /// <param name="id">用户ID。</param>
+        /// <returns>指定用户的信息。</returns>
         [HttpGet("{id:int:min(1)}")]
         public async Task<Result> Get(int id)
         {
@@ -143,6 +163,11 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok(model);
         }
 
+        /// <summary>
+        /// 创建新用户。
+        /// </summary>
+        /// <param name="model">用户创建参数。</param>
+        /// <returns>操作结果。</returns>
         [HttpPost]
         public async Task<Result> Post([FromBody]UserCreateParam model)
         {
@@ -192,6 +217,12 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 更新用户信息。
+        /// </summary>
+        /// <param name="id">用户ID。</param>
+        /// <param name="model">用户创建参数。</param>
+        /// <returns>操作结果。</returns>
         [HttpPut("{id:int:min(1)}")]
         public async Task<Result> Put(int id, [FromBody]UserCreateParam model)
         {
@@ -235,6 +266,11 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 删除用户。
+        /// </summary>
+        /// <param name="id">用户ID。</param>
+        /// <returns>操作结果。</returns>
         [HttpDelete("{id:int:min(1)}")]
         public async Task<Result> Delete(int id)
         {
@@ -288,6 +324,12 @@ namespace Shop.Module.Core.Controllers
             }
         }
 
+        /// <summary>
+        /// 获取用户地址列表。
+        /// </summary>
+        /// <param name="userId">用户ID。</param>
+        /// <param name="userAddressRepository">用户地址仓储。</param>
+        /// <returns>用户地址列表。</returns>
         [HttpGet("{userId}/addresses")]
         public async Task<Result> UserAddress(int userId, [FromServices]IRepository<UserAddress> userAddressRepository)
         {

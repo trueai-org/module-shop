@@ -6,12 +6,12 @@ using Shop.Infrastructure.Data;
 using Shop.Module.Catalog.Entities;
 using Shop.Module.Catalog.ViewModels;
 using Shop.Module.Core.Extensions;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Catalog.Controllers
 {
+    /// <summary>
+    /// 控制器用于处理心愿单相关操作的 API 请求。
+    /// </summary>
     [Authorize()]
     [Route("api/wishlist")]
     public class WishlistApiController : ControllerBase
@@ -27,6 +27,11 @@ namespace Shop.Module.Catalog.Controllers
             _workContext = workContext;
         }
 
+        /// <summary>
+        /// 根据产品 ID 获取心愿单收藏状态。
+        /// </summary>
+        /// <param name="productId">产品 ID。</param>
+        /// <returns>表示操作结果的 <see cref="Result"/> 对象。</returns>
         [HttpGet("collect-status/{productId:int:min(1)}")]
         [AllowAnonymous]
         public async Task<Result> CollectStatus(int productId)
@@ -41,6 +46,10 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(false);
         }
 
+        /// <summary>
+        /// 获取当前用户的心愿单列表。
+        /// </summary>
+        /// <returns>表示操作结果的 <see cref="Result"/> 对象。</returns>
         [HttpGet()]
         public async Task<Result> List()
         {
@@ -70,8 +79,13 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(list);
         }
 
+        /// <summary>
+        /// 将指定产品添加到心愿单。
+        /// </summary>
+        /// <param name="param">要添加到心愿单的参数。</param>
+        /// <returns>表示操作结果的 <see cref="Result"/> 对象。</returns>
         [HttpPost()]
-        public async Task<Result> Add([FromBody]WishlistAddParam param)
+        public async Task<Result> Add([FromBody] WishlistAddParam param)
         {
             var user = await _workContext.GetCurrentOrThrowAsync();
             var model = await _productWishlistRepository
@@ -90,6 +104,11 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 根据产品 ID 从心愿单中移除产品。
+        /// </summary>
+        /// <param name="productId">产品 ID。</param>
+        /// <returns>表示操作结果的 <see cref="Result"/> 对象。</returns>
         [HttpDelete("{productId:int:min(1)}")]
         public async Task<Result> Delete(int productId)
         {

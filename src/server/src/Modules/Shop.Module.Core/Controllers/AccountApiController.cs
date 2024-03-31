@@ -17,6 +17,9 @@ using System.Web;
 
 namespace Shop.Module.Core.Controllers
 {
+    /// <summary>
+    /// 账户API控制器，提供账号、登录、用户信息等功能。
+    /// </summary>
     [ApiController]
     [Authorize]
     [Route("api/account")]
@@ -66,6 +69,10 @@ namespace Shop.Module.Core.Controllers
             _accountService = accountService;
         }
 
+        /// <summary>
+        /// 获取当前登录用户信息
+        /// </summary>
+        /// <returns></returns>
         [HttpGet()]
         public async Task<Result> CurrentUser()
         {
@@ -91,6 +98,11 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 更新用户信息
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         [HttpPut()]
         public async Task<Result> PutCurrentUser(UserPutParam param)
         {
@@ -477,6 +489,12 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 登录双因子验证
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         [HttpPost("login-two-factor")]
         [AllowAnonymous]
         public async Task<Result> LoginTwoFactor(LoginTwoFactorParam model, string returnUrl = null)
@@ -514,6 +532,10 @@ namespace Shop.Module.Core.Controllers
             }
         }
 
+        /// <summary>
+        /// 启用双因子验证
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("enable-two-factor")]
         public async Task<Result> EnableTwoFactorAuthentication()
         {
@@ -527,6 +549,10 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 禁用双因子验证
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("disable-two-factor")]
         public async Task<Result> DisableTwoFactorAuthentication()
         {
@@ -936,6 +962,10 @@ namespace Shop.Module.Core.Controllers
             return Result.Fail(result?.Errors?.FirstOrDefault()?.Description);
         }
 
+        /// <summary>
+        /// 退出登录
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("logout")]
         [AllowAnonymous]
         public async Task<Result> LogOff()

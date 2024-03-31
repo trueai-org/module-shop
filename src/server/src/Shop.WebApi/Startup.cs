@@ -43,6 +43,22 @@ namespace Shop.WebApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                app.Use(async (context, next) =>
+                {
+                    // 处理 Swagger 刷新记住授权状态
+                    var isAuthorization = context.Request.Headers.ContainsKey("Authorization");
+                    if (!isAuthorization)
+                    {
+                        var isToken = context.Request.Cookies.ContainsKey("access-token");
+                        if (isToken)
+                        {
+                            var token = context.Request.Cookies["access-token"];
+                            context.Request.Headers.TryAdd("Authorization", $"Bearer {token}");
+                        }
+                    }
+                    await next();
+                });
             }
             else
             {
@@ -67,10 +83,13 @@ namespace Shop.WebApi
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.Map("/", () =>
+                {
+                    return "ok";
+                });
+
                 endpoints.MapControllers();
             });
         }
-
-
     }
 }

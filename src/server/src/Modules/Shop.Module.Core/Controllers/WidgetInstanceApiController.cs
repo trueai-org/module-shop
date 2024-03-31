@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace Shop.Module.Core.Controllers
 {
+    /// <summary>
+    /// 小部件实例 API 控制器，提供部件实例相关的接口操作。
+    /// </summary>
     [Authorize(Roles = "admin")]
     [Route("api/widget-instances")]
     public class WidgetInstanceApiController : ControllerBase
@@ -25,6 +28,10 @@ namespace Shop.Module.Core.Controllers
             _widgetRespository = widgetRespository;
         }
 
+        /// <summary>
+        /// 获取所有部件实例。
+        /// </summary>
+        /// <returns>所有部件实例的信息。</returns>
         [HttpGet]
         public async Task<Result> Get()
         {
@@ -47,6 +54,11 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok(widgetInstances.OrderBy(c => c.WidgetZoneId).ThenBy(c => c.DisplayOrder));
         }
 
+        /// <summary>
+        /// 根据部件实例ID删除部件实例。
+        /// </summary>
+        /// <param name="id">部件实例ID。</param>
+        /// <returns>操作结果。</returns>
         [HttpDelete("{id:int:min(1)}")]
         public async Task<Result> Delete(int id)
         {
@@ -60,6 +72,10 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 获取部件实例数量。
+        /// </summary>
+        /// <returns>部件实例的数量。</returns>
         [HttpGet("number-of-widgets")]
         public async Task<Result> GetNumberOfWidgets()
         {

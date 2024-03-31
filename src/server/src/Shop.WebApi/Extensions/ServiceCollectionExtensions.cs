@@ -43,7 +43,7 @@ namespace Shop.WebApi.Extensions
                 {
                     Title = title,
                     Version = version,
-                    Description = "一个基于 .NET 8.0 构建的简单、跨平台、模块化的商城系统。",
+                    Description = "一个基于 .NET 8.0 构建的简单、跨平台、模块化的商城系统。<br />支持 Swagger 免输入 token 直接调用接口，请使用 MockApi 模拟用户登录，在线调试和调用 API。",
                     Contact = new OpenApiContact
                     {
                         Name = "Circle",
