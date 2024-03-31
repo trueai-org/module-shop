@@ -6,13 +6,12 @@ using Shop.Infrastructure.Data;
 using Shop.Infrastructure.Web.StandardTable;
 using Shop.Module.Catalog.Entities;
 using Shop.Module.Catalog.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Catalog.Controllers
 {
+    /// <summary>
+    /// 产品选项API控制器，负责管理产品选项的相关操作。
+    /// </summary>
     [Authorize(Roles = "admin")]
     [Route("/api/product-options")]
     public class ProductOptionApiController : ControllerBase
@@ -28,6 +27,10 @@ namespace Shop.Module.Catalog.Controllers
             _productOptionDataRepository = productOptionDataRepository;
         }
 
+        /// <summary>
+        /// 获取所有未被删除的产品选项。
+        /// </summary>
+        /// <returns>产品选项列表。</returns>
         [HttpGet]
         public async Task<Result> Get()
         {
@@ -35,8 +38,13 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(options);
         }
 
+        /// <summary>
+        /// 根据分页参数获取产品选项的分页列表。
+        /// </summary>
+        /// <param name="param">分页和筛选参数。</param>
+        /// <returns>分页的产品选项列表。</returns>
         [HttpPost("grid")]
-        public async Task<Result<StandardTableResult<ProductOptionResult>>> DataList([FromBody]StandardTableParam param)
+        public async Task<Result<StandardTableResult<ProductOptionResult>>> DataList([FromBody] StandardTableParam param)
         {
             var query = _productOptionRepository.Query();
             var result = await query
@@ -49,6 +57,11 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 根据产品选项ID获取单个产品选项的详细信息。
+        /// </summary>
+        /// <param name="id">产品选项ID。</param>
+        /// <returns>指定的产品选项详情。</returns>
         [HttpGet("{id:int:min(1)}")]
         public async Task<Result> Get(int id)
         {
@@ -64,8 +77,13 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(model);
         }
 
+        /// <summary>
+        /// 添加一个新的产品选项。
+        /// </summary>
+        /// <param name="model">产品选项数据。</param>
+        /// <returns>操作结果。</returns>
         [HttpPost]
-        public async Task<Result> Post([FromBody]ProductOptionParam model)
+        public async Task<Result> Post([FromBody] ProductOptionParam model)
         {
             var productOption = new ProductOption
             {
@@ -77,8 +95,14 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 更新指定ID的产品选项。
+        /// </summary>
+        /// <param name="id">产品选项ID。</param>
+        /// <param name="model">更新的产品选项数据。</param>
+        /// <returns>操作结果。</returns>
         [HttpPut("{id:int:min(1)}")]
-        public async Task<Result> Put(int id, [FromBody]ProductOptionParam model)
+        public async Task<Result> Put(int id, [FromBody] ProductOptionParam model)
         {
             var productOption = await _productOptionRepository.FirstOrDefaultAsync(id);
             if (productOption == null)
@@ -90,6 +114,11 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 删除指定ID的产品选项。
+        /// </summary>
+        /// <param name="id">产品选项ID。</param>
+        /// <returns>操作结果。</returns>
         [HttpDelete("{id:int:min(1)}")]
         public async Task<Result> Delete(int id)
         {
@@ -109,6 +138,11 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 获取指定产品选项ID的所有选项数据。
+        /// </summary>
+        /// <param name="optionId">产品选项ID。</param>
+        /// <returns>产品选项数据列表。</returns>
         [HttpGet("data/{optionId:int:min(1)}")]
         public async Task<Result<List<ProductOptionDataListResult>>> DataList(int optionId)
         {
@@ -130,8 +164,14 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 根据分页参数和产品选项ID获取产品选项数据的分页列表。
+        /// </summary>
+        /// <param name="optionId">产品选项ID。</param>
+        /// <param name="param">分页和筛选参数。</param>
+        /// <returns>分页的产品选项数据列表。</returns>
         [HttpPost("data/{optionId:int:min(1)}/grid")]
-        public async Task<Result<StandardTableResult<ProductOptionDataListResult>>> DataList(int optionId, [FromBody]StandardTableParam<ValueParam> param)
+        public async Task<Result<StandardTableResult<ProductOptionDataListResult>>> DataList(int optionId, [FromBody] StandardTableParam<ValueParam> param)
         {
             var query = _productOptionDataRepository.Query().Include(c => c.Option).Where(c => c.OptionId == optionId);
             if (param.Search != null)
@@ -159,8 +199,14 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 向指定的产品选项添加新的选项数据。
+        /// </summary>
+        /// <param name="optionId">产品选项ID。</param>
+        /// <param name="model">选项数据。</param>
+        /// <returns>操作结果。</returns>
         [HttpPost("data/{optionId:int:min(1)}")]
-        public async Task<Result> AddData(int optionId, [FromBody]ProductOptionDataParam model)
+        public async Task<Result> AddData(int optionId, [FromBody] ProductOptionDataParam model)
         {
             var data = new ProductOptionData
             {
@@ -175,8 +221,14 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 更新指定ID的产品选项数据。
+        /// </summary>
+        /// <param name="id">产品选项数据ID。</param>
+        /// <param name="model">更新的产品选项数据。</param>
+        /// <returns>操作结果。</returns>
         [HttpPut("data/{id:int:min(1)}")]
-        public async Task<Result> EditData(int id, [FromBody]ProductOptionDataParam model)
+        public async Task<Result> EditData(int id, [FromBody] ProductOptionDataParam model)
         {
             var data = await _productOptionDataRepository.FirstOrDefaultAsync(id);
             if (data == null)
@@ -192,6 +244,11 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 删除指定ID的产品选项数据。
+        /// </summary>
+        /// <param name="id">产品选项数据ID。</param>
+        /// <returns>操作结果。</returns>
         [HttpDelete("data/{id:int:min(1)}")]
         public async Task<Result> DeleteData(int id)
         {

@@ -6,13 +6,12 @@ using Shop.Infrastructure.Data;
 using Shop.Infrastructure.Web.StandardTable;
 using Shop.Module.Catalog.Entities;
 using Shop.Module.Catalog.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Catalog.Controllers
 {
+    /// <summary>
+    /// 商品属性API控制器，负责商品属性的管理操作，如查询、创建、更新和删除。
+    /// </summary>
     [Authorize(Roles = "admin")]
     [Route("api/product-attributes")]
     public class ProductAttributeApiController : ControllerBase
@@ -34,6 +33,10 @@ namespace Shop.Module.Catalog.Controllers
             _productAttrTempRelaRepo = productAttrTempRelaRepo;
         }
 
+        /// <summary>
+        /// 获取所有商品属性的列表。
+        /// </summary>
+        /// <returns>返回商品属性的列表。</returns>
         [HttpGet]
         public async Task<Result<List<ProductAttributeResult>>> List()
         {
@@ -50,6 +53,10 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(attributes);
         }
 
+        /// <summary>
+        /// 按属性组分组，获取商品属性数组。
+        /// </summary>
+        /// <returns>返回分组后的商品属性列表。</returns>
         [HttpGet("group-array")]
         public async Task<Result<List<ProductAttributeGroupArrayResult>>> GroupArray()
         {
@@ -72,8 +79,13 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 分页获取商品属性列表，支持排序等高级功能。
+        /// </summary>
+        /// <param name="param">包含分页和排序参数的对象。</param>
+        /// <returns>返回分页的商品属性列表。</returns>
         [HttpPost("grid")]
-        public async Task<Result<StandardTableResult<ProductAttributeResult>>> DataList([FromBody]StandardTableParam param)
+        public async Task<Result<StandardTableResult<ProductAttributeResult>>> DataList([FromBody] StandardTableParam param)
         {
             var query = _productAttrRepository.Query();
             var result = await query.Include(c => c.Group)
@@ -87,6 +99,11 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 根据商品属性ID获取指定商品属性的详细信息。
+        /// </summary>
+        /// <param name="id">商品属性ID。</param>
+        /// <returns>返回指定商品属性的详细信息。</returns>
         [HttpGet("{id:int:min(1)}")]
         public async Task<Result> Get(int id)
         {
@@ -107,6 +124,11 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(model);
         }
 
+        /// <summary>
+        /// 添加新商品属性。
+        /// </summary>
+        /// <param name="model">包含商品属性信息的参数对象。</param>
+        /// <returns>返回操作结果。</returns>
         [HttpPost]
         public async Task<Result> Post([FromBody] ProductAttributeParam model)
         {
@@ -120,6 +142,12 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 更新指定ID的商品属性信息。
+        /// </summary>
+        /// <param name="id">商品属性ID。</param>
+        /// <param name="model">包含商品属性更新信息的参数对象。</param>
+        /// <returns>返回操作结果。</returns>
         [HttpPut("{id:int:min(1)}")]
         public async Task<Result> Put(int id, [FromBody] ProductAttributeParam model)
         {
@@ -135,6 +163,11 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 删除指定ID的商品属性。
+        /// </summary>
+        /// <param name="id">商品属性ID。</param>
+        /// <returns>返回操作结果。</returns>
         [HttpDelete("{id:int:min(1)}")]
         public async Task<Result> Delete(int id)
         {
@@ -168,7 +201,11 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
-
+        /// <summary>
+        /// 根据商品属性ID获取该属性的所有值。
+        /// </summary>
+        /// <param name="attributeId">商品属性ID。</param>
+        /// <returns>返回商品属性值的列表。</returns>
         [HttpGet("data/{attributeId:int:min(1)}")]
         public async Task<Result<List<ProductAttributeDataQueryResult>>> DataList(int attributeId)
         {
@@ -188,8 +225,14 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 分页获取商品属性值列表，支持排序等高级功能。
+        /// </summary>
+        /// <param name="attributeId">商品属性ID。</param>
+        /// <param name="param">包含分页和排序参数的对象。</param>
+        /// <returns>返回分页的商品属性值列表。</returns>
         [HttpPost("data/{attributeId:int:min(1)}/grid")]
-        public async Task<Result<StandardTableResult<ProductAttributeDataQueryResult>>> DataList(int attributeId, [FromBody]StandardTableParam<ValueParam> param)
+        public async Task<Result<StandardTableResult<ProductAttributeDataQueryResult>>> DataList(int attributeId, [FromBody] StandardTableParam<ValueParam> param)
         {
             var query = _productAttrDataRepository.Query(c => c.AttributeId == attributeId);
             if (param.Search != null)
@@ -215,8 +258,14 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 为指定的商品属性添加新的属性值。
+        /// </summary>
+        /// <param name="attributeId">商品属性ID。</param>
+        /// <param name="model">包含商品属性值信息的参数对象。</param>
+        /// <returns>返回操作结果。</returns>
         [HttpPost("data/{attributeId:int:min(1)}")]
-        public async Task<Result> AddData(int attributeId, [FromBody]ProductAttributeDataParam model)
+        public async Task<Result> AddData(int attributeId, [FromBody] ProductAttributeDataParam model)
         {
             var data = new ProductAttributeData
             {
@@ -230,8 +279,14 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 更新指定ID的商品属性值信息。
+        /// </summary>
+        /// <param name="id">商品属性值ID。</param>
+        /// <param name="model">包含商品属性值更新信息的参数对象。</param>
+        /// <returns>返回操作结果。</returns>
         [HttpPut("data/{id:int:min(1)}")]
-        public async Task<Result> EditData(int id, [FromBody]ProductAttributeDataParam model)
+        public async Task<Result> EditData(int id, [FromBody] ProductAttributeDataParam model)
         {
             var data = await _productAttrDataRepository.FirstOrDefaultAsync(id);
             if (data == null)
@@ -246,6 +301,12 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+
+        /// <summary>
+        /// 删除指定ID的商品属性值。
+        /// </summary>
+        /// <param name="id">商品属性值ID。</param>
+        /// <returns>返回操作结果。</returns>
         [HttpDelete("data/{id:int:min(1)}")]
         public async Task<Result> DeleteData(int id)
         {

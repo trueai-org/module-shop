@@ -8,11 +8,12 @@ using Shop.Module.Core.Extensions;
 using Shop.Module.Orders.Entities;
 using Shop.Module.Shipments.Entities;
 using Shop.Module.Shipments.ViewModels;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Shipments.Controllers
 {
+    /// <summary>
+    /// 发货 API 控制器，负责管理发货单相关操作。
+    /// </summary>
     [Authorize(Roles = "admin")]
     [Route("api/shipments")]
     public class ShipmentApiController : ControllerBase
@@ -31,6 +32,11 @@ namespace Shop.Module.Shipments.Controllers
             _workContext = workContext;
         }
 
+        /// <summary>
+        /// 获取指定发货单的详细信息。
+        /// </summary>
+        /// <param name="id">发货单 ID。</param>
+        /// <returns>发货单详细信息。</returns>
         [HttpGet("{id}")]
         public async Task<Result<ShipmentQueryResult>> Get(long id)
         {
@@ -72,7 +78,11 @@ namespace Shop.Module.Shipments.Controllers
             return Result.Ok(shipment);
         }
 
-
+        /// <summary>
+        /// 分页获取所有发货单信息。
+        /// </summary>
+        /// <param name="param">分页和筛选参数。</param>
+        /// <returns>分页的发货单列表。</returns>
         [HttpPost("grid")]
         public async Task<Result<StandardTableResult<ShipmentQueryResult>>> List([FromBody]StandardTableParam<ShipmentQueryParam> param)
         {

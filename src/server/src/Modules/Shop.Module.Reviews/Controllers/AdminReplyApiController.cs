@@ -8,12 +8,12 @@ using Shop.Module.MQ;
 using Shop.Module.Reviews.Entities;
 using Shop.Module.Reviews.Services;
 using Shop.Module.Reviews.ViewModels;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Reviews.Controllers
 {
+    /// <summary>
+    /// 管理员回复 API 控制器，用于处理管理员对评论的回复操作。
+    /// </summary>
     [Authorize(Roles = "admin")]
     [Route("api/admin-replies")]
     public class AdminReplyApiController : ControllerBase
@@ -38,8 +38,13 @@ namespace Shop.Module.Reviews.Controllers
             _mqService = mqService;
         }
 
+        /// <summary>
+        /// 分页获取管理员回复列表。
+        /// </summary>
+        /// <param name="param">分页和筛选参数。</param>
+        /// <returns>管理员回复的分页列表。</returns>
         [HttpPost("grid")]
-        public async Task<Result<StandardTableResult<AdminReplyListResult>>> Grid([FromBody]StandardTableParam<AdminReplyQueryParam> param)
+        public async Task<Result<StandardTableResult<AdminReplyListResult>>> Grid([FromBody] StandardTableParam<AdminReplyQueryParam> param)
         {
             var query = _replyRepository.Query();
             var search = param?.Search;
@@ -75,8 +80,14 @@ namespace Shop.Module.Reviews.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 更新指定 ID 的管理员回复的状态。
+        /// </summary>
+        /// <param name="id">管理员回复 ID。</param>
+        /// <param name="param">回复更新参数。</param>
+        /// <returns>更新操作的结果。</returns>
         [HttpPut("{id}")]
-        public async Task<Result> Put(int id, [FromBody]AdminReplyUpdateParam param)
+        public async Task<Result> Put(int id, [FromBody] AdminReplyUpdateParam param)
         {
             var user = await _workContext.GetCurrentOrThrowAsync();
             var model = await _replyRepository.FirstOrDefaultAsync(id);
@@ -89,6 +100,11 @@ namespace Shop.Module.Reviews.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 删除指定 ID 的管理员回复。
+        /// </summary>
+        /// <param name="id">管理员回复 ID。</param>
+        /// <returns>删除操作的结果。</returns>
         [HttpDelete("{id}")]
         public async Task<Result> Delete(int id)
         {

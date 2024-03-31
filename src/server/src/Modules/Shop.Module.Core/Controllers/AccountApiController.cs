@@ -2,23 +2,17 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
 using Shop.Infrastructure.Helpers;
-using Shop.Module.Core.Data;
 using Shop.Module.Core.Entities;
 using Shop.Module.Core.Extensions;
 using Shop.Module.Core.Models;
 using Shop.Module.Core.Services;
 using Shop.Module.Core.ViewModels;
 using Shop.Module.Schedule;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace Shop.Module.Core.Controllers

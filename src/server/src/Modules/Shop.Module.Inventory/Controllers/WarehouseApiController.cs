@@ -7,15 +7,15 @@ using Shop.Infrastructure.Web.StandardTable;
 using Shop.Module.Catalog.Entities;
 using Shop.Module.Core.Entities;
 using Shop.Module.Core.Extensions;
+using Shop.Module.Inventory.Areas.Inventory.ViewModels;
 using Shop.Module.Inventory.Entities;
 using Shop.Module.Inventory.ViewModels;
-using Shop.Module.Inventory.Areas.Inventory.ViewModels;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Inventory.Areas.Inventory.Controllers
 {
+    /// <summary>
+    /// 仓库管理API控制器，提供仓库的增删改查等功能
+    /// </summary>
     [Authorize(Roles = "admin")]
     [Route("api/warehouses")]
     public class WarehouseApiController : ControllerBase
@@ -40,6 +40,11 @@ namespace Shop.Module.Inventory.Areas.Inventory.Controllers
             _productRepository = productRepository;
         }
 
+
+        /// <summary>
+        /// 获取所有仓库的简要信息
+        /// </summary>
+        /// <returns>返回操作结果，包含仓库的简要信息列表</returns>
         [HttpGet]
         public async Task<Result> Get()
         {
@@ -53,8 +58,13 @@ namespace Shop.Module.Inventory.Areas.Inventory.Controllers
             return Result.Ok(warehouses);
         }
 
+        /// <summary>
+        /// 根据分页参数获取仓库数据列表
+        /// </summary>
+        /// <param name="param">标准表格参数，包含分页、排序等信息</param>
+        /// <returns>返回操作结果，包含分页的仓库数据列表</returns>
         [HttpPost("grid")]
-        public async Task<Result<StandardTableResult<WarehouseQueryResult>>> DataList([FromBody]StandardTableParam param)
+        public async Task<Result<StandardTableResult<WarehouseQueryResult>>> DataList([FromBody] StandardTableParam param)
         {
             var query = _warehouseRepository.Query();
             var result = await query.Include(w => w.Address)
@@ -76,6 +86,11 @@ namespace Shop.Module.Inventory.Areas.Inventory.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 根据仓库ID获取仓库详细信息
+        /// </summary>
+        /// <param name="id">仓库ID</param>
+        /// <returns>返回操作结果，包含指定ID的仓库详细信息</returns>
         [HttpGet("{id}")]
         public async Task<Result> Get(int id)
         {
@@ -102,8 +117,13 @@ namespace Shop.Module.Inventory.Areas.Inventory.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 创建新仓库
+        /// </summary>
+        /// <param name="model">仓库创建参数</param>
+        /// <returns>返回操作结果，表示是否创建成功</returns>
         [HttpPost]
-        public async Task<Result> Post([FromBody]WarehouseCreateParam model)
+        public async Task<Result> Post([FromBody] WarehouseCreateParam model)
         {
             var currentUser = await _workContext.GetCurrentUserAsync();
 
@@ -136,8 +156,15 @@ namespace Shop.Module.Inventory.Areas.Inventory.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 更新仓库
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         [HttpPut("{id:int:min(1)}")]
-        public async Task<Result> Put(int id, [FromBody]WarehouseCreateParam model)
+        public async Task<Result> Put(int id, [FromBody] WarehouseCreateParam model)
         {
             var currentUser = await _workContext.GetCurrentUserAsync();
             var warehouse = await _warehouseRepository.Query()
@@ -174,6 +201,11 @@ namespace Shop.Module.Inventory.Areas.Inventory.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 删除仓库
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id:int:min(1)}")]
         public async Task<Result> Delete(int id)
         {

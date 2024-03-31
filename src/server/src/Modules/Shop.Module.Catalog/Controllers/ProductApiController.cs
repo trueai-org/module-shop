@@ -13,13 +13,12 @@ using Shop.Module.Core.Extensions;
 using Shop.Module.Core.Models;
 using Shop.Module.Inventory.Entities;
 using Shop.Module.Orders.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Catalog.Controllers
 {
+    /// <summary>
+    /// 商品管理API控制器，负责商品的增删改查等管理操作。
+    /// </summary>
     [Authorize(Roles = "admin")]
     [Route("/api/products")]
     public class ProductApiController : ControllerBase
@@ -59,8 +58,13 @@ namespace Shop.Module.Catalog.Controllers
             _productService = productService;
         }
 
+        /// <summary>
+        /// 分页获取商品列表，支持通过商品名称、SKU等条件进行筛选。
+        /// </summary>
+        /// <param name="param">包含分页和筛选参数的对象。</param>
+        /// <returns>返回分页的商品列表。</returns>
         [HttpPost("grid")]
-        public async Task<Result<StandardTableResult<ProductQueryResult>>> List([FromBody]StandardTableParam<ProductQueryParam> param)
+        public async Task<Result<StandardTableResult<ProductQueryResult>>> List([FromBody] StandardTableParam<ProductQueryParam> param)
         {
             var query = _productRepository.Query();
             var search = param.Search;
@@ -135,6 +139,11 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(gridData);
         }
 
+        /// <summary>
+        /// 根据商品ID获取商品详细信息，包括商品媒体、属性、库存等信息。
+        /// </summary>
+        /// <param name="id">商品ID。</param>
+        /// <returns>返回指定商品的详细信息。</returns>
         [HttpGet("{id:int:min(1)}")]
         public async Task<Result<ProductGetResult>> Get(int id)
         {
@@ -287,7 +296,6 @@ namespace Shop.Module.Catalog.Controllers
                     IsEnabled = c.IsEnabled,
                     Name = c.Warehouse.Name,
                     Quantity = c.StockQuantity
-
                 }).OrderBy(c => c.DisplayOrder).ToList()
             }).ToList();
 
@@ -309,8 +317,13 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(productVm);
         }
 
+        /// <summary>
+        /// 添加新商品，支持设置商品的各种属性和关联信息。
+        /// </summary>
+        /// <param name="param">包含商品创建信息的参数对象。</param>
+        /// <returns>返回操作结果。</returns>
         [HttpPost]
-        public async Task<Result> Add([FromBody]ProductCreateParam param)
+        public async Task<Result> Add([FromBody] ProductCreateParam param)
         {
             var currentUser = await _workContext.GetCurrentUserAsync();
             var product = new Product
@@ -506,8 +519,14 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 编辑指定ID的商品信息，支持修改商品的各种属性和关联信息。
+        /// </summary>
+        /// <param name="id">商品ID。</param>
+        /// <param name="param">包含商品更新信息的参数对象。</param>
+        /// <returns>返回操作结果。</returns>
         [HttpPut("{id:int:min(1)}")]
-        public async Task<Result> Edit(int id, [FromBody]ProductCreateParam param)
+        public async Task<Result> Edit(int id, [FromBody] ProductCreateParam param)
         {
             var currentUser = await _workContext.GetCurrentUserAsync();
             var product = _productRepository.Query()
@@ -799,7 +818,6 @@ namespace Shop.Module.Catalog.Controllers
                 product.IsVisibleIndividually = param.IsVisibleIndividually;
             }
 
-
             var categoryIds = param.CategoryIds.Distinct();
             foreach (var categoryId in categoryIds)
             {
@@ -894,6 +912,11 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 删除指定ID的商品，包括其关联的选项、属性、媒体等信息。
+        /// </summary>
+        /// <param name="id">商品ID。</param>
+        /// <returns>返回操作结果。</returns>
         [HttpDelete("{id:int:min(1)}")]
         public async Task<Result> Delete(int id)
         {
@@ -987,6 +1010,11 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 发布指定ID的商品，使其在前台可见。
+        /// </summary>
+        /// <param name="id">商品ID。</param>
+        /// <returns>返回操作结果。</returns>
         [HttpPut("{id:int:min(1)}/publish")]
         public async Task<Result> Publish(int id)
         {
@@ -1014,6 +1042,11 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 取消发布指定ID的商品，使其在前台不可见。
+        /// </summary>
+        /// <param name="id">商品ID。</param>
+        /// <returns>返回操作结果。</returns>
         [HttpPut("{id:int:min(1)}/unpublish")]
         public async Task<Result> Unpublish(int id)
         {
@@ -1041,8 +1074,14 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 克隆指定ID的商品，创建一个新的商品副本。
+        /// </summary>
+        /// <param name="id">商品ID。</param>
+        /// <param name="model">包含克隆商品时可选参数的对象。</param>
+        /// <returns>返回操作结果，包括新克隆的商品ID。</returns>
         [HttpPost("{id:int:min(1)}/clone")]
-        public async Task<Result> Clone(int id, [FromBody]ProductCloneParam model)
+        public async Task<Result> Clone(int id, [FromBody] ProductCloneParam model)
         {
             var currentUser = await _workContext.GetCurrentUserAsync();
             var product = _productRepository.Query()
@@ -1131,7 +1170,7 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(newProduct.Id);
         }
 
-        void InitStock(List<Stock> addStocks, List<StockHistory> addStockHistories, Product product, User user, IEnumerable<ProductCreateStockParam> stockParams)
+        private void InitStock(List<Stock> addStocks, List<StockHistory> addStockHistories, Product product, User user, IEnumerable<ProductCreateStockParam> stockParams)
         {
             if (stockParams == null || stockParams.Count() <= 0)
                 return;
@@ -1163,7 +1202,7 @@ namespace Shop.Module.Catalog.Controllers
             }
         }
 
-        void UpdateAndDeleteStock(IEnumerable<Stock> productStocks, List<StockHistory> addStockHistories, Product product, User user, IEnumerable<ProductCreateStockParam> stockParams)
+        private void UpdateAndDeleteStock(IEnumerable<Stock> productStocks, List<StockHistory> addStockHistories, Product product, User user, IEnumerable<ProductCreateStockParam> stockParams)
         {
             if (stockParams == null || stockParams.Count() <= 0)
                 return;

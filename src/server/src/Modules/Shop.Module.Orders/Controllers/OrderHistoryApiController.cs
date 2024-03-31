@@ -4,11 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
 using Shop.Module.Orders.Entities;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Orders.Controllers
 {
+    /// <summary>
+    /// 订单历史 API 控制器，用于管理和查询订单历史记录。
+    /// </summary>
     [Authorize(Roles = "admin")]
     [Route("api/orders/history")]
     public class OrderHistoryApiController : ControllerBase
@@ -20,6 +21,11 @@ namespace Shop.Module.Orders.Controllers
             _orderHistoryRepository = orderHistoryRepository;
         }
 
+        /// <summary>
+        /// 获取指定订单的所有历史记录。
+        /// </summary>
+        /// <param name="orderId">订单 ID。</param>
+        /// <returns>指定订单的历史记录列表。</returns>
         [HttpGet("{orderId:int:min(1)}")]
         public async Task<Result> Get(int orderId)
         {

@@ -9,13 +9,12 @@ using Shop.Module.Catalog.Services;
 using Shop.Module.Catalog.ViewModels;
 using Shop.Module.Core.Entities;
 using Shop.Module.Core.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Catalog.Controllers
 {
+    /// <summary>
+    /// 商品分类API控制器，负责商品分类的管理操作，如查询、创建、更新和删除。
+    /// </summary>
     [Authorize(Roles = "admin")]
     [Route("api/categories")]
     public class CategoryApiController : ControllerBase
@@ -40,6 +39,11 @@ namespace Shop.Module.Catalog.Controllers
             _mediaService = mediaService;
         }
 
+
+        /// <summary>
+        /// 获取所有商品分类的信息。
+        /// </summary>
+        /// <returns>返回所有商品分类的信息列表。</returns>
         [HttpGet]
         public async Task<Result<IList<CategoryResult>>> Get()
         {
@@ -47,6 +51,11 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 根据商品分类ID获取指定商品分类的详细信息。
+        /// </summary>
+        /// <param name="id">商品分类ID。</param>
+        /// <returns>返回指定商品分类的详细信息。</returns>
         [HttpGet("{id:int:min(1)}")]
         public async Task<Result> Get(int id)
         {
@@ -70,13 +79,22 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(model);
         }
 
+        /// <summary>
+        /// 分页获取商品分类列表。
+        /// </summary>
+        /// <param name="param">包含分页和排序参数的对象。</param>
+        /// <returns>返回分页的商品分类列表。</returns>
         [HttpPost("grid")]
-        public async Task<Result<StandardTableResult<CategoryResult>>> List([FromBody]StandardTableParam param)
+        public async Task<Result<StandardTableResult<CategoryResult>>> List([FromBody] StandardTableParam param)
         {
             var result = await _categoryService.List(param);
             return result;
         }
 
+        /// <summary>
+        /// 清除商品分类的缓存。
+        /// </summary>
+        /// <returns>返回操作结果。</returns>
         [HttpPost("clear-cache")]
         public async Task<Result> ClearCache()
         {
@@ -84,6 +102,11 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 切换指定商品分类在菜单中的显示状态。
+        /// </summary>
+        /// <param name="id">商品分类ID。</param>
+        /// <returns>返回操作结果。</returns>
         [HttpPut("switch/{id:int:min(1)}")]
         public async Task<Result> SwitchInMenu(int id)
         {
@@ -91,6 +114,11 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 删除指定ID的商品分类。
+        /// </summary>
+        /// <param name="id">商品分类ID。</param>
+        /// <returns>返回操作结果。</returns>
         [HttpDelete("{id:int:min(1)}")]
         public async Task<Result> Delete(int id)
         {
@@ -107,8 +135,13 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 创建新的商品分类。
+        /// </summary>
+        /// <param name="model">包含商品分类信息的参数对象。</param>
+        /// <returns>返回操作结果。</returns>
         [HttpPost]
-        public async Task<Result> Create([FromBody]CategoryParam model)
+        public async Task<Result> Create([FromBody] CategoryParam model)
         {
             var category = new Category
             {
@@ -130,8 +163,14 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 更新指定ID的商品分类信息。
+        /// </summary>
+        /// <param name="model">包含商品分类更新信息的参数对象。</param>
+        /// <param name="id">商品分类ID。</param>
+        /// <returns>返回操作结果。</returns>
         [HttpPut("{id:int:min(1)}")]
-        public async Task<Result> Update([FromBody]CategoryParam model, int id)
+        public async Task<Result> Update([FromBody] CategoryParam model, int id)
         {
             var category = await _categoryRepository.FirstOrDefaultAsync(id);
             if (category == null)

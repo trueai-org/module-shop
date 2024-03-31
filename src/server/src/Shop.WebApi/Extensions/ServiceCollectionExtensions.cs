@@ -1,14 +1,11 @@
 ﻿using MassTransit;
-using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
@@ -18,18 +15,126 @@ using Shop.Module.Core.Entities;
 using Shop.Module.Core.Extensions;
 using Shop.WebApi.Filters;
 using Shop.WebApi.Handlers;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Shop.WebApi.Extensions
 {
     public static class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// 添加 swagger 文档
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="title"></param>
+        /// <param name="name"></param>
+        /// <param name="version"></param>
+        public static void AddSwaggerDoc(this IServiceCollection services, string title = "", string name = "v1", string version = "1.0.0")
+        {
+            var assemblyMame = Assembly.GetCallingAssembly().GetName().Name;
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                title = assemblyMame!;
+            }
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc(name, new OpenApiInfo
+                {
+                    Title = title,
+                    Version = version,
+                    Description = "一个基于 .NET 8.0 构建的简单、跨平台、模块化的商城系统。",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Circle",
+                        Email = "Circle@trueai.org",
+                        Url = new Uri("https://github.com/trueai-org/module-shop")
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "MIT License",
+                        Url = new Uri("https://github.com/trueai-org/module-shop/blob/master/LICENSE")
+                    }
+                });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Description = "在下框中输入请求头中需要添加 Jwt 授权 Token: Bearer {Token}",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    BearerFormat = "JWT",
+                    Scheme = "Bearer"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] { }
+                    }
+                });
+
+                //var modelXmls = new string[] { "", "", "" };
+                //foreach (var xmlModel in modelXmls)
+                //{
+                //    var baseDirectory = AppContext.BaseDirectory;
+                //    if (!File.Exists(Path.Combine(baseDirectory, xmlModel)))
+                //    {
+                //        baseDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "";
+                //    }
+
+                //    var xmlPath2 = Path.Combine(baseDirectory, xmlModel);
+                //    if (File.Exists(xmlPath2))
+                //    {
+                //        c.IncludeXmlComments(xmlPath2);
+                //    }
+                //}
+
+                // 获取当前应用程序加载的所有程序集
+                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+                // 遍历程序集以查找和包含 XML 注释文件
+                foreach (var assembly in assemblies)
+                {
+                    var assemblyName = assembly.GetName().Name;
+
+                    // 仅包括包含 "Module" 关键词的程序集的 XML
+                    if (assemblyName.StartsWith("Shop.Module."))
+                    {
+                        var xmlSubFile = $"{assemblyName}.xml";
+                        var xmlSubPath = Path.Combine(AppContext.BaseDirectory, xmlSubFile);
+                        if (File.Exists(xmlSubPath))
+                        {
+                            c.IncludeXmlComments(xmlSubPath, true);
+                        }
+                    }
+
+                    //// 这里你可以添加一些逻辑来过滤出属于你项目模块的程序集
+                    //// 例如，通过名称、自定义属性等
+                    //var xmlSubFile = $"{assembly.GetName().Name}.xml";
+                    //var xmlSubPath = Path.Combine(AppContext.BaseDirectory, xmlSubFile);
+                    //if (File.Exists(xmlSubPath))
+                    //{
+                    //    c.IncludeXmlComments(xmlSubPath);
+                    //}
+                }
+
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, $"{assemblyMame}.xml");
+                if (File.Exists(xmlPath))
+                {
+                    c.IncludeXmlComments(xmlPath, true);
+                }
+            });
+        }
+
         public static void AddCustomizedConfigureServices(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
         {
             if (string.IsNullOrWhiteSpace(env.WebRootPath))

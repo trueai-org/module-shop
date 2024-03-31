@@ -7,8 +7,6 @@ using Shop.Infrastructure.Data;
 using Shop.Module.Catalog.ViewModels;
 using Shop.Module.Core.Entities;
 using Shop.Module.Core.Models;
-using System;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Catalog.Controllers
 {
@@ -43,7 +41,7 @@ namespace Shop.Module.Catalog.Controllers
         }
 
         [HttpPost]
-        public async Task<Result> Post([FromBody]WidgetCategoryParam model)
+        public async Task<Result> Post([FromBody] WidgetCategoryParam model)
         {
             var widgetInstance = new WidgetInstance
             {
@@ -61,7 +59,7 @@ namespace Shop.Module.Catalog.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<Result> Put(int id, [FromBody]WidgetCategoryParam model)
+        public async Task<Result> Put(int id, [FromBody] WidgetCategoryParam model)
         {
             var widgetInstance = await _widgetInstanceRepository.FirstOrDefaultAsync(id);
             if (widgetInstance == null)

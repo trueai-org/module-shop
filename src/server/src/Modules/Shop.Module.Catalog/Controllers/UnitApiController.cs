@@ -7,13 +7,12 @@ using Shop.Module.Catalog.Data;
 using Shop.Module.Catalog.Entities;
 using Shop.Module.Catalog.ViewModels;
 using Shop.Module.Core.Cache;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Catalog.Controllers
 {
+    /// <summary>
+    /// 单位API控制器，负责管理商品单位。
+    /// </summary>
     [Authorize(Roles = "admin")]
     [Route("/api/units")]
     public class UnitApiController : ControllerBase
@@ -33,6 +32,10 @@ namespace Shop.Module.Catalog.Controllers
             _cache = cache;
         }
 
+        /// <summary>
+        /// 获取所有单位信息。
+        /// </summary>
+        /// <returns>所有单位的列表。</returns>
         [HttpGet]
         public async Task<Result> Get()
         {
@@ -41,8 +44,13 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 创建一个新的单位。
+        /// </summary>
+        /// <param name="model">包含单位名称的参数对象。</param>
+        /// <returns>操作结果。</returns>
         [HttpPost]
-        public async Task<Result> Post([FromBody]NameParam model)
+        public async Task<Result> Post([FromBody] NameParam model)
         {
             _unitRepository.Add(new Unit { Name = model.Name });
             await _unitRepository.SaveChangesAsync();
@@ -50,8 +58,14 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 更新指定ID的单位名称。
+        /// </summary>
+        /// <param name="id">要更新的单位ID。</param>
+        /// <param name="model">包含新单位名称的参数对象。</param>
+        /// <returns>操作结果。</returns>
         [HttpPut("{id:int:min(1)}")]
-        public async Task<Result> Put(int id, [FromBody]NameParam model)
+        public async Task<Result> Put(int id, [FromBody] NameParam model)
         {
             var unit = await _unitRepository.FirstOrDefaultAsync(id);
             if (unit == null)
@@ -63,6 +77,11 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 删除指定ID的单位。
+        /// </summary>
+        /// <param name="id">要删除的单位ID。</param>
+        /// <returns>操作结果，如果单位已被使用，则不允许删除。</returns>
         [HttpDelete("{id:int:min(1)}")]
         public async Task<Result> Delete(int id)
         {
@@ -81,6 +100,10 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 清除所有单位信息的缓存。
+        /// </summary>
+        /// <returns>操作结果。</returns>
         [HttpPost("clear-cache")]
         public async Task<Result> ClearAllCache()
         {

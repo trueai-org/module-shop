@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Shop.WebApi.Extensions;
+using System.Reflection;
 
 namespace Shop.WebApi
 {
@@ -25,10 +26,13 @@ namespace Shop.WebApi
         {
             services.AddCustomizedConfigureServices(Configuration, Environment);
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Shop Api", Version = "1.0.0" });
-            });
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Shop Api", Version = "1.0.0" });
+
+            //});
+
+            services.AddSwaggerDoc("Module Shop Api");
 
             services.AddControllers();
         }
@@ -66,5 +70,7 @@ namespace Shop.WebApi
                 endpoints.MapControllers();
             });
         }
+
+
     }
 }

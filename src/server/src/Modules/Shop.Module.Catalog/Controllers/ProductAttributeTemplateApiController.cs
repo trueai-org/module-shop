@@ -6,13 +6,12 @@ using Shop.Infrastructure.Data;
 using Shop.Infrastructure.Web.StandardTable;
 using Shop.Module.Catalog.Entities;
 using Shop.Module.Catalog.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Catalog.Controllers
 {
+    /// <summary>
+    /// 产品属性模板的API控制器，负责管理产品属性模板的相关操作。
+    /// </summary>
     [Authorize(Roles = "admin")]
     [Route("/api/product-attribute-templates")]
     public class ProductAttributeTemplateApiController : ControllerBase
@@ -31,6 +30,10 @@ namespace Shop.Module.Catalog.Controllers
             _productAttrTempRelaRepo = productAttrTempRelaRepo;
         }
 
+        /// <summary>
+        /// 获取所有产品属性模板的列表。
+        /// </summary>
+        /// <returns>返回产品属性模板的列表。</returns>
         [HttpGet]
         public async Task<Result> Get()
         {
@@ -42,8 +45,13 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 根据给定的参数获取产品属性模板的分页列表。
+        /// </summary>
+        /// <param name="param">分页和筛选参数。</param>
+        /// <returns>返回满足条件的产品属性模板的分页结果。</returns>
         [HttpPost("grid")]
-        public async Task<Result<StandardTableResult<ProductAttributeTemplateResult>>> DataList([FromBody]StandardTableParam param)
+        public async Task<Result<StandardTableResult<ProductAttributeTemplateResult>>> DataList([FromBody] StandardTableParam param)
         {
             var query = _productAttrTempRepo.Query()
                 .Include(c => c.ProductAttributes)
@@ -65,6 +73,11 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 根据指定的ID获取一个产品属性模板。
+        /// </summary>
+        /// <param name="id">产品属性模板的ID。</param>
+        /// <returns>返回指定ID的产品属性模板。</returns>
         [HttpGet("{id:int:min(1)}")]
         public async Task<Result> Get(int id)
         {
@@ -90,8 +103,13 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(model);
         }
 
+        /// <summary>
+        /// 添加一个新的产品属性模板。
+        /// </summary>
+        /// <param name="model">包含产品属性模板信息的参数对象。</param>
+        /// <returns>返回添加操作的结果。</returns>
         [HttpPost]
-        public async Task<Result> Post([FromBody]ProductAttributeTemplateParam model)
+        public async Task<Result> Post([FromBody] ProductAttributeTemplateParam model)
         {
             var template = new ProductAttributeTemplate
             {
@@ -114,8 +132,14 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 更新指定ID的产品属性模板。
+        /// </summary>
+        /// <param name="id">需要更新的产品属性模板ID。</param>
+        /// <param name="model">包含更新信息的产品属性模板参数对象。</param>
+        /// <returns>返回更新操作的结果。</returns>
         [HttpPut("{id:int:min(1)}")]
-        public async Task<Result> Put(int id, [FromBody]ProductAttributeTemplateParam model)
+        public async Task<Result> Put(int id, [FromBody] ProductAttributeTemplateParam model)
         {
             var productTemplate = await _productAttrTempRepo
                 .Query()
@@ -156,6 +180,11 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 删除指定ID的产品属性模板。
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id:int:min(1)}")]
         public async Task<Result> Delete(int id)
         {
@@ -179,5 +208,4 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
     }
-
 }

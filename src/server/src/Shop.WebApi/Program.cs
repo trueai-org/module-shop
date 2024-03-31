@@ -61,6 +61,8 @@ namespace Shop.WebApi
                     // 如果是开发环境，则本地配置项优先级最高
                     if (env.IsDevelopment())
                     {
+                        LogManager.UseConsoleLogging(Com.Ctrip.Framework.Apollo.Logging.LogLevel.Trace);
+
                         apolloConfigurationBuilder
                         .AddJsonFile($"appsettings.json", true)
                         .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true);
@@ -72,13 +74,13 @@ namespace Shop.WebApi
                 config.AddEntityFrameworkConfig(opt => opt.UseCustomizedDataStore(configuration));
 
                 var loggerConfig = new LoggerConfiguration();
-
                 if (env.IsDevelopment())
                 {
-                    LogManager.UseConsoleLogging(LogLevel.Trace);
+                  
                     loggerConfig.MinimumLevel.Information().Enrich.FromLogContext().WriteTo.Console();
                     SelfLog.Enable(Console.Error);
                 }
+
                 Log.Logger = loggerConfig.ReadFrom.Configuration(configuration).CreateLogger();
 
             }).ConfigureLogging((loggingBuilder) =>

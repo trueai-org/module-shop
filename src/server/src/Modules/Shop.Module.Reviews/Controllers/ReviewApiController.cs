@@ -16,12 +16,12 @@ using Shop.Module.Reviews.Events;
 using Shop.Module.Reviews.Models;
 using Shop.Module.Reviews.Services;
 using Shop.Module.Reviews.ViewModels;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Reviews.Controllers
 {
+    /// <summary>
+    /// 评论 API 控制器，负责处理评论相关操作。
+    /// </summary>
     [Route("api/reviews")]
     [Authorize()]
     public class ReviewApiController : ControllerBase
@@ -53,6 +53,11 @@ namespace Shop.Module.Reviews.Controllers
             _replyRepository = replyRepository;
         }
 
+        /// <summary>
+        /// 添加评论。
+        /// </summary>
+        /// <param name="param">评论添加的参数。</param>
+        /// <returns>添加评论操作的结果。</returns>
         [HttpPost]
         public async Task<Result> AddReview([FromBody] ReviewAddParam param)
         {
@@ -134,6 +139,12 @@ namespace Shop.Module.Reviews.Controllers
             return Result.Ok();
         }
 
+
+        /// <summary>
+        /// 获取特定实体的评论信息，如评论总数和各星级的评论数。
+        /// </summary>
+        /// <param name="param">评论信息查询的参数。</param>
+        /// <returns>特定实体的评论信息。</returns>
         [HttpPost("info")]
         [AllowAnonymous]
         public async Task<Result> Info([FromBody] ReviewInfoParam param)
@@ -164,6 +175,11 @@ namespace Shop.Module.Reviews.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 列出特定实体的评论列表。
+        /// </summary>
+        /// <param name="param">评论列表查询的参数。</param>
+        /// <returns>特定实体的评论列表。</returns>
         [HttpPost("list")]
         [AllowAnonymous]
         public async Task<Result> List([FromBody] ReviewListQueryParam param)
@@ -225,6 +241,11 @@ namespace Shop.Module.Reviews.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 分页获取评论列表。
+        /// </summary>
+        /// <param name="param">分页查询参数。</param>
+        /// <returns>分页的评论列表。</returns>
         [HttpPost("grid")]
         [AllowAnonymous]
         public async Task<Result<StandardTableResult<ReviewListResult>>> Grid([FromBody] StandardTableParam<ReviewQueryParam> param)
@@ -249,9 +270,11 @@ namespace Shop.Module.Reviews.Controllers
                     case RatingLevel.Bad:
                         query = query.Where(c => c.Rating == 1);
                         break;
+
                     case RatingLevel.Medium:
                         query = query.Where(c => c.Rating > 1 && c.Rating < 5);
                         break;
+
                     case RatingLevel.Positive:
                     default:
                         query = query.Where(c => c.Rating == 5);
@@ -311,6 +334,11 @@ namespace Shop.Module.Reviews.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 获取特定评论的详细信息。
+        /// </summary>
+        /// <param name="id">评论 ID。</param>
+        /// <returns>特定评论的详细信息。</returns>
         [HttpGet("{id:int:min(1)}")]
         [AllowAnonymous]
         public async Task<Result> Get(int id)

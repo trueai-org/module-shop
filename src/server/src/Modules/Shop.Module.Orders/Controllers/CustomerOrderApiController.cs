@@ -23,12 +23,12 @@ using Shop.Module.Reviews.Models;
 using Shop.Module.Reviews.Services;
 using Shop.Module.Schedule;
 using Shop.Module.Shipments.Entities;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Orders.Controllers
 {
+    /// <summary>
+    /// 客户订单 API 控制器，用于处理客户订单相关的操作。
+    /// </summary>
     [Authorize()]
     [Route("api/customer-orders")]
     public class CustomerOrderApiController : ControllerBase
@@ -92,6 +92,11 @@ namespace Shop.Module.Orders.Controllers
             _locker = locker;
         }
 
+        /// <summary>
+        /// 获取指定客户订单的详细信息。
+        /// </summary>
+        /// <param name="id">订单 ID。</param>
+        /// <returns>指定订单的详细信息。</returns>
         [HttpGet("{id:int:min(1)}")]
         public async Task<Result> Get(int id)
         {
@@ -154,6 +159,11 @@ namespace Shop.Module.Orders.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 分页获取客户的订单列表。
+        /// </summary>
+        /// <param name="param">分页查询参数。</param>
+        /// <returns>分页的客户订单列表。</returns>
         [HttpPost("grid")]
         public async Task<Result<StandardTableResult<CustomerOrderQueryResult>>> List([FromBody] StandardTableParam<CustomerOrderQueryParam> param)
         {
@@ -230,6 +240,12 @@ namespace Shop.Module.Orders.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 客户取消订单。
+        /// </summary>
+        /// <param name="id">订单 ID。</param>
+        /// <param name="reason">取消订单的原因。</param>
+        /// <returns>取消订单操作的结果。</returns>
         [HttpPut("{id:int:min(1)}/cancel")]
         public async Task<Result> Cancel(int id, [FromBody] OrderCancelParam reason)
         {
@@ -253,6 +269,11 @@ namespace Shop.Module.Orders.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 客户删除订单。
+        /// </summary>
+        /// <param name="id">订单 ID。</param>
+        /// <returns>删除订单操作的结果。</returns>
         [HttpDelete("{id:int:min(1)}")]
         public async Task<Result> Delete(int id)
         {
@@ -301,6 +322,11 @@ namespace Shop.Module.Orders.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 客户确认收货。
+        /// </summary>
+        /// <param name="id">订单 ID。</param>
+        /// <returns>确认收货操作的结果。</returns>
         [HttpPut("{id:int:min(1)}/cinfirm-receipt")]
         public async Task<Result> CinfirmReceipt(int id)
         {
@@ -383,6 +409,11 @@ namespace Shop.Module.Orders.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 获取订单支付信息。
+        /// </summary>
+        /// <param name="id">订单 ID。</param>
+        /// <returns>订单支付信息。</returns>
         [HttpGet("{id:int:min(1)}/pay")]
         public async Task<Result> PayInfo(int id)
         {

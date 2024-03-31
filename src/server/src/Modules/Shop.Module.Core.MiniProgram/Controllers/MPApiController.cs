@@ -8,25 +8,25 @@ using Newtonsoft.Json;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
 using Shop.Module.Core.Entities;
-using Shop.Module.Core.Models;
-using Shop.Module.Core.Services;
-using Shop.Module.Core.ViewModels;
 using Shop.Module.Core.MiniProgram.Data;
 using Shop.Module.Core.MiniProgram.Models;
 using Shop.Module.Core.MiniProgram.ViewModels;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
+using Shop.Module.Core.Models;
+using Shop.Module.Core.Services;
+using Shop.Module.Core.ViewModels;
 
 namespace Shop.Module.Core.MiniProgram.Controllers
 {
+    /// <summary>
+    /// 微信小程序API控制器，用于处理微信小程序相关的请求，如登录。
+    /// </summary>
     [ApiController]
     [Route("api/mp")]
     public class MPApiController : ControllerBase
     {
-        const string Code2SessionUrl = "https://api.weixin.qq.com/sns/jscode2session";
-        const string AccessTokenUrl = "https://api.weixin.qq.com/cgi-bin/token";
-        const string WxaCodeUnlimited = "https://api.weixin.qq.com/wxa/getwxacodeunlimit";
+        private const string Code2SessionUrl = "https://api.weixin.qq.com/sns/jscode2session";
+        private const string AccessTokenUrl = "https://api.weixin.qq.com/cgi-bin/token";
+        private const string WxaCodeUnlimited = "https://api.weixin.qq.com/wxa/getwxacodeunlimit";
 
         private readonly MiniProgramOptions _option;
         private readonly IRepository<UserLogin> _userLoginRepository;
@@ -56,12 +56,13 @@ namespace Shop.Module.Core.MiniProgram.Controllers
         }
 
         /// <summary>
-        /// 小程序登录
+        /// 处理微信小程序的登录请求。通过微信小程序传来的code与微信服务器通信以获取用户的唯一标识符。
+        /// 若用户是首次登录，则会创建一个新的用户账号。登录成功后，会返回包含访问令牌在内的登录信息。
         /// </summary>
-        /// <param name="param"></param>
-        /// <returns></returns>
+        /// <param name="param">包含微信小程序登录所需信息的参数，例如code。</param>
+        /// <returns>返回操作结果，如果登录成功，则包含用户的登录信息，如访问令牌和用户信息。</returns>
         [HttpPost("login")]
-        public async Task<Result> Login([FromBody]LoginByMpParam param)
+        public async Task<Result> Login([FromBody] LoginByMpParam param)
         {
             var url = $"{Code2SessionUrl}?appid={_option.AppId}&secret={_option.AppSecret}&js_code={param.Code}&grant_type=authorization_code";
             var httpClient = new HttpClient();

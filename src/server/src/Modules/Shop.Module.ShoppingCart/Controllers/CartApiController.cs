@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace Shop.Module.ShoppingCart.Controllers
 {
+    /// <summary>
+    /// 购物车 API 控制器，负责处理购物车相关操作。
+    /// </summary>
     [Authorize()]
     [Route("api/cart")]
     public class CartApiController : ControllerBase
@@ -30,6 +33,10 @@ namespace Shop.Module.ShoppingCart.Controllers
             _workContext = workContext;
         }
 
+        /// <summary>
+        /// 获取当前用户的购物车列表，未登录用户返回空购物车。
+        /// </summary>
+        /// <returns>购物车内容。</returns>
         [HttpGet()]
         [AllowAnonymous]
         public async Task<Result> List()
@@ -43,6 +50,11 @@ namespace Shop.Module.ShoppingCart.Controllers
             return Result.Ok(cart);
         }
 
+        /// <summary>
+        /// 向购物车中添加商品。
+        /// </summary>
+        /// <param name="model">添加到购物车的商品信息。</param>
+        /// <returns>更新后的购物车内容。</returns>
         [HttpPost("add-item")]
         public async Task<Result> AddToCart([FromBody]AddToCartParam model)
         {
@@ -52,6 +64,11 @@ namespace Shop.Module.ShoppingCart.Controllers
             return Result.Ok(cart);
         }
 
+        /// <summary>
+        /// 更新购物车中某个商品的数量。
+        /// </summary>
+        /// <param name="model">商品和新数量的信息。</param>
+        /// <returns>更新后的购物车内容。</returns>
         [HttpPut("update-item-quantity")]
         public async Task<Result> UpdateItemQuantity([FromBody]AddToCartParam model)
         {
@@ -61,6 +78,11 @@ namespace Shop.Module.ShoppingCart.Controllers
             return Result.Ok(cart);
         }
 
+        /// <summary>
+        /// 选中或取消选中购物车中的商品项。
+        /// </summary>
+        /// <param name="model">商品项选中状态的信息。</param>
+        /// <returns>更新后的购物车内容。</returns>
         [HttpPut("checked")]
         public async Task<Result> CheckedItem([FromBody]CheckedItemParam model)
         {
@@ -70,6 +92,11 @@ namespace Shop.Module.ShoppingCart.Controllers
             return Result.Ok(cart);
         }
 
+        /// <summary>
+        /// 从购物车中移除一个或多个商品。
+        /// </summary>
+        /// <param name="model">要移除的商品的ID列表。</param>
+        /// <returns>更新后的购物车内容。</returns>
         [HttpDelete("remove-items")]
         public async Task<Result> Remove([FromBody]DeleteItemParam model)
         {

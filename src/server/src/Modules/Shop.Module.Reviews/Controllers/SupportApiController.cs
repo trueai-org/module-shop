@@ -8,12 +8,12 @@ using Shop.Module.Core.Models;
 using Shop.Module.Reviews.Entities;
 using Shop.Module.Reviews.Services;
 using Shop.Module.Reviews.ViewModels;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Reviews.Controllers
 {
+    /// <summary>
+    /// 点赞 API 控制器，负责处理点赞相关操作。
+    /// </summary>
     [Route("api/supports")]
     [Authorize()]
     public class SupportApiController : ControllerBase
@@ -43,7 +43,7 @@ namespace Shop.Module.Reviews.Controllers
         /// <param name="param"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Result> Support([FromBody]SupportParam param)
+        public async Task<Result> Support([FromBody] SupportParam param)
         {
             var user = await _workContext.GetCurrentOrThrowAsync();
             var any = supportEntityTypeIds.Any(c => c == param.EntityTypeId);
@@ -82,6 +82,7 @@ namespace Shop.Module.Reviews.Controllers
                         supportCount = review.SupportCount;
                     }
                     break;
+
                 case EntityTypeWithId.Reply:
                     {
                         var reply = await _replyRepository.FirstOrDefaultAsync(param.EntityId);
@@ -92,6 +93,7 @@ namespace Shop.Module.Reviews.Controllers
                         supportCount = reply.SupportCount;
                     }
                     break;
+
                 default:
                     throw new Exception("参数不支持");
             }

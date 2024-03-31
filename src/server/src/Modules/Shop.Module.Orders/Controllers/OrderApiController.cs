@@ -19,14 +19,12 @@ using Shop.Module.Orders.Models;
 using Shop.Module.Orders.Services;
 using Shop.Module.Orders.ViewModels;
 using Shop.Module.Shipments.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Orders.Controllers
 {
-
+    /// <summary>
+    /// 管理员订单 API 控制器，处理订单的管理和操作。
+    /// </summary>
     [Authorize(Roles = "admin")]
     [Route("api/orders")]
     public class OrderApiController : ControllerBase
@@ -75,6 +73,11 @@ namespace Shop.Module.Orders.Controllers
             _appSettingService = appSettingService;
         }
 
+        /// <summary>
+        /// 根据订单 ID 获取订单详细信息。
+        /// </summary>
+        /// <param name="id">订单 ID。</param>
+        /// <returns>订单详细信息。</returns>
         [HttpGet("{id:int:min(1)}")]
         public async Task<Result<OrderGetResult>> Get(int id)
         {
@@ -82,6 +85,11 @@ namespace Shop.Module.Orders.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 根据订单号获取订单详细信息。
+        /// </summary>
+        /// <param name="no">订单号。</param>
+        /// <returns>订单详细信息。</returns>
         [HttpGet("{no:long:min(1)}/no")]
         public async Task<Result<OrderGetResult>> GetByNo(long no)
         {
@@ -89,8 +97,13 @@ namespace Shop.Module.Orders.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 创建新订单。
+        /// </summary>
+        /// <param name="model">订单创建参数。</param>
+        /// <returns>创建操作的结果。</returns>
         [HttpPost]
-        public async Task<Result> Post([FromBody]OrderCreateParam model)
+        public async Task<Result> Post([FromBody] OrderCreateParam model)
         {
             if (model == null)
                 throw new Exception("参数异常");
@@ -250,8 +263,14 @@ namespace Shop.Module.Orders.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 更新订单信息。
+        /// </summary>
+        /// <param name="id">订单 ID。</param>
+        /// <param name="model">订单编辑参数。</param>
+        /// <returns>更新操作的结果。</returns>
         [HttpPut("{id:int:min(1)}")]
-        public async Task<Result> Put(int id, [FromBody]OrderEditParam model)
+        public async Task<Result> Put(int id, [FromBody] OrderEditParam model)
         {
             if (model == null)
                 throw new Exception("参数异常");
@@ -465,6 +484,11 @@ namespace Shop.Module.Orders.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 删除指定订单。
+        /// </summary>
+        /// <param name="id">订单 ID。</param>
+        /// <returns>删除操作的结果。</returns>
         [HttpDelete("{id:int:min(1)}")]
         public async Task<Result> Delete(int id)
         {
@@ -513,16 +537,28 @@ namespace Shop.Module.Orders.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 取消指定订单。
+        /// </summary>
+        /// <param name="id">订单 ID。</param>
+        /// <param name="reason">取消订单的原因。</param>
+        /// <returns>取消操作的结果。</returns>
         [HttpPut("{id:int:min(1)}/cancel")]
-        public async Task<Result> Cancel(int id, [FromBody]OrderCancelParam reason)
+        public async Task<Result> Cancel(int id, [FromBody] OrderCancelParam reason)
         {
             var currentUser = await _workContext.GetCurrentUserAsync();
             await _orderService.Cancel(id, currentUser.Id, reason?.Reason);
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 将指定订单挂起。
+        /// </summary>
+        /// <param name="id">订单 ID。</param>
+        /// <param name="param">挂起订单的参数。</param>
+        /// <returns>挂起操作的结果。</returns>
         [HttpPut("{id:int:min(1)}/on-hold")]
-        public async Task<Result> OnHold(int id, [FromBody]OrderOnHoldParam param)
+        public async Task<Result> OnHold(int id, [FromBody] OrderOnHoldParam param)
         {
             var currentUser = await _workContext.GetCurrentUserAsync();
             var order = await _orderRepository
@@ -560,6 +596,11 @@ namespace Shop.Module.Orders.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 标记指定订单为已支付。
+        /// </summary>
+        /// <param name="id">订单 ID。</param>
+        /// <returns>标记操作的结果。</returns>
         [HttpPut("{id:int:min(1)}/payment")]
         public async Task<Result> AdminPayment(int id)
         {
@@ -583,8 +624,13 @@ namespace Shop.Module.Orders.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 分页获取订单列表。
+        /// </summary>
+        /// <param name="param">分页查询参数。</param>
+        /// <returns>分页的订单列表。</returns>
         [HttpPost("grid")]
-        public async Task<Result<StandardTableResult<OrderQueryResult>>> List([FromBody]StandardTableParam<OrderQueryParam> param)
+        public async Task<Result<StandardTableResult<OrderQueryResult>>> List([FromBody] StandardTableParam<OrderQueryParam> param)
         {
             var query = _orderRepository.Query();
             var search = param.Search;
@@ -642,8 +688,14 @@ namespace Shop.Module.Orders.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 为指定订单创建发货记录。
+        /// </summary>
+        /// <param name="id">订单 ID。</param>
+        /// <param name="param">订单发货参数。</param>
+        /// <returns>创建发货记录操作的结果。</returns>
         [HttpPost("{id:int:min(1)}/shipment")]
-        public async Task<Result> Post(int id, [FromBody]OrderShipmentParam param)
+        public async Task<Result> Post(int id, [FromBody] OrderShipmentParam param)
         {
             var currentUser = await _workContext.GetCurrentUserAsync();
             var order = await _orderRepository.Query()
@@ -668,10 +720,13 @@ namespace Shop.Module.Orders.Controllers
                 case ShippingStatus.PartiallyShipped:
                     order.ShippingStatus = ShippingStatus.PartiallyShipped;
                     break;
+
                 case ShippingStatus.Shipped:
                     return Result.Fail($"订单已发货");
+
                 case ShippingStatus.Delivered:
                     return Result.Fail($"订单已收货");
+
                 default:
                     return Result.Fail($"配送状态异常");
             }
@@ -744,7 +799,7 @@ namespace Shop.Module.Orders.Controllers
             return Result.Ok();
         }
 
-        async Task<OrderAddress> UserAddressToOrderAddress(int userAddressId, int userId, AddressType addressType, Order order)
+        private async Task<OrderAddress> UserAddressToOrderAddress(int userAddressId, int userId, AddressType addressType, Order order)
         {
             var userAddress = await _userAddressRepository.Query()
                     .Include(c => c.Address)
@@ -769,7 +824,7 @@ namespace Shop.Module.Orders.Controllers
             return orderAddress;
         }
 
-        async Task<OrderGetResult> GetOrder(int id, long no = 0)
+        private async Task<OrderGetResult> GetOrder(int id, long no = 0)
         {
             var currentUser = await _workContext.GetCurrentUserAsync();
             Order order = null;
@@ -898,7 +953,7 @@ namespace Shop.Module.Orders.Controllers
         /// <param name="quantity">减少或增加库存数量，减少库存负数，增加库存整数</param>
         /// <param name="orderId"></param>
         /// <param name="note"></param>
-        void OrderStockDoWorker(IList<Stock> stocks, IList<StockHistory> addStockHistories, Product product, User user, int quantity, Order order, string note)
+        private void OrderStockDoWorker(IList<Stock> stocks, IList<StockHistory> addStockHistories, Product product, User user, int quantity, Order order, string note)
         {
             if (product?.StockTrackingIsEnabled != true || quantity == 0)
                 return;
@@ -922,12 +977,14 @@ namespace Shop.Module.Orders.Controllers
                     if (order.OrderStatus == OrderStatus.PaymentReceived)
                         return;
                     break;
+
                 case StockReduceStrategy.PaymentSuccessDeduct:
                     //支付减库存时，下单、待支付、支付失败，不减少库存
                     var oss = new OrderStatus[] { OrderStatus.New, OrderStatus.PendingPayment, OrderStatus.PaymentFailed };
                     if (oss.Contains(order.OrderStatus))
                         return;
                     break;
+
                 default:
                     throw new Exception("库存扣减策略不存在");
             }

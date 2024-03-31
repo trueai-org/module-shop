@@ -18,6 +18,9 @@ using System.Threading.Tasks;
 
 namespace Shop.WebApi.Controllers
 {
+    /// <summary>
+    /// 首页 API 控制器，提供用于处理首页相关内容的 API 接口。
+    /// </summary>
     [ApiController]
     [Route("api")]
     public class HomeApiController
@@ -51,6 +54,10 @@ namespace Shop.WebApi.Controllers
             _productCategoryRepository = productCategoryRepository;
         }
 
+        /// <summary>
+        /// 获取发布的小部件实例集合。
+        /// </summary>
+        /// <returns>包含首页小部件实例的结果。</returns>
         [HttpGet("widgets")]
         public async Task<Result> Widgets()
         {
@@ -71,6 +78,11 @@ namespace Shop.WebApi.Controllers
             return Result.Ok(model);
         }
 
+        /// <summary>
+        /// 根据小部件实例 ID 获取特定的小部件内容。
+        /// </summary>
+        /// <param name="id">小部件实例的 ID。</param>
+        /// <returns>特定小部件的内容。</returns>
         [HttpGet("widgets/{id:int:min(1)}")]
         public async Task<Result> Component(int id)
         {

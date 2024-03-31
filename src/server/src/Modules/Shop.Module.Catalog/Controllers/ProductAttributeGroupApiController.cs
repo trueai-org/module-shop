@@ -5,12 +5,12 @@ using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
 using Shop.Module.Catalog.Entities;
 using Shop.Module.Catalog.ViewModels;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Catalog.Controllers
 {
+    /// <summary>
+    /// 商品属性组API控制器，负责商品属性组的管理操作，如查询、创建、更新和删除。
+    /// </summary>
     [Authorize(Roles = "admin")]
     [Route("/api/product-attribute-groups")]
     public class ProductAttributeGroupApiController : ControllerBase
@@ -25,6 +25,10 @@ namespace Shop.Module.Catalog.Controllers
             _productAttrRepository = productAttrRepository;
         }
 
+        /// <summary>
+        /// 获取所有商品属性组的列表。
+        /// </summary>
+        /// <returns>返回商品属性组的列表。</returns>
         [HttpGet]
         public async Task<Result> Get()
         {
@@ -36,6 +40,12 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(options);
         }
 
+
+        /// <summary>
+        /// 根据商品属性组ID获取指定商品属性组的详细信息。
+        /// </summary>
+        /// <param name="id">商品属性组ID。</param>
+        /// <returns>返回指定商品属性组的详细信息。</returns>
         [HttpGet("{id:int:min(1)}")]
         public async Task<Result> Get(int id)
         {
@@ -50,8 +60,13 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok(model);
         }
 
+        /// <summary>
+        /// 添加新商品属性组。
+        /// </summary>
+        /// <param name="model">包含商品属性组信息的参数对象。</param>
+        /// <returns>返回操作结果。</returns>
         [HttpPost]
-        public async Task<Result> Post([FromBody]ProductAttributeGroupParam model)
+        public async Task<Result> Post([FromBody] ProductAttributeGroupParam model)
         {
             var group = new ProductAttributeGroup
             {
@@ -62,8 +77,14 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 更新指定ID的商品属性组信息。
+        /// </summary>
+        /// <param name="id">商品属性组ID。</param>
+        /// <param name="model">包含商品属性组更新信息的参数对象。</param>
+        /// <returns>返回操作结果。</returns>
         [HttpPut("{id:int:min(1)}")]
-        public async Task<Result> Put(int id, [FromBody]ProductAttributeGroupParam model)
+        public async Task<Result> Put(int id, [FromBody] ProductAttributeGroupParam model)
         {
             var group = await _productAttrGroupRepository.FirstOrDefaultAsync(id);
             if (group == null)
@@ -74,6 +95,11 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 删除指定ID的商品属性组。
+        /// </summary>
+        /// <param name="id">商品属性组ID。</param>
+        /// <returns>返回操作结果。</returns>
         [HttpDelete("{id:int:min(1)}")]
         public async Task<Result> Delete(int id)
         {
@@ -92,5 +118,4 @@ namespace Shop.Module.Catalog.Controllers
             return Result.Ok();
         }
     }
-
 }

@@ -13,12 +13,12 @@ using Shop.Module.Reviews.Events;
 using Shop.Module.Reviews.Models;
 using Shop.Module.Reviews.Services;
 using Shop.Module.Reviews.ViewModels;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Reviews.Controllers
 {
+    /// <summary>
+    /// 评论回复 API 控制器，用于处理评论的回复操作。
+    /// </summary>
     [Route("api/replies")]
     [Authorize()]
     public class ReplyApiController : ControllerBase
@@ -46,6 +46,12 @@ namespace Shop.Module.Reviews.Controllers
             _appSettingService = appSettingService;
         }
 
+
+        /// <summary>
+        /// 发布一条评论回复。
+        /// </summary>
+        /// <param name="param">评论回复的参数。</param>
+        /// <returns>操作的结果。</returns>
         [HttpPost()]
         public async Task<Result> Post([FromBody]ReplyAddParam param)
         {
@@ -85,6 +91,11 @@ namespace Shop.Module.Reviews.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 分页获取指定评论的所有通过审核的回复。
+        /// </summary>
+        /// <param name="param">分页和筛选参数。</param>
+        /// <returns>指定评论的回复列表。</returns>
         [HttpPost("grid")]
         [AllowAnonymous]
         public async Task<Result<StandardTableResult<ReplyListResult>>> Grid([FromBody]StandardTableParam<ReplyQueryParam> param)

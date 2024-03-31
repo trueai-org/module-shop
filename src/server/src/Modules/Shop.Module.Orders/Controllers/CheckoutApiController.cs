@@ -9,12 +9,12 @@ using Shop.Module.Orders.Models;
 using Shop.Module.Orders.Services;
 using Shop.Module.Orders.ViewModels;
 using Shop.Module.ShoppingCart.Entities;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop.Module.Orders.Controllers
 {
+    /// <summary>
+    /// 结算 API 控制器，用于处理购物车、单个商品和订单的结算操作。
+    /// </summary>
     [Authorize()]
     [Route("api/checkout")]
     public class CheckoutApiController : ControllerBase
@@ -36,6 +36,11 @@ namespace Shop.Module.Orders.Controllers
             _orderService = orderService;
         }
 
+        /// <summary>
+        /// 通过购物车结算。
+        /// </summary>
+        /// <param name="userAddressId">用户地址 ID（可选）。</param>
+        /// <returns>结算结果。</returns>
         [HttpGet("cart")]
         public async Task<Result> CheckoutByCart(int? userAddressId)
         {
@@ -69,6 +74,13 @@ namespace Shop.Module.Orders.Controllers
             return Result.Ok(data);
         }
 
+        /// <summary>
+        /// 通过单个商品直接结算。
+        /// </summary>
+        /// <param name="userAddressId">用户地址 ID（可选）。</param>
+        /// <param name="productId">产品 ID。</param>
+        /// <param name="quantity">购买数量。</param>
+        /// <returns>结算结果。</returns>
         [HttpGet("product")]
         public async Task<Result> CheckoutByProduct(int? userAddressId, int productId, int quantity)
         {
@@ -83,6 +95,12 @@ namespace Shop.Module.Orders.Controllers
             return Result.Ok(data);
         }
 
+        /// <summary>
+        /// 通过现有订单结算。
+        /// </summary>
+        /// <param name="userAddressId">用户地址 ID（可选）。</param>
+        /// <param name="orderId">订单 ID。</param>
+        /// <returns>结算结果。</returns>
         [HttpGet("order")]
         public async Task<Result> CheckoutByOrder(int? userAddressId, int orderId)
         {
@@ -108,8 +126,13 @@ namespace Shop.Module.Orders.Controllers
             return Result.Ok(data);
         }
 
+        /// <summary>
+        /// 提交购物车结算生成订单。
+        /// </summary>
+        /// <param name="model">购物车结算参数。</param>
+        /// <returns>订单创建结果。</returns>
         [HttpPost("cart")]
-        public async Task<Result> PostByCart([FromBody]OrderCreateByCartParam model)
+        public async Task<Result> PostByCart([FromBody] OrderCreateByCartParam model)
         {
             var user = await _workContext.GetCurrentUserAsync();
             var cart = await _cartRepository.Query().FirstOrDefaultAsync(x => x.CustomerId == user.Id && x.IsActive);
@@ -129,8 +152,13 @@ namespace Shop.Module.Orders.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 提交单个商品结算生成订单。
+        /// </summary>
+        /// <param name="model">单个商品结算参数。</param>
+        /// <returns>订单创建结果。</returns>
         [HttpPost("product")]
-        public async Task<Result> PostByProduct([FromBody]OrderCreateByProductParam model)
+        public async Task<Result> PostByProduct([FromBody] OrderCreateByProductParam model)
         {
             var user = await _workContext.GetCurrentUserAsync();
             var param = new OrderCreateBaseParam()
@@ -158,8 +186,13 @@ namespace Shop.Module.Orders.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 提交现有订单结算生成新订单。
+        /// </summary>
+        /// <param name="model">现有订单结算参数。</param>
+        /// <returns>新订单创建结果。</returns>
         [HttpPost("order")]
-        public async Task<Result> PostByOrder([FromBody]OrderCreateByOrderParam model)
+        public async Task<Result> PostByOrder([FromBody] OrderCreateByOrderParam model)
         {
             var user = await _workContext.GetCurrentUserAsync();
             var oldOrder = await _orderRepository.Query()
