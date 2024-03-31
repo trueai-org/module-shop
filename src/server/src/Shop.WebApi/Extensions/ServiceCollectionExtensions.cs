@@ -47,7 +47,7 @@ namespace Shop.WebApi.Extensions
                     Contact = new OpenApiContact
                     {
                         Name = "Circle",
-                        Email = "Circle@trueai.org",
+                        Email = "circle@trueai.org",
                         Url = new Uri("https://github.com/trueai-org/module-shop")
                     },
                     License = new OpenApiLicense

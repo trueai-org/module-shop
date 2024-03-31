@@ -18,7 +18,7 @@
 
 项目地址：/src/server
 
-在线预览：[https://demo.shopapi.circle.ac.cn/swagger](https://demo.shopapi.circle.ac.cn/swagger)
+在线预览/文档地址：[https://demo.shopapi.circle.ac.cn/swagger](https://demo.shopapi.circle.ac.cn/swagger)
 
 ### 项目结构
 
