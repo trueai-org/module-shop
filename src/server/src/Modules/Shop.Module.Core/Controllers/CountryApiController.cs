@@ -67,6 +67,11 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 根据国家ID获取国家详情。
+        /// </summary>
+        /// <param name="id">国家ID。</param>
+        /// <returns>指定ID的国家详情。</returns>
         [HttpGet("{id:int:min(1)}")]
         public async Task<Result> Get(int id)
         {
@@ -96,6 +101,10 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok(country);
         }
 
+        /// <summary>
+        /// 获取所有国家的列表。
+        /// </summary>
+        /// <returns>所有国家的列表。</returns>
         [HttpGet()]
         public async Task<Result> Get()
         {
@@ -122,6 +131,11 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok(countries);
         }
 
+        /// <summary>
+        /// 添加新的国家。
+        /// </summary>
+        /// <param name="model">包含新国家信息的对象。</param>
+        /// <returns>操作结果。</returns>
         [HttpPost]
         public async Task<Result> Post([FromBody] CountryCreateParam model)
         {
@@ -150,6 +164,12 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 更新指定ID的国家信息。
+        /// </summary>
+        /// <param name="id">要更新的国家ID。</param>
+        /// <param name="model">包含更新信息的对象。</param>
+        /// <returns>操作结果。</returns>
         [HttpPut("{id:int:min(1)}")]
         public async Task<Result> Put(int id, [FromBody] CountryCreateParam model)
         {
@@ -180,6 +200,11 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 删除指定ID的国家。
+        /// </summary>
+        /// <param name="id">要删除的国家ID。</param>
+        /// <returns>操作结果。</returns>
         [HttpDelete("{id:int:min(1)}")]
         public async Task<Result> Delete(int id)
         {
@@ -201,6 +226,12 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 获取指定国家ID的省份列表，支持分页。
+        /// </summary>
+        /// <param name="countryId">国家ID。</param>
+        /// <param name="param">分页和查询参数。</param>
+        /// <returns>包含省份列表的分页结果。</returns>
         [HttpPost("provinces/grid/{countryId:int:min(1)}")]
         public async Task<Result<StandardTableResult<ProvinceQueryResult>>> ListProvince(int countryId, [FromBody] StandardTableParam<ProvinceQueryParam> param)
         {
@@ -235,6 +266,11 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 获取指定国家ID的省份树结构。
+        /// </summary>
+        /// <param name="countryId">国家ID。</param>
+        /// <returns>省份的树结构列表。</returns>
         [HttpGet("provinces/tree/{countryId:int:min(1)}")]
         public async Task<Result<IList<ProvinceTreeResult>>> ProvinceTree(int countryId)
         {
@@ -243,6 +279,11 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 根据省份ID获取省份详情。
+        /// </summary>
+        /// <param name="id">省份ID。</param>
+        /// <returns>指定ID的省份详情。</returns>
         [HttpGet("provinces/{id:int:min(1)}")]
         public async Task<Result<ProvinceGetResult>> GetProvince(int id)
         {
@@ -266,6 +307,12 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok(result);
         }
 
+        /// <summary>
+        /// 在指定国家下添加新的省份。
+        /// </summary>
+        /// <param name="countryId">国家ID。</param>
+        /// <param name="model">包含省份信息的对象。</param>
+        /// <returns>操作结果。</returns>
         [HttpPost("provinces/{countryId:int:min(1)}")]
         public async Task<Result> AddProvince(int countryId, [FromBody] ProvinceCreateParam model)
         {
@@ -292,6 +339,12 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 更新指定ID的省份信息。
+        /// </summary>
+        /// <param name="id">要更新的省份ID。</param>
+        /// <param name="model">包含更新信息的对象。</param>
+        /// <returns>操作结果。</returns>
         [HttpPut("provinces/{id:int:min(1)}")]
         public async Task<Result> EditProvince(int id, [FromBody] ProvinceCreateParam model)
         {
@@ -332,6 +385,11 @@ namespace Shop.Module.Core.Controllers
             return Result.Ok();
         }
 
+        /// <summary>
+        /// 删除指定ID的省份。
+        /// </summary>
+        /// <param name="id">要删除的省份ID。</param>
+        /// <returns>操作结果。</returns>
         [HttpDelete("provinces/{id:int:min(1)}")]
         public async Task<Result> DeleteProvince(int id)
         {
