@@ -26,6 +26,8 @@
 
 在线文档：[https://demo.shopapi.circle.ac.cn/swagger](https://demo.shopapi.circle.ac.cn/swagger)
 
+管理后台：[https://demo.shop.circle.ac.cn](https://demo.shop.circle.ac.cn) *admin/123456*
+
 
 | API 名称                  | 描述                                                                                   |
 |-------------------------|----------------------------------------------------------------------------------------|
@@ -82,7 +84,7 @@
 #### Visual Studio 2022 和 SQL Server/ MySQL
 
 **先决条件**
- - SQL Server/ MySQL 服务器
+ - SQL Server / MySQL 服务器
  - Visual Studio 2022 和 .NET 8
 
 
@@ -218,6 +220,6 @@
 
 #### 2. 在线演示站点登录不了怎么办？
 
-> 打开 swagger https://demo.shopapi.circle.ac.cn/swagger 文档，调用 [[重置密码](https://demo.shop.circle.ac.cn)] 密码接口，然后重新登录。
+> 打开 swagger https://demo.shopapi.circle.ac.cn/swagger 文档，调用 [[重置密码](https://demo.shop.circle.ac.cn/api/mock/reset-admin-password)] 密码接口，然后重新登录。
 
 登录地址：[https://demo.shop.circle.ac.cn](https://demo.shop.circle.ac.cn) *admin/123456*

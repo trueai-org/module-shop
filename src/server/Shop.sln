@@ -93,7 +93,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Module.Core.Tests", "t
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{08FD4614-6F70-403F-8A0E-770F6FE3E7A3}"
 	ProjectSection(SolutionItems) = preProject
-		README.md = README.md
+		..\..\README.md = ..\..\README.md
 	EndProjectSection
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{961155C0-6024-4299-97D6-305A00871081}"
