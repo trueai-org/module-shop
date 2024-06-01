@@ -2,6 +2,12 @@
 
 一个基于 .NET 8.0 构建的简单、跨平台、模块化的商城系统
 
+**推荐项目**
+
+[https://github.com/trueai-org/mdrive](https://github.com/trueai-org/mdrive)
+
+> 一个基于阿里云盘官方 API 授权的自动同步和备份工具，支持云盘挂载到本地，多平台、安全、自动化的数据管理方案
+
 **跨平台**
 
 > Docker, Windows, Linux, Mac. Microsoft SQL Server, PostgreSQL, MySQL, SQLite
