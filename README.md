@@ -2,7 +2,7 @@
 
 一个基于 .NET 8.0 构建的简单、跨平台、模块化的商城系统
 
-**推荐项目**
+**推荐项目👍👍**
 
 [https://github.com/trueai-org/mdrive](https://github.com/trueai-org/mdrive)
 
