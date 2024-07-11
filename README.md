@@ -8,6 +8,10 @@
 
 > 使用 .NET 8.0，一个基于阿里云盘官方 API 授权的自动同步和备份工具，支持云盘挂载到本地，多平台、安全、自动化的数据管理方案，欢迎收藏与支持！
 
+[https://github.com/trueai-org/midjourney-proxy](https://github.com/trueai-org/midjourney-proxy)
+
+> 代理 Midjourney 的 Discord 频道，实现 api 形式调用 AI 绘图（C# 版本），公益项目，全球 AI 模型免费使用。
+
 **跨平台**
 
 > Docker, Windows, Linux, Mac. Microsoft SQL Server, PostgreSQL, MySQL, SQLite
