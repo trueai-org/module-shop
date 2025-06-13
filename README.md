@@ -4,6 +4,10 @@
 
 **推荐项目👍👍**
 
+[https://github.com/trueai-org/ultra-kv](https://github.com/trueai-org/ultra-kv)
+
+> 🚀 UltraKV - 单文件极速键值存储引擎，🎯 极简代码，极致性能。
+
 [https://github.com/trueai-org/mdrive](https://github.com/trueai-org/mdrive)
 
 > 使用 .NET 8.0，一个基于阿里云盘官方 API 授权的自动同步和备份工具，支持云盘挂载到本地，多平台、安全、自动化的数据管理方案，欢迎收藏与支持！
