@@ -18,6 +18,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Modules\Shop.Module.Core\Shop.Module.Core.csproj" />
 		<ProjectReference Include="..\..\src\Shop.Infrastructure\Shop.Infrastructure.csproj" />
+		<ProjectReference Include="..\..\src\Modules\Shop.Module.SmsSenderAliyun\Shop.Module.SmsSenderAliyun.csproj" />
 	</ItemGroup>
 
 </Project>

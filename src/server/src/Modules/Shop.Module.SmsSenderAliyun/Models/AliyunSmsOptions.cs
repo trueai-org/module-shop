@@ -1,5 +1,9 @@
 ﻿namespace Shop.Module.SmsSenderAliyun.Models
 {
+    /// <summary>
+    /// 阿里云短信服务配置选项类
+    /// 用于配置阿里云短信服务的连接和认证信息
+    /// </summary>
     public class AliyunSmsOptions
     {
         /// <summary>

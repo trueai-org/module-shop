@@ -1,5 +1,9 @@
 ﻿namespace Shop.Module.SmsSenderAliyun.Models
 {
+    /// <summary>
+    /// 阿里云短信发送结果类
+    /// 用于封装阿里云短信发送API的返回数据
+    /// </summary>
     public class AliyunSendSmsResult
     {
         /// <summary>
